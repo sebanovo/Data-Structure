@@ -12,7 +12,7 @@ void mostrarListaV() {
     std::cout << v.anterior(3) << std::endl;
     std::cout << v.vacia() << std::endl;
     std::cout << v.recupera(4) << std::endl;
-    std::cout << v.longuitud() << std::endl;
+    std::cout << v._longitud() << std::endl;
     v.mostrar();
     v.inserta(4, 12);
     v.mostrar();

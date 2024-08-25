@@ -7,10 +7,10 @@ include_directories(src/lib)
 set(CMAKE_CXX_STANDARD 17)
 set(
     SOURCES src/main.cpp
-            src/lib/UMemoria.cpp
+            src/lib/UCSMemoria.cpp
             src/lib/UListaVector.cpp
             src/lib/UListaPuntero.cpp
-            src/lib/UListaMemoria.cpp
+            src/lib/UListaSM.cpp
 )
 
 add_executable(TDAMemoria ${SOURCES})

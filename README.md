@@ -53,7 +53,7 @@ direccion siguiente(direccion dir); //bien
 direccion anterior(direccion dir); //bien
 bool vacia(); //bien
 int recupera(direccion dir);//bien
-int longuitud(); //bien
+int _longitud(); //bien
 void inserta(direccion dir, int element); //bien
 void inserta_primero(int element); //bien
 void inserta_ultimo(int element); //bien
@@ -73,7 +73,7 @@ direccionP siguiente(direccionP dir); // bien
 direccionP anterior(direccionP dir); // bien
 bool vacia(); // bien
 int recupera(direccionP dir); //Saca elemento del nodo dir
-int longuitud(); // bien
+int _longitud(); // bien
 void inserta(direccionP dir, int element); // bien
 void inserta_primero(int element); // bien
 void inserta_ultimo(int element); // bien
@@ -109,7 +109,7 @@ class ListaSM {
     int anterior(int dir);
     bool vacia();
     int recupera(int dir);
-    int longuitud();
+    int _longitud();
     void inserta(int dir, int element);
     void inserta_primero(int element);
     void inserta_ultimo(int element);
