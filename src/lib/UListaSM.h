@@ -3,16 +3,13 @@
 #ifndef UListaSMH
 #define UListaSMH
 //---------------------------------------------------------------------------
-#include <iostream>
+
 #include <string>
 
 #include "UCSMemoria.h"
 
 namespace UListaSM {
-    using std::runtime_error;
     using std::string;
-    using UCSMemoria::CSMemoria;
-
     const string elemento_sig = "elemento,sig";
     const string elemento = "->elemento";
     const string sig = "->sig";
@@ -21,7 +18,7 @@ namespace UListaSM {
        private:
         int PtrElementos;
         int longitud;
-        CSMemoria* mem;
+        UCSMemoria::CSMemoria* mem;
 
        public:
         ListaSM();

@@ -186,15 +186,17 @@ namespace UListaPuntero {
         return nullptr;
     }
 
-    // elimina una dirección del elemento ocurrente
+    // elimina todas las ocurrencias del elemento ocurrente
     void ListaPuntero::elimina_dato(int element) {
         Nodo *x = PtrElementos;
         while (x != nullptr) {
             if (x->elemento == element) {
-                suprime(x);
-                return;
+                Nodo *elim = x;
+                x = x->sig;
+                suprime(elim);
+            } else {
+                x = x->sig;
             }
-            x = x->sig;
         }
     }
 

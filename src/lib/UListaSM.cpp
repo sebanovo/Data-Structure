@@ -4,18 +4,23 @@
 
 #include "UListaSM.h"
 
+#include <iostream>
+#include <string>
+
 #include "UCSMemoria.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
 namespace UListaSM {
+    using std::runtime_error;
+    using std::string;
     using std::to_string;
     using UCSMemoria::NULO;
 
     ListaSM::ListaSM() {
         longitud = 0;
         PtrElementos = NULO;
-        mem = new CSMemoria();
+        mem = new UCSMemoria::CSMemoria();
     }
 
     // retorna la dirección de memoria final
@@ -312,15 +317,17 @@ namespace UListaSM {
         return NULO;
     }
 
-    // elimina una dirección del elemento ocurrente
+    // elimina todas las ocurrencias del elemento
     void ListaSM::elimina_dato(int element) {
         int x = PtrElementos;
         while (x != NULO) {
             if (mem->obtener_dato(x, elemento) == element) {
-                suprime(x);
-                return;
+                int elim = x;
+                x = mem->obtener_dato(x, sig);
+                suprime(elim);
+            } else {
+                x = mem->obtener_dato(x, sig);
             }
-            x = mem->obtener_dato(x, sig);
         }
     }
 
