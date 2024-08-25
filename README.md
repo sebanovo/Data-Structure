@@ -3,42 +3,52 @@
 Es un simulador de memoria que empieza desde 0 hasta MAX - 1
 
 ```cpp
-struct NodoM {
-    int dato = 0;
-    string id;
-    int link;
+#include <iostream>
+#include <string>
 
-    NodoM();
-};
+namespace UCSMemoria {
+    using std::string;
 
-class CSMemoria {
-   private:
-    const int MAX = 11;
-    int libre;
-    NodoM *mem;
+    const int NULO = -1;
 
-   public:
-    CSMemoria();
-    // importantes
-    int new_espacio(string cad);
-    void delete_espacio(int dir);
-    void poner_dato(int dir, string id, int valor);
-    int obtener_dato(int dir, string lugar);
-    // relleno
-    int espacio_disponible();
-    int espacio_ocupado();
-    bool dir_libre(int dir);
-    void mostrar();
-    ~CSMemoria();
+    struct Nodo {
+        int dato = 0;
+        string id;
+        int link;
 
-    // metodos auxiliares
-    int numero_ids(string id);
-    string obtener_id(string cadena, int n);
-    bool hayAlmenosUnId(string cadena);
-    bool hayUnIdRepetido(string cadena);
-    // bool hayUnIdRepetidoEnLaMemoria(string cadena);
-    string eliminarflecha(string cadena);
-};
+        Nodo();
+    };
+
+    class CSMemoria {
+       private:
+        const int MAX = 11;
+        int libre;
+        Nodo *mem;
+
+       public:
+        CSMemoria();
+        // importantes
+        int new_espacio(string cadena);
+        void delete_espacio(int dir);
+        void poner_dato(int dir, string id, int valor);
+        int obtener_dato(int dir, string lugar);
+
+        // relleno
+        int espacio_disponible();
+        int espacio_ocupado();
+        bool dir_libre(int dir);
+        void mostrar();
+        ~CSMemoria();
+
+        // metodos auxiliares
+        int numero_ids(string id);
+        string obtener_id(string cadena, int n);
+        bool hayAlmenosUnId(string cadena);
+        bool hayUnIdRepetido(string cadena);
+        string eliminarflecha(string cadena);
+    };
+
+}  // namespace UCSMemoria
 ```
 
 # Lista Vector 
@@ -46,44 +56,91 @@ class CSMemoria {
 Es un vector sin mas que empieza en la posicion 1 hasta la n
 
 ```cpp
-ListaV(); // bien
-direccion fin(); //bien
-direccion primero(); //bien
-direccion siguiente(direccion dir); //bien
-direccion anterior(direccion dir); //bien
-bool vacia(); //bien
-int recupera(direccion dir);//bien
-int _longitud(); //bien
-void inserta(direccion dir, int element); //bien
-void inserta_primero(int element); //bien
-void inserta_ultimo(int element); //bien
-void suprime(direccion dir); //bien
-void modifica(direccion dir, int element); //bien
-void mostrar(); //bien
+#include <string>
+
+namespace UListaVector {
+    using std::string;
+    typedef int direccion;
+    class ListaVector {
+       private:
+        static constexpr int MAX = 100;
+        int elementos[MAX];
+        int longitud;
+
+       public:
+        ListaVector();                       //
+        direccion fin();                     //
+        direccion primero();                 //
+        direccion siguiente(direccion dir);  //
+        direccion anterior(direccion dir);   //
+        bool vacia();                        //
+        int recupera(direccion dir);
+        int _longitud();                            //
+        void inserta(direccion dir, int element);   //
+        void inserta_primero(int element);          //
+        void inserta_ultimo(int element);           //
+        void suprime(direccion dir);                //
+        void modifica(direccion dir, int element);  //
+        void mostrar();                             //
+
+        // extra
+        direccion localiza(int element);  //
+        void elimina_dato(int element);   //
+        void anula();                     //
+    };
+}  // namespace UListaVector
 ```
 
 # Lista Puntero 
 
 Es una lista enlazada de toda la vida con punteros
 ```cpp
-ListaP(); //  bien 
-direccionP fin(); // bien
-direccionP primero(); // bien
-direccionP siguiente(direccionP dir); // bien
-direccionP anterior(direccionP dir); // bien
-bool vacia(); // bien
-int recupera(direccionP dir); //Saca elemento del nodo dir
-int _longitud(); // bien
-void inserta(direccionP dir, int element); // bien
-void inserta_primero(int element); // bien
-void inserta_ultimo(int element); // bien
-void suprime(direccionP dir); // bien 
-void modifica(direccionP dir, int element); // bien
-string mostrar(); // bien
-bool esDireccionValida(); // bien
+#include <iostream>
+#include <string>
 
+namespace UListaPuntero {
+    using std::runtime_error;
+    using std::string;
 
-bool esDireccionValida(direccionP dir);
+    struct Nodo;
+    typedef Nodo *direccion;
+    struct Nodo {
+       public:
+        int elemento;
+        Nodo *sig;
+    };
+
+    class ListaPuntero {
+       private:
+        direccion PtrElementos;
+        int longitud;
+
+       public:
+        ListaPuntero();                             //
+        direccion fin();                            //
+        direccion primero();                        //
+        direccion siguiente(direccion dir);         //
+        direccion anterior(direccion dir);          //
+        bool vacia();                               //
+        int recupera(direccion dir);                //
+        int _longitud();                            //
+        void inserta(direccion dir, int element);   //
+        void inserta_primero(int element);          //
+        void inserta_ultimo(int element);           //
+        void suprime(direccion dir);                //
+        void modifica(direccion dir, int element);  //
+        string mostrar();                           //
+        ~ListaPuntero();                            //
+
+        // extra
+        direccion localiza(int element);
+        void elimina_dato(int element);
+        void anula();
+
+        bool esDireccionValida(direccion dir);
+    };
+
+}  // namespace UListaPuntero
 ```
 
 # Lista simulador de memoria (SM)
@@ -91,38 +148,47 @@ bool esDireccionValida(direccionP dir);
 Algoritmos usando el simulador de memori y listas enlazadas
 
 ```cpp
-const string datoL = "elemento,sig";
-const string elementL = "->elemento";
-const string sigL = "->sig";
+include <string>
 
-class ListaSM {
-   private:
-    int PtrElementos;
-    int longitud;
-    CSMemoria* mem;
+#include "UCSMemoria.h"
 
-   public:
-    ListaSM();
-    int fin();
-    int primero();
-    int siguiente(int dir);
-    int anterior(int dir);
-    bool vacia();
-    int recupera(int dir);
-    int _longitud();
-    void inserta(int dir, int element);
-    void inserta_primero(int element);
-    void inserta_ultimo(int element);
-    void suprime(int dir);
-    void modifica(int dir, int element);
-    string mostrar();
-    ~ListaSM();
+namespace UListaSM {
+    using std::string;
+    const string elemento_sig = "elemento,sig";
+    const string elemento = "->elemento";
+    const string sig = "->sig";
 
-    // extra
-    int localiza(int element);
-    void elimina_dato(int element);
-    void anula();
+    class ListaSM {
+       private:
+        int PtrElementos;
+        int longitud;
+        UCSMemoria::CSMemoria* mem;
 
-    bool esDireccionValida(int dir);
-};
+       public:
+        ListaSM();
+        int fin();
+        int primero();
+        int siguiente(int dir);
+        int anterior(int dir);
+        bool vacia();
+        int recupera(int dir);
+        int _longitud();
+        void inserta(int dir, int element);
+        void inserta_primero(int element);
+        void inserta_ultimo(int element);
+        void suprime(int dir);
+        void modifica(int dir, int element);
+        string mostrar();
+        ~ListaSM();
+
+        // extra
+        int localiza(int element);
+        void elimina_dato(int element);
+        void anula();
+
+        bool esDireccionValida(int dir);
+    };
+
+}  // namespace UListaSM
+
 ```

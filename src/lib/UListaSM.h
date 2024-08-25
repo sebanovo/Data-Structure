@@ -3,7 +3,6 @@
 #ifndef UListaSMH
 #define UListaSMH
 //---------------------------------------------------------------------------
-
 #include <string>
 
 #include "UCSMemoria.h"
