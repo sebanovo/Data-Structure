@@ -257,6 +257,16 @@ namespace UListaVector {
 
     // muestra el vector
     void ListaVector::mostrar() {
+        // string lista;
+        // cout << '<';
+        // for (int i = 0; i < longitud; i++) {
+        //     int a = elementos[i];
+        //     cout << a;
+        //     if (i < longitud) {
+        //         cout << ',';
+        //     }
+        // }
+        // cout << '>' << endl;
         string lista;
         cout << '<';
         for (int i = 1; i <= longitud; i++) {
@@ -286,6 +296,14 @@ namespace UListaVector {
 
     // elimina todas la ocurrencias de ese elemento
     void ListaVector::elimina_dato(int element) {
+        // int i = 0;
+        // while (i < longitud) {
+        //     if (elementos[i] == element) {
+        //         suprime(i);
+        //     } else {
+        //         i++;
+        //     }
+        // }
         int i = 1;
         while (i <= longitud) {
             if (elementos[i] == element) {
