@@ -34,6 +34,9 @@ namespace UListaVector {
         direccion localiza(int element);  //
         void elimina_dato(int element);   //
         void anula();                     //
+
+        // ejercicio
+        void bubble_sort();
     };
 }  // namespace UListaVector
 #endif

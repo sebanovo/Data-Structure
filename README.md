@@ -29,20 +29,20 @@ namespace UCSMemoria {
 
        public:
         CSMemoria();
-        // importantes
+          importantes
         int new_espacio(string cadena);
         void delete_espacio(int dir);
         void poner_dato(int dir, string id, int valor);
         int obtener_dato(int dir, string lugar);
 
-        // relleno
+          relleno
         int espacio_disponible();
         int espacio_ocupado();
         bool dir_libre(int dir);
         void mostrar();
         ~CSMemoria();
 
-        // metodos auxiliares
+          metodos auxiliares
         int numero_ids(string id);
         string obtener_id(string cadena, int n);
         bool hay_al_menos_un_id(string cadena);
@@ -50,7 +50,7 @@ namespace UCSMemoria {
         string eliminar_flecha(string cadena);
     };
 
-}  // namespace UCSMemoria
+}    namespace UCSMemoria
 ```
 
 # Lista Vector 
@@ -70,27 +70,27 @@ namespace UListaVector {
         int longitud;
 
        public:
-        ListaVector();                       //
-        direccion fin();                     //
-        direccion primero();                 //
-        direccion siguiente(direccion dir);  //
-        direccion anterior(direccion dir);   //
-        bool vacia();                        //
+        ListaVector();                        
+        direccion fin();                      
+        direccion primero();                  
+        direccion siguiente(direccion dir);
+        direccion anterior(direccion dir);    
+        bool vacia();                         
         int recupera(direccion dir);
-        int _longitud();                            //
-        void inserta(direccion dir, int element);   //
-        void inserta_primero(int element);          //
-        void inserta_ultimo(int element);           //
-        void suprime(direccion dir);                //
-        void modifica(direccion dir, int element);  //
-        void mostrar();                             //
+        int _longitud();                             
+        void inserta(direccion dir, int element);    
+        void inserta_primero(int element);           
+        void inserta_ultimo(int element);            
+        void suprime(direccion dir);                 
+        void modifica(direccion dir, int element);   
+        void mostrar();                              
 
-        // extra
-        direccion localiza(int element);  //
-        void elimina_dato(int element);   //
-        void anula();                     //
+          extra
+        direccion localiza(int element);   
+        void elimina_dato(int element);    
+        void anula();                      
     };
-}  // namespace UListaVector
+} // namespace UListaVector
 ```
 
 # Lista Puntero 
@@ -118,23 +118,23 @@ namespace UListaPuntero {
         int longitud;
 
        public:
-        ListaPuntero();                             //
-        direccion fin();                            //
-        direccion primero();                        //
-        direccion siguiente(direccion dir);         //
-        direccion anterior(direccion dir);          //
-        bool vacia();                               //
-        int recupera(direccion dir);                //
-        int _longitud();                            //
-        void inserta(direccion dir, int element);   //
-        void inserta_primero(int element);          //
-        void inserta_ultimo(int element);           //
-        void suprime(direccion dir);                //
-        void modifica(direccion dir, int element);  //
-        string mostrar();                           //
-        ~ListaPuntero();                            //
+        ListaPuntero();                              
+        direccion fin();                             
+        direccion primero();                         
+        direccion siguiente(direccion dir);          
+        direccion anterior(direccion dir);           
+        bool vacia();                                
+        int recupera(direccion dir);                 
+        int _longitud();                             
+        void inserta(direccion dir, int element);    
+        void inserta_primero(int element);           
+        void inserta_ultimo(int element);            
+        void suprime(direccion dir);                 
+        void modifica(direccion dir, int element);   
+        string mostrar();                            
+        ~ListaPuntero();                             
 
-        // extra
+          extra
         direccion localiza(int element);
         void elimina_dato(int element);
         void anula();
@@ -183,7 +183,7 @@ namespace UListaSM {
         string mostrar();
         ~ListaSM();
 
-        // extra
+          extra
         int localiza(int element);
         void elimina_dato(int element);
         void anula();
@@ -191,6 +191,6 @@ namespace UListaSM {
         bool es_direccion_valida(int dir);
     };
 
-}  // namespace UListaSM
+} // namespace UListaSM
 
 ```

@@ -21,6 +21,7 @@ namespace UListaSM {
 
        public:
         ListaSM();
+        ListaSM(UCSMemoria::CSMemoria* m);
         int fin();
         int primero();
         int siguiente(int dir);
@@ -42,6 +43,9 @@ namespace UListaSM {
         void anula();
 
         bool es_direccion_valida(int dir);
+
+        // ejercicio
+        void bubble_sort();
     };
 
 }  // namespace UListaSM

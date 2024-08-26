@@ -46,6 +46,9 @@ namespace UListaPuntero {
         void anula();
 
         bool es_direccion_valida(direccion dir);
+
+        // ejercicios
+        void bubble_sort();
     };
 
 }  // namespace UListaPuntero

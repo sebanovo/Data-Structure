@@ -188,7 +188,5 @@ void mostrarListaSM() {
 }
 
 int main() {
-    std::cout << "hola mudno" << std::endl;
-    mostrarListaSM();
     return 0;
 }

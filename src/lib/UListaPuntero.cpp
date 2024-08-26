@@ -216,4 +216,23 @@ namespace UListaPuntero {
         }
         return false;
     }
+
+    // ejercicios
+    void ListaPuntero::bubble_sort() {
+        Nodo *x = PtrElementos;
+        Nodo *y;
+
+        while (x != nullptr) {
+            y = x->sig;
+            while (y != nullptr) {
+                if (x->elemento > y->elemento) {
+                    int temp = x->elemento;
+                    x->elemento = y->elemento;
+                    y->elemento = temp;
+                }
+                y = y->sig;
+            }
+            x = x->sig;
+        }
+    }
 }  // namespace UListaPuntero

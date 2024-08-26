@@ -15,10 +15,6 @@ namespace UCSMemoria {
     using std::stringstream;
     using std::to_string;
 
-    Nodo::Nodo() {
-        dato = 0;  // necesario para mostrar la memoria
-    }
-
     // inicializa el constructor
     CSMemoria::CSMemoria() {
         mem = new Nodo[MAX];

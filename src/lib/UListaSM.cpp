@@ -23,6 +23,12 @@ namespace UListaSM {
         mem = new UCSMemoria::CSMemoria();
     }
 
+    ListaSM::ListaSM(UCSMemoria::CSMemoria* m) {
+        longitud = 0;
+        PtrElementos = NULO;
+        mem = m;
+    }
+
     // retorna la dirección de memoria final
     int ListaSM::fin() {
         if (vacia())
@@ -229,5 +235,23 @@ namespace UListaSM {
             x = mem->obtener_dato(x, sig);
         }
         return false;
+    }
+
+    // ejercicio
+    void ListaSM::bubble_sort() {
+        int x = PtrElementos;
+        int y;
+        while (x != NULO) {
+            y = mem->obtener_dato(x, sig);
+            while (y != NULO) {
+                if (mem->obtener_dato(x, elemento) > mem->obtener_dato(y, elemento)) {
+                    int temp = mem->obtener_dato(x, elemento);
+                    mem->poner_dato(x, elemento, mem->obtener_dato(y, elemento));
+                    mem->poner_dato(y, elemento, temp);
+                }
+                y = mem->obtener_dato(y, sig);
+            }
+            x = mem->obtener_dato(x, sig);
+        }
     }
 }  // namespace UListaSM
