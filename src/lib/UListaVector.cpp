@@ -320,14 +320,12 @@ namespace UListaVector {
 
     // ejercicio
     void ListaVector::bubble_sort() {
-        int n = 0;
         for (int i = 1; i < longitud; i++) {
             for (int j = i + 1; j <= longitud; j++) {
                 if (elementos[i] > elementos[j]) {
                     int temp = elementos[i];
                     elementos[i] = elementos[j];
                     elementos[j] = temp;
-                    n++;
                 }
             }
         }
