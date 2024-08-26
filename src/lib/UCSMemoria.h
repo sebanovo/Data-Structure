@@ -15,8 +15,6 @@ namespace UCSMemoria {
         int dato = 0;
         string id;
         int link;
-
-        Nodo();
     };
 
     class CSMemoria {
@@ -43,9 +41,9 @@ namespace UCSMemoria {
         // metodos auxiliares
         int numero_ids(string id);
         string obtener_id(string cadena, int n);
-        bool hayAlmenosUnId(string cadena);
-        bool hayUnIdRepetido(string cadena);
-        string eliminarflecha(string cadena);
+        bool hay_al_menos_un_id(string cadena);
+        bool hay_un_id_repetido(string cadena);
+        string eliminar_flecha(string cadena);
     };
 
 }  // namespace UCSMemoria

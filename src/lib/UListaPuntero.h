@@ -45,7 +45,7 @@ namespace UListaPuntero {
         void elimina_dato(int element);
         void anula();
 
-        bool esDireccionValida(direccion dir);
+        bool es_direccion_valida(direccion dir);
     };
 
 }  // namespace UListaPuntero

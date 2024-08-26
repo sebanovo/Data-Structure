@@ -47,7 +47,7 @@ namespace UListaSM {
     int ListaSM::siguiente(int dir) {
         if (vacia())
             throw std::runtime_error("La lista esta vacia");
-        else if (!esDireccionValida(dir))
+        else if (!es_direccion_valida(dir))
             throw std::runtime_error("Esta dirección no es valida");
         else if (dir == fin())
             throw std::runtime_error("No hay siguiente luego de esta dirección");
@@ -58,7 +58,7 @@ namespace UListaSM {
     int ListaSM::anterior(int dir) {
         if (vacia())
             throw std::runtime_error("La lista esta vacía");
-        if (!esDireccionValida(dir))
+        if (!es_direccion_valida(dir))
             throw std::runtime_error("No existe esta dirección en la Lista");
         if (dir == primero())
             throw std::runtime_error("No existe la dirección anterior a esta\n");
@@ -83,7 +83,7 @@ namespace UListaSM {
     int ListaSM::recupera(int dir) {
         if (vacia())
             throw std::runtime_error("La lista esta vacía\n");
-        if (!esDireccionValida(dir))
+        if (!es_direccion_valida(dir))
             throw std::runtime_error("No existe esta dirección en la Lista");
         return mem->obtener_dato(dir, elemento);
     }
@@ -103,7 +103,7 @@ namespace UListaSM {
             throw std::runtime_error("No hay espacio en la memoria");
         if (vacia())
             PtrElementos = x;
-        else if (!esDireccionValida(dir))
+        else if (!es_direccion_valida(dir))
             std::runtime_error("La dirección no es valida");
         else if (dir == primero()) {  // caso especial
             mem->poner_dato(x, sig, PtrElementos);
@@ -146,7 +146,7 @@ namespace UListaSM {
     void ListaSM::suprime(int dir) {
         if (vacia())
             throw std::runtime_error("La lista esta vacía");
-        if (!esDireccionValida(dir))
+        if (!es_direccion_valida(dir))
             throw std::runtime_error("La dirección no es valida");
         if (PtrElementos == dir) {
             int temp = PtrElementos;
@@ -165,7 +165,7 @@ namespace UListaSM {
     void ListaSM::modifica(int dir, int element) {
         if (vacia())
             throw std::runtime_error("La lista esta vacía");
-        if (!esDireccionValida(dir))
+        if (!es_direccion_valida(dir))
             throw std::runtime_error("La dirección no es valida");
         mem->poner_dato(dir, elemento, element);
     }
@@ -221,7 +221,7 @@ namespace UListaSM {
     }
 
     // verifica que la dirección exista
-    bool ListaSM::esDireccionValida(int dir) {
+    bool ListaSM::es_direccion_valida(int dir) {
         int x = PtrElementos;
         while (x != NULO) {
             if (x == dir)

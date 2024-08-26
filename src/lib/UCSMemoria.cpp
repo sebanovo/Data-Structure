@@ -35,9 +35,9 @@ namespace UCSMemoria {
             throw std::runtime_error("Exediste el limite del espacio disponible");
         if (cadena.empty())
             throw std::runtime_error("La cadena esta vacía");
-        if (!hayAlmenosUnId(cadena))
+        if (!hay_al_menos_un_id(cadena))
             throw std::runtime_error("Tiene que haber almenos un id");
-        if (hayUnIdRepetido(cadena))
+        if (hay_un_id_repetido(cadena))
             throw std::runtime_error("Hay un id repetido en la cadena");
 
         int cant = numero_ids(cadena);
@@ -67,12 +67,12 @@ namespace UCSMemoria {
 
     // pone un dato desde la dirección de memoria que quieras
     void CSMemoria::poner_dato(int dir, string cadena_id, int valor) {
-        cadena_id = eliminarflecha(cadena_id);
+        cadena_id = eliminar_flecha(cadena_id);
         if (dir < 0 || dir > MAX - 1)
             throw std::runtime_error("Esta dirección no es valida");
         if (cadena_id.empty())
             throw std::runtime_error("La cadena ID esta vacía");
-        if (!hayAlmenosUnId(cadena_id))
+        if (!hay_al_menos_un_id(cadena_id))
             throw std::runtime_error("Tiene que haber almenos un id");
 
         int z = dir;
@@ -87,12 +87,12 @@ namespace UCSMemoria {
 
     // obtiene un dato desde la dirección de memoria
     int CSMemoria::obtener_dato(int dir, string cadena_id) {
-        cadena_id = eliminarflecha(cadena_id);
+        cadena_id = eliminar_flecha(cadena_id);
         if (dir < 0 || dir > MAX - 1)
             throw std::runtime_error("Esta dirección no es valida");
         if (cadena_id.empty())
             throw std::runtime_error("La cadena ID esta vacía");
-        if (!hayAlmenosUnId(cadena_id))
+        if (!hay_al_menos_un_id(cadena_id))
             throw std::runtime_error("Tiene que haber almenos un id");
 
         int z = dir;
@@ -205,7 +205,7 @@ namespace UCSMemoria {
     }
 
     // verifica si hay almenos un id
-    bool CSMemoria::hayAlmenosUnId(string cadena) {
+    bool CSMemoria::hay_al_menos_un_id(string cadena) {
         for (int i = 0; i < cadena.length(); i++) {
             if (cadena[i] != ',')
                 return true;
@@ -214,7 +214,7 @@ namespace UCSMemoria {
     }
 
     // verifica que no se repitan ids ejem: "fono,x,y,,fono"
-    bool CSMemoria::hayUnIdRepetido(string cadena) {
+    bool CSMemoria::hay_un_id_repetido(string cadena) {
         set<string> idsUnicos;
         stringstream ss(cadena);
         string id;
@@ -231,7 +231,7 @@ namespace UCSMemoria {
     }
 
     // elimina la flecha
-    string CSMemoria::eliminarflecha(string cadena) {
+    string CSMemoria::eliminar_flecha(string cadena) {
         int pos = 0;
         if (cadena.empty())
             return "";

@@ -41,7 +41,7 @@ namespace UListaSM {
         void elimina_dato(int element);
         void anula();
 
-        bool esDireccionValida(int dir);
+        bool es_direccion_valida(int dir);
     };
 
 }  // namespace UListaSM

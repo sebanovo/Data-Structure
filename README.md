@@ -2,6 +2,8 @@
 
 Es un simulador de memoria que empieza desde 0 hasta MAX - 1
 
+TODO: el eliminar_flecha no funciona
+
 ```cpp
 #include <iostream>
 #include <string>
@@ -43,9 +45,9 @@ namespace UCSMemoria {
         // metodos auxiliares
         int numero_ids(string id);
         string obtener_id(string cadena, int n);
-        bool hayAlmenosUnId(string cadena);
-        bool hayUnIdRepetido(string cadena);
-        string eliminarflecha(string cadena);
+        bool hay_al_menos_un_id(string cadena);
+        bool hay_un_id_repetido(string cadena);
+        string eliminar_flecha(string cadena);
     };
 
 }  // namespace UCSMemoria
@@ -137,7 +139,7 @@ namespace UListaPuntero {
         void elimina_dato(int element);
         void anula();
 
-        bool esDireccionValida(direccion dir);
+        bool es_direccion_valida(direccion dir);
     };
 
 }  // namespace UListaPuntero
@@ -186,7 +188,7 @@ namespace UListaSM {
         void elimina_dato(int element);
         void anula();
 
-        bool esDireccionValida(int dir);
+        bool es_direccion_valida(int dir);
     };
 
 }  // namespace UListaSM
