@@ -28,7 +28,7 @@ namespace UListaVector {
         void inserta_ultimo(int element);
         void suprime(direccion dir);
         void modifica(direccion dir, int element);
-        void mostrar();
+        string mostrar();
 
         // extra
         direccion localiza(int element);

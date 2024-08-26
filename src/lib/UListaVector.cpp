@@ -256,27 +256,27 @@ namespace UListaVector {
     }
 
     // muestra el vector
-    void ListaVector::mostrar() {
-        // string lista;
-        // cout << '<';
+    string ListaVector::mostrar() {
+        //    string s;
+        // s = '<';
         // for (int i = 0; i < longitud; i++) {
-        //     int a = elementos[i];
-        //     cout << a;
+        //     s += std::to_string(elementos[i]);
         //     if (i < longitud) {
-        //         cout << ',';
+        //         s += ",";
         //     }
         // }
-        // cout << '>' << endl;
-        string lista;
-        cout << '<';
+        // s += ">";
+        // return s;
+        string s;
+        s = '<';
         for (int i = 1; i <= longitud; i++) {
-            int a = elementos[i];
-            cout << a;
+            s += std::to_string(elementos[i]);
             if (i < longitud) {
-                cout << ',';
+                s += ",";
             }
         }
-        cout << '>' << endl;
+        s += ">";
+        return s;
     }
 
     // retorna la dirección de memoria del elemento
@@ -320,12 +320,14 @@ namespace UListaVector {
 
     // ejercicio
     void ListaVector::bubble_sort() {
+        int n = 0;
         for (int i = 1; i < longitud; i++) {
-            for (int j = i + 1; i <= longitud; j++) {
+            for (int j = i + 1; j <= longitud; j++) {
                 if (elementos[i] > elementos[j]) {
                     int temp = elementos[i];
                     elementos[i] = elementos[j];
                     elementos[j] = temp;
+                    n++;
                 }
             }
         }
