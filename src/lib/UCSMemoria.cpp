@@ -180,24 +180,29 @@ namespace UCSMemoria {
 
     // Obtiene el id indicando el número del id que es
     string CSMemoria::obtener_id(string cadena, int n) {
-        string palabra = "";
-        int contador = 0;
-        int i = 0;
-        while ((contador < n - 1) && (i < cadena.length())) {
-            if (cadena.at(i) == ',') {
-                contador++;
-                cadena = cadena.substr(
-                    i + 1, cadena.length() - cadena.substr(0, i).length());
-                i = NULO;
+        // a,b,c,d
+        // ,,,a,b,c,d,,,
+        // a,,,b,,,c,,,d
+        string id = "";
+        bool b = false;
+        int c = 0;
+        for (int i = 0; i < cadena.length(); i++) {
+            if (cadena[i] != ',') {
+                if (!b)
+                    c++;
+
+                if (c == n)
+                    id += cadena[i];
+                b = true;
+
+            } else {
+                if (b && c == n) {
+                    return id;
+                }
+                b = false;
             }
-            i++;
         }
-        i = 0;
-        while (cadena[i] != ',' && i < cadena.length()) {
-            i++;
-        }
-        palabra = cadena.substr(0, i);
-        return palabra;
+        return id;
     }
 
     // verifica si hay almenos un id
@@ -228,12 +233,10 @@ namespace UCSMemoria {
 
     // elimina la flecha
     string CSMemoria::eliminar_flecha(string cadena) {
-        int pos = 0;
-        if (cadena.empty())
-            return "";
-        while (cadena[pos] != '-' && cadena[pos + 1] != '>') {
-            pos++;
-        }
-        return cadena.substr(pos + 2, cadena.length() - cadena.substr(0, pos + 1).length());
+        if (cadena.length() < 3)
+            throw std::runtime_error("La cadena tiene que tener minimo 3 caracteres");
+        if (cadena.substr(0, 2) != "->")
+            throw std::runtime_error("La cadena necesita una flecha (->)");
+        return cadena.substr(2, cadena.length());
     }
 }  // namespace UCSMemoria

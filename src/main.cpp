@@ -165,6 +165,6 @@ void mostrarListaSM() {
 }
 
 int main() {
-    mostrarListaV();
+    mostrarListaSM();
     return 0;
 }
