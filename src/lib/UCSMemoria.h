@@ -38,7 +38,7 @@ namespace UCSMemoria {
         void mostrar();
         ~CSMemoria();
 
-       public:
+       private:
         // metodos auxiliares
         int numero_ids(string id);
         string obtener_id(string cadena, int n);
