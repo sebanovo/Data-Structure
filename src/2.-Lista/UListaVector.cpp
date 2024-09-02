@@ -13,6 +13,7 @@ namespace UListaVector {
     // constructor
     ListaVector::ListaVector() {
         longitud = 0;
+        elementos = new int[MAX];
     }
 
     // devuelve la direccion fin de la lista
@@ -253,6 +254,10 @@ namespace UListaVector {
         if (dir < 1 || dir > longitud)
             throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
         elementos[dir] = element;
+    }
+
+    ListaVector::~ListaVector() {
+        delete[] elementos;
     }
 
     // muestra el vector

@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------------
 #include <string>
 
-#include "UCSMemoria.h"
+#include "1.-Memoria/UCSMemoria.h"
 
 namespace UListaSM {
     using std::string;

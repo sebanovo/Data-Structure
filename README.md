@@ -65,8 +65,8 @@ namespace UListaVector {
     typedef int direccion;
     class ListaVector {
        private:
-        static constexpr int MAX = 100;
-        int elementos[MAX];
+        const int MAX = 100;
+        int* elementos[MAX];
         int longitud;
 
        public:
@@ -84,6 +84,7 @@ namespace UListaVector {
         void suprime(direccion dir);                 
         void modifica(direccion dir, int element);   
         void mostrar();                              
+        ~ListaVector();                        
 
           extra
         direccion localiza(int element);   
@@ -192,5 +193,44 @@ namespace UListaSM {
     };
 
 } // namespace UListaSM
+
+# Polinomio 
+
+```cpp
+// TODO:
+// restar
+// multiplicar
+// derivada
+// integral
+namespace UPolinomio {
+    using std::string;
+    class Polinomio {
+       private:
+        const int MAX = 30;
+        int* vc;
+        int* ve;
+        int nt;
+
+       public:
+        Polinomio();
+        bool es_cero();
+        int grado();
+        int coeficiente(int exp);
+        void sumar(Polinomio p1, Polinomio p2);
+        void restar(Polinomio p1, Polinomio p2);
+        void multiplicar(Polinomio p1, Polinomio p3);
+        void poner_termino(int coef, int exp);
+        int numero_terminos();
+        int exponente(int nroTer);
+        string mostrar();
+        ~Polinomio();
+        void derivada(Polinomio p);
+        string mostrar_integral(Polinomio p);
+
+        // extra
+        int buscar_exponente(int exp);
+    };
+}  // namespace UPolinomio
+```
 
 ```

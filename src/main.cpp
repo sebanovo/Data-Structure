@@ -1,9 +1,11 @@
+#include <iostream>
 #include <limits>
 
-#include "lib/UCSMemoria.h"
-#include "lib/UListaPuntero.h"
-#include "lib/UListaSM.h"
-#include "lib/UListaVector.h"
+#include "1.-Memoria/UCSMemoria.h"
+#include "2.-Lista/UListaPuntero.h"
+#include "2.-Lista/UListaSM.h"
+#include "2.-Lista/UListaVector.h"
+#include "3.-Polinomio/PolinomioVector.h"
 
 using std::cin;
 using std::cout;
@@ -164,6 +166,22 @@ void mostrarListaSM() {
     delete lista;
 }
 
+void mostrarPol() {
+    UPolinomioVector::PolinomioVector* polinomio = new UPolinomioVector::PolinomioVector;
+    UPolinomioVector::PolinomioVector polinomio1;
+    UPolinomioVector::PolinomioVector polinomio2;
+    polinomio->poner_termino(1, 2);
+    polinomio->poner_termino(2, 3);
+    polinomio->poner_termino(1, 3);
+
+    std::cout << polinomio->mostrar() << std::endl;
+    int re = polinomio->evaluar(3);
+    std::cout << re;
+
+    delete polinomio;
+}
+
 int main() {
+    mostrarPol();
     return 0;
 }

@@ -10,8 +10,8 @@ namespace UListaVector {
     typedef int direccion;
     class ListaVector {
        private:
-        static constexpr int MAX = 100;
-        int elementos[MAX];
+        const int MAX = 100;
+        int* elementos;
         int longitud;
 
        public:
@@ -29,6 +29,7 @@ namespace UListaVector {
         void suprime(direccion dir);
         void modifica(direccion dir, int element);
         string mostrar();
+        ~ListaVector();
 
         // extra
         direccion localiza(int element);

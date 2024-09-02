@@ -173,6 +173,7 @@ namespace UListaPuntero {
     ListaPuntero::~ListaPuntero() {
         while (!vacia())
             suprime(primero());
+        PtrElementos = nullptr;
     }
 
     // retorna la direccion de memoria de la primera ocurrencia del elemento

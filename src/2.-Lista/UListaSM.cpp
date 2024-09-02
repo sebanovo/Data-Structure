@@ -6,8 +6,6 @@
 
 #include <iostream>
 #include <string>
-
-#include "UCSMemoria.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -193,6 +191,7 @@ namespace UListaSM {
 
     ListaSM::~ListaSM() {
         delete mem;
+        PtrElementos = NULO;
     }
 
     // retorna la direccion de memoria de la primera ocurrencia del elemento
