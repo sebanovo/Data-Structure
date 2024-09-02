@@ -9,9 +9,9 @@
 
 namespace UListaSM {
     using std::string;
-    const string elemento_sig = "elemento,sig";
-    const string elemento = "->elemento";
-    const string sig = "->sig";
+    const string _elemento_sig = "elemento,sig";
+    const string _elemento = "->elemento";
+    const string _sig = "->sig";
 
     class ListaSM {
        private:

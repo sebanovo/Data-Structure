@@ -24,8 +24,8 @@ namespace UPolinomioVector {
 
     // obtiene el grado del polinomio
     int PolinomioVector::grado() {
-        if (nt <= 0)
-            throw std::runtime_error("No existen terminos");
+        // if (nt <= 0)
+        //     throw std::runtime_error("No existen terminos");
         int max = ve[1];
         for (int i = 1; i <= nt; i++) {
             if (ve[i] > max)
@@ -71,9 +71,22 @@ namespace UPolinomioVector {
 
     void PolinomioVector::multiplicar(PolinomioVector p1, PolinomioVector p2) {
         // P1 * P2 = (2x + 1) * (3x + 3)
+        // 2x * 3x + 2x * 3 + 1 * 3x + 1 * 3;
+        // 6x^2 + 9x + 3
+        for (int i = 1; i <= p1.numero_terminos(); i++) {
+            for (int j = 1; j <= p2.numero_terminos(); j++) {
+                int exp1 = p1.exponente(i);
+                int coef1 = p1.coeficiente(exp1);
+
+                int exp2 = p2.exponente(j);
+                int coef2 = p2.coeficiente(exp2);
+
+                poner_termino(coef1 * coef2, exp1 + exp2);
+            }
+        }
     }
 
-    // retorna la posicion del exponenete
+    // retorna la direccion del exponenete
     int PolinomioVector::buscar_exponente(int exp) {
         for (int i = 1; i <= nt; i++) {
             if (ve[i] == exp)
@@ -84,8 +97,6 @@ namespace UPolinomioVector {
 
     // pone un termino al polinomio
     void PolinomioVector::poner_termino(int coef, int exp) {
-        // if (nt >= MAX)
-        //     throw std::runtime_error("Los vectores estan llenos");
         int dir_exp = buscar_exponente(exp);
         if (dir_exp == -1) {
             if (coef != 0) {
@@ -119,9 +130,17 @@ namespace UPolinomioVector {
 
     // cambia el coeficiente del termino
     void PolinomioVector::asignar_coeficiente(int coef, int exp) {
-        for (int i = 1; i <= numero_terminos(); i++) {
-            if (ve[i] == exp)
-                vc[i] = coef;
+        int dir = buscar_exponente(exp);
+        if (dir != -1) {
+            vc[dir] = coef;
+            if (vc[dir] == 0) {
+                for (int i = dir; i < numero_terminos(); i++) {
+                    vc[i] = vc[i + 1];
+                    ve[i] = ve[i + 1];
+                }
+            }
+        } else {
+            throw std::runtime_error("No existe ese exponente");
         }
     }
 

@@ -35,7 +35,7 @@ namespace UListaSM {
         int PtrFin;
         while (x != NULO) {
             PtrFin = x;
-            x = mem->obtener_dato(x, sig);
+            x = mem->obtener_dato(x, _sig);
         }
         return PtrFin;
     }
@@ -55,7 +55,7 @@ namespace UListaSM {
             throw std::runtime_error("Esta dirección no es valida");
         else if (dir == fin())
             throw std::runtime_error("No hay siguiente luego de esta dirección");
-        return mem->obtener_dato(dir, sig);
+        return mem->obtener_dato(dir, _sig);
     }
 
     // retorna la dirección de memoria anterior a esta
@@ -73,7 +73,7 @@ namespace UListaSM {
             if (x == dir)
                 return ant;
             ant = x;
-            x = mem->obtener_dato(x, sig);
+            x = mem->obtener_dato(x, _sig);
         }
         return NULO;
     }
@@ -83,13 +83,13 @@ namespace UListaSM {
         return longitud == 0 || PtrElementos == NULO;
     }
 
-    // recupera el elemento de la dirección de memoria
+    // recupera el _elemento de la dirección de memoria
     int ListaSM::recupera(int dir) {
         if (vacia())
             throw std::runtime_error("La lista esta vacía\n");
         if (!es_direccion_valida(dir))
             throw std::runtime_error("No existe esta dirección en la Lista");
-        return mem->obtener_dato(dir, elemento);
+        return mem->obtener_dato(dir, _elemento);
     }
 
     // retorna la longitud
@@ -97,11 +97,11 @@ namespace UListaSM {
         return longitud;
     }
 
-    // insertar un elemento en una dirección de memoria
+    // insertar un _elemento en una dirección de memoria
     void ListaSM::inserta(int dir, int element) {
-        int x = mem->new_espacio(elemento_sig);
-        mem->poner_dato(x, elemento, element);
-        mem->poner_dato(x, sig, NULO);
+        int x = mem->new_espacio(_elemento_sig);
+        mem->poner_dato(x, _elemento, element);
+        mem->poner_dato(x, _sig, NULO);
 
         if (x == NULO)
             throw std::runtime_error("No hay espacio en la memoria");
@@ -110,30 +110,30 @@ namespace UListaSM {
         else if (!es_direccion_valida(dir))
             std::runtime_error("La dirección no es valida");
         else if (dir == primero()) {  // caso especial
-            mem->poner_dato(x, sig, PtrElementos);
+            mem->poner_dato(x, _sig, PtrElementos);
             PtrElementos = x;
         } else {
             int ant = anterior(dir);
-            mem->poner_dato(x, sig, mem->obtener_dato(ant, sig));
-            mem->poner_dato(ant, sig, x);
+            mem->poner_dato(x, _sig, mem->obtener_dato(ant, _sig));
+            mem->poner_dato(ant, _sig, x);
         }
         longitud++;
     }
 
-    // insertar un elemento al principio de la lista
+    // insertar un _elemento al principio de la lista
     void ListaSM::inserta_primero(int element) {
-        int x = mem->new_espacio(elemento_sig);
-        mem->poner_dato(x, elemento, element);
-        mem->poner_dato(x, sig, PtrElementos);
+        int x = mem->new_espacio(_elemento_sig);
+        mem->poner_dato(x, _elemento, element);
+        mem->poner_dato(x, _sig, PtrElementos);
         PtrElementos = x;
         longitud++;
     }
 
-    // inserta un elemento al final de la lista
+    // inserta un _elemento al final de la lista
     void ListaSM::inserta_ultimo(int element) {
-        int x = mem->new_espacio(elemento_sig);
-        mem->poner_dato(x, elemento, element);
-        mem->poner_dato(x, sig, NULO);
+        int x = mem->new_espacio(_elemento_sig);
+        mem->poner_dato(x, _elemento, element);
+        mem->poner_dato(x, _sig, NULO);
         if (x == NULO)
             throw std::runtime_error("No hay espacio en la memoria");
         if (vacia()) {
@@ -142,11 +142,11 @@ namespace UListaSM {
             return;
         }
 
-        mem->poner_dato(fin(), sig, x);
+        mem->poner_dato(fin(), _sig, x);
         longitud++;
     }
 
-    // elimina un elemento de la lista
+    // elimina un _elemento de la lista
     void ListaSM::suprime(int dir) {
         if (vacia())
             throw std::runtime_error("La lista esta vacía");
@@ -154,24 +154,24 @@ namespace UListaSM {
             throw std::runtime_error("La dirección no es valida");
         if (PtrElementos == dir) {
             int temp = PtrElementos;
-            PtrElementos = mem->obtener_dato(PtrElementos, sig);
+            PtrElementos = mem->obtener_dato(PtrElementos, _sig);
             mem->delete_espacio(temp);
             return;
         } else {
             int ant = anterior(dir);
-            mem->poner_dato(ant, sig, mem->obtener_dato(dir, sig));
+            mem->poner_dato(ant, _sig, mem->obtener_dato(dir, _sig));
             mem->delete_espacio(dir);
         }
         longitud--;
     }
 
-    // modifica el elemento de una direccion de la lista
+    // modifica el _elemento de una direccion de la lista
     void ListaSM::modifica(int dir, int element) {
         if (vacia())
             throw std::runtime_error("La lista esta vacía");
         if (!es_direccion_valida(dir))
             throw std::runtime_error("La dirección no es valida");
-        mem->poner_dato(dir, elemento, element);
+        mem->poner_dato(dir, _elemento, element);
     }
 
     // muestra la lista
@@ -180,9 +180,9 @@ namespace UListaSM {
         string s = "[";
         int x = PtrElementos;
         while (x != NULO) {
-            int el = mem->obtener_dato(x, elemento);
+            int el = mem->obtener_dato(x, _elemento);
             s += to_string(el);
-            x = mem->obtener_dato(x, sig);
+            x = mem->obtener_dato(x, _sig);
             if (x != NULO)
                 s += ",";
         }
@@ -194,27 +194,27 @@ namespace UListaSM {
         PtrElementos = NULO;
     }
 
-    // retorna la direccion de memoria de la primera ocurrencia del elemento
+    // retorna la direccion de memoria de la primera ocurrencia del _elemento
     int ListaSM::localiza(int element) {
         int x = PtrElementos;
         while (x != NULO) {
-            if (mem->obtener_dato(x, elemento) == element)
+            if (mem->obtener_dato(x, _elemento) == element)
                 return x;
-            x = mem->obtener_dato(x, sig);
+            x = mem->obtener_dato(x, _sig);
         }
         return NULO;
     }
 
-    // elimina todas las ocurrencias del elemento
+    // elimina todas las ocurrencias del _elemento
     void ListaSM::elimina_dato(int element) {
         int x = PtrElementos;
         while (x != NULO) {
-            if (mem->obtener_dato(x, elemento) == element) {
+            if (mem->obtener_dato(x, _elemento) == element) {
                 int elim = x;
-                x = mem->obtener_dato(x, sig);
+                x = mem->obtener_dato(x, _sig);
                 suprime(elim);
             } else {
-                x = mem->obtener_dato(x, sig);
+                x = mem->obtener_dato(x, _sig);
             }
         }
     }
@@ -231,7 +231,7 @@ namespace UListaSM {
         while (x != NULO) {
             if (x == dir)
                 return true;
-            x = mem->obtener_dato(x, sig);
+            x = mem->obtener_dato(x, _sig);
         }
         return false;
     }
@@ -241,16 +241,16 @@ namespace UListaSM {
         int x = PtrElementos;
         int y;
         while (x != NULO) {
-            y = mem->obtener_dato(x, sig);
+            y = mem->obtener_dato(x, _sig);
             while (y != NULO) {
-                if (mem->obtener_dato(x, elemento) > mem->obtener_dato(y, elemento)) {
-                    int temp = mem->obtener_dato(x, elemento);
-                    mem->poner_dato(x, elemento, mem->obtener_dato(y, elemento));
-                    mem->poner_dato(y, elemento, temp);
+                if (mem->obtener_dato(x, _elemento) > mem->obtener_dato(y, _elemento)) {
+                    int temp = mem->obtener_dato(x, _elemento);
+                    mem->poner_dato(x, _elemento, mem->obtener_dato(y, _elemento));
+                    mem->poner_dato(y, _elemento, temp);
                 }
-                y = mem->obtener_dato(y, sig);
+                y = mem->obtener_dato(y, _sig);
             }
-            x = mem->obtener_dato(x, sig);
+            x = mem->obtener_dato(x, _sig);
         }
     }
 }  // namespace UListaSM

@@ -5,6 +5,9 @@
 #include "2.-Lista/UListaPuntero.h"
 #include "2.-Lista/UListaSM.h"
 #include "2.-Lista/UListaVector.h"
+#include "3.-Polinomio/PolinomioLista.h"
+#include "3.-Polinomio/PolinomioPuntero.h"
+#include "3.-Polinomio/PolinomioSM.h"
 #include "3.-Polinomio/PolinomioVector.h"
 
 using std::cin;
@@ -166,22 +169,29 @@ void mostrarListaSM() {
     delete lista;
 }
 
-void mostrarPol() {
+void mostrarPolinomioVector() {
     UPolinomioVector::PolinomioVector* polinomio = new UPolinomioVector::PolinomioVector;
-    UPolinomioVector::PolinomioVector polinomio1;
-    UPolinomioVector::PolinomioVector polinomio2;
-    polinomio->poner_termino(1, 2);
-    polinomio->poner_termino(2, 3);
-    polinomio->poner_termino(1, 3);
 
     std::cout << polinomio->mostrar() << std::endl;
-    int re = polinomio->evaluar(3);
-    std::cout << re;
+
+    delete polinomio;
+}
+
+void mostrarPolinomioPuntero() {
+    UPolinomioPuntero::PolinomioPuntero* polinomio = new UPolinomioPuntero::PolinomioPuntero;
+    UPolinomioPuntero::PolinomioPuntero polinomio1;
+    UPolinomioPuntero::PolinomioPuntero polinomio2;
+    // P1 * P2 = (2x + 1) * (3x + 3)
+    // 2x * 3x + 2x * 3 + 1 * 3x + 1 * 3;
+    // 6x^2 + 9x + 3
+
+    polinomio->restar(polinomio1, polinomio2);
+    std::cout << polinomio->mostrar() << std::endl;
 
     delete polinomio;
 }
 
 int main() {
-    mostrarPol();
+    mostrarPolinomioPuntero();
     return 0;
 }

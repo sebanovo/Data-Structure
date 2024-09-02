@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef PolinomioPunteroH
-#define PolinomioPunteroH
+#ifndef UPolinomioPunteroH
+#define UPolinomioPunteroH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -30,7 +30,7 @@ namespace UPolinomioPuntero {
         int coeficiente(int exp);
         void sumar(PolinomioPuntero p1, PolinomioPuntero p2);
         void restar(PolinomioPuntero p1, PolinomioPuntero p2);
-        void multiplicar(PolinomioPuntero p1, PolinomioPuntero p3);
+        void multiplicar(PolinomioPuntero p1, PolinomioPuntero p2);
         void poner_termino(int coef, int exp);
         int numero_terminos();
         int exponente(int nroTer);

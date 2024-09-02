@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef PolinomioSMH
-#define PolinomioSMH
+#ifndef UPolinomioSMH
+#define UPolinomioSMH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>

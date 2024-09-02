@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef PolinomioVectorH
-#define PolinomioVectorH
+#ifndef UPolinomioVectorH
+#define UPolinomioVectorH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -10,7 +10,7 @@ namespace UPolinomioVector {
     using std::string;
     class PolinomioVector {
        private:
-        const int MAX = 30;
+        const int MAX = 100;
         int* vc;
         int* ve;
         int nt;
