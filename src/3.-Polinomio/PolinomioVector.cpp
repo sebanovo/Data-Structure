@@ -95,6 +95,13 @@ namespace UPolinomioVector {
         return -1;
     }
 
+    // devuelve la direccion del número del termino
+    int PolinomioVector::buscar_termino_n(int n) {
+        if (n <= 0 || n > numero_terminos())
+            return -1;
+        return n;
+    }
+
     // pone un termino al polinomio
     void PolinomioVector::poner_termino(int coef, int exp) {
         int dir_exp = buscar_exponente(exp);

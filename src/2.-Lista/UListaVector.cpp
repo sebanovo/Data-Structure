@@ -18,12 +18,13 @@ namespace UListaVector {
 
     // devuelve la direccion fin de la lista
     direccion ListaVector::fin() {
-        if (vacia()) {
-            throw std::runtime_error("La lista esta vacia\n");
-        }
+        // if (vacia()) {
+        //     throw std::runtime_error("La lista esta vacia\n");
+        // }
         return longitud;
         // if (!vacia()) {
         //     return longitud - 1;
+        // }
         // }
         // else {
         //     cout << "Error: La lista esta vacia\n";
@@ -32,9 +33,9 @@ namespace UListaVector {
 
     // devuelve la dirección del primer elemento de la lista
     direccion ListaVector::primero() {
-        if (vacia()) {
-            throw std::runtime_error("La lista esta vacia\n");
-        }
+        // if (vacia()) {
+        //     throw std::runtime_error("La lista esta vacia\n");
+        // }
         return 1;
         // if (!vacia()) {
         //     return 0;
@@ -60,12 +61,11 @@ namespace UListaVector {
         //         return -1;
         //     }
         // }
-        if (vacia())
-            throw std::runtime_error("La lista esta vacia\n");
-        if (dir == longitud)
-            throw std::runtime_error("No hay siguiente después de esta dirección (" + std::to_string(dir) + ")\n");
-        if (dir < 1 || dir > longitud)
-            throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
+
+        // if (vacia())
+        //     throw std::runtime_error("La lista esta vacia\n");
+        // if (dir == fin())
+        //     throw std::runtime_error("No hay siguiente después de esta dirección (" + std::to_string(dir) + ")\n");
 
         return dir + 1;
     }
@@ -90,7 +90,7 @@ namespace UListaVector {
             throw std::runtime_error("La lista esta vacía\n");
         if (dir == 1)
             throw std::runtime_error("No hay anterior antes de esta dirección (" + std::to_string(dir) + ")\n");
-        if (dir < 1 || dir > longitud)
+        if (dir == primero())
             throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
 
         return dir - 1;
@@ -117,9 +117,6 @@ namespace UListaVector {
         // }
         if (vacia())
             throw std::runtime_error("La lista esta vacía\n");
-        if (dir < 1 || dir > longitud)
-            throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
-
         return elementos[dir];
     }
 
@@ -149,15 +146,13 @@ namespace UListaVector {
         //     cout << "Error de direccion\n";
         // }
         if (longitud == MAX) {
-            std::runtime_error("La lista esta llena\n");
+            throw std::runtime_error("La lista esta llena\n");
         }
         if (vacia()) {
             elementos[1] = element;
             longitud++;
             return;
         }
-        if (dir < 1 || dir > longitud)
-            throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
 
         for (int i = longitud + 1; i > dir; i--) {
             elementos[i] = elementos[i - 1];
@@ -225,10 +220,9 @@ namespace UListaVector {
         //         cout << "Error de direccion no se puede suprimir\n";
         //     }
         // }
-        if (vacia())
-            throw std::runtime_error("Lista vacia\n");
-        if (dir < 1 || dir > longitud)
-            throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
+
+        // if (vacia())
+        //     throw std::runtime_error("Lista vacia\n");
         for (int i = dir; i < longitud; i++) {
             elementos[i] = elementos[i + 1];
         }
@@ -251,8 +245,7 @@ namespace UListaVector {
         // }
         if (vacia())
             throw std::runtime_error("Lista vacia\n");
-        if (dir < 1 || dir > longitud)
-            throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
+
         elementos[dir] = element;
     }
 
@@ -272,16 +265,14 @@ namespace UListaVector {
         // }
         // s += ">";
         // return s;
-        string s;
-        s = '<';
+        string s = "<";
         for (int i = 1; i <= longitud; i++) {
             s += std::to_string(elementos[i]);
             if (i < longitud) {
                 s += ",";
             }
         }
-        s += ">";
-        return s;
+        return s + ">";
     }
 
     // retorna la dirección de memoria del elemento

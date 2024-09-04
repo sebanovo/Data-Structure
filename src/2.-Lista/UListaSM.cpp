@@ -29,8 +29,6 @@ namespace UListaSM {
 
     // retorna la dirección de memoria final
     int ListaSM::fin() {
-        if (vacia())
-            throw std::runtime_error("Lista vacia");
         int x = PtrElementos;
         int PtrFin;
         while (x != NULO) {
@@ -42,30 +40,28 @@ namespace UListaSM {
 
     // retorna la dirección de memoria de la cabeza de la lista
     int ListaSM::primero() {
-        if (vacia())
-            throw std::runtime_error("La lista esta vacía");
         return PtrElementos;
     }
 
     // retorna la dirección de memoria siguiente a este
     int ListaSM::siguiente(int dir) {
-        if (vacia())
-            throw std::runtime_error("La lista esta vacia");
-        else if (!es_direccion_valida(dir))
-            throw std::runtime_error("Esta dirección no es valida");
-        else if (dir == fin())
-            throw std::runtime_error("No hay siguiente luego de esta dirección");
+        // if (vacia())
+        //     throw std::runtime_error("La lista esta vacia");
+        // else if (!es_direccion_valida(dir))
+        //     throw std::runtime_error("Esta dirección no es valida");
+        // else if (dir == fin())
+        //     throw std::runtime_error("No hay siguiente luego de esta dirección");
         return mem->obtener_dato(dir, _sig);
     }
 
     // retorna la dirección de memoria anterior a esta
     int ListaSM::anterior(int dir) {
-        if (vacia())
-            throw std::runtime_error("La lista esta vacía");
-        if (!es_direccion_valida(dir))
-            throw std::runtime_error("No existe esta dirección en la Lista");
-        if (dir == primero())
-            throw std::runtime_error("No existe la dirección anterior a esta\n");
+        // if (vacia())
+        //     throw std::runtime_error("La lista esta vacía");
+        // if (!es_direccion_valida(dir))
+        //     throw std::runtime_error("No existe esta dirección en la Lista");
+        // if (dir == primero())
+        //     throw std::runtime_error("No existe la dirección anterior a esta\n");
 
         int x = PtrElementos;
         int ant = NULO;
@@ -83,12 +79,12 @@ namespace UListaSM {
         return longitud == 0 || PtrElementos == NULO;
     }
 
-    // recupera el _elemento de la dirección de memoria
+    // recupera el elemento de la dirección de memoria
     int ListaSM::recupera(int dir) {
-        if (vacia())
-            throw std::runtime_error("La lista esta vacía\n");
-        if (!es_direccion_valida(dir))
-            throw std::runtime_error("No existe esta dirección en la Lista");
+        // if (vacia())
+        //     throw std::runtime_error("La lista esta vacía\n");
+        // if (!es_direccion_valida(dir))
+        //     throw std::runtime_error("No existe esta dirección en la Lista");
         return mem->obtener_dato(dir, _elemento);
     }
 
@@ -107,8 +103,8 @@ namespace UListaSM {
             throw std::runtime_error("No hay espacio en la memoria");
         if (vacia())
             PtrElementos = x;
-        else if (!es_direccion_valida(dir))
-            std::runtime_error("La dirección no es valida");
+        // else if (!es_direccion_valida(dir))
+        //     std::runtime_error("La dirección no es valida");
         else if (dir == primero()) {  // caso especial
             mem->poner_dato(x, _sig, PtrElementos);
             PtrElementos = x;
@@ -148,15 +144,15 @@ namespace UListaSM {
 
     // elimina un _elemento de la lista
     void ListaSM::suprime(int dir) {
-        if (vacia())
-            throw std::runtime_error("La lista esta vacía");
-        if (!es_direccion_valida(dir))
-            throw std::runtime_error("La dirección no es valida");
+        // if (vacia())
+        //     throw std::runtime_error("La lista esta vacía");
+        // if (!es_direccion_valida(dir))
+        //     throw std::runtime_error("La dirección no es valida");
         if (PtrElementos == dir) {
             int temp = PtrElementos;
             PtrElementos = mem->obtener_dato(PtrElementos, _sig);
             mem->delete_espacio(temp);
-            return;
+            // return;
         } else {
             int ant = anterior(dir);
             mem->poner_dato(ant, _sig, mem->obtener_dato(dir, _sig));
@@ -167,17 +163,17 @@ namespace UListaSM {
 
     // modifica el _elemento de una direccion de la lista
     void ListaSM::modifica(int dir, int element) {
-        if (vacia())
-            throw std::runtime_error("La lista esta vacía");
-        if (!es_direccion_valida(dir))
-            throw std::runtime_error("La dirección no es valida");
+        // if (vacia())
+        //     throw std::runtime_error("La lista esta vacía");
+        // if (!es_direccion_valida(dir))
+        //     throw std::runtime_error("La dirección no es valida");
         mem->poner_dato(dir, _elemento, element);
     }
 
     // muestra la lista
     string ListaSM::mostrar() {
-        mem->mostrar();
-        string s = "[";
+        // mem->mostrar();
+        string s = "<";
         int x = PtrElementos;
         while (x != NULO) {
             int el = mem->obtener_dato(x, _elemento);
@@ -186,7 +182,7 @@ namespace UListaSM {
             if (x != NULO)
                 s += ",";
         }
-        return s + "]";
+        return s + ">";
     }
 
     ListaSM::~ListaSM() {

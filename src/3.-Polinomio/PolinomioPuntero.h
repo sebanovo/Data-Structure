@@ -39,5 +39,6 @@ namespace UPolinomioPuntero {
         ~PolinomioPuntero();
     };
     void derivada(PolinomioPuntero p, PolinomioPuntero p1);
+    std::string mostrar_integral(PolinomioPuntero p);
 }  // namespace UPolinomioPuntero
 #endif

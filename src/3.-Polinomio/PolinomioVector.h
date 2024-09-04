@@ -15,6 +15,9 @@ namespace UPolinomioVector {
         int* ve;
         int nt;
 
+        int buscar_exponente(int exp);
+        int buscar_termino_n(int n);
+
        public:
         PolinomioVector();
         bool es_cero();
@@ -30,9 +33,6 @@ namespace UPolinomioVector {
         string mostrar();
         ~PolinomioVector();
         int evaluar(int x);
-
-        // extra
-        int buscar_exponente(int exp);
     };
     void derivada(PolinomioVector p, PolinomioVector p1);
     string mostrar_integral(PolinomioVector p);

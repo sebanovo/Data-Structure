@@ -27,14 +27,14 @@ namespace UCSMemoria {
 
     // retorna el inicio de la dirección donde se colocaron los ids
     int CSMemoria::new_espacio(string cadena) {
-        if (numero_ids(cadena) > espacio_disponible())
-            throw std::runtime_error("Exediste el limite del espacio disponible");
-        if (cadena.empty())
-            throw std::runtime_error("La cadena esta vacía");
-        if (!hay_al_menos_un_id(cadena))
-            throw std::runtime_error("Tiene que haber almenos un id");
-        if (hay_un_id_repetido(cadena))
-            throw std::runtime_error("Hay un id repetido en la cadena");
+        // if (numero_ids(cadena) > espacio_disponible())
+        //     throw std::runtime_error("Exediste el limite del espacio disponible");
+        // if (cadena.empty())
+        //     throw std::runtime_error("La cadena esta vacía");
+        // if (!hay_al_menos_un_id(cadena))
+        //     throw std::runtime_error("Tiene que haber almenos un id");
+        // if (hay_un_id_repetido(cadena))
+        //     throw std::runtime_error("Hay un id repetido en la cadena");
 
         int cant = numero_ids(cadena);
         int dir = libre;
@@ -51,8 +51,8 @@ namespace UCSMemoria {
 
     // libera un espacio de la memoria
     void CSMemoria::delete_espacio(int dir) {
-        if (dir < 0 || dir > MAX - 1)
-            throw std::runtime_error("Esta dirección no existe");
+        // if (dir < 0 || dir > MAX - 1)
+        //     throw std::runtime_error("Esta dirección no existe");
 
         int x = dir;
         while (mem[x].link != NULO)
@@ -64,12 +64,12 @@ namespace UCSMemoria {
     // pone un dato desde la dirección de memoria que quieras
     void CSMemoria::poner_dato(int dir, string cadena_id, int valor) {
         cadena_id = eliminar_flecha(cadena_id);
-        if (dir < 0 || dir > MAX - 1)
-            throw std::runtime_error("Esta dirección no es valida");
-        if (cadena_id.empty())
-            throw std::runtime_error("La cadena ID esta vacía");
-        if (!hay_al_menos_un_id(cadena_id))
-            throw std::runtime_error("Tiene que haber almenos un id");
+        // if (dir < 0 || dir > MAX - 1)
+        //     throw std::runtime_error("Esta dirección no es valida");
+        // if (cadena_id.empty())
+        //     throw std::runtime_error("La cadena ID esta vacía");
+        // if (!hay_al_menos_un_id(cadena_id))
+        //     throw std::runtime_error("Tiene que haber almenos un id");
 
         int z = dir;
         while (z != NULO) {
@@ -84,12 +84,12 @@ namespace UCSMemoria {
     // obtiene un dato desde la dirección de memoria
     int CSMemoria::obtener_dato(int dir, string cadena_id) {
         cadena_id = eliminar_flecha(cadena_id);
-        if (dir < 0 || dir > MAX - 1)
-            throw std::runtime_error("Esta dirección no es valida");
-        if (cadena_id.empty())
-            throw std::runtime_error("La cadena ID esta vacía");
-        if (!hay_al_menos_un_id(cadena_id))
-            throw std::runtime_error("Tiene que haber almenos un id");
+        // if (dir < 0 || dir > MAX - 1)
+        //     throw std::runtime_error("Esta dirección no es valida");
+        // if (cadena_id.empty())
+        //     throw std::runtime_error("La cadena ID esta vacía");
+        // if (!hay_al_menos_un_id(cadena_id))
+        //     throw std::runtime_error("Tiene que haber almenos un id");
 
         int z = dir;
         while (z != NULO) {

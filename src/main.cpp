@@ -191,7 +191,34 @@ void mostrarPolinomioPuntero() {
     delete polinomio;
 }
 
+void mostrarPolinomioLista() {
+    UPolinomioLista::PolinomioLista* p1 = new UPolinomioLista::PolinomioLista;
+    UPolinomioLista::PolinomioLista* p2 = new UPolinomioLista::PolinomioLista;
+    UPolinomioLista::PolinomioLista* p = new UPolinomioLista::PolinomioLista;
+
+    // std::cout << p->es_cero() << std::endl;
+    // p->poner_termino(1, 2);
+    // p1->poner_termino(4, 5);
+    // p1->poner_termino(4, 1);
+    // p2->poner_termino(10, 5);
+    // p2->poner_termino(11, 2);
+    // = (2x + 1) * (3x + 3)
+    // = 2x * 3x + 2x * 3 + 1 * 3x + 1 * 3;
+    // = 6x^2 + 9x + 3
+    p1->poner_termino(2, 1);
+    p1->poner_termino(1, 0);
+    p2->poner_termino(3, 1);
+    p2->poner_termino(3, 0);
+    p->multiplicar(p1, p2);
+    std::cout << p->mostrar() << std::endl;
+
+    // int re = p->evaludar(2);
+    // std::cout << p->mostrar() << std::endl;
+    // std::cout << p->mostrar() << std::endl;
+    // std::cout << p->es_cero() << std::endl;
+}
+
 int main() {
-    mostrarPolinomioPuntero();
+    mostrarPolinomioLista();
     return 0;
 }

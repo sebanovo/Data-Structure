@@ -21,6 +21,7 @@ namespace UPolinomioSM {
         int PtrPoli;
         UCSMemoria::CSMemoria *mem;
         int nt;
+
         int buscar_exponente(int exp);
         int buscar_termino_n(int n);
 
@@ -41,5 +42,6 @@ namespace UPolinomioSM {
         ~PolinomioSM();
     };
     void derivada(PolinomioSM p, PolinomioSM p1);
+    std::string mostrar_integral(PolinomioSM p);
 }  // namespace UPolinomioSM
 #endif

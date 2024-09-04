@@ -91,7 +91,7 @@ namespace UListaPuntero {
         if (vacia()) {
             PtrElementos = x;
         } else if (!es_direccion_valida(dir))
-            throw std::runtime_error("La dirección no i valida");
+            throw std::runtime_error("La dirección no es valida");
         else if (dir == primero()) {  // caso especial
             x->sig = PtrElementos;
             PtrElementos = x;
@@ -138,7 +138,7 @@ namespace UListaPuntero {
             Nodo *temp = PtrElementos;
             PtrElementos = PtrElementos->sig;
             delete temp;
-            return;
+            // return;
         } else {
             Nodo *ant = anterior(dir);
             ant->sig = dir->sig;
@@ -158,7 +158,7 @@ namespace UListaPuntero {
 
     // muestra la lista
     string ListaPuntero::mostrar() {
-        string s = "[";
+        string s = "<";
         direccion x = PtrElementos;
         while (x != nullptr) {
             int numero = x->elemento;
@@ -167,12 +167,13 @@ namespace UListaPuntero {
             if (x != nullptr)
                 s += ",";
         }
-        return s + "]";
+        return s + ">";
     }
 
     ListaPuntero::~ListaPuntero() {
         while (!vacia())
             suprime(primero());
+        delete PtrElementos;
         PtrElementos = nullptr;
     }
 

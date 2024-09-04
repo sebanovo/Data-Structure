@@ -203,4 +203,17 @@ namespace UPolinomioSM {
             p1.poner_termino(coef * exp, exp - 1);
         }
     }
+
+    std::string mostrar_integral(PolinomioSM p) {
+        std::string s = "";
+        for (int i = 1; i <= p.numero_terminos(); i++) {
+            int exp = p.exponente(i);
+            int co = p.coeficiente(exp);
+
+            s += "(" + std::to_string(co) + "x^" + std::to_string(exp + 1) + ")/" + std::to_string(exp + 1) + " + ";
+            if (i == p.numero_terminos())
+                s += "C";
+        }
+        return s;
+    }
 }  // namespace UPolinomioSM

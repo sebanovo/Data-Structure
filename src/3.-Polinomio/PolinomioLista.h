@@ -9,20 +9,22 @@
 #include <iostream>
 #include <string>
 
-// ESTE POLINOMIO FUNCIONA USANDO UNA LISTASM O UN LISTA VECTOR
+// POLINOMIO LISTA
+// SOLO FUNCIONA PARA UNA (LISTA SM) Y (LISTA VECTOR)
 
 namespace UPolinomioLista {
     class PolinomioLista {
        private:
-        UListaSM::ListaSM* ls;
+        // UListaSM::ListaSM* ls;
         UCSMemoria::CSMemoria* mem;
-        // UListaVector::ListaVector* ls;
+        UListaVector::ListaVector* ls;
+
+        int buscar_exponente(int exp);
+        int buscar_termino_n(int n);
+
        public:
         PolinomioLista();
         PolinomioLista(UCSMemoria::CSMemoria* m);
-        int buscar_exponente(int exp);
-        int buscar_termino_n(int n);
-        void crear(UCSMemoria::CSMemoria* m);
         bool es_cero();
         int grado();
         void poner_en_cero();
@@ -35,8 +37,12 @@ namespace UPolinomioLista {
         void restar(PolinomioLista* p1, PolinomioLista* p2);
         void multiplicar(PolinomioLista* P1, PolinomioLista* P2);
         int evaludar(int x);
+        std::string mostrar();
         ~PolinomioLista();
     };
+
+    void derivada(PolinomioLista p, PolinomioLista p1);
+    std::string mostrar_integral(PolinomioLista p);
 }  // namespace UPolinomioLista
 
 #endif
