@@ -22,7 +22,7 @@ namespace UPolinomioSM {
         mem = new UCSMemoria::CSMemoria();
     }
 
-    PolinomioSM::PolinomioSM(UCSMemoria::CSMemoria* m) {
+    PolinomioSM::PolinomioSM(UCSMemoria::CSMemoria *m) {
         nt = 0;
         PtrPoli = UCSMemoria::NULO;
         mem = m;
@@ -91,45 +91,45 @@ namespace UPolinomioSM {
     }
 
     // P1 + P2
-    void PolinomioSM::sumar(PolinomioSM p1, PolinomioSM p2) {
-        for (int i = 1; i <= p1.numero_terminos(); i++) {
-            int exp = p1.exponente(i);
-            int coef = p1.coeficiente(exp);
+    void PolinomioSM::sumar(PolinomioSM *p1, PolinomioSM *p2) {
+        for (int i = 1; i <= p1->numero_terminos(); i++) {
+            int exp = p1->exponente(i);
+            int coef = p1->coeficiente(exp);
             poner_termino(coef, exp);
         }
-        for (int i = 1; i <= p2.numero_terminos(); i++) {
-            int exp = p2.exponente(i);
-            int coef = p2.coeficiente(exp);
+        for (int i = 1; i <= p2->numero_terminos(); i++) {
+            int exp = p2->exponente(i);
+            int coef = p2->coeficiente(exp);
             poner_termino(coef, exp);
         }
     }
 
     // P1 - P2
-    void PolinomioSM::restar(PolinomioSM p1, PolinomioSM p2) {
-        for (int i = 1; i <= p1.numero_terminos(); i++) {
-            int exp = p1.exponente(i);
-            int coef = p1.coeficiente(exp);
+    void PolinomioSM::restar(PolinomioSM *p1, PolinomioSM *p2) {
+        for (int i = 1; i <= p1->numero_terminos(); i++) {
+            int exp = p1->exponente(i);
+            int coef = p1->coeficiente(exp);
             poner_termino(coef, exp);
         }
-        for (int i = 1; i <= p2.numero_terminos(); i++) {
-            int exp = p2.exponente(i);
-            int coef = p2.coeficiente(exp) * -1;
+        for (int i = 1; i <= p2->numero_terminos(); i++) {
+            int exp = p2->exponente(i);
+            int coef = p2->coeficiente(exp) * -1;
             poner_termino(coef, exp);
         }
     }
 
     // P2 * P2
-    void PolinomioSM::multiplicar(PolinomioSM p1, PolinomioSM p2) {
+    void PolinomioSM::multiplicar(PolinomioSM *p1, PolinomioSM *p2) {
         // = (2x + 1) * (3x + 3)
         // = 2x * 3x + 2x * 3 + 1 * 3x + 1 * 3;
         // = 6x^2 + 9x + 3
-        for (int i = 1; i <= p1.numero_terminos(); i++) {
-            for (int j = 1; j <= p2.numero_terminos(); j++) {
-                int exp1 = p1.exponente(i);
-                int coef1 = p1.coeficiente(exp1);
+        for (int i = 1; i <= p1->numero_terminos(); i++) {
+            for (int j = 1; j <= p2->numero_terminos(); j++) {
+                int exp1 = p1->exponente(i);
+                int coef1 = p1->coeficiente(exp1);
 
-                int exp2 = p2.exponente(j);
-                int coef2 = p2.coeficiente(exp2);
+                int exp2 = p2->exponente(j);
+                int coef2 = p2->coeficiente(exp2);
 
                 poner_termino(coef1 * coef2, exp1 + exp2);
             }
@@ -162,7 +162,7 @@ namespace UPolinomioSM {
     // devuelve el exponente
     int PolinomioSM::exponente(int nroTer) {
         int dir = buscar_termino_n(nroTer);
-        return dir == NULO ? mem->obtener_dato(dir, _exp) : throw std::runtime_error("No existe este exponente");
+        return dir != NULO ? mem->obtener_dato(dir, _exp) : throw std::runtime_error("No existe este exponente");
     }
 
     // cambia el coeficiente indicando el termino con el exponente asociado
@@ -196,22 +196,22 @@ namespace UPolinomioSM {
         delete mem;
     }
 
-    void derivada(PolinomioSM p, PolinomioSM p1) {
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int coef = p.coeficiente(exp);
-            p1.poner_termino(coef * exp, exp - 1);
+    void derivada(PolinomioSM *p, PolinomioSM *p1) {
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int coef = p->coeficiente(exp);
+            p1->poner_termino(coef * exp, exp - 1);
         }
     }
 
-    std::string mostrar_integral(PolinomioSM p) {
+    std::string mostrar_integral(PolinomioSM *p) {
         std::string s = "";
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int co = p.coeficiente(exp);
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int co = p->coeficiente(exp);
 
             s += "(" + std::to_string(co) + "x^" + std::to_string(exp + 1) + ")/" + std::to_string(exp + 1) + " + ";
-            if (i == p.numero_terminos())
+            if (i == p->numero_terminos())
                 s += "C";
         }
         return s;

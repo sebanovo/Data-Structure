@@ -11,8 +11,8 @@ namespace UPolinomioVector {
     class PolinomioVector {
        private:
         const int MAX = 100;
-        int* vc;
-        int* ve;
+        int *vc;
+        int *ve;
         int nt;
 
         int buscar_exponente(int exp);
@@ -34,8 +34,8 @@ namespace UPolinomioVector {
         ~PolinomioVector();
         int evaluar(int x);
     };
-    void derivada(PolinomioVector p, PolinomioVector p1);
-    string mostrar_integral(PolinomioVector p);
+    void derivada(PolinomioVector *p, PolinomioVector *p1);
+    string mostrar_integral(PolinomioVector *p);
 }  // namespace UPolinomioVector
 
 #endif

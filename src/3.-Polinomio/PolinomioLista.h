@@ -36,13 +36,13 @@ namespace UPolinomioLista {
         void sumar(PolinomioLista* p1, PolinomioLista* p2);
         void restar(PolinomioLista* p1, PolinomioLista* p2);
         void multiplicar(PolinomioLista* P1, PolinomioLista* P2);
-        int evaludar(int x);
+        int evaluar(int x);
         std::string mostrar();
         ~PolinomioLista();
     };
 
-    void derivada(PolinomioLista p, PolinomioLista p1);
-    std::string mostrar_integral(PolinomioLista p);
+    void derivada(PolinomioLista* p, PolinomioLista* p1);
+    std::string mostrar_integral(PolinomioLista* p);
 }  // namespace UPolinomioLista
 
 #endif

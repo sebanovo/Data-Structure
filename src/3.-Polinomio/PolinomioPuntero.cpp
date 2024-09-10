@@ -78,45 +78,47 @@ namespace UPolinomioPuntero {
     }
 
     // P1 + P2
-    void PolinomioPuntero::sumar(PolinomioPuntero p1, PolinomioPuntero p2) {
-        for (int i = 1; i <= p1.numero_terminos(); i++) {
-            int exp = p1.exponente(i);
-            int coef = p1.coeficiente(exp);
-            poner_termino(coef, exp);
+    void PolinomioPuntero::sumar(PolinomioPuntero* p1, PolinomioPuntero* p2) {
+        // poner_en_cero();
+        for (int i = 1; i <= p1->numero_terminos(); i++) {
+            int ex = p1->exponente(i);
+            int co = p1->coeficiente(ex);
+            poner_termino(co, ex);
         }
-        for (int i = 1; i <= p2.numero_terminos(); i++) {
-            int exp = p2.exponente(i);
-            int coef = p2.coeficiente(exp);
-            poner_termino(coef, exp);
+        for (int i = 1; i <= p2->numero_terminos(); i++) {
+            int ex = p2->exponente(i);
+            int co = p2->coeficiente(ex);
+            poner_termino(co, ex);
         }
     }
 
     // P1 - P2
-    void PolinomioPuntero::restar(PolinomioPuntero p1, PolinomioPuntero p2) {
-        for (int i = 1; i <= p1.numero_terminos(); i++) {
-            int exp = p1.exponente(i);
-            int coef = p1.coeficiente(exp);
-            poner_termino(coef, exp);
+    void PolinomioPuntero::restar(PolinomioPuntero* p1, PolinomioPuntero* p2) {
+        // poner_en_cero();
+        for (int i = 1; i <= p1->numero_terminos(); i++) {
+            int ex = p1->exponente(i);
+            int co = p1->coeficiente(ex);
+            poner_termino(co, ex);
         }
-        for (int i = 1; i <= p2.numero_terminos(); i++) {
-            int exp = p2.exponente(i);
-            int coef = p2.coeficiente(exp) * -1;
-            poner_termino(coef, exp);
+        for (int i = 1; i <= p2->numero_terminos(); i++) {
+            int ex = p2->exponente(i);
+            int co = p2->coeficiente(ex) * -1;
+            poner_termino(co, ex);
         }
     }
 
     // P1 * P2
-    void PolinomioPuntero::multiplicar(PolinomioPuntero p1, PolinomioPuntero p2) {
+    void PolinomioPuntero::multiplicar(PolinomioPuntero* p1, PolinomioPuntero* p2) {
         // = (2x + 1) * (3x + 3)
         // = 2x * 3x + 2x * 3 + 1 * 3x + 1 * 3;
         // = 6x^2 + 9x + 3
-        for (int i = 1; i <= p1.numero_terminos(); i++) {
-            for (int j = 1; j <= p2.numero_terminos(); j++) {
-                int exp1 = p1.exponente(i);
-                int coef1 = p1.coeficiente(exp1);
+        for (int i = 1; i <= p1->numero_terminos(); i++) {
+            for (int j = 1; j <= p2->numero_terminos(); j++) {
+                int exp1 = p1->exponente(i);
+                int coef1 = p1->coeficiente(exp1);
 
-                int exp2 = p2.exponente(j);
-                int coef2 = p2.coeficiente(exp2);
+                int exp2 = p2->exponente(j);
+                int coef2 = p2->coeficiente(exp2);
 
                 poner_termino(coef1 * coef2, exp1 + exp2);
             }
@@ -195,22 +197,22 @@ namespace UPolinomioPuntero {
         PtrPoli = nullptr;
     }
 
-    void derivada(PolinomioPuntero p, PolinomioPuntero p1) {
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int coef = p.coeficiente(exp);
-            p1.poner_termino(coef * exp, exp - 1);
+    void derivada(PolinomioPuntero* p, PolinomioPuntero* p1) {
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int coef = p->coeficiente(exp);
+            p1->poner_termino(coef * exp, exp - 1);
         }
     }
 
-    std::string mostrar_integral(PolinomioPuntero p) {
+    std::string mostrar_integral(PolinomioPuntero* p) {
         std::string s = "";
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int co = p.coeficiente(exp);
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int co = p->coeficiente(exp);
 
             s += "(" + std::to_string(co) + "x^" + std::to_string(exp + 1) + ")/" + std::to_string(exp + 1) + " + ";
-            if (i == p.numero_terminos())
+            if (i == p->numero_terminos())
                 s += "C";
         }
         return s;

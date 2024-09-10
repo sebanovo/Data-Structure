@@ -176,22 +176,22 @@ namespace UPolinomioVector {
         return resultado;
     }
 
-    void derivada(PolinomioVector p, PolinomioVector p1) {
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int co = p.coeficiente(exp);
-            p1.poner_termino(co * exp, exp - 1);
+    void derivada(PolinomioVector *p, PolinomioVector *p1) {
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int co = p->coeficiente(exp);
+            p1->poner_termino(co * exp, exp - 1);
         }
     }
 
-    string mostrar_integral(PolinomioVector p) {
+    string mostrar_integral(PolinomioVector *p) {
         string s = "";
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int co = p.coeficiente(exp);
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int co = p->coeficiente(exp);
 
             s += "(" + to_string(co) + "x^" + to_string(exp + 1) + ")/" + to_string(exp + 1) + " + ";
-            if (i == p.numero_terminos())
+            if (i == p->numero_terminos())
                 s += "C";
         }
         return s;

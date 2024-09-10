@@ -188,7 +188,7 @@ namespace UPolinomioLista {
         }
     }
 
-    int PolinomioLista::evaludar(int x) {
+    int PolinomioLista::evaluar(int x) {
         int resultado = 0;
         for (int i = 1; i <= numero_terminos(); i++) {
             int exp = exponente(i);
@@ -216,22 +216,22 @@ namespace UPolinomioLista {
         delete mem;
     }
 
-    void derivada(PolinomioLista p, PolinomioLista p1) {
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int co = p.coeficiente(exp);
-            p1.poner_termino(co * exp, exp - 1);
+    void derivada(PolinomioLista* p, PolinomioLista* p1) {
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int co = p->coeficiente(exp);
+            p1->poner_termino(co * exp, exp - 1);
         }
     };
 
-    std::string mostrar_integral(PolinomioLista p) {
+    std::string mostrar_integral(PolinomioLista* p) {
         std::string s = "";
-        for (int i = 1; i <= p.numero_terminos(); i++) {
-            int exp = p.exponente(i);
-            int co = p.coeficiente(exp);
+        for (int i = 1; i <= p->numero_terminos(); i++) {
+            int exp = p->exponente(i);
+            int co = p->coeficiente(exp);
 
             s += "(" + std::to_string(co) + "x^" + std::to_string(exp + 1) + ")/" + std::to_string(exp + 1) + " + ";
-            if (i == p.numero_terminos())
+            if (i == p->numero_terminos())
                 s += "C";
         }
         return s;

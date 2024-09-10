@@ -9,11 +9,11 @@
 namespace UPolinomioPuntero {
     using std::string;
     struct Nodo;
-    typedef Nodo* direccion;
+    typedef Nodo *direccion;
     struct Nodo {
         int coef;
         int exp;
-        Nodo* sig;
+        Nodo *sig;
     };
 
     class PolinomioPuntero {
@@ -28,9 +28,9 @@ namespace UPolinomioPuntero {
         bool es_cero();
         int grado();
         int coeficiente(int exp);
-        void sumar(PolinomioPuntero p1, PolinomioPuntero p2);
-        void restar(PolinomioPuntero p1, PolinomioPuntero p2);
-        void multiplicar(PolinomioPuntero p1, PolinomioPuntero p2);
+        void sumar(PolinomioPuntero *p1, PolinomioPuntero *p2);
+        void restar(PolinomioPuntero *p1, PolinomioPuntero *p2);
+        void multiplicar(PolinomioPuntero *p1, PolinomioPuntero *p2);
         void poner_termino(int coef, int exp);
         int numero_terminos();
         int exponente(int nroTer);
@@ -38,7 +38,7 @@ namespace UPolinomioPuntero {
         string mostrar();
         ~PolinomioPuntero();
     };
-    void derivada(PolinomioPuntero p, PolinomioPuntero p1);
-    std::string mostrar_integral(PolinomioPuntero p);
+    void derivada(PolinomioPuntero *p, PolinomioPuntero *p1);
+    std::string mostrar_integral(PolinomioPuntero *p);
 }  // namespace UPolinomioPuntero
 #endif
