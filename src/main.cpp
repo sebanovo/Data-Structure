@@ -179,8 +179,8 @@ void mostrarPolinomioVector() {
 
 void mostrarPolinomioPuntero() {
     UPolinomioPuntero::PolinomioPuntero* polinomio = new UPolinomioPuntero::PolinomioPuntero;
-    UPolinomioPuntero::PolinomioPuntero polinomio1;
-    UPolinomioPuntero::PolinomioPuntero polinomio2;
+    UPolinomioPuntero::PolinomioPuntero* polinomio1;
+    UPolinomioPuntero::PolinomioPuntero* polinomio2;
     // P1 * P2 = (2x + 1) * (3x + 3)
     // 2x * 3x + 2x * 3 + 1 * 3x + 1 * 3;
     // 6x^2 + 9x + 3
