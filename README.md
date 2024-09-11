@@ -5,9 +5,6 @@ Es un simulador de memoria que empieza desde 0 hasta MAX - 1
 TODO: el eliminar_flecha no funciona
 
 ```cpp
-#include <iostream>
-#include <string>
-
 namespace UCSMemoria {
     using std::string;
 
@@ -58,8 +55,6 @@ namespace UCSMemoria {
 Es un vector sin mas que empieza en la posicion 1 hasta la n
 
 ```cpp
-#include <string>
-
 namespace UListaVector {
     using std::string;
     typedef int direccion;
@@ -98,9 +93,6 @@ namespace UListaVector {
 
 Es una lista enlazada de toda la vida con punteros
 ```cpp
-#include <iostream>
-#include <string>
-
 namespace UListaPuntero {
     using std::runtime_error;
     using std::string;
@@ -151,10 +143,6 @@ namespace UListaPuntero {
 Algoritmos usando el simulador de memori y listas enlazadas
 
 ```cpp
-include <string>
-
-#include "UCSMemoria.h"
-
 namespace UListaSM {
     using std::string;
     const string elemento_sig = "elemento,sig";
@@ -193,44 +181,275 @@ namespace UListaSM {
     };
 
 } // namespace UListaSM
+```
 
-# Polinomio 
+# Polinomio Lista
 
 ```cpp
-// TODO:
-// restar
-// multiplicar
-// derivada
-// integral
-namespace UPolinomio {
-    using std::string;
-    class Polinomio {
+// POLINOMIO LISTA
+// SOLO FUNCIONA PARA UNA (LISTA SM) Y (LISTA VECTOR)
+
+namespace UPolinomioLista {
+    class PolinomioLista {
        private:
-        const int MAX = 30;
-        int* vc;
-        int* ve;
-        int nt;
+        // UListaSM::ListaSM* ls;
+        UCSMemoria::CSMemoria* mem;
+        UListaVector::ListaVector* ls;
+
+        int buscar_exponente(int exp);
+        int buscar_termino_n(int n);
 
        public:
-        Polinomio();
+        PolinomioLista();
+        PolinomioLista(UCSMemoria::CSMemoria* m);
+        bool es_cero();
+        int grado();
+        void poner_en_cero();
+        int coeficiente(int exp);
+        void asignar_coeficiente(int coef, int exp);
+        void poner_termino(int coef, int exp);
+        int numero_terminos();
+        int exponente(int nroTerm);
+        void sumar(PolinomioLista* p1, PolinomioLista* p2);
+        void restar(PolinomioLista* p1, PolinomioLista* p2);
+        void multiplicar(PolinomioLista* P1, PolinomioLista* P2);
+        int evaluar(int x);
+        std::string mostrar();
+        ~PolinomioLista();
+    };
+
+    void derivada(PolinomioLista* p, PolinomioLista* p1);
+    std::string mostrar_integral(PolinomioLista* p);
+}  // namespace UPolinomioLista
+```
+
+# Polinomio Puntero
+
+```cpp
+namespace UPolinomioPuntero {
+    using std::string;
+    struct Nodo;
+    typedef Nodo *direccion;
+    struct Nodo {
+        int coef;
+        int exp;
+        Nodo *sig;
+    };
+
+    class PolinomioPuntero {
+       private:
+        direccion PtrPoli;
+        int nt;
+        direccion buscar_exponente(int exp);
+        direccion buscar_termino_n(int n);
+
+       public:
+        PolinomioPuntero();
         bool es_cero();
         int grado();
         int coeficiente(int exp);
-        void sumar(Polinomio p1, Polinomio p2);
-        void restar(Polinomio p1, Polinomio p2);
-        void multiplicar(Polinomio p1, Polinomio p3);
+        void sumar(PolinomioPuntero *p1, PolinomioPuntero *p2);
+        void restar(PolinomioPuntero *p1, PolinomioPuntero *p2);
+        void multiplicar(PolinomioPuntero *p1, PolinomioPuntero *p2);
         void poner_termino(int coef, int exp);
         int numero_terminos();
         int exponente(int nroTer);
+        void asignar_coeficiente(int coef, int exp);
         string mostrar();
-        ~Polinomio();
-        void derivada(Polinomio p);
-        string mostrar_integral(Polinomio p);
-
-        // extra
-        int buscar_exponente(int exp);
+        ~PolinomioPuntero();
     };
-}  // namespace UPolinomio
+    void derivada(PolinomioPuntero *p, PolinomioPuntero *p1);
+    std::string mostrar_integral(PolinomioPuntero *p);
+}  // namespace UPolinomioPuntero
 ```
 
+# Polinomio simulador de memoria (SM)
+
+```cpp
+namespace UPolinomioSM {
+    using std::string;
+
+    const string _coef_exp_sig = "coef,exp,sig";
+    const string _coef = "->coef";
+    const string _exp = "->exp";
+    const string _sig = "->sig";
+
+    class PolinomioSM {
+       private:
+        int PtrPoli;
+        UCSMemoria::CSMemoria *mem;
+        int nt;
+
+        int buscar_exponente(int exp);
+        int buscar_termino_n(int n);
+
+       public:
+        PolinomioSM();
+        PolinomioSM(UCSMemoria::CSMemoria *m);
+        bool es_cero();
+        int grado();
+        int coeficiente(int exp);
+        void sumar(PolinomioSM *p1, PolinomioSM *p2);
+        void restar(PolinomioSM *p1, PolinomioSM *p2);
+        void multiplicar(PolinomioSM *p1, PolinomioSM *p3);
+        void poner_termino(int coef, int exp);
+        int numero_terminos();
+        int exponente(int nroTer);
+        void asignar_coeficiente(int coef, int exp);
+        string mostrar();
+        ~PolinomioSM();
+    };
+    void derivada(PolinomioSM *p, PolinomioSM *p1);
+    std::string mostrar_integral(PolinomioSM *p);
+}  // namespace UPolinomioSM
+```
+
+# Polinomio Vector
+
+```cpp
+namespace UPolinomioVector {
+    using std::string;
+    class PolinomioVector {
+       private:
+        const int MAX = 100;
+        int *vc;
+        int *ve;
+        int nt;
+
+        int buscar_exponente(int exp);
+        int buscar_termino_n(int n);
+
+       public:
+        PolinomioVector();
+        bool es_cero();
+        int grado();
+        int coeficiente(int exp);
+        void sumar(PolinomioVector *p1, PolinomioVector *p2);
+        void restar(PolinomioVector *p1, PolinomioVector *p2);
+        void multiplicar(PolinomioVector *p1, PolinomioVector *p3);
+        void poner_termino(int coef, int exp);
+        int numero_terminos();
+        int exponente(int nroTer);
+        void asignar_coeficiente(int coef, int exp);
+        string mostrar();
+        ~PolinomioVector();
+        int evaluar(int x);
+    };
+    void derivada(PolinomioVector *p, PolinomioVector *p1);
+    string mostrar_integral(PolinomioVector *p);
+}  // namespace UPolinomioVector
+```
+
+# Conjunto Lista 
+
+```cpp
+namespace UConjuntoLista {
+    struct Nodo {
+        int dato;
+        Nodo* sig;
+    };
+
+    class ConjuntoLista {
+       private:
+        UListaVector::ListaVector* elem;
+        // UListaPuntero::ListaPuntero* elem;
+
+       public:
+        ConjuntoLista();
+        int cardinal();
+        bool vacio();
+        int ordinal(int e);
+        void inserta(int e);
+        void suprime(int e);
+        bool pertenece(int e);
+        int muestrea();
+        ~ConjuntoLista();
+        std::string mostrar();
+    };
+}  // namespace UConjuntoLista
+```
+
+# Conjunto Puntero
+
+```cpp
+namespace UConjuntoLista {
+    struct Nodo {
+        int dato;
+        Nodo* sig;
+    };
+
+    class ConjuntoLista {
+       private:
+        UListaVector::ListaVector* elem;
+        // UListaPuntero::ListaPuntero* elem;
+
+       public:
+        ConjuntoLista();
+        int cardinal();
+        bool vacio();
+        int ordinal(int e);
+        void inserta(int e);
+        void suprime(int e);
+        bool pertenece(int e);
+        int muestrea();
+        ~ConjuntoLista();
+        std::string mostrar();
+    };
+}  // namespace UConjuntoLista
+```
+
+# Conjunto simulador de memoria (SM)
+
+```cpp
+namespace UConjuntoSM {
+    const std::string _dato_sig = "dato,sig";
+    const std::string _dato = "->dato";
+    const std::string _sig = "->sig";
+
+    class ConjuntoSM {
+       private:
+        UCSMemoria::CSMemoria* mem;
+        int PtrConj;
+        int cant;
+
+       public:
+        ConjuntoSM();
+        int cardinal();
+        bool vacio();
+        int ordinal(int e);
+        void inserta(int e);
+        void suprime(int e);
+        bool pertenece(int e);
+        int muestrea();
+        ~ConjuntoSM();
+        std::string mostrar();
+    };
+
+}  // namespace UConjuntoSM
+```
+
+# Conjunto Vector 
+
+```cpp
+namespace UConjuntoVector {
+    class ConjuntoVector {
+       private:
+        const int MAX = 100;
+        bool* v;
+        int cant;
+
+       public:
+        ConjuntoVector();
+        int cardinal();
+        bool vacio();
+        int ordinal(int e);
+        void inserta(int e);
+        void suprime(int e);
+        bool pertenece(int e);
+        int muestrea();
+        ~ConjuntoVector();
+        std::string mostrar();
+    };
+
+}  // namespace UConjuntoVector
 ```

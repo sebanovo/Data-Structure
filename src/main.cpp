@@ -5,10 +5,11 @@
 #include "2.-Lista/UListaPuntero.h"
 #include "2.-Lista/UListaSM.h"
 #include "2.-Lista/UListaVector.h"
-#include "3.-Polinomio/PolinomioLista.h"
-#include "3.-Polinomio/PolinomioPuntero.h"
-#include "3.-Polinomio/PolinomioSM.h"
-#include "3.-Polinomio/PolinomioVector.h"
+#include "3.-Polinomio/UPolinomioLista.h"
+#include "3.-Polinomio/UPolinomioPuntero.h"
+#include "3.-Polinomio/UPolinomioSM.h"
+#include "3.-Polinomio/UPolinomioVector.h"
+#include "4.-Conjunto/UConjuntoVector.h"
 
 using std::cin;
 using std::cout;
@@ -219,6 +220,13 @@ void mostrarPolinomioLista() {
 }
 
 int main() {
-    mostrarPolinomioLista();
+    // mostrarPolinomioLista();
+    UConjuntoVector::ConjuntoVector* c = new UConjuntoVector::ConjuntoVector();
+    c->inserta(2);
+    c->inserta(4);
+    c->inserta(10);
+
+    std::cout << c->mostrar() << std::endl;
+    delete c;
     return 0;
 }
