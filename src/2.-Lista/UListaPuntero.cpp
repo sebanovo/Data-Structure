@@ -90,9 +90,7 @@ namespace UListaPuntero {
 
         if (vacia()) {
             PtrElementos = x;
-        } else if (!es_direccion_valida(dir))
-            throw std::runtime_error("La dirección no es valida");
-        else if (dir == primero()) {  // caso especial
+        } else if (dir == primero()) {  // caso especial
             x->sig = PtrElementos;
             PtrElementos = x;
         } else {
@@ -174,7 +172,6 @@ namespace UListaPuntero {
         while (!vacia())
             suprime(primero());
         delete PtrElementos;
-        PtrElementos = nullptr;
     }
 
     // retorna la direccion de memoria de la primera ocurrencia del elemento

@@ -6,22 +6,22 @@
 #include <iostream>
 #include <string>
 
-#include "2.-Lista/UListaPuntero.h"
+#include "2.-Lista/UListaSM.h"
 #include "2.-Lista/UListaVector.h"
 
-namespace UConjuntoLista {
-    struct Nodo {
-        int dato;
-        Nodo* sig;
-    };
+// Conjunto LISTA
+// SOLO FUNCIONA PARA UNA (LISTA SM) Y (LISTA VECTOR)
 
+namespace UConjuntoLista {
     class ConjuntoLista {
        private:
         UListaVector::ListaVector* elem;
-        // UListaPuntero::ListaPuntero* elem;
+        // UListaSM::ListaSM* elem;
+        // UCSMemoria::CSMemoria* mem;
 
        public:
         ConjuntoLista();
+        ConjuntoLista(UCSMemoria::CSMemoria* m);
         int cardinal();
         bool vacio();
         int ordinal(int e);

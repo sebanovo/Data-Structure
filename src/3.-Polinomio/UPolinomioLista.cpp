@@ -212,7 +212,7 @@ namespace UPolinomioLista {
 
     PolinomioLista::~PolinomioLista() {
         delete ls;
-        delete mem;
+        // delete mem;
     }
 
     void derivada(PolinomioLista* p, PolinomioLista* p1) {

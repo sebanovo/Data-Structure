@@ -21,6 +21,7 @@ namespace UConjuntoSM {
 
        public:
         ConjuntoSM();
+        ConjuntoSM(UCSMemoria::CSMemoria* m);
         int cardinal();
         bool vacio();
         int ordinal(int e);

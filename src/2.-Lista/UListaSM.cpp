@@ -99,12 +99,8 @@ namespace UListaSM {
         mem->poner_dato(x, _elemento, element);
         mem->poner_dato(x, _sig, NULO);
 
-        if (x == NULO)
-            throw std::runtime_error("No hay espacio en la memoria");
         if (vacia())
             PtrElementos = x;
-        // else if (!es_direccion_valida(dir))
-        //     std::runtime_error("La dirección no es valida");
         else if (dir == primero()) {  // caso especial
             mem->poner_dato(x, _sig, PtrElementos);
             PtrElementos = x;
@@ -130,8 +126,7 @@ namespace UListaSM {
         int x = mem->new_espacio(_elemento_sig);
         mem->poner_dato(x, _elemento, element);
         mem->poner_dato(x, _sig, NULO);
-        if (x == NULO)
-            throw std::runtime_error("No hay espacio en la memoria");
+
         if (vacia()) {
             PtrElementos = x;
             longitud++;
@@ -187,7 +182,6 @@ namespace UListaSM {
 
     ListaSM::~ListaSM() {
         delete mem;
-        PtrElementos = NULO;
     }
 
     // retorna la direccion de memoria de la primera ocurrencia del _elemento

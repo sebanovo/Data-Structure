@@ -9,6 +9,9 @@
 #include "3.-Polinomio/UPolinomioPuntero.h"
 #include "3.-Polinomio/UPolinomioSM.h"
 #include "3.-Polinomio/UPolinomioVector.h"
+#include "4.-Conjunto/UConjuntoLista.h"
+#include "4.-Conjunto/UConjuntoPuntero.h"
+#include "4.-Conjunto/UConjuntoSM.h"
 #include "4.-Conjunto/UConjuntoVector.h"
 
 using std::cin;
@@ -221,12 +224,26 @@ void mostrarPolinomioLista() {
 
 int main() {
     // mostrarPolinomioLista();
-    UConjuntoVector::ConjuntoVector* c = new UConjuntoVector::ConjuntoVector();
-    c->inserta(2);
-    c->inserta(4);
-    c->inserta(10);
+    // UConjuntoSM ::ConjuntoSM* c = new UConjuntoSM::ConjuntoSM();
+    // UConjuntoLista ::ConjuntoLista* c = new UConjuntoLista ::ConjuntoLista;
+    // c->inserta(2);
+    // c->inserta(4);
 
-    std::cout << c->mostrar() << std::endl;
+    // c->inserta(10);
+
+    // std::cout << c->mostrar() << std::endl;
+
+    // c->suprime(2);
+    // std::cout << c->mostrar() << std::endl;
+    // std::cout << c->muestrea() << std::endl;
+    // delete c;
+    UConjuntoSM ::ConjuntoSM* c;
+    if (c == NULL) {
+        std::cout << "entro" << std::endl;
+    }
+    int x = 10;
+    c = new UConjuntoSM::ConjuntoSM();
     delete c;
+    std::cout << "borrado" << std::endl;
     return 0;
 }

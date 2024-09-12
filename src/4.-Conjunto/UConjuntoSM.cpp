@@ -4,25 +4,128 @@
 
 #include "UConjuntoSM.h"
 
+#include "1.-Memoria/UCSMemoria.h"
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
 namespace UConjuntoSM {
-    ConjuntoSM::ConjuntoSM() {}
+    using UCSMemoria::NULO;
+    ConjuntoSM::ConjuntoSM() {
+        PtrConj = NULO;
+        mem = new UCSMemoria::CSMemoria();
+        cant = 0;
+    }
+
+    ConjuntoSM::ConjuntoSM(UCSMemoria::CSMemoria* m) {
+        PtrConj = UCSMemoria::NULO;
+        mem = m;
+        cant = 0;
+    }
+
     // cantidad de elementos del conjunto
-    int ConjuntoSM::cardinal() {}
+    int ConjuntoSM::cardinal() {
+        return cant;
+    }
+
     // esta vacio?
-    bool ConjuntoSM::vacio() {}
+    bool ConjuntoSM::vacio() {
+        return cant == 0;  //|| PtrConj == UCSMemoria::NULO
+    }
+
     // busca el lugar que ocupa el elemento E en el conjunto
-    // en este caso el indice coincide con el elemento
-    int ConjuntoSM::ordinal(int e) {}
+    int ConjuntoSM::ordinal(int e) {
+        int resp = 0;
+        int pc = PtrConj;
+        while (pc != NULO) {
+            resp++;
+            if (mem->obtener_dato(pc, _dato) == e) {
+                return resp;
+            }
+            pc = mem->obtener_dato(pc, _sig);
+        }
+        return NULO;
+    }
+
     // inserta elementos en el conjunto
-    void ConjuntoSM::inserta(int e) {}
+    void ConjuntoSM::inserta(int e) {
+        if (!pertenece(e)) {
+            int dir = mem->new_espacio(_dato_sig);
+            mem->poner_dato(dir, _dato, e);
+            mem->poner_dato(dir, _sig, PtrConj);
+            PtrConj = dir;
+            cant++;
+        } else {
+            // error pertenece
+        }
+    }
+
     // elimna un elemento del conjunto
-    void ConjuntoSM::suprime(int e) {}
-    bool ConjuntoSM::pertenece(int e) {}
+    void ConjuntoSM::suprime(int e) {
+        if (!pertenece(e)) return;
+
+        int dir;
+        if (mem->obtener_dato(PtrConj, _dato) == e) {  // caso si esta en la cabeza
+            dir = PtrConj;
+            PtrConj = mem->obtener_dato(PtrConj, _sig);
+        } else {
+            int pc = PtrConj;
+            int ant;
+            while (pc != NULO) {
+                if (mem->obtener_dato(pc, _dato) == e) {
+                    dir = pc;
+                    break;
+                }
+                ant = pc;
+                pc = mem->obtener_dato(pc, _sig);
+            }
+            mem->poner_dato(ant, _sig, mem->obtener_dato(pc, _sig));
+            mem->poner_dato(pc, _sig, NULO);
+        }
+        cant--;
+        mem->delete_espacio(dir);
+    }
+
+    bool ConjuntoSM::pertenece(int e) {
+        int pc = PtrConj;
+        while (pc != NULO) {
+            if (mem->obtener_dato(pc, _dato) == e) {
+                return true;
+            }
+            pc = mem->obtener_dato(pc, _sig);
+        }
+        return false;
+    }
+
     // busca un elemento al azar que pertenezca al conjunto
-    int ConjuntoSM::muestrea() {}
-    ConjuntoSM::~ConjuntoSM() {}
-    std::string ConjuntoSM::mostrar() {}
+    int ConjuntoSM::muestrea() {
+        if (vacio()) return NULO;
+        int i = 0;
+        int lugar = rand() % cardinal() + 1;  // >= 1 && <= cant
+        int pc = PtrConj;
+        while (pc != NULO) {
+            i++;
+            if (i == lugar) {
+                return mem->obtener_dato(pc, _dato);
+            }
+            pc = mem->obtener_dato(pc, _sig);
+        }
+    }
+
+    ConjuntoSM::~ConjuntoSM() {
+        delete mem;
+    }
+
+    std::string ConjuntoSM::mostrar() {
+        std::string s = "{";
+        int x = PtrConj;
+        int i = 0;
+        while (x != NULO) {
+            i++;
+            s += std::to_string(mem->obtener_dato(x, _dato));
+            s += i < cardinal() ? "," : "";
+            x = mem->obtener_dato(x, _sig);
+        }
+        return s + "}";
+    }
 }  // namespace UConjuntoSM

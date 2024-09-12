@@ -36,6 +36,8 @@ namespace UListaVector {
         // if (vacia()) {
         //     throw std::runtime_error("La lista esta vacia\n");
         // }
+        if (vacia())
+            return -1;
         return 1;
         // if (!vacia()) {
         //     return 0;
@@ -66,7 +68,6 @@ namespace UListaVector {
         //     throw std::runtime_error("La lista esta vacia\n");
         // if (dir == fin())
         //     throw std::runtime_error("No hay siguiente después de esta dirección (" + std::to_string(dir) + ")\n");
-
         return dir + 1;
     }
 
@@ -115,8 +116,8 @@ namespace UListaVector {
         //         cout << "Error de direccion\n";
         //     }
         // }
-        if (vacia())
-            throw std::runtime_error("La lista esta vacía\n");
+        // if (vacia())
+        //     throw std::runtime_error("La lista esta vacía\n");
         return elementos[dir];
     }
 
