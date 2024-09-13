@@ -62,13 +62,14 @@ namespace UConjuntoVector {
 
     // busca un elemento al azar que pertenezca al conjunto
     int ConjuntoVector::muestrea() {
-        int resp = 0, elemento = 0;
+        int resp = 0;
+        int elemento = 0;
         int lug = rand() % cardinal() + 1;  // >= 1 && <= cant
         for (int i = 1; i <= MAX; i++) {
-            if (v[i] != 0) {
+            if (v[i] == 1) {
                 resp++;
                 if (resp == lug)
-                    elemento = v[i];
+                    return i;
             }
         }
         return elemento;
@@ -88,6 +89,107 @@ namespace UConjuntoVector {
 
     ConjuntoVector::~ConjuntoVector() {
         delete[] v;
+    }
+
+    void _union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
+        ConjuntoVector* aux = new ConjuntoVector;
+        while (!a->vacio()) {
+            int m = a->muestrea();
+            a->suprime(m);
+            aux->inserta(m);
+            c->inserta(m);
+        }
+        // while (!aux->vacio()) {
+        //     int m = aux->muestrea();
+        //     aux->suprime(m);
+        //     a->inserta(m);
+        // }
+        while (!b->vacio()) {
+            int m = b->muestrea();
+            b->suprime(m);
+            aux->inserta(m);
+            if (!c->pertenece(m))
+                c->inserta(m);
+        }
+        // while (!aux->vacio()) {
+        //     int m = aux->muestrea();
+        //     aux->suprime(m);
+        //     b->inserta(m);
+        // }
+    };
+
+    void _union() {
+        ConjuntoVector* a = new ConjuntoVector();
+        ConjuntoVector* b = new ConjuntoVector();
+        ConjuntoVector* c = new ConjuntoVector();
+        a->inserta(1);
+        a->inserta(2);
+        a->inserta(3);
+        a->inserta(5);
+        b->inserta(1);
+        b->inserta(2);
+        b->inserta(3);
+        b->inserta(4);
+        _union(a, b, c);
+        std::cout << a->mostrar() << std::endl;
+        std::cout << b->mostrar() << std::endl;
+        std::cout << c->mostrar() << std::endl;
+
+        delete a;
+        delete b;
+        delete c;
+    }
+
+    void interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
+        auto* aux = new ConjuntoVector;
+        while (!a->vacio()) {
+            int m = a->muestrea();
+            if (a->pertenece(m) && b->pertenece(m))
+                c->inserta(m);
+            a->suprime(m);
+            aux->inserta(m);
+        }
+        while (!aux->vacio()) {
+            int m = aux->muestrea();
+            aux->suprime(m);
+            a->inserta(m);
+        }
+    }
+
+    void _interseccion() {
+        ConjuntoVector* a = new ConjuntoVector();
+        ConjuntoVector* b = new ConjuntoVector();
+        ConjuntoVector* c = new ConjuntoVector();
+        a->inserta(1);
+        a->inserta(2);
+        a->inserta(3);
+        a->inserta(5);
+        b->inserta(1);
+        b->inserta(2);
+        b->inserta(3);
+        b->inserta(4);
+        interseccion(a, b, c);
+        std::cout << a->mostrar() << std::endl;
+        std::cout << b->mostrar() << std::endl;
+        std::cout << c->mostrar() << std::endl;
+    }
+
+    bool _equivalente(ConjuntoVector* a, ConjuntoVector* b) {
+        return a->cardinal() == b->cardinal();
+    }
+
+    void equivalentes() {
+        ConjuntoVector* a = new ConjuntoVector();
+        ConjuntoVector* b = new ConjuntoVector();
+        a->inserta(1);
+        a->inserta(2);
+        a->inserta(3);
+        a->inserta(5);
+        b->inserta(1);
+        b->inserta(2);
+        b->inserta(3);
+        b->inserta(4);
+        std::cout << (_equivalente(a, b) ? "si" : "no") << " equivalentes" << std::endl;
     }
 
 }  // namespace UConjuntoVector

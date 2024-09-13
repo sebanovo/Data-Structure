@@ -237,13 +237,19 @@ int main() {
     // std::cout << c->mostrar() << std::endl;
     // std::cout << c->muestrea() << std::endl;
     // delete c;
-    UConjuntoSM ::ConjuntoSM* c;
-    if (c == NULL) {
-        std::cout << "entro" << std::endl;
-    }
-    int x = 10;
-    c = new UConjuntoSM::ConjuntoSM();
-    delete c;
-    std::cout << "borrado" << std::endl;
+    // UConjuntoVector::_union();
+    UConjuntoVector::_interseccion();
+    // UConjuntoVector::equivalentes();
+    // using UConjuntoVector::ConjuntoVector;
+    // ConjuntoVector* p = new ConjuntoVector;
+    // p->inserta(10);
+    // p->inserta(2);
+    // std::cout << "muestrea: " << p->muestrea() << std::endl;
+    // std::cout << p->mostrar() << std::endl;
+    // p->suprime(2);
+    // p->suprime(10);
+    // std::cout << p->mostrar() << std::endl;
+    // std::cout << p->vacio() << std::endl;
+
     return 0;
 }
