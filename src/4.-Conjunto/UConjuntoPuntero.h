@@ -29,5 +29,13 @@ namespace UConjuntoPuntero {
         ~ConjuntoPuntero();
         std::string mostrar();
     };
+
+    void _union();
+    void _interseccion();
+    void _equivalentes();
+
+    void _union(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
+    void _interseccion(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
+    bool _equivalentes(ConjuntoPuntero* a, ConjuntoPuntero* b);
 }  // namespace UConjuntoPuntero
 #endif

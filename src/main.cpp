@@ -222,34 +222,23 @@ void mostrarPolinomioLista() {
     // std::cout << p->es_cero() << std::endl;
 }
 
+void mostrarConjunto() {
+    UConjuntoSM ::ConjuntoSM* c = new UConjuntoSM::ConjuntoSM();
+    c->inserta(2);
+    c->inserta(4);
+
+    c->inserta(10);
+
+    std::cout << c->mostrar() << std::endl;
+
+    c->suprime(2);
+    std::cout << c->mostrar() << std::endl;
+    std::cout << c->muestrea() << std::endl;
+    delete c;
+}
+
 int main() {
     // mostrarPolinomioLista();
-    // UConjuntoSM ::ConjuntoSM* c = new UConjuntoSM::ConjuntoSM();
-    // UConjuntoLista ::ConjuntoLista* c = new UConjuntoLista ::ConjuntoLista;
-    // c->inserta(2);
-    // c->inserta(4);
-
-    // c->inserta(10);
-
-    // std::cout << c->mostrar() << std::endl;
-
-    // c->suprime(2);
-    // std::cout << c->mostrar() << std::endl;
-    // std::cout << c->muestrea() << std::endl;
-    // delete c;
-    // UConjuntoVector::_union();
-    UConjuntoVector::_interseccion();
-    // UConjuntoVector::equivalentes();
-    // using UConjuntoVector::ConjuntoVector;
-    // ConjuntoVector* p = new ConjuntoVector;
-    // p->inserta(10);
-    // p->inserta(2);
-    // std::cout << "muestrea: " << p->muestrea() << std::endl;
-    // std::cout << p->mostrar() << std::endl;
-    // p->suprime(2);
-    // p->suprime(10);
-    // std::cout << p->mostrar() << std::endl;
-    // std::cout << p->vacio() << std::endl;
-
+    mostrarConjunto();
     return 0;
 }

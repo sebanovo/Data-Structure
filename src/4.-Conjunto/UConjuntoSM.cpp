@@ -128,4 +128,113 @@ namespace UConjuntoSM {
         }
         return s + "}";
     }
+
+    void _union(ConjuntoSM* a, ConjuntoSM* b, ConjuntoSM* c) {
+        ConjuntoSM* aux = new ConjuntoSM;
+        while (!a->vacio()) {
+            int m = a->muestrea();
+            a->suprime(m);
+            aux->inserta(m);
+            c->inserta(m);
+        }
+        // while (!aux->vacio()) {
+        //     int m = aux->muestrea();
+        //     aux->suprime(m);
+        //     a->inserta(m);
+        // }
+        while (!b->vacio()) {
+            int m = b->muestrea();
+            b->suprime(m);
+            aux->inserta(m);
+            if (!c->pertenece(m))
+                c->inserta(m);
+        }
+        // while (!aux->vacio()) {
+        //     int m = aux->muestrea();
+        //     aux->suprime(m);
+        //     b->inserta(m);
+        // }
+
+        delete aux;
+    };
+
+    void _union() {
+        ConjuntoSM* a = new ConjuntoSM();
+        ConjuntoSM* b = new ConjuntoSM();
+        ConjuntoSM* c = new ConjuntoSM();
+        a->inserta(1);
+        a->inserta(2);
+        a->inserta(3);
+        a->inserta(5);
+        b->inserta(1);
+        b->inserta(2);
+        b->inserta(3);
+        b->inserta(4);
+        _union(a, b, c);
+        std::cout << a->mostrar() << std::endl;
+        std::cout << b->mostrar() << std::endl;
+        std::cout << c->mostrar() << std::endl;
+
+        delete a, b, c;
+    }
+
+    void _interseccion(ConjuntoSM* a, ConjuntoSM* b, ConjuntoSM* c) {
+        auto* aux = new ConjuntoSM;
+        while (!a->vacio()) {
+            int m = a->muestrea();
+            if (a->pertenece(m) && b->pertenece(m)) {
+                c->inserta(m);
+            }
+            a->suprime(m);
+            aux->inserta(m);
+        }
+
+        while (!aux->vacio()) {
+            int m = aux->muestrea();
+            aux->suprime(m);
+            a->inserta(m);
+        }
+
+        delete aux;
+    }
+
+    void _interseccion() {
+        ConjuntoSM* a = new ConjuntoSM();
+        ConjuntoSM* b = new ConjuntoSM();
+        ConjuntoSM* c = new ConjuntoSM();
+        a->inserta(1);
+        a->inserta(2);
+        a->inserta(3);
+        a->inserta(5);
+        b->inserta(1);
+        b->inserta(2);
+        b->inserta(3);
+        b->inserta(4);
+        _interseccion(a, b, c);
+        std::cout << a->mostrar() << std::endl;
+        std::cout << b->mostrar() << std::endl;
+        std::cout << c->mostrar() << std::endl;
+
+        delete a, b, c;
+    }
+
+    bool _equivalentes(ConjuntoSM* a, ConjuntoSM* b) {
+        return a->cardinal() == b->cardinal();
+    }
+
+    void _equivalentes() {
+        ConjuntoSM* a = new ConjuntoSM();
+        ConjuntoSM* b = new ConjuntoSM();
+        a->inserta(1);
+        a->inserta(2);
+        a->inserta(3);
+        a->inserta(5);
+        b->inserta(1);
+        b->inserta(2);
+        b->inserta(3);
+        b->inserta(4);
+        std::cout << (_equivalentes(a, b) ? "si" : "no") << " equivalentes" << std::endl;
+
+        delete a, b;
+    }
 }  // namespace UConjuntoSM

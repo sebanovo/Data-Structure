@@ -180,11 +180,11 @@ namespace UConjuntoVector {
         delete a, b, c;
     }
 
-    bool _equivalente(ConjuntoVector* a, ConjuntoVector* b) {
+    bool _equivalentes(ConjuntoVector* a, ConjuntoVector* b) {
         return a->cardinal() == b->cardinal();
     }
 
-    void equivalentes() {
+    void _equivalentes() {
         ConjuntoVector* a = new ConjuntoVector();
         ConjuntoVector* b = new ConjuntoVector();
         a->inserta(1);
@@ -195,7 +195,7 @@ namespace UConjuntoVector {
         b->inserta(2);
         b->inserta(3);
         b->inserta(4);
-        std::cout << (_equivalente(a, b) ? "si" : "no") << " equivalentes" << std::endl;
+        std::cout << (_equivalentes(a, b) ? "si" : "no") << " equivalentes" << std::endl;
 
         delete a, b;
     }

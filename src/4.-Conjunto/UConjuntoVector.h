@@ -25,8 +25,13 @@ namespace UConjuntoVector {
         ~ConjuntoVector();
         std::string mostrar();
     };
+
     void _union();
     void _interseccion();
-    void equivalentes();
+    void _equivalentes();
+
+    void _union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
+    void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
+    bool _equivalente(ConjuntoVector* a, ConjuntoVector* b);
 }  // namespace UConjuntoVector
 #endif
