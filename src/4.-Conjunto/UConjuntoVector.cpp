@@ -116,6 +116,8 @@ namespace UConjuntoVector {
         //     aux->suprime(m);
         //     b->inserta(m);
         // }
+
+        delete aux;
     };
 
     void _union() {
@@ -135,25 +137,27 @@ namespace UConjuntoVector {
         std::cout << b->mostrar() << std::endl;
         std::cout << c->mostrar() << std::endl;
 
-        delete a;
-        delete b;
-        delete c;
+        delete a, b, c;
     }
 
-    void interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
+    void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
         auto* aux = new ConjuntoVector;
         while (!a->vacio()) {
             int m = a->muestrea();
-            if (a->pertenece(m) && b->pertenece(m))
+            if (a->pertenece(m) && b->pertenece(m)) {
                 c->inserta(m);
+            }
             a->suprime(m);
             aux->inserta(m);
         }
+
         while (!aux->vacio()) {
             int m = aux->muestrea();
             aux->suprime(m);
             a->inserta(m);
         }
+
+        delete aux;
     }
 
     void _interseccion() {
@@ -168,10 +172,12 @@ namespace UConjuntoVector {
         b->inserta(2);
         b->inserta(3);
         b->inserta(4);
-        interseccion(a, b, c);
+        _interseccion(a, b, c);
         std::cout << a->mostrar() << std::endl;
         std::cout << b->mostrar() << std::endl;
         std::cout << c->mostrar() << std::endl;
+
+        delete a, b, c;
     }
 
     bool _equivalente(ConjuntoVector* a, ConjuntoVector* b) {
@@ -190,6 +196,8 @@ namespace UConjuntoVector {
         b->inserta(3);
         b->inserta(4);
         std::cout << (_equivalente(a, b) ? "si" : "no") << " equivalentes" << std::endl;
+
+        delete a, b;
     }
 
 }  // namespace UConjuntoVector
