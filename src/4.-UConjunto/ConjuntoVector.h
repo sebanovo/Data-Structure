@@ -1,24 +1,20 @@
 //---------------------------------------------------------------------------
 
-#ifndef UConjuntoPunteroH
-#define UConjuntoPunteroH
+#ifndef ConjuntoVectorH
+#define ConjuntoVectorH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
 
-namespace UConjuntoPuntero {
-    struct Nodo {
-        int dato;
-        Nodo* sig;
-    };
-
-    class ConjuntoPuntero {
+namespace UConjuntoVector {
+    class ConjuntoVector {
        private:
-        Nodo* PtrConj;
+        const int MAX = 100;
+        bool* v;
         int cant;
 
        public:
-        ConjuntoPuntero();
+        ConjuntoVector();
         int cardinal();
         bool vacio();
         int ordinal(int e);
@@ -26,7 +22,7 @@ namespace UConjuntoPuntero {
         void suprime(int e);
         bool pertenece(int e);
         int muestrea();
-        ~ConjuntoPuntero();
+        ~ConjuntoVector();
         std::string mostrar();
     };
 
@@ -34,8 +30,8 @@ namespace UConjuntoPuntero {
     void _interseccion();
     void _equivalentes();
 
-    void _union(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
-    void _interseccion(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
-    bool _equivalentes(ConjuntoPuntero* a, ConjuntoPuntero* b);
-}  // namespace UConjuntoPuntero
+    void _union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
+    void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
+    bool _equivalente(ConjuntoVector* a, ConjuntoVector* b);
+}  // namespace UConjuntoVector
 #endif

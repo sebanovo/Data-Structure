@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
 
-#ifndef UConjuntoSMH
-#define UConjuntoSMH
+#ifndef ConjuntoSMH
+#define ConjuntoSMH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
 
-#include "1.-Memoria/UCSMemoria.h"
+#include "1.-UCSMemoria/CSMemoria.h"
 
 namespace UConjuntoSM {
     const std::string _dato_sig = "dato,sig";

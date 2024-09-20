@@ -1,21 +1,29 @@
 //---------------------------------------------------------------------------
-
-#ifndef UListavectorH
-#define UListavectorH
+#ifndef ListapunteroH
+#define ListapunteroH
 //---------------------------------------------------------------------------
+#include <iostream>
 #include <string>
 
-namespace UListaVector {
+namespace UListaPuntero {
+    using std::runtime_error;
     using std::string;
-    typedef int direccion;
-    class ListaVector {
+
+    struct Nodo;
+    typedef Nodo *direccion;
+    struct Nodo {
+       public:
+        int elemento;
+        Nodo *sig;
+    };
+
+    class ListaPuntero {
        private:
-        const int MAX = 100;
-        int* elementos;
+        direccion PtrElementos;
         int longitud;
 
        public:
-        ListaVector();
+        ListaPuntero();
         direccion fin();
         direccion primero();
         direccion siguiente(direccion dir);
@@ -29,15 +37,18 @@ namespace UListaVector {
         void suprime(direccion dir);
         void modifica(direccion dir, int element);
         string mostrar();
-        ~ListaVector();
+        ~ListaPuntero();
 
         // extra
         direccion localiza(int element);
         void elimina_dato(int element);
         void anula();
 
-        // ejercicio
+        bool es_direccion_valida(direccion dir);
+
+        // ejercicios
         void bubble_sort();
     };
-}  // namespace UListaVector
+
+}  // namespace UListaPuntero
 #endif

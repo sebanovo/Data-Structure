@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef UPolinomioVectorH
-#define UPolinomioVectorH
+#ifndef PolinomioVectorH
+#define PolinomioVectorH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>

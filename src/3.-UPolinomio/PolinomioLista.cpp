@@ -2,7 +2,7 @@
 
 #pragma hdrstop
 
-#include "UPolinomioLista.h"
+#include "PolinomioLista.h"
 
 #include "math.h"
 

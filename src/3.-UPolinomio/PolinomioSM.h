@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
 
-#ifndef UPolinomioSMH
-#define UPolinomioSMH
+#ifndef PolinomioSMH
+#define PolinomioSMH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
 
-#include "1.-Memoria/UCSMemoria.h"
+#include "1.-UCSMemoria/CSMemoria.h"
 
 namespace UPolinomioSM {
     using std::string;

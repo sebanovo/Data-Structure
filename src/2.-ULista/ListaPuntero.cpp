@@ -2,7 +2,7 @@
 
 #pragma hdrstop
 
-#include "UListapuntero.h"
+#include "Listapuntero.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 

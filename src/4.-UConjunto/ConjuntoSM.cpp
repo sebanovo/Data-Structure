@@ -2,47 +2,57 @@
 
 #pragma hdrstop
 
-#include "UConjuntoPuntero.h"
+#include "ConjuntoSM.h"
+
+#include "1.-UCSMemoria/CSMemoria.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-namespace UConjuntoPuntero {
-    ConjuntoPuntero::ConjuntoPuntero() {
-        PtrConj = nullptr;
+namespace UConjuntoSM {
+    using UCSMemoria::NULO;
+    ConjuntoSM::ConjuntoSM() {
+        PtrConj = NULO;
+        mem = new UCSMemoria::CSMemoria();
+        cant = 0;
+    }
+
+    ConjuntoSM::ConjuntoSM(UCSMemoria::CSMemoria* m) {
+        PtrConj = UCSMemoria::NULO;
+        mem = m;
         cant = 0;
     }
 
     // cantidad de elementos del conjunto
-    int ConjuntoPuntero::cardinal() {
+    int ConjuntoSM::cardinal() {
         return cant;
     }
 
     // esta vacio?
-    bool ConjuntoPuntero::vacio() {
-        return cant == 0;  //|| PtrConj == nullptr;
+    bool ConjuntoSM::vacio() {
+        return cant == 0;  //|| PtrConj == UCSMemoria::NULO
     }
 
     // busca el lugar que ocupa el elemento E en el conjunto
-    int ConjuntoPuntero::ordinal(int e) {
+    int ConjuntoSM::ordinal(int e) {
         int resp = 0;
-        Nodo* pc = PtrConj;
-        while (pc != nullptr) {
+        int pc = PtrConj;
+        while (pc != NULO) {
             resp++;
-            if (pc->dato == e) {
+            if (mem->obtener_dato(pc, _dato) == e) {
                 return resp;
             }
-            pc = pc->sig;
+            pc = mem->obtener_dato(pc, _sig);
         }
-        return -1;
+        return NULO;
     }
 
     // inserta elementos en el conjunto
-    void ConjuntoPuntero::inserta(int e) {
+    void ConjuntoSM::inserta(int e) {
         if (!pertenece(e)) {
-            Nodo* dir = new Nodo();
-            dir->dato = e;
-            dir->sig = PtrConj;
+            int dir = mem->new_espacio(_dato_sig);
+            mem->poner_dato(dir, _dato, e);
+            mem->poner_dato(dir, _sig, PtrConj);
             PtrConj = dir;
             cant++;
         } else {
@@ -51,82 +61,76 @@ namespace UConjuntoPuntero {
     }
 
     // elimna un elemento del conjunto
-    void ConjuntoPuntero::suprime(int e) {
+    void ConjuntoSM::suprime(int e) {
         if (!pertenece(e)) return;
 
-        Nodo* dir;
-        if (PtrConj->dato == e) {  // caso si esta en la cabeza
+        int dir;
+        if (mem->obtener_dato(PtrConj, _dato) == e) {  // caso si esta en la cabeza
             dir = PtrConj;
-            PtrConj = PtrConj->sig;
+            PtrConj = mem->obtener_dato(PtrConj, _sig);
         } else {
-            Nodo* pc = PtrConj;
-            Nodo* ant;
-            while (pc != nullptr) {
-                if (pc->dato == e) {
+            int pc = PtrConj;
+            int ant;
+            while (pc != NULO) {
+                if (mem->obtener_dato(pc, _dato) == e) {
                     dir = pc;
                     break;
                 }
                 ant = pc;
-                pc = pc->sig;
+                pc = mem->obtener_dato(pc, _sig);
             }
-            ant->sig = pc->sig;
-            pc->sig = nullptr;
+            mem->poner_dato(ant, _sig, mem->obtener_dato(pc, _sig));
+            mem->poner_dato(pc, _sig, NULO);
         }
         cant--;
-        delete dir;
+        mem->delete_espacio(dir);
     }
 
-    bool ConjuntoPuntero::pertenece(int e) {
-        Nodo* pc = PtrConj;
-        while (pc != nullptr) {
-            if (pc->dato == e) {
+    bool ConjuntoSM::pertenece(int e) {
+        int pc = PtrConj;
+        while (pc != NULO) {
+            if (mem->obtener_dato(pc, _dato) == e) {
                 return true;
             }
-            pc = pc->sig;
+            pc = mem->obtener_dato(pc, _sig);
         }
         return false;
     }
 
     // busca un elemento al azar que pertenezca al conjunto
-    int ConjuntoPuntero::muestrea() {
-        if (vacio()) return -1;
+    int ConjuntoSM::muestrea() {
+        if (vacio()) return NULO;
         int i = 0;
         int lugar = rand() % cardinal() + 1;  // >= 1 && <= cant
-        Nodo* pc = PtrConj;
-        while (pc != nullptr) {
+        int pc = PtrConj;
+        while (pc != NULO) {
             i++;
             if (i == lugar) {
-                return pc->dato;
+                return mem->obtener_dato(pc, _dato);
             }
-            pc = pc->sig;
+            pc = mem->obtener_dato(pc, _sig);
         }
     }
 
-    ConjuntoPuntero::~ConjuntoPuntero() {
-        Nodo* dir = PtrConj;
-        Nodo* ant;
-        while (dir != nullptr) {
-            ant = dir;
-            dir = dir->sig;
-            delete ant;
-        }
+    ConjuntoSM::~ConjuntoSM() {
+        delete mem;
     }
 
-    std::string ConjuntoPuntero::mostrar() {
+    std::string ConjuntoSM::mostrar() {
         std::string s = "{";
-        Nodo* x = PtrConj;
+        int x = PtrConj;
         int i = 0;
-        while (x != nullptr) {
+        while (x != NULO) {
             i++;
-            s += std::to_string(x->dato);
+            s += std::to_string(mem->obtener_dato(x, _dato));
             s += i < cardinal() ? "," : "";
-            x = x->sig;
+            x = mem->obtener_dato(x, _sig);
         }
         return s + "}";
     }
 
-    void _union(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c) {
-        ConjuntoPuntero* aux = new ConjuntoPuntero;
+    void _union(ConjuntoSM* a, ConjuntoSM* b, ConjuntoSM* c) {
+        ConjuntoSM* aux = new ConjuntoSM;
         while (!a->vacio()) {
             int m = a->muestrea();
             a->suprime(m);
@@ -155,9 +159,9 @@ namespace UConjuntoPuntero {
     };
 
     void _union() {
-        ConjuntoPuntero* a = new ConjuntoPuntero();
-        ConjuntoPuntero* b = new ConjuntoPuntero();
-        ConjuntoPuntero* c = new ConjuntoPuntero();
+        ConjuntoSM* a = new ConjuntoSM();
+        ConjuntoSM* b = new ConjuntoSM();
+        ConjuntoSM* c = new ConjuntoSM();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -174,8 +178,8 @@ namespace UConjuntoPuntero {
         delete a, b, c;
     }
 
-    void _interseccion(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c) {
-        auto* aux = new ConjuntoPuntero;
+    void _interseccion(ConjuntoSM* a, ConjuntoSM* b, ConjuntoSM* c) {
+        auto* aux = new ConjuntoSM;
         while (!a->vacio()) {
             int m = a->muestrea();
             if (a->pertenece(m) && b->pertenece(m)) {
@@ -195,9 +199,9 @@ namespace UConjuntoPuntero {
     }
 
     void _interseccion() {
-        ConjuntoPuntero* a = new ConjuntoPuntero();
-        ConjuntoPuntero* b = new ConjuntoPuntero();
-        ConjuntoPuntero* c = new ConjuntoPuntero();
+        ConjuntoSM* a = new ConjuntoSM();
+        ConjuntoSM* b = new ConjuntoSM();
+        ConjuntoSM* c = new ConjuntoSM();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -214,13 +218,13 @@ namespace UConjuntoPuntero {
         delete a, b, c;
     }
 
-    bool _equivalentes(ConjuntoPuntero* a, ConjuntoPuntero* b) {
+    bool _equivalentes(ConjuntoSM* a, ConjuntoSM* b) {
         return a->cardinal() == b->cardinal();
     }
 
     void _equivalentes() {
-        ConjuntoPuntero* a = new ConjuntoPuntero();
-        ConjuntoPuntero* b = new ConjuntoPuntero();
+        ConjuntoSM* a = new ConjuntoSM();
+        ConjuntoSM* b = new ConjuntoSM();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -233,4 +237,4 @@ namespace UConjuntoPuntero {
 
         delete a, b;
     }
-}  // namespace UConjuntoPuntero
+}  // namespace UConjuntoSM

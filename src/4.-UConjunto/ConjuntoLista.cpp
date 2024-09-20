@@ -2,135 +2,118 @@
 
 #pragma hdrstop
 
-#include "UConjuntoSM.h"
-
-#include "1.-Memoria/UCSMemoria.h"
+#include "ConjuntoLista.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-namespace UConjuntoSM {
+namespace UConjuntoLista {
     using UCSMemoria::NULO;
-    ConjuntoSM::ConjuntoSM() {
-        PtrConj = NULO;
-        mem = new UCSMemoria::CSMemoria();
-        cant = 0;
+    ConjuntoLista::ConjuntoLista() {
+        mem = new UCSMemoria::CSMemoria;
+        elem = new UListaSM::ListaSM(mem);
+        // elem = new UListaVector::ListaVector;
     }
 
-    ConjuntoSM::ConjuntoSM(UCSMemoria::CSMemoria* m) {
-        PtrConj = UCSMemoria::NULO;
-        mem = m;
-        cant = 0;
+    ConjuntoLista::ConjuntoLista(UCSMemoria::CSMemoria* m) {
+        elem = new UListaSM::ListaSM(m);
+        // elem = new UListaVector::ListaVector;
     }
 
     // cantidad de elementos del conjunto
-    int ConjuntoSM::cardinal() {
-        return cant;
+    int ConjuntoLista::cardinal() {
+        return elem->_longitud();
     }
 
     // esta vacio?
-    bool ConjuntoSM::vacio() {
-        return cant == 0;  //|| PtrConj == UCSMemoria::NULO
+    bool ConjuntoLista::vacio() {
+        return elem->_longitud() == 0;
     }
 
     // busca el lugar que ocupa el elemento E en el conjunto
-    int ConjuntoSM::ordinal(int e) {
+    int ConjuntoLista::ordinal(int e) {
         int resp = 0;
-        int pc = PtrConj;
+        int pc = elem->primero();
         while (pc != NULO) {
             resp++;
-            if (mem->obtener_dato(pc, _dato) == e) {
+            if (elem->recupera(pc) == e) {
                 return resp;
             }
-            pc = mem->obtener_dato(pc, _sig);
+            pc = elem->siguiente(pc);
         }
-        return NULO;
+        return -1;
     }
 
     // inserta elementos en el conjunto
-    void ConjuntoSM::inserta(int e) {
+    void ConjuntoLista::inserta(int e) {
         if (!pertenece(e)) {
-            int dir = mem->new_espacio(_dato_sig);
-            mem->poner_dato(dir, _dato, e);
-            mem->poner_dato(dir, _sig, PtrConj);
-            PtrConj = dir;
-            cant++;
+            elem->inserta(elem->primero(), e);
         } else {
             // error pertenece
         }
     }
 
     // elimna un elemento del conjunto
-    void ConjuntoSM::suprime(int e) {
+    void ConjuntoLista::suprime(int e) {
         if (!pertenece(e)) return;
 
-        int dir;
-        if (mem->obtener_dato(PtrConj, _dato) == e) {  // caso si esta en la cabeza
-            dir = PtrConj;
-            PtrConj = mem->obtener_dato(PtrConj, _sig);
-        } else {
-            int pc = PtrConj;
-            int ant;
-            while (pc != NULO) {
-                if (mem->obtener_dato(pc, _dato) == e) {
-                    dir = pc;
-                    break;
-                }
-                ant = pc;
-                pc = mem->obtener_dato(pc, _sig);
+        int aux = elem->primero();
+        while (aux != -1) {
+            if (elem->recupera(aux) == e) {
+                elem->suprime(aux);
+                return;
             }
-            mem->poner_dato(ant, _sig, mem->obtener_dato(pc, _sig));
-            mem->poner_dato(pc, _sig, NULO);
+            // if (elem->recupera(aux) == e && aux != -1) {
+            //     elem->suprime(aux);
+            //     return;
+            // }
+            aux = elem->siguiente(aux);
         }
-        cant--;
-        mem->delete_espacio(dir);
     }
 
-    bool ConjuntoSM::pertenece(int e) {
-        int pc = PtrConj;
-        while (pc != NULO) {
-            if (mem->obtener_dato(pc, _dato) == e) {
+    bool ConjuntoLista::pertenece(int e) {
+        int aux = elem->primero();
+        while (aux != -1) {
+            if (elem->recupera(aux) == e)
                 return true;
-            }
-            pc = mem->obtener_dato(pc, _sig);
+            aux = elem->siguiente(aux);
         }
         return false;
     }
 
     // busca un elemento al azar que pertenezca al conjunto
-    int ConjuntoSM::muestrea() {
-        if (vacio()) return NULO;
+    int ConjuntoLista::muestrea() {
         int i = 0;
         int lugar = rand() % cardinal() + 1;  // >= 1 && <= cant
-        int pc = PtrConj;
-        while (pc != NULO) {
+        int aux = elem->primero();
+        while (aux != -1) {
             i++;
             if (i == lugar) {
-                return mem->obtener_dato(pc, _dato);
+                return elem->recupera(aux);
             }
-            pc = mem->obtener_dato(pc, _sig);
+            aux = elem->siguiente(aux);
         }
     }
 
-    ConjuntoSM::~ConjuntoSM() {
-        delete mem;
+    ConjuntoLista::~ConjuntoLista() {
+        delete elem;
+        // delete mem;
     }
 
-    std::string ConjuntoSM::mostrar() {
+    std::string ConjuntoLista::mostrar() {
         std::string s = "{";
-        int x = PtrConj;
+        int aux = elem->_longitud() == 0 ? aux = -1 : elem->primero();
         int i = 0;
-        while (x != NULO) {
+        while (aux != -1) {
             i++;
-            s += std::to_string(mem->obtener_dato(x, _dato));
+            s += std::to_string(elem->recupera(aux));
             s += i < cardinal() ? "," : "";
-            x = mem->obtener_dato(x, _sig);
+            aux = elem->siguiente(aux);
         }
         return s + "}";
     }
-
-    void _union(ConjuntoSM* a, ConjuntoSM* b, ConjuntoSM* c) {
-        ConjuntoSM* aux = new ConjuntoSM;
+    void _union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
+        ConjuntoLista* aux = new ConjuntoLista;
         while (!a->vacio()) {
             int m = a->muestrea();
             a->suprime(m);
@@ -159,9 +142,9 @@ namespace UConjuntoSM {
     };
 
     void _union() {
-        ConjuntoSM* a = new ConjuntoSM();
-        ConjuntoSM* b = new ConjuntoSM();
-        ConjuntoSM* c = new ConjuntoSM();
+        ConjuntoLista* a = new ConjuntoLista();
+        ConjuntoLista* b = new ConjuntoLista();
+        ConjuntoLista* c = new ConjuntoLista();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -170,7 +153,7 @@ namespace UConjuntoSM {
         b->inserta(2);
         b->inserta(3);
         b->inserta(4);
-        _union(a, b, c);
+        UConjuntoLista::_union(a, b, c);
         std::cout << a->mostrar() << std::endl;
         std::cout << b->mostrar() << std::endl;
         std::cout << c->mostrar() << std::endl;
@@ -178,8 +161,8 @@ namespace UConjuntoSM {
         delete a, b, c;
     }
 
-    void _interseccion(ConjuntoSM* a, ConjuntoSM* b, ConjuntoSM* c) {
-        auto* aux = new ConjuntoSM;
+    void _interseccion(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
+        auto* aux = new ConjuntoLista;
         while (!a->vacio()) {
             int m = a->muestrea();
             if (a->pertenece(m) && b->pertenece(m)) {
@@ -199,9 +182,9 @@ namespace UConjuntoSM {
     }
 
     void _interseccion() {
-        ConjuntoSM* a = new ConjuntoSM();
-        ConjuntoSM* b = new ConjuntoSM();
-        ConjuntoSM* c = new ConjuntoSM();
+        ConjuntoLista* a = new ConjuntoLista();
+        ConjuntoLista* b = new ConjuntoLista();
+        ConjuntoLista* c = new ConjuntoLista();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -218,13 +201,13 @@ namespace UConjuntoSM {
         delete a, b, c;
     }
 
-    bool _equivalentes(ConjuntoSM* a, ConjuntoSM* b) {
+    bool _equivalentes(ConjuntoLista* a, ConjuntoLista* b) {
         return a->cardinal() == b->cardinal();
     }
 
     void _equivalentes() {
-        ConjuntoSM* a = new ConjuntoSM();
-        ConjuntoSM* b = new ConjuntoSM();
+        ConjuntoLista* a = new ConjuntoLista();
+        ConjuntoLista* b = new ConjuntoLista();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -237,4 +220,4 @@ namespace UConjuntoSM {
 
         delete a, b;
     }
-}  // namespace UConjuntoSM
+}  // namespace UConjuntoLista

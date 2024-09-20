@@ -7,18 +7,18 @@ include_directories(src/lib)
 set(CMAKE_CXX_STANDARD 17)
 set(
     SOURCES src/main.cpp
-            src/1.-Memoria/UCSMemoria.cpp
-            src/2.-Lista/UListaVector.cpp
-            src/2.-Lista/UListaPuntero.cpp
-            src/2.-Lista/UListaSM.cpp
-            src/3.-Polinomio/UPolinomioVector.cpp
-            src/3.-Polinomio/UPolinomioLista.cpp
-            src/3.-Polinomio/UPolinomioSM.cpp
-            src/3.-Polinomio/UPolinomioPuntero.cpp
-            src/4.-Conjunto/UConjuntoVector.cpp
-            src/4.-Conjunto/UConjuntoPuntero.cpp
-            src/4.-Conjunto/UConjuntoLista.cpp
-            src/4.-Conjunto/UConjuntoSM.cpp
+            src/1.-UCSMemoria/CSMemoria.cpp
+            src/2.-ULista/ListaVector.cpp
+            src/2.-ULista/ListaPuntero.cpp
+            src/2.-ULista/ListaSM.cpp
+            src/3.-UPolinomio/PolinomioVector.cpp
+            src/3.-UPolinomio/PolinomioLista.cpp
+            src/3.-UPolinomio/PolinomioSM.cpp
+            src/3.-UPolinomio/PolinomioPuntero.cpp
+            src/4.-UConjunto/ConjuntoVector.cpp
+            src/4.-UConjunto/ConjuntoPuntero.cpp
+            src/4.-UConjunto/ConjuntoLista.cpp
+            src/4.-UConjunto/ConjuntoSM.cpp
 )
 
 add_executable(TDA ${SOURCES})

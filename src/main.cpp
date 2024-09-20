@@ -1,18 +1,18 @@
 #include <iostream>
 #include <limits>
 
-#include "1.-Memoria/UCSMemoria.h"
-#include "2.-Lista/UListaPuntero.h"
-#include "2.-Lista/UListaSM.h"
-#include "2.-Lista/UListaVector.h"
-#include "3.-Polinomio/UPolinomioLista.h"
-#include "3.-Polinomio/UPolinomioPuntero.h"
-#include "3.-Polinomio/UPolinomioSM.h"
-#include "3.-Polinomio/UPolinomioVector.h"
-#include "4.-Conjunto/UConjuntoLista.h"
-#include "4.-Conjunto/UConjuntoPuntero.h"
-#include "4.-Conjunto/UConjuntoSM.h"
-#include "4.-Conjunto/UConjuntoVector.h"
+#include "1.-UCSMemoria/CSMemoria.h"
+#include "2.-ULista/ListaPuntero.h"
+#include "2.-ULista/ListaSM.h"
+#include "2.-ULista/ListaVector.h"
+#include "3.-UPolinomio/PolinomioLista.h"
+#include "3.-UPolinomio/PolinomioPuntero.h"
+#include "3.-UPolinomio/PolinomioSM.h"
+#include "3.-UPolinomio/PolinomioVector.h"
+#include "4.-UConjunto/ConjuntoLista.h"
+#include "4.-UConjunto/ConjuntoPuntero.h"
+#include "4.-UConjunto/ConjuntoSM.h"
+#include "4.-UConjunto/ConjuntoVector.h"
 
 using std::cin;
 using std::cout;

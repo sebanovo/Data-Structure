@@ -2,118 +2,131 @@
 
 #pragma hdrstop
 
-#include "UConjuntoLista.h"
+#include "ConjuntoPuntero.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-namespace UConjuntoLista {
-    using UCSMemoria::NULO;
-    ConjuntoLista::ConjuntoLista() {
-        mem = new UCSMemoria::CSMemoria;
-        elem = new UListaSM::ListaSM(mem);
-        // elem = new UListaVector::ListaVector;
-    }
-
-    ConjuntoLista::ConjuntoLista(UCSMemoria::CSMemoria* m) {
-        elem = new UListaSM::ListaSM(m);
-        // elem = new UListaVector::ListaVector;
+namespace UConjuntoPuntero {
+    ConjuntoPuntero::ConjuntoPuntero() {
+        PtrConj = nullptr;
+        cant = 0;
     }
 
     // cantidad de elementos del conjunto
-    int ConjuntoLista::cardinal() {
-        return elem->_longitud();
+    int ConjuntoPuntero::cardinal() {
+        return cant;
     }
 
     // esta vacio?
-    bool ConjuntoLista::vacio() {
-        return elem->_longitud() == 0;
+    bool ConjuntoPuntero::vacio() {
+        return cant == 0;  //|| PtrConj == nullptr;
     }
 
     // busca el lugar que ocupa el elemento E en el conjunto
-    int ConjuntoLista::ordinal(int e) {
+    int ConjuntoPuntero::ordinal(int e) {
         int resp = 0;
-        int pc = elem->primero();
-        while (pc != NULO) {
+        Nodo* pc = PtrConj;
+        while (pc != nullptr) {
             resp++;
-            if (elem->recupera(pc) == e) {
+            if (pc->dato == e) {
                 return resp;
             }
-            pc = elem->siguiente(pc);
+            pc = pc->sig;
         }
         return -1;
     }
 
     // inserta elementos en el conjunto
-    void ConjuntoLista::inserta(int e) {
+    void ConjuntoPuntero::inserta(int e) {
         if (!pertenece(e)) {
-            elem->inserta(elem->primero(), e);
+            Nodo* dir = new Nodo();
+            dir->dato = e;
+            dir->sig = PtrConj;
+            PtrConj = dir;
+            cant++;
         } else {
             // error pertenece
         }
     }
 
     // elimna un elemento del conjunto
-    void ConjuntoLista::suprime(int e) {
+    void ConjuntoPuntero::suprime(int e) {
         if (!pertenece(e)) return;
 
-        int aux = elem->primero();
-        while (aux != -1) {
-            if (elem->recupera(aux) == e) {
-                elem->suprime(aux);
-                return;
+        Nodo* dir;
+        if (PtrConj->dato == e) {  // caso si esta en la cabeza
+            dir = PtrConj;
+            PtrConj = PtrConj->sig;
+        } else {
+            Nodo* pc = PtrConj;
+            Nodo* ant;
+            while (pc != nullptr) {
+                if (pc->dato == e) {
+                    dir = pc;
+                    break;
+                }
+                ant = pc;
+                pc = pc->sig;
             }
-            // if (elem->recupera(aux) == e && aux != -1) {
-            //     elem->suprime(aux);
-            //     return;
-            // }
-            aux = elem->siguiente(aux);
+            ant->sig = pc->sig;
+            pc->sig = nullptr;
         }
+        cant--;
+        delete dir;
     }
 
-    bool ConjuntoLista::pertenece(int e) {
-        int aux = elem->primero();
-        while (aux != -1) {
-            if (elem->recupera(aux) == e)
+    bool ConjuntoPuntero::pertenece(int e) {
+        Nodo* pc = PtrConj;
+        while (pc != nullptr) {
+            if (pc->dato == e) {
                 return true;
-            aux = elem->siguiente(aux);
+            }
+            pc = pc->sig;
         }
         return false;
     }
 
     // busca un elemento al azar que pertenezca al conjunto
-    int ConjuntoLista::muestrea() {
+    int ConjuntoPuntero::muestrea() {
+        if (vacio()) return -1;
         int i = 0;
         int lugar = rand() % cardinal() + 1;  // >= 1 && <= cant
-        int aux = elem->primero();
-        while (aux != -1) {
+        Nodo* pc = PtrConj;
+        while (pc != nullptr) {
             i++;
             if (i == lugar) {
-                return elem->recupera(aux);
+                return pc->dato;
             }
-            aux = elem->siguiente(aux);
+            pc = pc->sig;
         }
     }
 
-    ConjuntoLista::~ConjuntoLista() {
-        delete elem;
-        // delete mem;
+    ConjuntoPuntero::~ConjuntoPuntero() {
+        Nodo* dir = PtrConj;
+        Nodo* ant;
+        while (dir != nullptr) {
+            ant = dir;
+            dir = dir->sig;
+            delete ant;
+        }
     }
 
-    std::string ConjuntoLista::mostrar() {
+    std::string ConjuntoPuntero::mostrar() {
         std::string s = "{";
-        int aux = elem->_longitud() == 0 ? aux = -1 : elem->primero();
+        Nodo* x = PtrConj;
         int i = 0;
-        while (aux != -1) {
+        while (x != nullptr) {
             i++;
-            s += std::to_string(elem->recupera(aux));
+            s += std::to_string(x->dato);
             s += i < cardinal() ? "," : "";
-            aux = elem->siguiente(aux);
+            x = x->sig;
         }
         return s + "}";
     }
-    void _union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
-        ConjuntoLista* aux = new ConjuntoLista;
+
+    void _union(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c) {
+        ConjuntoPuntero* aux = new ConjuntoPuntero;
         while (!a->vacio()) {
             int m = a->muestrea();
             a->suprime(m);
@@ -142,9 +155,9 @@ namespace UConjuntoLista {
     };
 
     void _union() {
-        ConjuntoLista* a = new ConjuntoLista();
-        ConjuntoLista* b = new ConjuntoLista();
-        ConjuntoLista* c = new ConjuntoLista();
+        ConjuntoPuntero* a = new ConjuntoPuntero();
+        ConjuntoPuntero* b = new ConjuntoPuntero();
+        ConjuntoPuntero* c = new ConjuntoPuntero();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -153,7 +166,7 @@ namespace UConjuntoLista {
         b->inserta(2);
         b->inserta(3);
         b->inserta(4);
-        UConjuntoLista::_union(a, b, c);
+        _union(a, b, c);
         std::cout << a->mostrar() << std::endl;
         std::cout << b->mostrar() << std::endl;
         std::cout << c->mostrar() << std::endl;
@@ -161,8 +174,8 @@ namespace UConjuntoLista {
         delete a, b, c;
     }
 
-    void _interseccion(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
-        auto* aux = new ConjuntoLista;
+    void _interseccion(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c) {
+        auto* aux = new ConjuntoPuntero;
         while (!a->vacio()) {
             int m = a->muestrea();
             if (a->pertenece(m) && b->pertenece(m)) {
@@ -182,9 +195,9 @@ namespace UConjuntoLista {
     }
 
     void _interseccion() {
-        ConjuntoLista* a = new ConjuntoLista();
-        ConjuntoLista* b = new ConjuntoLista();
-        ConjuntoLista* c = new ConjuntoLista();
+        ConjuntoPuntero* a = new ConjuntoPuntero();
+        ConjuntoPuntero* b = new ConjuntoPuntero();
+        ConjuntoPuntero* c = new ConjuntoPuntero();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -201,13 +214,13 @@ namespace UConjuntoLista {
         delete a, b, c;
     }
 
-    bool _equivalentes(ConjuntoLista* a, ConjuntoLista* b) {
+    bool _equivalentes(ConjuntoPuntero* a, ConjuntoPuntero* b) {
         return a->cardinal() == b->cardinal();
     }
 
     void _equivalentes() {
-        ConjuntoLista* a = new ConjuntoLista();
-        ConjuntoLista* b = new ConjuntoLista();
+        ConjuntoPuntero* a = new ConjuntoPuntero();
+        ConjuntoPuntero* b = new ConjuntoPuntero();
         a->inserta(1);
         a->inserta(2);
         a->inserta(3);
@@ -220,4 +233,4 @@ namespace UConjuntoLista {
 
         delete a, b;
     }
-}  // namespace UConjuntoLista
+}  // namespace UConjuntoPuntero

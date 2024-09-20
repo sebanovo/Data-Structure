@@ -2,7 +2,7 @@
 
 #pragma hdrstop
 
-#include "UConjuntoVector.h"
+#include "ConjuntoVector.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef UCSMemoriaH
-#define UCSMemoriaH
+#ifndef CSMemoriaH
+#define CSMemoriaH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>

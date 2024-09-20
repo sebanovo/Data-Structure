@@ -2,7 +2,7 @@
 
 #pragma hdrstop
 
-#include "UListaSM.h"
+#include "ListaSM.h"
 
 #include <iostream>
 #include <string>

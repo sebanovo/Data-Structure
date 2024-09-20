@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef UPolinomioPunteroH
-#define UPolinomioPunteroH
+#ifndef PolinomioPunteroH
+#define PolinomioPunteroH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>

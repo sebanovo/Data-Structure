@@ -1,13 +1,13 @@
 //---------------------------------------------------------------------------
 
-#ifndef UConjuntoListaH
-#define UConjuntoListaH
+#ifndef ConjuntoListaH
+#define ConjuntoListaH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
 
-#include "2.-Lista/UListaSM.h"
-#include "2.-Lista/UListaVector.h"
+#include "2.-ULista/ListaSM.h"
+#include "2.-ULista/ListaVector.h"
 
 // Conjunto LISTA
 // SOLO FUNCIONA PARA UNA (LISTA SM) Y (LISTA VECTOR)

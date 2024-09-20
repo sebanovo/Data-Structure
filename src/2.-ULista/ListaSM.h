@@ -1,11 +1,11 @@
 //---------------------------------------------------------------------------
 
-#ifndef UListaSMH
-#define UListaSMH
+#ifndef ListaSMH
+#define ListaSMH
 //---------------------------------------------------------------------------
 #include <string>
 
-#include "1.-Memoria/UCSMemoria.h"
+#include "1.-UCSMemoria/CSMemoria.h"
 
 namespace UListaSM {
     using std::string;
