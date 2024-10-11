@@ -13,6 +13,7 @@
 #include "4.-UConjunto/ConjuntoPuntero.h"
 #include "4.-UConjunto/ConjuntoSM.h"
 #include "4.-UConjunto/ConjuntoVector.h"
+#include "5.-UMatrizDispersa/MatrizDispersaVector.h"
 
 using std::cin;
 using std::cout;
@@ -239,6 +240,17 @@ void mostrarConjunto() {
 
 int main() {
     // mostrarPolinomioLista();
-    mostrarConjunto();
+    // mostrarConjunto();
+    UMatrizDispersaVector::MatrizDispersaVector* m1 = new UMatrizDispersaVector::MatrizDispersaVector;
+    m1->dimensionar(5, 5);
+    m1->poner(1, 1, 100);
+    m1->poner(1, 2, 200);
+    m1->poner(1, 3, 300);
+    m1->poner(1, 4, 400);
+    m1->poner(1, 5, 500);
+
+    m1->definir_valor_repetido(100);
+    std::cout << m1->mostrar() << "\n";
+    std::cout << UMatrizDispersaVector::suma(m1) << "\n";
     return 0;
 }

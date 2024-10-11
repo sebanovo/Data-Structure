@@ -19,6 +19,7 @@ set(
             src/4.-UConjunto/ConjuntoPuntero.cpp
             src/4.-UConjunto/ConjuntoLista.cpp
             src/4.-UConjunto/ConjuntoSM.cpp
+            src/5.-UMatrizDispersa/MatrizDispersaVector.cpp
 )
 
 add_executable(TDA ${SOURCES})
