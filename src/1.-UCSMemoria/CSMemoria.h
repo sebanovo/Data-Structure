@@ -19,7 +19,7 @@ namespace UCSMemoria {
 
     class CSMemoria {
        private:
-        const int MAX = 30;
+        const int MAX = 1000;
         int libre;
         Nodo *mem;
 

@@ -1,34 +1,40 @@
 //---------------------------------------------------------------------------
 
-#ifndef MatrizDispersaVectorH
-#define MatrizDispersaVectorH
+#ifndef MatrizDispersaPunteroH
+#define MatrizDispersaPunteroH
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
 
-namespace UMatrizDispersaVector {
-    class MatrizDispersaVector {
+namespace UMatrizDispersaPuntero {
+    struct Nodo {
+        int fil;
+        int col;
+        int dato;
+        Nodo* sig;
+    };
+
+    class MatrizDispersaPuntero {
        private:
-        const int MAX = 1000;
-        int *vf, *vc, *vd;  // filas, columnas, datos
-        int df, dc, repe, nt;
-        int buscar_posicion_vd(int f, int c);
+        Nodo* PtrMatD;
+        int repe, df, dc, nt;
+        Nodo* buscar(int f, int c);
         bool hay(int elemento);
 
        public:
-        MatrizDispersaVector();
-        void dimensionar(int df, int dc);
+        MatrizDispersaPuntero();
+        void dimensionar(int f, int c);
         int dimension_fila();
         int dimension_columna();
         void poner(int f, int c, int elemento);
         int elemento(int f, int c);
         void definir_valor_repetido(int elemento);
         std::string mostrar();
-        ~MatrizDispersaVector();
+        ~MatrizDispersaPuntero();
 
         // void  traspuesta();
     };
 
-    int suma(MatrizDispersaVector *m);
-}  // namespace UMatrizDispersaVector
+    int suma(MatrizDispersaPuntero* m);
+}  // namespace UMatrizDispersaPuntero
 #endif

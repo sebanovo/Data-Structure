@@ -10,24 +10,25 @@
 namespace UMatrizDispersaVector {
     MatrizDispersaVector::MatrizDispersaVector() {
         df = dc = nt = repe = 0;
+        vf = new int[MAX];
+        vc = new int[MAX];
+        vd = new int[MAX];
 
-        // por seguridad al aplicarle el destructor
-        vf = new int[0];
-        vc = new int[0];
-        vd = new int[0];
+        for (int i = 1; i < MAX; i++) {
+            vf[i] = repe;
+            vc[i] = 0;
+            vd[i] = 0;
+        }
     }
 
     // dimensionar la fila y la columna
     void MatrizDispersaVector::dimensionar(int f, int c) {
         df = f;
         dc = c;
-        vf = new int[df * dc];
-        vc = new int[df * dc];
-        vd = new int[df * dc];
     }
 
     // busca la posicion de la fila y la columna
-    int MatrizDispersaVector::buscar_posicion(int f, int c) {
+    int MatrizDispersaVector::buscar_posicion_vd(int f, int c) {
         for (int i = 1; i <= nt; i++) {
             if (vf[i] == f && vc[i] == c) return i;
         }
@@ -38,11 +39,11 @@ namespace UMatrizDispersaVector {
     void MatrizDispersaVector::poner(int f, int c, int elemento) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
 
-        int lugar = buscar_posicion(f, c);
+        int lugar = buscar_posicion_vd(f, c);
         if (lugar > 0) {
             vd[lugar] = elemento;
             if (vd[lugar] == repe) {
-                for (int i = lugar; i <= nt; i++) {
+                for (int i = lugar; i < nt; i++) {
                     vf[i] = vf[i + 1];
                     vc[i] = vc[i + 1];
                     vd[i] = vd[i + 1];
@@ -64,11 +65,8 @@ namespace UMatrizDispersaVector {
     // devuelve el elemento (fila, columna)
     int MatrizDispersaVector::elemento(int f, int c) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
-        int lugar = buscar_posicion(f, c);
-        if (lugar < 1)
-            return repe;
-        else
-            return vd[lugar];
+        int lugar = buscar_posicion_vd(f, c);
+        return lugar < 1 ? repe : vd[lugar];
     }
 
     int MatrizDispersaVector::dimension_fila() {
@@ -81,9 +79,8 @@ namespace UMatrizDispersaVector {
 
     // verifica si hay el elemento especificado en la matriz
     bool MatrizDispersaVector::hay(int elemento) {
-        for (int i = 1; i <= nt; i++) {
+        for (int i = 1; i <= nt; i++)
             if (vd[i] == elemento) return true;
-        }
         return false;
     }
 
@@ -95,7 +92,7 @@ namespace UMatrizDispersaVector {
                 int el = this->elemento(i, j);
 
                 if (el == elemento) {
-                    int lugar = buscar_posicion(i, j);
+                    int lugar = buscar_posicion_vd(i, j);
                     for (int k = lugar; k <= nt; k++) {
                         vf[k] = vf[k + 1];
                         vc[k] = vc[k + 1];
@@ -117,7 +114,6 @@ namespace UMatrizDispersaVector {
         std::string s = "";
         for (int f = 1; f <= df; f++) {
             for (int c = 1; c <= dc; c++) {
-                int ele = elemento(f, c);
                 s += std::to_string(elemento(f, c)) + "\t";
             }
             s += "\r\n";
@@ -125,11 +121,29 @@ namespace UMatrizDispersaVector {
 
         std::stringstream info;
         info << "\n-----------------------------------\n";
-        info << "nt = " << std::to_string(nt) << "  ";
-        info << "df = " << std::to_string(df) << "  ";
-        info << "dc = " << std::to_string(dc) << "  ";
+        info << "nt = " << std::to_string(nt) << "\n";
+        info << "df = " << std::to_string(df) << "\n";
+        info << "dc = " << std::to_string(dc) << "\n";
         info << "repe = " << std::to_string(repe) << "\n";
 
+        int n = df * dc;
+        std::string r;
+        r += "vd: ";
+        for (int i = 1; i <= n; i++) {
+            r += std::to_string(vd[i]);
+            r += i < n ? "," : "";
+        }
+        r += "\nvc: ";
+        for (int i = 1; i <= n; i++) {
+            r += std::to_string(vc[i]);
+            r += i < n ? "," : "";
+        }
+        r += "\nvf: ";
+        for (int i = 1; i <= n; i++) {
+            r += std::to_string(vf[i]);
+            r += i < n ? "," : "";
+        }
+        info << r;
         return s + info.str();
     }
 

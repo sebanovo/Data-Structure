@@ -14,6 +14,9 @@
 #include "4.-UConjunto/ConjuntoSM.h"
 #include "4.-UConjunto/ConjuntoVector.h"
 #include "5.-UMatrizDispersa/MatrizDispersaVector.h"
+#include "5.-UMatrizDispersa/MatrizDispersaCSR.h"
+#include "5.-UMatrizDispersa/MatrizDispersaPuntero.h"
+#include "5.-UMatrizDispersa/MatrizDispersaSM.h"
 
 using std::cin;
 using std::cout;
@@ -227,7 +230,6 @@ void mostrarConjunto() {
     UConjuntoSM ::ConjuntoSM* c = new UConjuntoSM::ConjuntoSM();
     c->inserta(2);
     c->inserta(4);
-
     c->inserta(10);
 
     std::cout << c->mostrar() << std::endl;
@@ -238,19 +240,57 @@ void mostrarConjunto() {
     delete c;
 }
 
+void mostrarMDispersaVector() {
+    UMatrizDispersaVector::MatrizDispersaVector* m = new UMatrizDispersaVector::MatrizDispersaVector;
+    m->dimensionar(3, 3);
+    m->poner(1, 1, 100);
+    m->poner(1, 2, 200);
+
+    m->definir_valor_repetido(100);
+    std::cout << m->mostrar() << "\n";
+    delete m;
+}
+
+void mostrarMDispersaVectorCSR() {
+    UMatrizDispersaCSR::MatrizDispersaCSR* m = new UMatrizDispersaCSR::MatrizDispersaCSR;
+    m->dimensionar(3, 3);
+    m->poner(1, 1, 100);
+    m->poner(1, 2, 200);
+    m->poner(1, 3, 300);
+    m->poner(2, 1, 400);
+
+    std::cout << m->mostrar() << "\n";
+    delete m;
+}
+
+void mostrarMDPuntero() {
+    UMatrizDispersaPuntero::MatrizDispersaPuntero* m = new UMatrizDispersaPuntero::MatrizDispersaPuntero;
+    m->dimensionar(3, 3);
+    m->poner(1, 1, 100);
+    m->poner(1, 2, 200);
+    m->poner(1, 3, 300);
+    m->poner(2, 1, 400);
+    m->definir_valor_repetido(100);
+
+    std::cout << m->mostrar() << "\n";
+    delete m;
+}
+
+void mostrarMDSM() {
+    UMatrizDispersaSM::MatrizDispersaSM* m = new UMatrizDispersaSM::MatrizDispersaSM;
+    m->dimensionar(3, 3);
+    m->poner(1, 1, 100);
+    m->poner(1, 2, 200);
+    m->poner(1, 3, 300);
+    m->poner(2, 1, 400);
+
+    std::cout << m->mostrar() << "\n";
+    delete m;
+}
+
 int main() {
     // mostrarPolinomioLista();
     // mostrarConjunto();
-    UMatrizDispersaVector::MatrizDispersaVector* m1 = new UMatrizDispersaVector::MatrizDispersaVector;
-    m1->dimensionar(5, 5);
-    m1->poner(1, 1, 100);
-    m1->poner(1, 2, 200);
-    m1->poner(1, 3, 300);
-    m1->poner(1, 4, 400);
-    m1->poner(1, 5, 500);
-
-    m1->definir_valor_repetido(100);
-    std::cout << m1->mostrar() << "\n";
-    std::cout << UMatrizDispersaVector::suma(m1) << "\n";
+    mostrarMDSM();
     return 0;
 }

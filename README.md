@@ -453,3 +453,10 @@ namespace UConjuntoVector {
 
 }  // namespace UConjuntoVector
 ```
+
+TODO: 
+- hacer la clase MatrizDispersa Puntero
+- hacer la clase MatrizDispersa CSMemoria 
+- hacer la clase MatrizDispersa Puntero Doble 
+- 
+- arreglar el meotodo definar_valor_repetido de la clase MatrizDispersaCSR
