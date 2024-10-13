@@ -23,6 +23,8 @@ set(
             src/5.-UMatrizDispersa/MatrizDispersaCSR.cpp
             src/5.-UMatrizDispersa/MatrizDispersaSM.cpp
             src/5.-UMatrizDispersa/MatrizDispersaPuntero.cpp
+            src/5.-UMatrizDispersa/MatrizDispersaPunteroDoble.cpp
+            src/5.-UMatrizDispersa/MatrizDispersaSMDoble.cpp
 )
 
 add_executable(TDA ${SOURCES})

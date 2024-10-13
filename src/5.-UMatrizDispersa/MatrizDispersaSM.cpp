@@ -193,7 +193,6 @@ namespace UMatrizDispersaSM {
     }
 
     MatrizDispersaSM::~MatrizDispersaSM() {
-        mem->delete_espacio(PtrMatD);
         delete mem;
         // delete PtrMatD;
     }

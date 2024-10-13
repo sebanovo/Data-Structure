@@ -5,7 +5,6 @@
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
-#
 #include "1.-UCSMemoria/CSMemoria.h"
 
 namespace UMatrizDispersaSM {

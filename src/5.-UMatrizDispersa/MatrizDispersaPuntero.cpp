@@ -147,7 +147,14 @@ namespace UMatrizDispersaPuntero {
     }
 
     MatrizDispersaPuntero::~MatrizDispersaPuntero() {
-        delete PtrMatD;
+        Nodo* x = PtrMatD;
+        while (x != nullptr) {
+            Nodo* temp = x;
+            x = x->sig;
+            delete temp;
+        }
+        PtrMatD = nullptr;
+        x = nullptr;
     }
 
     std::string MatrizDispersaPuntero::mostrar() {

@@ -17,6 +17,8 @@
 #include "5.-UMatrizDispersa/MatrizDispersaCSR.h"
 #include "5.-UMatrizDispersa/MatrizDispersaPuntero.h"
 #include "5.-UMatrizDispersa/MatrizDispersaSM.h"
+#include "5.-UMatrizDispersa/MatrizDispersaPunteroDoble.h"
+#include "5.-UMatrizDispersa/MatrizDispersaSMDoble.h"
 
 using std::cin;
 using std::cout;
@@ -288,9 +290,34 @@ void mostrarMDSM() {
     delete m;
 }
 
+void mostrarMDPunteroDoble() {
+    UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble* m = new UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble;
+    m->dimensionar(3, 3);
+    m->poner(1, 1, 100);
+    m->poner(1, 2, 200);
+    m->poner(1, 3, 300);
+    m->poner(2, 1, 400);
+
+    std::cout << m->mostrar() << "\n";
+    delete m;
+}
+
+void mostrarMDSMDoble() {
+    UMatrizDispersaSMDoble::MatrizDispersaSMDoble* m = new UMatrizDispersaSMDoble::MatrizDispersaSMDoble;
+    m->dimensionar(3, 3);
+    m->poner(1, 1, 100);
+    m->poner(1, 2, 200);
+    m->poner(1, 3, 300);
+    m->poner(2, 1, 400);
+
+    std::cout << m->mostrar() << "\n";
+    delete m;
+}
+
 int main() {
     // mostrarPolinomioLista();
     // mostrarConjunto();
-    mostrarMDSM();
+    // mostrarMDPunteroDoble();
+    mostrarMDSMDoble();
     return 0;
 }
