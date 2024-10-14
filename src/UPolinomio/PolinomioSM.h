@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 
-#include "1.-UCSMemoria/CSMemoria.h"
+#include "UCSMemoria/CSMemoria.h"
 
 namespace UPolinomioSM {
     using std::string;
