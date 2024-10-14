@@ -19,8 +19,7 @@ namespace UMatrizDispersaSMDoble {
     MatrizDispersaSMDoble::MatrizDispersaSMDoble(UCSMemoria::CSMemoria* m) {
         mem = m;
         PtrFil = NULO;
-        df = dc = repe = 0;
-        nt = 0;
+        df = dc = nt = repe = 0;
     }
 
     void MatrizDispersaSMDoble::dimensionar(int f, int c) {
@@ -66,8 +65,7 @@ namespace UMatrizDispersaSMDoble {
     int MatrizDispersaSMDoble::posicionIns(int f) {
         int aux = PtrFil;
         while (aux != NULO) {
-            int aux_fil = mem->obtener_dato(aux, _fil);
-            if (f < aux_fil)
+            if (f < mem->obtener_dato(aux, _fil))
                 return aux;
             aux = mem->obtener_dato(aux, _sigF);
         }
@@ -118,8 +116,7 @@ namespace UMatrizDispersaSMDoble {
         mem->poner_dato(x, _sigC, NULO);
         int dirFila = buscarF(f);
         if (dirFila != NULO) {
-            int dirFila_ptrCol = mem->obtener_dato(dirFila, _ptrCol);
-            mem->poner_dato(x, _sigC, dirFila_ptrCol);
+            mem->poner_dato(x, _sigC, mem->obtener_dato(dirFila, _ptrCol));
             mem->poner_dato(dirFila, _ptrCol, x);
         } else {
             int xf = mem->new_espacio(_fil_antF_sigF_ptrCol);
@@ -134,11 +131,8 @@ namespace UMatrizDispersaSMDoble {
                         PtrFil = xf;
                     else {
                         int fin = PtrFil;
-                        int fin_sigF = mem->obtener_dato(fin, _sigF);
-                        while (fin_sigF != NULO) {
-                            fin_sigF = mem->obtener_dato(fin, _sigF);
-                            fin = fin_sigF;
-                        }
+                        while (mem->obtener_dato(fin, _sigF) != NULO)
+                            fin = mem->obtener_dato(fin, _sigF);
                         mem->poner_dato(xf, _antF, fin);
                         mem->poner_dato(fin, _sigF, xf);
                     }
