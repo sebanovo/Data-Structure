@@ -31,10 +31,10 @@ namespace UMatrizDispersaPuntero {
         void definir_valor_repetido(int elemento);
         std::string mostrar();
         ~MatrizDispersaPuntero();
-
-        // void  traspuesta();
     };
 
     int suma(MatrizDispersaPuntero* m);
+    void transpuesta(MatrizDispersaPuntero* m, MatrizDispersaPuntero* m1);
+    bool esSimetrica(MatrizDispersaPuntero* m);
 }  // namespace UMatrizDispersaPuntero
 #endif

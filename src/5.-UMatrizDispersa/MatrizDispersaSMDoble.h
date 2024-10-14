@@ -45,6 +45,9 @@ namespace UMatrizDispersaSMDoble {
         void definir_valor_repetido(int elemento);
         string mostrar();
     };
+
     int suma(MatrizDispersaSMDoble* m);
+    void transpuesta(MatrizDispersaSMDoble* m, MatrizDispersaSMDoble* m1);
+    bool esSimetrica(MatrizDispersaSMDoble* m);
 }  // namespace UMatrizDispersaSMDoble
 #endif

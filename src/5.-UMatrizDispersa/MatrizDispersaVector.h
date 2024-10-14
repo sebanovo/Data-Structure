@@ -25,10 +25,10 @@ namespace UMatrizDispersaVector {
         void definir_valor_repetido(int elemento);
         std::string mostrar();
         ~MatrizDispersaVector();
-
-        // void  traspuesta();
     };
 
     int suma(MatrizDispersaVector *m);
+    void transpuesta(MatrizDispersaVector *m, MatrizDispersaVector *m1);
+    bool esSimetrica(MatrizDispersaVector *m);
 }  // namespace UMatrizDispersaVector
 #endif

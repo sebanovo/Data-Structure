@@ -45,6 +45,8 @@ namespace UMatrizDispersaPunteroDoble {
     };
 
     int suma(MatrizDispersaPunteroDoble* m);
+    void transpuesta(MatrizDispersaPunteroDoble* m, MatrizDispersaPunteroDoble* m1);
+    bool esSimetrica(MatrizDispersaPunteroDoble* m);
 }  // namespace UMatrizDispersaPunteroDoble
 
 #endif

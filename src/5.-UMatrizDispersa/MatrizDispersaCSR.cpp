@@ -204,7 +204,7 @@ namespace UMatrizDispersaCSR {
         delete[] vf, vc, vd;
     }
 
-    int suma(MatrizDispersaCSR* m) {
+    int suma(MatrizDispersaCSR *m) {
         int suma = 0;
         for (int f = 1; f <= m->dimension_fila(); f++) {
             for (int c = 1; c <= m->dimension_columna(); c++) {
@@ -213,5 +213,30 @@ namespace UMatrizDispersaCSR {
             }
         }
         return suma;
+    }
+
+    void transpuesta(MatrizDispersaCSR *m, MatrizDispersaCSR *m1) {
+        int f = m->dimension_fila();
+        int c = m->dimension_columna();
+        m1->dimensionar(c, f);
+        for (int i = 1; i <= f; i++) {
+            for (int j = 1; j <= c; j++) {
+                m1->poner(j, i, m->elemento(i, j));
+            }
+        }
+        return;
+    }
+
+    bool esSimetrica(MatrizDispersaCSR *m) {
+        int f = m->dimension_fila();
+        int c = m->dimension_columna();
+        if (f != c) return;
+        for (int i = 1; i <= f; i++) {
+            for (int j = 1; j <= c; j++) {
+                if (m->elemento(i, j) != m->elemento(j, i))
+                    return false;
+            }
+        }
+        return true;
     }
 }  // namespace UMatrizDispersaCSR

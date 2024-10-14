@@ -34,11 +34,11 @@ namespace UMatrizDispersaSM {
         void definir_valor_repetido(int elemento);
         std::string mostrar();
         ~MatrizDispersaSM();
-
-        // void  traspuesta();
     };
 
     int suma(MatrizDispersaSM* m);
+    void transpuesta(MatrizDispersaSM* m, MatrizDispersaSM* m1);
+    bool esSimetrica(MatrizDispersaSM* m);
 }  // namespace UMatrizDispersaSM
 
 #endif

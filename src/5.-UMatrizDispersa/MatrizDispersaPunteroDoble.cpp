@@ -225,4 +225,29 @@ namespace UMatrizDispersaPunteroDoble {
         }
         return suma;
     }
+
+    void transpuesta(MatrizDispersaPunteroDoble* m, MatrizDispersaPunteroDoble* m1) {
+        int f = m->dimension_fila();
+        int c = m->dimension_columna();
+        m1->dimensionar(c, f);
+        for (int i = 1; i <= f; i++) {
+            for (int j = 1; j <= c; j++) {
+                m1->poner(j, i, m->elemento(i, j));
+            }
+        }
+        return;
+    }
+
+    bool esSimetrica(MatrizDispersaPunteroDoble* m) {
+        int f = m->dimension_fila();
+        int c = m->dimension_columna();
+        if (f != c) return;
+        for (int i = 1; i <= f; i++) {
+            for (int j = 1; j <= c; j++) {
+                if (m->elemento(i, j) != m->elemento(j, i))
+                    return false;
+            }
+        }
+        return true;
+    }
 }  // namespace UMatrizDispersaPunteroDoble
