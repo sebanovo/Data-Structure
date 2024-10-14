@@ -238,7 +238,7 @@ namespace UMatrizDispersaPunteroDoble {
         return;
     }
 
-    bool esSimetrica(MatrizDispersaPunteroDoble* m) {
+    bool es_simetrica(MatrizDispersaPunteroDoble* m) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         if (f != c) return false;

@@ -227,7 +227,7 @@ namespace UMatrizDispersaCSR {
         return;
     }
 
-    bool esSimetrica(MatrizDispersaCSR *m) {
+    bool es_simetrica(MatrizDispersaCSR *m) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         if (f != c) return false;

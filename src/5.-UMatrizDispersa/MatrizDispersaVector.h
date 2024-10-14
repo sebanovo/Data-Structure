@@ -29,6 +29,6 @@ namespace UMatrizDispersaVector {
 
     int suma(MatrizDispersaVector *m);
     void transpuesta(MatrizDispersaVector *m, MatrizDispersaVector *m1);
-    bool esSimetrica(MatrizDispersaVector *m);
+    bool es_simetrica(MatrizDispersaVector *m);
 }  // namespace UMatrizDispersaVector
 #endif

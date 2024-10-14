@@ -29,7 +29,7 @@ namespace UMatrizDispersaCSR {
 
     int suma(MatrizDispersaCSR *m);
     void transpuesta(MatrizDispersaCSR *m, MatrizDispersaCSR *m1);
-    bool esSimetrica(MatrizDispersaCSR *m);
+    bool es_simetrica(MatrizDispersaCSR *m);
 
 }  // namespace UMatrizDispersaCSR
 

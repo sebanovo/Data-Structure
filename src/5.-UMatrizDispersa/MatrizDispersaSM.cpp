@@ -179,7 +179,7 @@ namespace UMatrizDispersaSM {
         return;
     }
 
-    bool esSimetrica(MatrizDispersaSM *m) {
+    bool es_simetrica(MatrizDispersaSM *m) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         if (f != c) return false;

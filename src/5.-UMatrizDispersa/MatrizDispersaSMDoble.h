@@ -48,6 +48,6 @@ namespace UMatrizDispersaSMDoble {
 
     int suma(MatrizDispersaSMDoble* m);
     void transpuesta(MatrizDispersaSMDoble* m, MatrizDispersaSMDoble* m1);
-    bool esSimetrica(MatrizDispersaSMDoble* m);
+    bool es_simetrica(MatrizDispersaSMDoble* m);
 }  // namespace UMatrizDispersaSMDoble
 #endif
