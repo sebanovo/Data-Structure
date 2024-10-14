@@ -24,15 +24,15 @@ namespace UMatrizDispersaSMDoble {
     class MatrizDispersaSMDoble {
        private:
         UCSMemoria::CSMemoria* mem;
-        int PtrFil;
-        int repe, df, dc, nt;
+        int PtrFil, repe, df, dc, nt;
 
         int buscarC(int f, int c);
         int buscarF(int f);
         int posicionIns(int f);
-        void insertar(int f, int c, int v);
-        void suprimir2(int dirFil, int dirCol);
-        void suprimir1(int dir);
+        void insertar(int f, int c, int elemento);
+        void suprimir(int dirFil, int dirCol);
+        void suprimir(int dir);
+        bool hay(int elemento);
 
        public:
         MatrizDispersaSMDoble();

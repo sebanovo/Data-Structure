@@ -11,8 +11,7 @@ namespace UMatrizDispersaPunteroDoble {
 
     MatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble() {
         PtrFil = nullptr;
-        df = dc = repe = 0;
-        nt = 0;
+        df = dc = nt = repe = 0;
     }
 
     void MatrizDispersaPunteroDoble::dimensionar(int f, int c) {
@@ -69,10 +68,9 @@ namespace UMatrizDispersaPunteroDoble {
         if (dirCol == dirFil->PtrCol)
             dirFil->PtrCol = dirFil->PtrCol->sigC;
         else {
-            NodoColumna* ant;
-            // Codido de anterior
+            // El anterior
             NodoColumna* x = dirFil->PtrCol;
-            ant = nullptr;
+            NodoColumna* ant = nullptr;
             while (x != nullptr) {
                 if (x == dirCol)
                     break;
@@ -99,58 +97,54 @@ namespace UMatrizDispersaPunteroDoble {
             if (sig != nullptr)
                 sig->antF = ant;
         }
-        delete (dir);
+        delete dir;
     }
 
-    void MatrizDispersaPunteroDoble::insertar(int f, int c, int v) {
+    void MatrizDispersaPunteroDoble::insertar(int f, int c, int elemento) {
         NodoColumna* x = new NodoColumna;
-        if (x != nullptr) {
-            x->col = c;
-            x->dato = v;
-            x->sigC = nullptr;
-            NodoFila* dirFila = buscar(f);  // Buscamos si ya existe la fila
-            if (dirFila != nullptr) {       // Ya existe la fila, insertamos el nodo de columna
-                x->sigC = dirFila->PtrCol;
-                dirFila->PtrCol = x;
-            } else {  // Insercion nueva, hay dos casos
-                NodoFila* xf = new NodoFila;
-                if (xf != nullptr) {
-                    xf->fil = f;
-                    xf->antF = nullptr;
-                    xf->sigF = nullptr;
-                    xf->PtrCol = nullptr;
-                    NodoFila* posF = posicionIns(f);
-                    if (posF == nullptr) {      // No  hay datos en los nodos o se tendra q insertar al final
-                        if (PtrFil == nullptr)  // No hay datos
-                            PtrFil = xf;
-                        else {  // Insercion a lo ultimo
-                            NodoFila* fin = PtrFil;
-                            while (fin->sigF != nullptr)
-                                fin = fin->sigF;
-                            xf->antF = fin;
-                            fin->sigF = xf;
-                        }
-                    } else {                   // Se inserta en el primero, o algun nodo que no sea al final
-                        if (posF == PtrFil) {  // Inserta al inicio
-                            xf->sigF = PtrFil;
-                            PtrFil->antF = xf;
-                            PtrFil = xf;
-                        } else {  // Insercion por el medio
-                            NodoFila* ant = posF->antF;
-                            NodoFila* sig = posF;
-                            xf->sigF = sig;
-                            xf->antF = ant;
-                            ant->sigF = xf;
-                            sig->antF = xf;
-                        }
+        if (x == nullptr) throw std::runtime_error("No hay espacio en la memoria");
+        x->col = c;
+        x->dato = elemento;
+        x->sigC = nullptr;
+        NodoFila* dirFila = buscar(f);
+        if (dirFila != nullptr) {
+            x->sigC = dirFila->PtrCol;
+            dirFila->PtrCol = x;
+        } else {
+            NodoFila* xf = new NodoFila;
+            if (xf != nullptr) {
+                xf->fil = f;
+                xf->antF = nullptr;
+                xf->sigF = nullptr;
+                xf->PtrCol = nullptr;
+                NodoFila* posF = posicionIns(f);
+                if (posF == nullptr) {
+                    if (PtrFil == nullptr)
+                        PtrFil = xf;
+                    else {
+                        NodoFila* fin = PtrFil;
+                        while (fin->sigF != nullptr)
+                            fin = fin->sigF;
+                        xf->antF = fin;
+                        fin->sigF = xf;
                     }
-                    x->sigC = xf->PtrCol;
-                    xf->PtrCol = x;
+                } else if (posF == PtrFil) {
+                    xf->sigF = PtrFil;
+                    PtrFil->antF = xf;
+                    PtrFil = xf;
+                } else {
+                    NodoFila* ant = posF->antF;
+                    NodoFila* sig = posF;
+                    xf->sigF = sig;
+                    xf->antF = ant;
+                    ant->sigF = xf;
+                    sig->antF = xf;
                 }
+                x->sigC = xf->PtrCol;
+                xf->PtrCol = x;
             }
-            nt++;
-        } else
-            throw std::runtime_error("No hay espacio en la memoria");
+        }
+        nt++;
     }
 
     void MatrizDispersaPunteroDoble::poner(int f, int c, int elemento) {
@@ -158,50 +152,46 @@ namespace UMatrizDispersaPunteroDoble {
         NodoColumna* dir = buscar(f, c);
         if (dir != nullptr) {
             dir->dato = elemento;
-            // Analizar si valor == repe
             if (elemento == repe) {
                 NodoFila* dirFila = buscar(f);
                 suprimir(dirFila, dir);
             }
-        } else if (elemento != repe)  // Insercion nueva
+        } else if (elemento != repe)
             insertar(f, c, elemento);
     }
 
     int MatrizDispersaPunteroDoble::elemento(int f, int c) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
         NodoColumna* dir = buscar(f, c);
-        if (dir != nullptr)
-            return dir->dato;
-        else
-            return repe;
+        return dir == nullptr ? repe : dir->dato;
     }
 
-    void MatrizDispersaPunteroDoble::definir_valor_repetido(int elemento) {
-        bool hayRepe = false;
+    bool MatrizDispersaPunteroDoble::hay(int elemento) {
         NodoFila* auxF = PtrFil;
-        while (auxF != nullptr && hayRepe == false) {
+        while (auxF != nullptr) {
             NodoColumna* auxC = auxF->PtrCol;
-            while (auxC != nullptr && hayRepe == false) {
-                if (auxC->dato == elemento)
-                    hayRepe = true;
+            while (auxC != nullptr) {
+                if (auxC->dato == elemento) return true;
                 auxC = auxC->sigC;
             }
             auxF = auxF->sigF;
         }
-        if (PtrFil == nullptr || hayRepe == false) {
+        return false;
+    }
+
+    void MatrizDispersaPunteroDoble::definir_valor_repetido(int elemento) {
+        if (PtrFil == nullptr || !hay(elemento)) {
             repe = elemento;
         } else {
-            int nRep = elemento;
-            int aRep = repe;
             for (int i = 1; i <= df; i++) {
                 for (int j = 1; j <= dc; j++) {
-                    int e = this->elemento(i, j);
-                    if (e == nRep) {
+                    int el = this->elemento(i, j);
+                    if (el == elemento) {
                         NodoFila* dirF = buscar(i);
                         NodoColumna* dirC = buscar(i, j);
                         suprimir(dirF, dirC);
-                    } else if (e == aRep)
-                        insertar(i, j, aRep);
+                    } else if (el == repe)
+                        insertar(i, j, repe);
                 }
             }
             repe = elemento;

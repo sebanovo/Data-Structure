@@ -28,9 +28,10 @@ namespace UMatrizDispersaPunteroDoble {
         NodoColumna* buscar(int f, int c);
         NodoFila* buscar(int f);
         NodoFila* posicionIns(int f);
-        void insertar(int f, int c, int v);
+        void insertar(int f, int c, int elemento);
         void suprimir(NodoFila* dirFil, NodoColumna* dirCol);
         void suprimir(NodoFila* dir);
+        bool hay(int elemento);
 
        public:
         MatrizDispersaPunteroDoble();

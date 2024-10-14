@@ -130,7 +130,7 @@ namespace UCSMemoria {
     }
 
     // muestra en la consola la dirección de memoria
-    void CSMemoria::mostrar() {
+    string CSMemoria::mostrar() {
         string cab = "       | DIR |  DATO  |    ID    | LINK |\n";
         string lin = "       +" + string(cab.length() - 10, '-') + "+\n";
         string out = lin + cab + lin;
@@ -151,7 +151,7 @@ namespace UCSMemoria {
         out += "Libre = " + to_string(libre) + "\n";
         out += "Espacios libres = " + to_string(espacio_disponible()) + "\n";
         out += "Espacios ocupados = " + to_string(espacio_ocupado()) + "\n";
-        cout << out;
+        return out;
     }
 
     CSMemoria::~CSMemoria() {

@@ -39,12 +39,10 @@ namespace UMatrizDispersaSMDoble {
     int MatrizDispersaSMDoble::buscarC(int f, int c) {
         int auxf = PtrFil;
         while (auxf != NULO) {
-            int auxf_fil = mem->obtener_dato(auxf, _fil);
-            if (auxf_fil == f) {
+            if (mem->obtener_dato(auxf, _fil) == f) {
                 int auxc = mem->obtener_dato(auxf, _ptrCol);
                 while (auxc != NULO) {
-                    int auxc_col = mem->obtener_dato(auxc, _col);
-                    if (auxc_col == c)
+                    if (mem->obtener_dato(auxc, _col) == c)
                         return auxc;
                     auxc = mem->obtener_dato(auxc, _sigC);
                 }
@@ -58,8 +56,7 @@ namespace UMatrizDispersaSMDoble {
     int MatrizDispersaSMDoble::buscarF(int f) {
         int auxf = PtrFil;
         while (auxf != NULO) {
-            int auxf_fil = mem->obtener_dato(auxf, _fil);
-            if (auxf_fil == f)
+            if (mem->obtener_dato(auxf, _fil) == f)
                 return auxf;
             auxf = mem->obtener_dato(auxf, _sigF);
         }
@@ -77,38 +74,31 @@ namespace UMatrizDispersaSMDoble {
         return NULO;
     }
 
-    void MatrizDispersaSMDoble::suprimir2(int dirFil, int dirCol) {
-        int dirFil_ptrCol = mem->obtener_dato(dirFil, _ptrCol);
-        if (dirCol == dirFil_ptrCol) {
-            int dirFil_ptrCol_sigC = mem->obtener_dato(dirFil_ptrCol, _sigC);
-            mem->poner_dato(dirFil, _ptrCol, dirFil_ptrCol_sigC);
+    void MatrizDispersaSMDoble::suprimir(int dirFil, int dirCol) {
+        if (dirCol == mem->obtener_dato(dirFil, _ptrCol)) {
+            mem->poner_dato(dirFil, _ptrCol, mem->obtener_dato(mem->obtener_dato(dirFil, _ptrCol), _sigC));
         } else {
-            int ant;
-            // Codido de anterior
+            // El anterior
             int x = mem->obtener_dato(dirFil, _ptrCol);
-            ant = NULO;
+            int ant = NULO;
             while (x != NULO) {
                 if (x == dirCol)
                     break;
                 ant = x;
                 x = mem->obtener_dato(x, _sigC);
             }
-            //
-            int dirCol_sigC = mem->obtener_dato(dirCol, _sigC);
-            mem->poner_dato(ant, _sigC, dirCol_sigC);
+            mem->poner_dato(ant, _sigC, mem->obtener_dato(dirCol, _sigC));
         }
         mem->delete_espacio(dirCol);
         nt--;
-        dirFil_ptrCol = mem->obtener_dato(dirFil, _ptrCol);
-        if (dirFil_ptrCol == NULO) {
-            suprimir1(dirFil);
+        if (mem->obtener_dato(dirFil, _ptrCol) == NULO) {
+            suprimir(dirFil);
         }
     }
 
-    void MatrizDispersaSMDoble::suprimir1(int dir) {
+    void MatrizDispersaSMDoble::suprimir(int dir) {
         if (dir == PtrFil) {
-            int ptrFil_sigF = mem->obtener_dato(PtrFil, _sigF);
-            PtrFil = ptrFil_sigF;
+            PtrFil = mem->obtener_dato(PtrFil, _sigF);
         } else {
             int ant = mem->obtener_dato(dir, _antF);
             int sig = mem->obtener_dato(dir, _sigF);
@@ -120,61 +110,56 @@ namespace UMatrizDispersaSMDoble {
         mem->delete_espacio(dir);
     }
 
-    void MatrizDispersaSMDoble::insertar(int f, int c, int v) {
+    void MatrizDispersaSMDoble::insertar(int f, int c, int elemento) {
         int x = mem->new_espacio(_col_dato_sigC);
-        if (x != NULO) {
-            mem->poner_dato(x, _col, c);
-            mem->poner_dato(x, _dato, v);
-            mem->poner_dato(x, _sigC, NULO);
-            int dirFila = buscarF(f);  // Buscamos si ya existe la fila
-            if (dirFila != NULO) {     // Ya existe la fila, insertamos el nodo de columna
-                int dirFila_ptrCol = mem->obtener_dato(dirFila, _ptrCol);
-                mem->poner_dato(x, _sigC, dirFila_ptrCol);
-                mem->poner_dato(dirFila, _ptrCol, x);
-            } else {  // Insercion nueva, hay dos casos
-                int xf = mem->new_espacio(_fil_antF_sigF_ptrCol);
-                if (xf != NULO) {
-                    mem->poner_dato(xf, _fil, f);
-                    mem->poner_dato(xf, _antF, NULO);
-                    mem->poner_dato(xf, _sigF, NULO);
-                    mem->poner_dato(xf, _ptrCol, NULO);
-                    int posF = posicionIns(f);
-                    if (posF == NULO) {      // No  hay datos en los nodos o se tendra q insertar al final
-                        if (PtrFil == NULO)  // No hay datos
-                            PtrFil = xf;
-                        else {  // Insercion a lo ultimo
-                            int fin = PtrFil;
-                            int fin_sigF = mem->obtener_dato(fin, _sigF);
-                            while (fin_sigF != NULO) {
-                                fin_sigF = mem->obtener_dato(fin, _sigF);
-                                fin = fin_sigF;
-                            }
-                            mem->poner_dato(xf, _antF, fin);
-                            mem->poner_dato(fin, _sigF, xf);
+        if (x == NULO) throw std::runtime_error("No hay espacio en la memoria");
+        mem->poner_dato(x, _col, c);
+        mem->poner_dato(x, _dato, elemento);
+        mem->poner_dato(x, _sigC, NULO);
+        int dirFila = buscarF(f);
+        if (dirFila != NULO) {
+            int dirFila_ptrCol = mem->obtener_dato(dirFila, _ptrCol);
+            mem->poner_dato(x, _sigC, dirFila_ptrCol);
+            mem->poner_dato(dirFila, _ptrCol, x);
+        } else {
+            int xf = mem->new_espacio(_fil_antF_sigF_ptrCol);
+            if (xf != NULO) {
+                mem->poner_dato(xf, _fil, f);
+                mem->poner_dato(xf, _antF, NULO);
+                mem->poner_dato(xf, _sigF, NULO);
+                mem->poner_dato(xf, _ptrCol, NULO);
+                int posF = posicionIns(f);
+                if (posF == NULO) {
+                    if (PtrFil == NULO)
+                        PtrFil = xf;
+                    else {
+                        int fin = PtrFil;
+                        int fin_sigF = mem->obtener_dato(fin, _sigF);
+                        while (fin_sigF != NULO) {
+                            fin_sigF = mem->obtener_dato(fin, _sigF);
+                            fin = fin_sigF;
                         }
-                    } else {                   // Se inserta en el primero, o algun nodo que no sea al final
-                        if (posF == PtrFil) {  // Inserta al inicio
-                            mem->poner_dato(xf, _sigF, PtrFil);
-                            mem->poner_dato(PtrFil, _antF, xf);
-                            PtrFil = xf;
-                        } else {  // Insercion por el medio
-                            int ant = mem->obtener_dato(posF, _antF);
-                            ;
-                            int sig = posF;
-                            mem->poner_dato(xf, _sigF, sig);
-                            mem->poner_dato(xf, _antF, ant);
-                            mem->poner_dato(ant, _sigF, xf);
-                            mem->poner_dato(sig, _antF, xf);
-                        }
+                        mem->poner_dato(xf, _antF, fin);
+                        mem->poner_dato(fin, _sigF, xf);
                     }
-                    int xf_ptrCol = mem->obtener_dato(xf, _ptrCol);
-                    mem->poner_dato(x, _sigC, xf_ptrCol);
-                    mem->poner_dato(xf, _ptrCol, x);
+                } else if (posF == PtrFil) {
+                    mem->poner_dato(xf, _sigF, PtrFil);
+                    mem->poner_dato(PtrFil, _antF, xf);
+                    PtrFil = xf;
+                } else {
+                    int ant = mem->obtener_dato(posF, _antF);
+                    int sig = posF;
+                    mem->poner_dato(xf, _sigF, sig);
+                    mem->poner_dato(xf, _antF, ant);
+                    mem->poner_dato(ant, _sigF, xf);
+                    mem->poner_dato(sig, _antF, xf);
                 }
+
+                mem->poner_dato(x, _sigC, mem->obtener_dato(xf, _ptrCol));
+                mem->poner_dato(xf, _ptrCol, x);
             }
-            nt++;
-        } else
-            cout << "ERROR NO EXISTE ESPACIO DE MEMORIA\n";
+        }
+        nt++;
     }
 
     void MatrizDispersaSMDoble::poner(int f, int c, int elemento) {
@@ -182,50 +167,47 @@ namespace UMatrizDispersaSMDoble {
         int dir = buscarC(f, c);
         if (dir != NULO) {
             mem->poner_dato(dir, _dato, elemento);
-            // Analizar si elemento == repe
             if (elemento == repe) {
                 int dirFila = buscarF(f);
-                suprimir2(dirFila, dir);
+                suprimir(dirFila, dir);
             }
-        } else if (elemento != repe)  // Insercion nueva
+        } else if (elemento != repe)
             insertar(f, c, elemento);
     }
 
     int MatrizDispersaSMDoble::elemento(int f, int c) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
         int dir = buscarC(f, c);
-        if (dir != NULO)
-            return mem->obtener_dato(dir, _dato);
-        else
-            return repe;
+        return dir == NULO ? repe : mem->obtener_dato(dir, _dato);
     }
 
-    void MatrizDispersaSMDoble::definir_valor_repetido(int elemento) {
-        bool hayRepe = false;
+    bool MatrizDispersaSMDoble::hay(int elemento) {
         int auxF = PtrFil;
-        while (auxF != NULO && hayRepe == false) {
+        while (auxF != NULO) {
             int auxC = mem->obtener_dato(auxF, _ptrCol);
-            while (auxC != NULO && hayRepe == false) {
+            while (auxC != NULO) {
                 if (mem->obtener_dato(auxC, _dato) == elemento)
-                    hayRepe = true;
+                    return true;
                 auxC = mem->obtener_dato(auxC, _sigC);
             }
             auxF = mem->obtener_dato(auxF, _sigF);
         }
-        if (PtrFil == NULO || hayRepe == false) {
+        return false;
+    }
+
+    void MatrizDispersaSMDoble::definir_valor_repetido(int elemento) {
+        if (PtrFil == NULO || !hay(elemento)) {
             repe = elemento;
         } else {
-            int nRep = elemento;
-            int aRep = repe;
             for (int i = 1; i <= df; i++) {
                 for (int j = 1; j <= dc; j++) {
-                    int e = this->elemento(i, j);
-                    if (e == nRep) {
+                    int el = this->elemento(i, j);
+                    if (el == elemento) {
                         int dirF = buscarF(i);
                         int dirC = buscarC(i, j);
-                        suprimir2(dirF, dirC);
-                    } else if (e == aRep)
-                        insertar(i, j, aRep);
+                        suprimir(dirF, dirC);
+                    } else if (el == repe)
+                        insertar(i, j, repe);
                 }
             }
             repe = elemento;

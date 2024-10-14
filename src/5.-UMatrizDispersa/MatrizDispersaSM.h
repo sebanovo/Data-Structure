@@ -18,9 +18,8 @@ namespace UMatrizDispersaSM {
 
     class MatrizDispersaSM {
        private:
-        int PtrMatD;
         UCSMemoria::CSMemoria* mem;
-        int repe, df, dc, nt;
+        int PtrMatD, repe, df, dc, nt;
         int buscar(int f, int c);
         bool hay(int elemento);
 

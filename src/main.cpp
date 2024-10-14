@@ -247,6 +247,8 @@ void mostrarMDispersaVector() {
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
+    m->poner(1, 3, 300);
+    m->poner(2, 1, 400);
 
     m->definir_valor_repetido(100);
     std::cout << m->mostrar() << "\n";
@@ -261,6 +263,7 @@ void mostrarMDispersaVectorCSR() {
     m->poner(1, 3, 300);
     m->poner(2, 1, 400);
 
+    m->definir_valor_repetido(100);
     std::cout << m->mostrar() << "\n";
     delete m;
 }
@@ -272,22 +275,24 @@ void mostrarMDPuntero() {
     m->poner(1, 2, 200);
     m->poner(1, 3, 300);
     m->poner(2, 1, 400);
-    m->definir_valor_repetido(100);
 
+    m->definir_valor_repetido(100);
     std::cout << m->mostrar() << "\n";
     delete m;
 }
 
 void mostrarMDSM() {
-    UMatrizDispersaSM::MatrizDispersaSM* m = new UMatrizDispersaSM::MatrizDispersaSM;
+    UCSMemoria::CSMemoria* mem = new UCSMemoria::CSMemoria;
+    UMatrizDispersaSM::MatrizDispersaSM* m = new UMatrizDispersaSM::MatrizDispersaSM(mem);
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
     m->poner(1, 3, 300);
     m->poner(2, 1, 400);
 
+    m->definir_valor_repetido(100);
     std::cout << m->mostrar() << "\n";
-    delete m;
+    delete mem;
 }
 
 void mostrarMDPunteroDoble() {
@@ -297,6 +302,7 @@ void mostrarMDPunteroDoble() {
     m->poner(1, 2, 200);
     m->poner(1, 3, 300);
     m->poner(2, 1, 400);
+    m->definir_valor_repetido(100);
 
     std::cout << m->mostrar() << "\n";
     delete m;
@@ -309,7 +315,7 @@ void mostrarMDSMDoble() {
     m->poner(1, 2, 200);
     m->poner(1, 3, 300);
     m->poner(2, 1, 400);
-
+    m->definir_valor_repetido(100);
     std::cout << m->mostrar() << "\n";
     delete m;
 }
@@ -318,6 +324,17 @@ int main() {
     // mostrarPolinomioLista();
     // mostrarConjunto();
     // mostrarMDPunteroDoble();
+    // mostrarMDispersaVector();
+    // mostrarMDPuntero();
+    // mostrarMDSM();
+    // mostrarMDSMDoble();
+    // mostrarMDPunteroDoble();
+    // mostrarMDispersaVector();
+    // mostrarMDispersaVectorCSR();
+    // mostrarMDPuntero();
+    // mostrarMDSM();
+    // mostrarMDPunteroDoble();
     mostrarMDSMDoble();
+
     return 0;
 }

@@ -23,6 +23,7 @@ namespace UMatrizDispersaVector {
 
     // dimensionar la fila y la columna
     void MatrizDispersaVector::dimensionar(int f, int c) {
+        if (f * c > MAX) throw std::runtime_error("Memoria insuficiente");
         df = f;
         dc = c;
     }

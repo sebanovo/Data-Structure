@@ -35,7 +35,7 @@ namespace UCSMemoria {
         int espacio_disponible();
         int espacio_ocupado();
         bool dir_libre(int dir);
-        void mostrar();
+        string mostrar();
         ~CSMemoria();
 
        private:

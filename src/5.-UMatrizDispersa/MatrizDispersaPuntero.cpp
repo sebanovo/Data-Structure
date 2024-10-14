@@ -11,8 +11,7 @@ namespace UMatrizDispersaPuntero {
 
     MatrizDispersaPuntero::MatrizDispersaPuntero() {
         PtrMatD = nullptr;
-        df = dc = repe = 0;
-        nt = 0;
+        df = dc = repe = nt = 0;
     }
 
     void MatrizDispersaPuntero::dimensionar(int f, int c) {
@@ -42,42 +41,34 @@ namespace UMatrizDispersaPuntero {
     void MatrizDispersaPuntero::poner(int f, int c, int elemento) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
         Nodo* dir = buscar(f, c);
-        if (dir == nullptr && elemento != repe) {  // Dato nuevo
+        if (dir == nullptr && elemento != repe) {
             Nodo* x = new Nodo;
-            if (x != nullptr) {
-                x->fil = f;
-                x->col = c;
-                x->dato = elemento;
-                x->sig = PtrMatD;
-                PtrMatD = x;
-                nt++;
-            } else {
-                throw std::runtime_error("No ha espacios en la memoria");
-            }
+            if (x == nullptr) throw std::runtime_error("No ha espacios en la memoria");
+            x->fil = f;
+            x->col = c;
+            x->dato = elemento;
+            x->sig = PtrMatD;
+            PtrMatD = x;
+            nt++;
 
         } else {
             dir->dato = elemento;
             if (elemento == repe) {
-                // Codigo de suprimir
                 if (dir == PtrMatD)
                     PtrMatD = PtrMatD->sig;
                 else {
-                    Nodo* ant;
-                    // Codido de anterior
                     Nodo* x = PtrMatD;
-                    ant = nullptr;
+                    Nodo* ant = nullptr;
                     while (x != nullptr) {
                         if (x == dir)
                             break;
                         ant = x;
                         x = x->sig;
                     }
-                    //
                     ant->sig = dir->sig;
                 }
-                delete (dir);
+                delete dir;
                 nt--;
-                //
             }
         }
     }
@@ -101,44 +92,36 @@ namespace UMatrizDispersaPuntero {
         if (PtrMatD == nullptr || !hay(elemento)) {
             repe = elemento;
         } else {
-            int nRep = elemento;
-            int aRep = repe;
             for (int i = 1; i <= df; i++) {
                 for (int j = 1; j <= dc; j++) {
                     int el = this->elemento(i, j);
-                    if (el == nRep) {
+                    if (el == elemento) {
                         Nodo* dir = buscar(i, j);
-                        // Codigo de suprimir
                         if (dir == PtrMatD)
                             PtrMatD = PtrMatD->sig;
                         else {
-                            Nodo* ant;
-                            // Codido de anterior
+                            // El anterior
                             Nodo* x = PtrMatD;
-                            ant = nullptr;
+                            Nodo* ant = nullptr;
                             while (x != nullptr) {
                                 if (x == dir)
                                     break;
                                 ant = x;
                                 x = x->sig;
                             }
-                            //
                             ant->sig = dir->sig;
                         }
                         delete (dir);
                         nt--;
-                        //
-                    } else if (el == aRep) {
+                    } else if (el == repe) {
                         Nodo* x = new Nodo;
-                        if (x != nullptr) {
-                            x->fil = i;
-                            x->col = j;
-                            x->dato = aRep;
-                            x->sig = PtrMatD;
-                            PtrMatD = x;
-                            nt++;
-                        } else
-                            throw std::runtime_error("No hay espacio en la memoria");
+                        if (x == nullptr) throw std::runtime_error("No hay espacio en la memoria");
+                        x->fil = i;
+                        x->col = j;
+                        x->dato = repe;
+                        x->sig = PtrMatD;
+                        PtrMatD = x;
+                        nt++;
                     }
                 }
             }

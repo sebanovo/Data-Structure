@@ -11,7 +11,7 @@ namespace UMatrizDispersaVector {
        private:
         const int MAX = 1000;
         int *vf, *vc, *vd;  // filas, columnas, datos
-        int df, dc, repe, nt;
+        int df, dc, nt, repe;
         int buscar_posicion_vd(int f, int c);
         bool hay(int elemento);
 
