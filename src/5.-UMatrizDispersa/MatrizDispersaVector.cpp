@@ -177,7 +177,7 @@ namespace UMatrizDispersaVector {
     bool esSimetrica(MatrizDispersaVector *m) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
-        if (f != c) return;
+        if (f != c) return false;
         for (int i = 1; i <= f; i++) {
             for (int j = 1; j <= c; j++) {
                 if (m->elemento(i, j) != m->elemento(j, i))
