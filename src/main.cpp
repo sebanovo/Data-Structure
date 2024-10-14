@@ -317,6 +317,7 @@ void mostrarMDSMDoble() {
     m->poner(2, 1, 400);
     m->definir_valor_repetido(100);
     std::cout << m->mostrar() << "\n";
+    std::cout << UMatrizDispersaSMDoble::MatrizDispersaSMDoble::suma(m) << "\n";
     delete m;
 }
 

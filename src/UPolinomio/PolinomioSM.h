@@ -40,8 +40,10 @@ namespace UPolinomioSM {
         void asignar_coeficiente(int coef, int exp);
         string mostrar();
         ~PolinomioSM();
+
+        // ejercicios
+        static void derivada(PolinomioSM *p, PolinomioSM *p1);
+        static std::string mostrar_integral(PolinomioSM *p);
     };
-    void derivada(PolinomioSM *p, PolinomioSM *p1);
-    std::string mostrar_integral(PolinomioSM *p);
 }  // namespace UPolinomioSM
 #endif

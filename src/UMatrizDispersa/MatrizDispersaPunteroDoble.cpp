@@ -216,7 +216,7 @@ namespace UMatrizDispersaPunteroDoble {
         return s + info.str();
     }
 
-    int suma(MatrizDispersaPunteroDoble* m) {
+    int MatrizDispersaPunteroDoble::suma(MatrizDispersaPunteroDoble* m) {
         int suma = 0;
         for (int f = 1; f <= m->dimension_fila(); f++) {
             for (int c = 1; c <= m->dimension_columna(); c++) {
@@ -226,7 +226,7 @@ namespace UMatrizDispersaPunteroDoble {
         return suma;
     }
 
-    void transpuesta(MatrizDispersaPunteroDoble* m, MatrizDispersaPunteroDoble* m1) {
+    void MatrizDispersaPunteroDoble::transpuesta(MatrizDispersaPunteroDoble* m, MatrizDispersaPunteroDoble* m1) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         m1->dimensionar(c, f);
@@ -238,7 +238,7 @@ namespace UMatrizDispersaPunteroDoble {
         return;
     }
 
-    bool es_simetrica(MatrizDispersaPunteroDoble* m) {
+    bool MatrizDispersaPunteroDoble::es_simetrica(MatrizDispersaPunteroDoble* m) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         if (f != c) return false;

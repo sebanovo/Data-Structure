@@ -24,14 +24,10 @@ namespace UConjuntoVector {
         int muestrea();
         ~ConjuntoVector();
         std::string mostrar();
+        // ejercicios
+        static void _union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
+        static void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
+        static bool _equivalentes(ConjuntoVector* a, ConjuntoVector* b);
     };
-
-    void _union();
-    void _interseccion();
-    void _equivalentes();
-
-    void _union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
-    void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
-    bool _equivalente(ConjuntoVector* a, ConjuntoVector* b);
 }  // namespace UConjuntoVector
 #endif

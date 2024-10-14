@@ -42,11 +42,12 @@ namespace UMatrizDispersaPunteroDoble {
         int elemento(int f, int c);
         void definir_valor_repetido(int elemento);
         std::string mostrar();
-    };
 
-    int suma(MatrizDispersaPunteroDoble* m);
-    void transpuesta(MatrizDispersaPunteroDoble* m, MatrizDispersaPunteroDoble* m1);
-    bool es_simetrica(MatrizDispersaPunteroDoble* m);
+        // ejercicios
+        static int suma(MatrizDispersaPunteroDoble* m);
+        static void transpuesta(MatrizDispersaPunteroDoble* m, MatrizDispersaPunteroDoble* m1);
+        static bool es_simetrica(MatrizDispersaPunteroDoble* m);
+    };
 }  // namespace UMatrizDispersaPunteroDoble
 
 #endif

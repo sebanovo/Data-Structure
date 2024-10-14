@@ -215,7 +215,7 @@ namespace UPolinomioLista {
         // delete mem;
     }
 
-    void derivada(PolinomioLista* p, PolinomioLista* p1) {
+    void PolinomioLista::derivada(PolinomioLista* p, PolinomioLista* p1) {
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);
             int co = p->coeficiente(exp);
@@ -223,7 +223,7 @@ namespace UPolinomioLista {
         }
     };
 
-    std::string mostrar_integral(PolinomioLista* p) {
+    std::string PolinomioLista::mostrar_integral(PolinomioLista* p) {
         std::string s = "";
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);

@@ -91,7 +91,7 @@ namespace UConjuntoVector {
         delete[] v;
     }
 
-    void _union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
+    void ConjuntoVector::_union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
         ConjuntoVector* aux = new ConjuntoVector;
         while (!a->vacio()) {
             int m = a->muestrea();
@@ -120,27 +120,7 @@ namespace UConjuntoVector {
         delete aux;
     };
 
-    void _union() {
-        ConjuntoVector* a = new ConjuntoVector();
-        ConjuntoVector* b = new ConjuntoVector();
-        ConjuntoVector* c = new ConjuntoVector();
-        a->inserta(1);
-        a->inserta(2);
-        a->inserta(3);
-        a->inserta(5);
-        b->inserta(1);
-        b->inserta(2);
-        b->inserta(3);
-        b->inserta(4);
-        _union(a, b, c);
-        std::cout << a->mostrar() << std::endl;
-        std::cout << b->mostrar() << std::endl;
-        std::cout << c->mostrar() << std::endl;
-
-        delete a, b, c;
-    }
-
-    void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
+    void ConjuntoVector::_interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c) {
         auto* aux = new ConjuntoVector;
         while (!a->vacio()) {
             int m = a->muestrea();
@@ -160,44 +140,8 @@ namespace UConjuntoVector {
         delete aux;
     }
 
-    void _interseccion() {
-        ConjuntoVector* a = new ConjuntoVector();
-        ConjuntoVector* b = new ConjuntoVector();
-        ConjuntoVector* c = new ConjuntoVector();
-        a->inserta(1);
-        a->inserta(2);
-        a->inserta(3);
-        a->inserta(5);
-        b->inserta(1);
-        b->inserta(2);
-        b->inserta(3);
-        b->inserta(4);
-        _interseccion(a, b, c);
-        std::cout << a->mostrar() << std::endl;
-        std::cout << b->mostrar() << std::endl;
-        std::cout << c->mostrar() << std::endl;
-
-        delete a, b, c;
-    }
-
-    bool _equivalentes(ConjuntoVector* a, ConjuntoVector* b) {
+    bool ConjuntoVector::_equivalentes(ConjuntoVector* a, ConjuntoVector* b) {
         return a->cardinal() == b->cardinal();
-    }
-
-    void _equivalentes() {
-        ConjuntoVector* a = new ConjuntoVector();
-        ConjuntoVector* b = new ConjuntoVector();
-        a->inserta(1);
-        a->inserta(2);
-        a->inserta(3);
-        a->inserta(5);
-        b->inserta(1);
-        b->inserta(2);
-        b->inserta(3);
-        b->inserta(4);
-        std::cout << (_equivalentes(a, b) ? "si" : "no") << " equivalentes" << std::endl;
-
-        delete a, b;
     }
 
 }  // namespace UConjuntoVector

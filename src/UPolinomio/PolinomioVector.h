@@ -33,9 +33,11 @@ namespace UPolinomioVector {
         string mostrar();
         ~PolinomioVector();
         int evaluar(int x);
+
+        // ejercicios
+        static void derivada(PolinomioVector *p, PolinomioVector *p1);
+        static string mostrar_integral(PolinomioVector *p);
     };
-    void derivada(PolinomioVector *p, PolinomioVector *p1);
-    string mostrar_integral(PolinomioVector *p);
 }  // namespace UPolinomioVector
 
 #endif

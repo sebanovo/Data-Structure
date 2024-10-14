@@ -204,7 +204,7 @@ namespace UMatrizDispersaCSR {
         delete[] vf, vc, vd;
     }
 
-    int suma(MatrizDispersaCSR *m) {
+    int MatrizDispersaCSR::suma(MatrizDispersaCSR *m) {
         int suma = 0;
         for (int f = 1; f <= m->dimension_fila(); f++) {
             for (int c = 1; c <= m->dimension_columna(); c++) {
@@ -215,7 +215,7 @@ namespace UMatrizDispersaCSR {
         return suma;
     }
 
-    void transpuesta(MatrizDispersaCSR *m, MatrizDispersaCSR *m1) {
+    void MatrizDispersaCSR::transpuesta(MatrizDispersaCSR *m, MatrizDispersaCSR *m1) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         m1->dimensionar(c, f);
@@ -227,7 +227,7 @@ namespace UMatrizDispersaCSR {
         return;
     }
 
-    bool es_simetrica(MatrizDispersaCSR *m) {
+    bool MatrizDispersaCSR::es_simetrica(MatrizDispersaCSR *m) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         if (f != c) return false;

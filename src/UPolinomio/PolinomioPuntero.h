@@ -37,8 +37,10 @@ namespace UPolinomioPuntero {
         void asignar_coeficiente(int coef, int exp);
         string mostrar();
         ~PolinomioPuntero();
+
+        // ejercicios
+        static void derivada(PolinomioPuntero *p, PolinomioPuntero *p1);
+        static std::string mostrar_integral(PolinomioPuntero *p);
     };
-    void derivada(PolinomioPuntero *p, PolinomioPuntero *p1);
-    std::string mostrar_integral(PolinomioPuntero *p);
 }  // namespace UPolinomioPuntero
 #endif

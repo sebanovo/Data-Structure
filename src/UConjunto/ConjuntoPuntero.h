@@ -28,14 +28,12 @@ namespace UConjuntoPuntero {
         int muestrea();
         ~ConjuntoPuntero();
         std::string mostrar();
+
+        // ejercicios
+        static void _union(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
+        static void _interseccion(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
+        static bool _equivalentes(ConjuntoPuntero* a, ConjuntoPuntero* b);
     };
 
-    void _union();
-    void _interseccion();
-    void _equivalentes();
-
-    void _union(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
-    void _interseccion(ConjuntoPuntero* a, ConjuntoPuntero* b, ConjuntoPuntero* c);
-    bool _equivalentes(ConjuntoPuntero* a, ConjuntoPuntero* b);
 }  // namespace UConjuntoPuntero
 #endif

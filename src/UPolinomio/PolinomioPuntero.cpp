@@ -196,7 +196,7 @@ namespace UPolinomioPuntero {
         PtrPoli = nullptr;
     }
 
-    void derivada(PolinomioPuntero* p, PolinomioPuntero* p1) {
+    void PolinomioPuntero::derivada(PolinomioPuntero* p, PolinomioPuntero* p1) {
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);
             int coef = p->coeficiente(exp);
@@ -204,7 +204,7 @@ namespace UPolinomioPuntero {
         }
     }
 
-    std::string mostrar_integral(PolinomioPuntero* p) {
+    std::string PolinomioPuntero::mostrar_integral(PolinomioPuntero* p) {
         std::string s = "";
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);

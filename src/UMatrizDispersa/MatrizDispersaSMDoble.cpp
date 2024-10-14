@@ -227,7 +227,7 @@ namespace UMatrizDispersaSMDoble {
         return s + info.str();
     }
 
-    int suma(MatrizDispersaSMDoble *m) {
+    int MatrizDispersaSMDoble::suma(MatrizDispersaSMDoble *m) {
         int suma = 0;
         for (int f = 1; f <= m->dimension_fila(); f++) {
             for (int c = 1; c <= m->dimension_columna(); c++) {
@@ -237,7 +237,7 @@ namespace UMatrizDispersaSMDoble {
         return suma;
     }
 
-    void transpuesta(MatrizDispersaSMDoble *m, MatrizDispersaSMDoble *m1) {
+    void MatrizDispersaSMDoble::transpuesta(MatrizDispersaSMDoble *m, MatrizDispersaSMDoble *m1) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         m1->dimensionar(c, f);
@@ -249,7 +249,7 @@ namespace UMatrizDispersaSMDoble {
         return;
     }
 
-    bool es_simetrica(MatrizDispersaSMDoble *m) {
+    bool MatrizDispersaSMDoble::es_simetrica(MatrizDispersaSMDoble *m) {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
         if (f != c) return false;

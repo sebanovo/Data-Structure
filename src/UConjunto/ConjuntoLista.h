@@ -31,14 +31,12 @@ namespace UConjuntoLista {
         int muestrea();
         ~ConjuntoLista();
         std::string mostrar();
+
+        // ejercicios
+        static void _union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c);
+        static void _interseccion(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c);
+        static bool _equivalentes(ConjuntoLista* a, ConjuntoLista* b);
     };
 
-    void _union();
-    void _interseccion();
-    void _equivalentes();
-
-    void _union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c);
-    void _interseccion(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c);
-    bool _equivalentes(ConjuntoLista* a, ConjuntoLista* b);
 }  // namespace UConjuntoLista
 #endif

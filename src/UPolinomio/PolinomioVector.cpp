@@ -176,7 +176,7 @@ namespace UPolinomioVector {
         return resultado;
     }
 
-    void derivada(PolinomioVector *p, PolinomioVector *p1) {
+    void PolinomioVector::derivada(PolinomioVector *p, PolinomioVector *p1) {
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);
             int co = p->coeficiente(exp);
@@ -184,7 +184,7 @@ namespace UPolinomioVector {
         }
     }
 
-    string mostrar_integral(PolinomioVector *p) {
+    string PolinomioVector::mostrar_integral(PolinomioVector *p) {
         string s = "";
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);

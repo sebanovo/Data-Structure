@@ -44,10 +44,11 @@ namespace UMatrizDispersaSMDoble {
         int elemento(int f, int c);
         void definir_valor_repetido(int elemento);
         string mostrar();
-    };
 
-    int suma(MatrizDispersaSMDoble* m);
-    void transpuesta(MatrizDispersaSMDoble* m, MatrizDispersaSMDoble* m1);
-    bool es_simetrica(MatrizDispersaSMDoble* m);
+        // ejercicios
+        static int suma(MatrizDispersaSMDoble* m);
+        static void transpuesta(MatrizDispersaSMDoble* m, MatrizDispersaSMDoble* m1);
+        static bool es_simetrica(MatrizDispersaSMDoble* m);
+    };
 }  // namespace UMatrizDispersaSMDoble
 #endif

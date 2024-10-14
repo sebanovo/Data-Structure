@@ -195,7 +195,7 @@ namespace UPolinomioSM {
         delete mem;
     }
 
-    void derivada(PolinomioSM *p, PolinomioSM *p1) {
+    void PolinomioSM::derivada(PolinomioSM *p, PolinomioSM *p1) {
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);
             int coef = p->coeficiente(exp);
@@ -203,7 +203,7 @@ namespace UPolinomioSM {
         }
     }
 
-    std::string mostrar_integral(PolinomioSM *p) {
+    std::string PolinomioSM::mostrar_integral(PolinomioSM *p) {
         std::string s = "";
         for (int i = 1; i <= p->numero_terminos(); i++) {
             int exp = p->exponente(i);

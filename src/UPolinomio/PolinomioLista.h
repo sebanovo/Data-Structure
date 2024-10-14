@@ -39,10 +39,11 @@ namespace UPolinomioLista {
         int evaluar(int x);
         std::string mostrar();
         ~PolinomioLista();
-    };
 
-    void derivada(PolinomioLista* p, PolinomioLista* p1);
-    std::string mostrar_integral(PolinomioLista* p);
+        // ejercicios
+        static void derivada(PolinomioLista* p, PolinomioLista* p1);
+        static std::string mostrar_integral(PolinomioLista* p);
+    };
 }  // namespace UPolinomioLista
 
 #endif
