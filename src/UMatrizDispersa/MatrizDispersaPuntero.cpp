@@ -111,7 +111,7 @@ namespace UMatrizDispersaPuntero {
                             }
                             ant->sig = dir->sig;
                         }
-                        delete (dir);
+                        delete dir;
                         nt--;
                     } else if (el == repe) {
                         Nodo* x = new Nodo;

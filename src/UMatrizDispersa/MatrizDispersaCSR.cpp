@@ -37,17 +37,15 @@ namespace UMatrizDispersaCSR {
     }
 
     // verifica que exista el elemento
-    int MatrizDispersaCSR::buscar_posicion_vd(int f, int c) {
+    int MatrizDispersaCSR::existe_elemento(int f, int c) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
 
         int lug_antes = 0;
         for (int i = 1; i <= f - 1; i++) {
-            lug_antes += (vf[i + 1] - vf[i]);
+            lug_antes += vf[i + 1] - vf[i];
         }
 
-        int max_elem = vf[f + 1] - vf[f];
-
-        for (int i = 1; i <= max_elem; i++) {
+        for (int i = 1; i <= vf[f + 1] - vf[f]; i++) {
             if (vc[lug_antes + i] == c)
                 return lug_antes + i;
         }
@@ -77,7 +75,7 @@ namespace UMatrizDispersaCSR {
     void MatrizDispersaCSR::poner(int f, int c, int elemento) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
 
-        int lugar = buscar_posicion_vd(f, c);
+        int lugar = existe_elemento(f, c);
         if (lugar > 0) {
             vd[lugar] = elemento;
             if (vd[lugar] == repe) {
@@ -85,7 +83,7 @@ namespace UMatrizDispersaCSR {
                     vd[i] = vd[i + 1];
                     vc[i] = vc[i + 1];
                 }
-                for (int i = f; i <= df + 1; i++) {
+                for (int i = f + 1; i <= df + 1; i++) {
                     vf[i]--;
                 }
                 nt--;
@@ -93,7 +91,7 @@ namespace UMatrizDispersaCSR {
         } else {
             if (elemento != repe) {
                 int pos = donde_insertar(f, c);
-                for (int i = nt; i >= pos; i--) {
+                for (int i = nt + 1; i >= pos; i--) {
                     vd[i] = vd[i - 1];
                     vc[i] = vc[i - 1];
                 }
@@ -109,7 +107,7 @@ namespace UMatrizDispersaCSR {
     // devuelve el elemento (fila, columna)
     int MatrizDispersaCSR::elemento(int f, int c) {
         if ((f < 1 || f > df) || (c < 1 || c > dc)) throw std::runtime_error("Indices fuera de rango!!");
-        int lugar = buscar_posicion_vd(f, c);
+        int lugar = existe_elemento(f, c);
         return lugar < 1 ? repe : vd[lugar];
     }
 
@@ -137,7 +135,7 @@ namespace UMatrizDispersaCSR {
                 for (int j = 1; j <= dc; j++) {
                     int el = this->elemento(i, j);
                     if (el == elemento) {
-                        int lugar = buscar_posicion_vd(i, j);
+                        int lugar = existe_elemento(i, j);
                         for (int k = lugar; k < nt; k++) {
                             vd[k] = vd[k + 1];
                             vc[k] = vc[k + 1];
@@ -147,14 +145,14 @@ namespace UMatrizDispersaCSR {
                         nt--;
                     } else if (el == repe) {
                         int pos = donde_insertar(i, j);
-                        for (int k = nt; k > pos; k--) {
+                        for (int k = nt; k >= pos; k--) {
                             vd[k] = vd[k - 1];
                             vc[k] = vc[k - 1];
                         }
                         vd[pos] = elemento;
                         vc[pos] = j;
                         nt++;
-                        for (int k = i; k <= df + 1; k++)
+                        for (int k = i ;k <= df + 1; k++)
                             vf[k]++;
                     }
                 }

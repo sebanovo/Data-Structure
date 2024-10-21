@@ -525,6 +525,8 @@ void mostarPilaCadena()
 
 int main()
 {
-    mostarPilaCadena();
+    // mostarPilaCadena();
+    mostrarMDispersaVectorCSR();
+
     return 0;
 }

@@ -102,7 +102,7 @@ namespace UMatrizDispersaVector {
                     nt--;
                 } else if (el == repe) {
                     nt++;
-                    vd[nt] = repe;  // aquí mirar si es repe o elemento
+                    vd[nt] = repe;
                     vf[nt] = i;
                     vc[nt] = j;
                 }

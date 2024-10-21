@@ -5,13 +5,14 @@
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
+
 namespace UMatrizDispersaCSR {
     class MatrizDispersaCSR {
        private:
         const int MAX = 1000;
         int *vf, *vc, *vd;  // filas, columnas, datos
         int df, dc, nt, repe;
-        int buscar_posicion_vd(int f, int c);
+        int existe_elemento(int f, int c);
         int donde_insertar(int f, int c);
         bool hay(int elemento);
 
