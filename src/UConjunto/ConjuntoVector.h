@@ -24,6 +24,7 @@ namespace UConjuntoVector {
         int muestrea();
         ~ConjuntoVector();
         std::string mostrar();
+
         // ejercicios
         static void _union(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
         static void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);

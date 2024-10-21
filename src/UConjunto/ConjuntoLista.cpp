@@ -113,8 +113,7 @@ namespace UConjuntoLista {
         return s + "}";
     }
 
-    void
-    ConjuntoLista::_union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
+    void ConjuntoLista::_union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
         ConjuntoLista* aux = new ConjuntoLista;
         while (!a->vacio()) {
             int m = a->muestrea();

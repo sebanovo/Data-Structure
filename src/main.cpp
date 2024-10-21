@@ -20,15 +20,24 @@
 #include "UMatrizDispersa/MatrizDispersaPunteroDoble.h"
 #include "UMatrizDispersa/MatrizDispersaSMDoble.h"
 
+#include "UPila/PilaVector.h"
+#include "UPila/PilaLista.h"
+#include "UPila/PilaPuntero.h"
+#include "UPila/PilaSM.h"
+#include "UPila/PilaEntero.h"
+#include "UPila/PilaCadena.h"
+
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
 
-void mostrarMemoria() {
+void mostrarMemoria()
+{
     UCSMemoria::CSMemoria* mem = nullptr;
     int opcion;
-    do {
+    do
+    {
         cout << "1. Crear Memoria" << endl;
         cout << "2. Pedir espacio" << endl;
         cout << "3. Liberar espacio" << endl;
@@ -38,24 +47,31 @@ void mostrarMemoria() {
         cout << "Opcion: ";
         cin >> opcion;
 
-        if (cin.fail()) {
+        if (cin.fail())
+        {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             cout << "Entrada no válida. Inténtalo de nuevo.\n";
             continue;
         }
 
-        switch (opcion) {
-            case 1: {
-                if (mem != nullptr) {
+        switch (opcion)
+        {
+            case 1:
+            {
+                if (mem != nullptr)
+                {
                     delete mem;
                 }
                 mem = new UCSMemoria::CSMemoria();
                 cout << "Memoria Creada\n";
-            } break;
+            }
+            break;
 
-            case 2: {
-                if (mem == nullptr) {
+            case 2:
+            {
+                if (mem == nullptr)
+                {
                     cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
                     break;
                 }
@@ -64,10 +80,13 @@ void mostrarMemoria() {
                 cin.ignore();
                 getline(cin, ids);
                 mem->new_espacio(ids);
-            } break;
+            }
+            break;
 
-            case 3: {
-                if (mem == nullptr) {
+            case 3:
+            {
+                if (mem == nullptr)
+                {
                     cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
                     break;
                 }
@@ -75,10 +94,13 @@ void mostrarMemoria() {
                 cout << "Direccion a liberar: ";
                 cin >> dir_delete;
                 mem->delete_espacio(dir_delete);
-            } break;
+            }
+            break;
 
-            case 4: {
-                if (mem == nullptr) {
+            case 4:
+            {
+                if (mem == nullptr)
+                {
                     cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
                     break;
                 }
@@ -93,22 +115,28 @@ void mostrarMemoria() {
                 cout << "Valor: ";
                 cin >> valor;
                 mem->poner_dato(dir, id, valor);
-            } break;
+            }
+            break;
 
-            case 5: {
-                if (mem == nullptr) {
+            case 5:
+            {
+                if (mem == nullptr)
+                {
                     cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
                     break;
                 }
                 mem->mostrar();
-            } break;
+            }
+            break;
 
-            case 6: {
+            case 6:
+            {
                 delete mem;
                 mem = nullptr;
                 cout << "Saliendo...\n"
                      << endl;
-            } break;
+            }
+            break;
 
             default:
                 cout << "Opción no válida. Inténtalo de nuevo.\n";
@@ -119,7 +147,8 @@ void mostrarMemoria() {
     delete mem;
 }
 
-void mostrarListaV() {
+void mostrarListaV()
+{
     UListaVector::ListaVector v;
     v.inserta_primero(10);
     v.inserta_primero(32);
@@ -139,7 +168,8 @@ void mostrarListaV() {
 // [555,12,11,10,25]
 // [12,11,10,25]
 // [12,11,29,25]
-void mostrarListaP() {
+void mostrarListaP()
+{
     UListaPuntero::ListaPuntero* lista = new UListaPuntero::ListaPuntero();
     lista->inserta(lista->primero(), 11);
     lista->inserta(lista->primero(), 12);
@@ -167,7 +197,8 @@ void mostrarListaP() {
     delete lista;
 }
 
-void mostrarListaSM() {
+void mostrarListaSM()
+{
     UListaSM::ListaSM* lista = new UListaSM::ListaSM();
     lista->inserta_primero(100);
     lista->inserta_primero(100);
@@ -179,7 +210,8 @@ void mostrarListaSM() {
     delete lista;
 }
 
-void mostrarPolinomioVector() {
+void mostrarPolinomioVector()
+{
     UPolinomioVector::PolinomioVector* polinomio = new UPolinomioVector::PolinomioVector;
 
     std::cout << polinomio->mostrar() << std::endl;
@@ -187,7 +219,8 @@ void mostrarPolinomioVector() {
     delete polinomio;
 }
 
-void mostrarPolinomioPuntero() {
+void mostrarPolinomioPuntero()
+{
     UPolinomioPuntero::PolinomioPuntero* polinomio = new UPolinomioPuntero::PolinomioPuntero;
     UPolinomioPuntero::PolinomioPuntero* polinomio1;
     UPolinomioPuntero::PolinomioPuntero* polinomio2;
@@ -201,7 +234,8 @@ void mostrarPolinomioPuntero() {
     delete polinomio;
 }
 
-void mostrarPolinomioLista() {
+void mostrarPolinomioLista()
+{
     UPolinomioLista::PolinomioLista* p1 = new UPolinomioLista::PolinomioLista;
     UPolinomioLista::PolinomioLista* p2 = new UPolinomioLista::PolinomioLista;
     UPolinomioLista::PolinomioLista* p = new UPolinomioLista::PolinomioLista;
@@ -228,7 +262,8 @@ void mostrarPolinomioLista() {
     // std::cout << p->es_cero() << std::endl;
 }
 
-void mostrarConjunto() {
+void mostrarConjunto()
+{
     UConjuntoSM ::ConjuntoSM* c = new UConjuntoSM::ConjuntoSM();
     c->inserta(2);
     c->inserta(4);
@@ -242,7 +277,8 @@ void mostrarConjunto() {
     delete c;
 }
 
-void mostrarMDispersaVector() {
+void mostrarMDispersaVector()
+{
     UMatrizDispersaVector::MatrizDispersaVector* m = new UMatrizDispersaVector::MatrizDispersaVector;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
@@ -255,7 +291,8 @@ void mostrarMDispersaVector() {
     delete m;
 }
 
-void mostrarMDispersaVectorCSR() {
+void mostrarMDispersaVectorCSR()
+{
     UMatrizDispersaCSR::MatrizDispersaCSR* m = new UMatrizDispersaCSR::MatrizDispersaCSR;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
@@ -268,7 +305,8 @@ void mostrarMDispersaVectorCSR() {
     delete m;
 }
 
-void mostrarMDPuntero() {
+void mostrarMDPuntero()
+{
     UMatrizDispersaPuntero::MatrizDispersaPuntero* m = new UMatrizDispersaPuntero::MatrizDispersaPuntero;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
@@ -281,7 +319,8 @@ void mostrarMDPuntero() {
     delete m;
 }
 
-void mostrarMDSM() {
+void mostrarMDSM()
+{
     UCSMemoria::CSMemoria* mem = new UCSMemoria::CSMemoria;
     UMatrizDispersaSM::MatrizDispersaSM* m = new UMatrizDispersaSM::MatrizDispersaSM(mem);
     m->dimensionar(3, 3);
@@ -295,7 +334,8 @@ void mostrarMDSM() {
     delete mem;
 }
 
-void mostrarMDPunteroDoble() {
+void mostrarMDPunteroDoble()
+{
     UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble* m = new UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
@@ -308,7 +348,8 @@ void mostrarMDPunteroDoble() {
     delete m;
 }
 
-void mostrarMDSMDoble() {
+void mostrarMDSMDoble()
+{
     UMatrizDispersaSMDoble::MatrizDispersaSMDoble* m = new UMatrizDispersaSMDoble::MatrizDispersaSMDoble;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
@@ -321,21 +362,169 @@ void mostrarMDSMDoble() {
     delete m;
 }
 
-int main() {
-    // mostrarPolinomioLista();
-    // mostrarConjunto();
-    // mostrarMDPunteroDoble();
-    // mostrarMDispersaVector();
-    // mostrarMDPuntero();
-    // mostrarMDSM();
-    // mostrarMDSMDoble();
-    // mostrarMDPunteroDoble();
-    // mostrarMDispersaVector();
-    // mostrarMDispersaVectorCSR();
-    // mostrarMDPuntero();
-    // mostrarMDSM();
-    // mostrarMDPunteroDoble();
-    mostrarMDSMDoble();
+void mostrarPilaV()
+{
+    UPilaVector::PilaVector p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
 
+    while (!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(&exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
+
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void mostrarPilaLista()
+{
+    UPilaLista::PilaLista p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
+
+    while (!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(&exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
+
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void mostarPilaPuntero()
+{
+    UPilaPuntero::PilaPuntero p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
+
+    while (!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(&exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
+
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+void mostarPilaSM()
+{
+    UPilaSM::PilaSM p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
+
+    while (!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(&exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
+
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void mostarPilaEntero()
+{
+    UPilaEntero::PilaEntero p1;
+    p1.meter(1);
+    p1.meter(2);
+    p1.meter(3);
+    p1.meter(4);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
+
+    while (!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(&exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
+
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void mostarPilaCadena()
+{
+    UPilaCadena::PilaCadena p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
+
+    while (!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(&exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
+
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+int main()
+{
+    mostarPilaCadena();
     return 0;
 }
