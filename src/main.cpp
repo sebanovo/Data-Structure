@@ -526,7 +526,12 @@ void mostarPilaCadena()
 int main()
 {
     // mostarPilaCadena();
-    mostrarMDispersaVectorCSR();
-
+    // mostrarMDispersaVectorCSR();
+    // std::string s = "Sebastian";
+    // if(s.find(s[0]) >= 0)
+    //     std::cout << "Hola" << " " << s << "\n";
+    int re = UPilaVector::evaluar_postfija("235*+");
+    std::cout << re << "\n";
+    std::cout << UPilaVector::infija_a_postfija("2+3*5");
     return 0;
 }

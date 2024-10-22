@@ -23,6 +23,8 @@ namespace UPilaVector
         std::string mostrar();
         ~PilaVector();
     };
+    int evaluar_postfija(std::string expPostfija);
+    std::string infija_a_postfija(std::string infija);
 };  // namespace UPilaVector
 
 #endif
