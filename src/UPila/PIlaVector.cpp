@@ -5,6 +5,7 @@
 #include "PilaVector.h"
 #include <math.h>
 #include <stdexcept>
+#include <cstring>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -14,7 +15,7 @@ namespace UPilaVector
     PilaVector::PilaVector()
     {
         tope = 0;
-        elementos = new int[MAX];
+        elementos = new char[MAX];
     }
 
     bool PilaVector::vacia()
@@ -22,14 +23,14 @@ namespace UPilaVector
         return tope == 0;
     }
 
-    void PilaVector::meter(int e)
+    void PilaVector::meter(char e)
     {
         if (tope >= MAX) return;
         tope++;
         elementos[tope] = e;
     }
 
-    void PilaVector::sacar(int* e)
+    void PilaVector::sacar(char* e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         *e = elementos[tope];
@@ -49,14 +50,14 @@ namespace UPilaVector
         while (!vacia())
         {
             int e;
-            sacar(&e);
+            sacar((char*)&e);
             s += "| " + std::to_string(e) + " |\n";
             aux->meter(e);
         }
         while (!aux->vacia())
         {
             int e;
-            aux->sacar(&e);
+            aux->sacar((char*)&e);
             meter(e);
         }
         return s;
@@ -69,45 +70,62 @@ namespace UPilaVector
 
     int evalua(int* op1, int* op2, char sim_operacion)
     {
-        int resultado = 0;
         switch (sim_operacion)
         {
             case '+':
-                resultado += *op1 + *op2;
-                break;
+                return *op1 + *op2;
             case '-':
-                resultado += *op1 - *op2;
-                break;
+                return *op1 - *op2;
             case '*':
-                resultado += (*op1) * (*op2);
-                break;
+                return (*op1) * (*op2);
             case '/':
-                resultado += (*op1) / (*op2);
-                break;
+                return (*op1) / (*op2);
             case '^':
-                resultado += std::pow(*op1, *op2);
-                break;
-            default:
-                break;
+                return std::pow(*op1, *op2);
         }
-        return resultado;
+        return 0;
+    }
+
+    int prioridad_infija(char c)
+    {
+        if (c == '^') return 4;
+        if (c == '*' || c == '/') return 3;
+        if (c == '+' || c == '-') return 2;
+        if (c == '(') return 1;
+        return 0;
+    }
+
+    bool tieneMayorPrioridad(char op1, char op2)
+    {
+        int nivelOp1 = prioridad_infija(op1);
+        int nivelOp2 = prioridad_infija(op2);
+        return nivelOp1 >= nivelOp2;
+    }
+
+    bool esOperador(char c)
+    {
+        return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+    }
+
+    bool esDigito(char c)
+    {
+        return std::isdigit(c);
     }
 
     int evaluar_postfija(std::string expPostFija)
     {
         PilaVector p;
-        std::string numeros = "0123456789";
         for (int i = 0; i < expPostFija.length(); i++)
         {
-            if (static_cast<int>(numeros.find(expPostFija[i])) >= 0)
+            if (esDigito(expPostFija[i]))
             {
                 p.meter(expPostFija[i] - 48);
             }
             else
             {
                 int op1, op2;
-                p.sacar(&op2);
-                p.sacar(&op1);
+                p.sacar((char*)&op2);
+                p.sacar((char*)&op1);
                 char sim_operacion = expPostFija[i];
                 int z = evalua(&op1, &op2, sim_operacion);
                 p.meter(z);
@@ -115,118 +133,61 @@ namespace UPilaVector
         }
         return p.cima();
     }
-    
-    int prioridad_infija(char c)
-    {
-        int prioridad;
-        switch (c)
-        {
-            case '^':
-                prioridad = 4;
-                break;
-            case '*':
-                prioridad = 2;
-                break;
-            case '/':
-                prioridad = 2;
-                break;
-            case '+':
-                prioridad = 1;
-                break;
-            case '-':
-                prioridad = 1;
-                break;
-            case '(':
-                prioridad = 5;
-                break;
-            default:
-                break;
-        }
-        return prioridad;
-    }
-    int prioridad_pila(char c)
-    {
-        int prioridad;
-        switch (c)
-        {
-            case '^':
-                prioridad = 3;
-                break;
-            case '*':
-                prioridad = 2;
-                break;
-            case '/':
-                prioridad = 2;
-                break;
-            case '+':
-                prioridad = 1;
-                break;
-            case '-':
-                prioridad = 1;
-                break;
-            case '(':
-                prioridad = 0;
-                break;
-            default:
-                break;
-        }
-        return prioridad;
-    }
 
     std::string infija_a_postfija(std::string infija)
     {
         PilaVector p;
-        std::string PostFija = "";
-        std::string numeros = "0123456789";
-        std::string operador = "^*/+-(";
-        for (int i = 0; i < infija.length(); i++)
+        std::string postfija = "";
+        char elemento, operador;
+        for (int i = 0; i < infija.size(); i++)
         {
-            if ((int)numeros.find(infija[i]) >= 0)
+            elemento = infija[i];
+            if (esDigito(elemento))
             {
-                PostFija = PostFija + infija[i];
+                postfija += elemento;
             }
-            else
+            else if (esOperador(elemento))
             {
-                if ((int)operador.find(infija[i]) >= 0)
+                if (!p.vacia())
                 {
-                    bool b = false;
-                    while (!b)
+                    bool seDebeContinuar;
+                    do
                     {
-                        int aux = p.cima();
-                        if (p.vacia() || prioridad_infija(infija[i]) > prioridad_pila(aux))
+                        p.sacar((char*)&operador);
+                        if (tieneMayorPrioridad(operador, elemento))
                         {
-                            p.meter(infija[i] - 48);
-                            b = true;
+                            postfija += operador;
+                            seDebeContinuar = true;
                         }
                         else
                         {
-                            p.sacar(&aux);
-                            PostFija = PostFija + std::to_string(aux);
+                            seDebeContinuar = false;
+                            p.meter(operador);
                         }
-                    }
+                    } while (!p.vacia() && seDebeContinuar);
                 }
-                else
+                p.meter(elemento);
+            }
+            else if (elemento == '(')
+            {
+                p.meter(elemento);
+            }
+            else if (elemento == ')')
+            {
+                p.sacar((char*)&operador);
+                while (!p.vacia() && operador != '(')
                 {
-                    if (infija[i] == ')')
-                    {
-                        int aux;
-                        do
-                        {
-                            p.sacar(&aux);
-                            if (aux != '(')
-                            {
-                                PostFija = PostFija + std::to_string(aux);
-                            }
-                        } while (aux == 'C');
-                    }
+                    postfija += operador;
+                    p.sacar((char*)&operador);
                 }
             }
         }
-        while(!p.vacia()) {
-            int aux;
-            p.sacar(&aux);
-            PostFija = PostFija + std::to_string(aux);
+        while (!p.vacia())
+        {
+            p.sacar((char*)&operador);
+            postfija += operador;
         }
-        return PostFija;
+        return postfija;
     }
+
 }  // namespace UPilaVector

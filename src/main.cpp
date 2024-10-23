@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits>
+#include <cstring>
 
 #include "UCSMemoria/CSMemoria.h"
 #include "ULista/ListaPuntero.h"
@@ -362,166 +363,166 @@ void mostrarMDSMDoble()
     delete m;
 }
 
-void mostrarPilaV()
-{
-    UPilaVector::PilaVector p1;
-    p1.meter(10);
-    p1.meter(20);
-    p1.meter(30);
-    p1.meter(40);
-    std::cout << p1.mostrar() << "\n";
-    std::cout << "cima" << p1.cima() << "\n";
+// void mostrarPilaV()
+// {
+//     UPilaVector::PilaVector p1;
+//     p1.meter(10);
+//     p1.meter(20);
+//     p1.meter(30);
+//     p1.meter(40);
+//     std::cout << p1.mostrar() << "\n";
+//     std::cout << "cima" << p1.cima() << "\n";
 
-    while (!p1.vacia())
-    {
-        int exp1;
-        p1.sacar(&exp1);
-        std::cout << "Elemento: " << exp1 << std::endl;
-    }
+//     while (!p1.vacia())
+//     {
+//         int exp1;
+//         p1.sacar(&exp1);
+//         std::cout << "Elemento: " << exp1 << std::endl;
+//     }
 
-    try
-    {
-        std::cout << "cima" << p1.cima() << "\n";
-    }
-    catch (const std::runtime_error& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
+//     try
+//     {
+//         std::cout << "cima" << p1.cima() << "\n";
+//     }
+//     catch (const std::runtime_error& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+// }
 
-void mostrarPilaLista()
-{
-    UPilaLista::PilaLista p1;
-    p1.meter(10);
-    p1.meter(20);
-    p1.meter(30);
-    p1.meter(40);
-    std::cout << p1.mostrar() << "\n";
-    std::cout << "cima" << p1.cima() << "\n";
+// void mostrarPilaLista()
+// {
+//     UPilaLista::PilaLista p1;
+//     p1.meter(10);
+//     p1.meter(20);
+//     p1.meter(30);
+//     p1.meter(40);
+//     std::cout << p1.mostrar() << "\n";
+//     std::cout << "cima" << p1.cima() << "\n";
 
-    while (!p1.vacia())
-    {
-        int exp1;
-        p1.sacar(&exp1);
-        std::cout << "Elemento: " << exp1 << std::endl;
-    }
+//     while (!p1.vacia())
+//     {
+//         int exp1;
+//         p1.sacar(&exp1);
+//         std::cout << "Elemento: " << exp1 << std::endl;
+//     }
 
-    try
-    {
-        std::cout << "cima" << p1.cima() << "\n";
-    }
-    catch (const std::runtime_error& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
+//     try
+//     {
+//         std::cout << "cima" << p1.cima() << "\n";
+//     }
+//     catch (const std::runtime_error& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+// }
 
-void mostarPilaPuntero()
-{
-    UPilaPuntero::PilaPuntero p1;
-    p1.meter(10);
-    p1.meter(20);
-    p1.meter(30);
-    p1.meter(40);
-    std::cout << p1.mostrar() << "\n";
-    std::cout << "cima" << p1.cima() << "\n";
+// void mostarPilaPuntero()
+// {
+//     UPilaPuntero::PilaPuntero p1;
+//     p1.meter(10);
+//     p1.meter(20);
+//     p1.meter(30);
+//     p1.meter(40);
+//     std::cout << p1.mostrar() << "\n";
+//     std::cout << "cima" << p1.cima() << "\n";
 
-    while (!p1.vacia())
-    {
-        int exp1;
-        p1.sacar(&exp1);
-        std::cout << "Elemento: " << exp1 << std::endl;
-    }
+//     while (!p1.vacia())
+//     {
+//         int exp1;
+//         p1.sacar(&exp1);
+//         std::cout << "Elemento: " << exp1 << std::endl;
+//     }
 
-    try
-    {
-        std::cout << "cima" << p1.cima() << "\n";
-    }
-    catch (const std::runtime_error& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
-void mostarPilaSM()
-{
-    UPilaSM::PilaSM p1;
-    p1.meter(10);
-    p1.meter(20);
-    p1.meter(30);
-    p1.meter(40);
-    std::cout << p1.mostrar() << "\n";
-    std::cout << "cima" << p1.cima() << "\n";
+//     try
+//     {
+//         std::cout << "cima" << p1.cima() << "\n";
+//     }
+//     catch (const std::runtime_error& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+// }
+// void mostarPilaSM()
+// {
+//     UPilaSM::PilaSM p1;
+//     p1.meter(10);
+//     p1.meter(20);
+//     p1.meter(30);
+//     p1.meter(40);
+//     std::cout << p1.mostrar() << "\n";
+//     std::cout << "cima" << p1.cima() << "\n";
 
-    while (!p1.vacia())
-    {
-        int exp1;
-        p1.sacar(&exp1);
-        std::cout << "Elemento: " << exp1 << std::endl;
-    }
+//     while (!p1.vacia())
+//     {
+//         int exp1;
+//         p1.sacar(&exp1);
+//         std::cout << "Elemento: " << exp1 << std::endl;
+//     }
 
-    try
-    {
-        std::cout << "cima" << p1.cima() << "\n";
-    }
-    catch (const std::runtime_error& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
+//     try
+//     {
+//         std::cout << "cima" << p1.cima() << "\n";
+//     }
+//     catch (const std::runtime_error& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+// }
 
-void mostarPilaEntero()
-{
-    UPilaEntero::PilaEntero p1;
-    p1.meter(1);
-    p1.meter(2);
-    p1.meter(3);
-    p1.meter(4);
-    std::cout << p1.mostrar() << "\n";
-    std::cout << "cima" << p1.cima() << "\n";
+// void mostarPilaEntero()
+// {
+//     UPilaEntero::PilaEntero p1;
+//     p1.meter(1);
+//     p1.meter(2);
+//     p1.meter(3);
+//     p1.meter(4);
+//     std::cout << p1.mostrar() << "\n";
+//     std::cout << "cima" << p1.cima() << "\n";
 
-    while (!p1.vacia())
-    {
-        int exp1;
-        p1.sacar(&exp1);
-        std::cout << "Elemento: " << exp1 << std::endl;
-    }
+//     while (!p1.vacia())
+//     {
+//         int exp1;
+//         p1.sacar(&exp1);
+//         std::cout << "Elemento: " << exp1 << std::endl;
+//     }
 
-    try
-    {
-        std::cout << "cima" << p1.cima() << "\n";
-    }
-    catch (const std::runtime_error& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
+//     try
+//     {
+//         std::cout << "cima" << p1.cima() << "\n";
+//     }
+//     catch (const std::runtime_error& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+// }
 
-void mostarPilaCadena()
-{
-    UPilaCadena::PilaCadena p1;
-    p1.meter(10);
-    p1.meter(20);
-    p1.meter(30);
-    p1.meter(40);
-    std::cout << p1.mostrar() << "\n";
-    std::cout << "cima" << p1.cima() << "\n";
+// void mostarPilaCadena()
+// {
+//     UPilaCadena::PilaCadena p1;
+//     p1.meter(10);
+//     p1.meter(20);
+//     p1.meter(30);
+//     p1.meter(40);
+//     std::cout << p1.mostrar() << "\n";
+//     std::cout << "cima" << p1.cima() << "\n";
 
-    while (!p1.vacia())
-    {
-        int exp1;
-        p1.sacar(&exp1);
-        std::cout << "Elemento: " << exp1 << std::endl;
-    }
+//     while (!p1.vacia())
+//     {
+//         int exp1;
+//         p1.sacar(&exp1);
+//         std::cout << "Elemento: " << exp1 << std::endl;
+//     }
 
-    try
-    {
-        std::cout << "cima" << p1.cima() << "\n";
-    }
-    catch (const std::runtime_error& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
+//     try
+//     {
+//         std::cout << "cima" << p1.cima() << "\n";
+//     }
+//     catch (const std::runtime_error& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+// }
 
 int main()
 {
@@ -530,8 +531,20 @@ int main()
     // std::string s = "Sebastian";
     // if(s.find(s[0]) >= 0)
     //     std::cout << "Hola" << " " << s << "\n";
-    int re = UPilaVector::evaluar_postfija("235*+");
-    std::cout << re << "\n";
-    std::cout << UPilaVector::infija_a_postfija("2+3*5");
-    return 0;
+    // int re = UPilaVector::evaluar_postfija("235*+");
+    // std::cout << re << "\n";
+    // std::cout << UPilaVector::infija_a_postfija("2+3*5");
+    // char* c = static_cast<char *>(malloc(sizeof(char) * 100));
+    // c[0] = 's';
+    // c[1] = 'e';
+    // c[2] = 'b';
+    // c[3] = 'a';
+    // c[4] = 's';
+    // c[5] = '\0';
+    // int longitud = std::strlen(c);
+    // std::cout << longitud;
+    std::string result = "(2+2+2+2)*2-3*5";
+    std::cout << UPilaVector::evaluar_postfija(UPilaVector::infija_a_postfija(result)) << "\n";
+
+
 }
