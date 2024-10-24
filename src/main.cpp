@@ -543,8 +543,4 @@ int main()
     // c[5] = '\0';
     // int longitud = std::strlen(c);
     // std::cout << longitud;
-    std::string result = "(2+2+2+2)*2-3*5";
-    std::cout << UPilaVector::evaluar_postfija(UPilaVector::infija_a_postfija(result)) << "\n";
-
-
 }
