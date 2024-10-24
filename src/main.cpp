@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <cstring>
+#include <cmath>
 
 #include "UCSMemoria/CSMemoria.h"
 #include "ULista/ListaPuntero.h"
@@ -543,4 +544,8 @@ int main()
     // c[5] = '\0';
     // int longitud = std::strlen(c);
     // std::cout << longitud;
+    std::string input = "2^6";
+    std::string postfija = UPilaVector::infija_a_postfija(input);
+    std::cout << UPilaVector::evaluar_postfija(postfija) << '\n';
+    std::cout << std::pow(2,3);
 }
