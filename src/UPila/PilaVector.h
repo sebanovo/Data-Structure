@@ -11,14 +11,14 @@ namespace UPilaVector
     {
        private:
         const int MAX = 1000;
-        char* elementos;
+        int* elementos;
         int tope;
 
        public:
         PilaVector();
         bool vacia();
-        void meter(char e);
-        void sacar(char* e);
+        void meter(int e);
+        void sacar(int* e);
         int cima();
         std::string mostrar();
         ~PilaVector();
