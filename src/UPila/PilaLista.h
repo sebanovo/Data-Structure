@@ -23,7 +23,7 @@ namespace UPilaLista
         PilaLista(UCSMemoria::CSMemoria* m);
         bool vacia();
         void meter(int e);
-        void sacar(int* e);
+        void sacar(int& e);
         int cima();
         std::string mostrar();
         ~PilaLista();

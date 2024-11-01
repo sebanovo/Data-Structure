@@ -15,7 +15,7 @@ namespace UPilaCadena
         PilaCadena();
         bool vacia();
         void meter(int e);
-        void sacar(int* e);
+        void sacar(int& e);
         int cima();
         std::string mostrar();
         ~PilaCadena() = default;

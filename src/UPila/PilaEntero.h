@@ -16,7 +16,7 @@ namespace UPilaEntero
         PilaEntero();
         bool vacia();
         void meter(int e);
-        void sacar(int* e);
+        void sacar(int& e);
         int cima();
         std::string mostrar();
         ~PilaEntero() = default;

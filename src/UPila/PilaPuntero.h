@@ -23,7 +23,7 @@ namespace UPilaPuntero
         PilaPuntero();
         bool vacia();
         void meter(int e);
-        void sacar(int* e);
+        void sacar(int& e);
         int cima();
         std::string mostrar();
         ~PilaPuntero();

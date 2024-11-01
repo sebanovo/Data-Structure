@@ -378,7 +378,7 @@ void mostrarMDSMDoble()
 //     while (!p1.vacia())
 //     {
 //         int exp1;
-//         p1.sacar(&exp1);
+//         p1.sacar( exp1);
 //         std::cout << "Elemento: " << exp1 << std::endl;
 //     }
 
@@ -405,7 +405,7 @@ void mostrarMDSMDoble()
 //     while (!p1.vacia())
 //     {
 //         int exp1;
-//         p1.sacar(&exp1);
+//         p1.sacar( exp1);
 //         std::cout << "Elemento: " << exp1 << std::endl;
 //     }
 
@@ -432,7 +432,7 @@ void mostrarMDSMDoble()
 //     while (!p1.vacia())
 //     {
 //         int exp1;
-//         p1.sacar(&exp1);
+//         p1.sacar( exp1);
 //         std::cout << "Elemento: " << exp1 << std::endl;
 //     }
 
@@ -458,7 +458,7 @@ void mostrarMDSMDoble()
 //     while (!p1.vacia())
 //     {
 //         int exp1;
-//         p1.sacar(&exp1);
+//         p1.sacar( exp1);
 //         std::cout << "Elemento: " << exp1 << std::endl;
 //     }
 
@@ -485,7 +485,7 @@ void mostrarMDSMDoble()
 //     while (!p1.vacia())
 //     {
 //         int exp1;
-//         p1.sacar(&exp1);
+//         p1.sacar( exp1);
 //         std::cout << "Elemento: " << exp1 << std::endl;
 //     }
 
@@ -512,7 +512,7 @@ void mostrarMDSMDoble()
 //     while (!p1.vacia())
 //     {
 //         int exp1;
-//         p1.sacar(&exp1);
+//         p1.sacar(exp1);
 //         std::cout << "Elemento: " << exp1 << std::endl;
 //     }
 
@@ -553,17 +553,10 @@ int main()
     // std::cout << postfija << '\n';
     // std::cout << evaluar_postfija(postfija) << '\n';
 
-    // std::string infija = "4/3-(8/2*3+1)+4";
-    // std::cout << (UPilaGenerica::verificar_parentesis(infija) ? "SI": "NO") << '\n';
-    // std::string postfija = UPilaGenerica::infija_a_postfija(infija);
-    // std::cout << postfija << '\n';
-    // std::cout << UPilaGenerica::evaluar_postfija(postfija) << '\n';
-    
-    UPilaGenerica::PilaGenerica<int> p;
-    p.meter(1);
-    p.meter(2);
-    p.meter(3);
-    p.meter(4);
-    std::cout << p.mostrar() << '\n';
+    std::string infija = "4/3-(8/2*3+1)+4";
+    std::cout << (UPilaGenerica::verificar_parentesis(infija) ? "SI" : "NO") << '\n';
+    std::string postfija = UPilaGenerica::infija_a_postfija(infija);
+    std::cout << postfija << '\n';
+    std::cout << UPilaGenerica::evaluar_postfija(postfija) << '\n';
     return 0;
 }

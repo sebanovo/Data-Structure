@@ -11,14 +11,15 @@
 namespace UPilaSM
 {
     using UCSMemoria::NULO;
-    
+
     PilaSM::PilaSM()
     {
         tope = NULO;
         mem = new UCSMemoria::CSMemoria;
     }
 
-    PilaSM::PilaSM(UCSMemoria::CSMemoria* m){
+    PilaSM::PilaSM(UCSMemoria::CSMemoria* m)
+    {
         mem = m;
         tope = NULO;
     }
@@ -32,16 +33,16 @@ namespace UPilaSM
     {
         int x = mem->new_espacio(_elemento_sig);
         if (x == NULO) throw std::runtime_error("No hay espacio en la memoria");
-        mem->poner_dato(x,_elemento, e);
-        mem->poner_dato(x,_sig, tope);
+        mem->poner_dato(x, _elemento, e);
+        mem->poner_dato(x, _sig, tope);
         tope = x;
     }
 
-    void PilaSM::sacar(int* e)
+    void PilaSM::sacar(int& e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         // if (e == NULO) throw std::invalid_argument("Puntero nulo pasado a sacar");
-        *e = mem->obtener_dato(tope, _elemento);
+        e = mem->obtener_dato(tope, _elemento);
         int aux = tope;
         tope = mem->obtener_dato(tope, _sig);
         mem->delete_espacio(aux);
@@ -60,14 +61,14 @@ namespace UPilaSM
         while (!vacia())
         {
             int e;
-            sacar(&e);
+            sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux->meter(e);
         }
         while (!aux->vacia())
         {
             int e;
-            aux->sacar(&e);
+            aux->sacar(e);
             meter(e);
         }
         return s;
@@ -77,4 +78,4 @@ namespace UPilaSM
     {
         delete mem;
     }
-}  // namespace PilaSM
+}  // namespace UPilaSM

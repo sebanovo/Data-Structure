@@ -26,10 +26,10 @@ namespace UPilaEntero
         datos = datos * 10 + e;
     }
 
-    void PilaEntero::sacar(int* e)
+    void PilaEntero::sacar(int& e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        *e = datos % 10;
+        e = datos % 10;
         datos = datos / 10;
     }
 
@@ -45,14 +45,14 @@ namespace UPilaEntero
         while (!vacia())
         {
             int e;
-            sacar(&e);
+            sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux->meter(e);
         }
         while (!aux->vacia())
         {
             int e;
-            aux->sacar(&e);
+            aux->sacar(e);
             meter(e);
         }
         return s;

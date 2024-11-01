@@ -23,7 +23,7 @@ namespace UPilaSM
         PilaSM(UCSMemoria::CSMemoria * m);
         bool vacia();
         void meter(int e);
-        void sacar(int* e);
+        void sacar(int& e);
         int cima();
         std::string mostrar();
         ~PilaSM();

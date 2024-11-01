@@ -29,11 +29,11 @@ namespace UPilaPuntero
         tope = x;
     }
 
-    void PilaPuntero::sacar(int* e)
+    void PilaPuntero::sacar(int& e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         // if (e == nullptr) throw std::invalid_argument("Puntero nulo pasado a sacar");
-        *e = tope->elemento;
+        e = tope->elemento;
         Nodo* aux = tope;
         tope = tope->sig;
         delete aux;
@@ -52,14 +52,14 @@ namespace UPilaPuntero
         while (!vacia())
         {
             int e;
-            sacar(&e);
+            sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux->meter(e);
         }
         while (!aux->vacia())
         {
             int e;
-            aux->sacar(&e);
+            aux->sacar(e);
             meter(e);
         }
         return s;
