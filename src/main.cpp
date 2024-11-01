@@ -28,6 +28,7 @@
 #include "UPila/PilaSM.h"
 #include "UPila/PilaEntero.h"
 #include "UPila/PilaCadena.h"
+#include "UPila/PilaGenerica.h"
 
 using std::cin;
 using std::cout;
@@ -544,8 +545,25 @@ int main()
     // c[5] = '\0';
     // int longitud = std::strlen(c);
     // std::cout << longitud;
-    std::string input = "2^6";
-    std::string postfija = UPilaVector::infija_a_postfija(input);
-    std::cout << UPilaVector::evaluar_postfija(postfija) << '\n';
-    std::cout << std::pow(2,3);
+
+    // -7.666666
+    // std::string input = "4/3-(8/2*3+1)+4";
+    // // 4 4 / 8 2 / 3 * 1 + - 4 +
+    // std::string postfija = infija_a_postfija(input);
+    // std::cout << postfija << '\n';
+    // std::cout << evaluar_postfija(postfija) << '\n';
+
+    // std::string infija = "4/3-(8/2*3+1)+4";
+    // std::cout << (UPilaGenerica::verificar_parentesis(infija) ? "SI": "NO") << '\n';
+    // std::string postfija = UPilaGenerica::infija_a_postfija(infija);
+    // std::cout << postfija << '\n';
+    // std::cout << UPilaGenerica::evaluar_postfija(postfija) << '\n';
+    
+    UPilaGenerica::PilaGenerica<int> p;
+    p.meter(1);
+    p.meter(2);
+    p.meter(3);
+    p.meter(4);
+    std::cout << p.mostrar() << '\n';
+    return 0;
 }

@@ -48,6 +48,12 @@
         "cstdarg": "cpp",
         "set": "cpp",
         "fstream": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "charconv": "cpp",
+        "ctime": "cpp",
+        "format": "cpp",
+        "span": "cpp",
+        "text_encoding": "cpp",
+        "variant": "cpp"
     }
 }

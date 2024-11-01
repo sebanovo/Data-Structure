@@ -4,28 +4,26 @@
 #define PilaVectorH
 //---------------------------------------------------------------------------
 #include <string>
+#include <stdexcept>
+#include <cmath>
+#include <iostream>
+#include <sstream>
 
-namespace UPilaVector
-{
-    class PilaVector
-    {
-       private:
+namespace UPilaVector {
+    class PilaVector {
+    private:
         const int MAX = 1000;
-        char* elementos;
+        int* elementos;
         int tope;
 
-       public:
+    public:
         PilaVector();
         bool vacia();
-        void meter(char e);
-        void sacar(char* e);
+        void meter(int e);
+        void sacar(int& e);
         int cima();
         std::string mostrar();
         ~PilaVector();
     };
-
-    int evaluar_postfija(std::string expPostfija);
-    std::string infija_a_postfija(std::string infija);
 };  // namespace UPilaVector
-
 #endif
