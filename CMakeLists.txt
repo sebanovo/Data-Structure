@@ -37,6 +37,7 @@ set(
             src/UPila/PilaSM.cpp
             src/UPila/PilaEntero.cpp
             src/UPila/PilaCadena.cpp
+            src/UPila/PilaGenerica.cpp
 )
 
 add_executable(TDA ${SOURCES})
