@@ -546,11 +546,12 @@ int main()
     // int longitud = std::strlen(c);
     // std::cout << longitud;
 
-    // -7.666666
-    // std::string input = "4/3-(8/2*3+1)+4";
-    // // 4 4 / 8 2 / 3 * 1 + - 4 +
-    // std::string postfija = infija_a_postfija(input);
-    // std::cout << postfija << '\n';
-    // std::cout << evaluar_postfija(postfija) << '\n';
+    //-7.666666
+    //"4/3-(8/2*3+1)+4"
+    std::string input = "1..+1";
+    // 4 4 / 8 2 / 3 * 1 + - 4 +
+    std::string postfija = UPilaGenerica::infija_a_postfija(input);
+    std::cout << postfija << '\n';
+    std::cout << UPilaGenerica::evaluar_postfija(postfija) << '\n';
     return 0;
 }

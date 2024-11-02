@@ -125,6 +125,19 @@ namespace UPilaGenerica
         return true;
     }
 
+    bool son_caracteres_validos(std::string expresionInfija) {
+        std::string numeros =  "0123456789";
+        std::string operadores =  "+-*/^";
+        std::string parentesis =  "()";
+        std::string punto = ".";
+        std::string caracteresValidos = numeros + operadores + parentesis + punto;
+
+        for(size_t i = 0; i < expresionInfija.length() ; i++) {
+            if(caracteresValidos.find(expresionInfija[i]) == std::string::npos) return false;
+        }
+        return true;
+    }
+
     double evaluar(double op1, double op2, char operacion)
     {
         switch (operacion)
@@ -164,19 +177,33 @@ namespace UPilaGenerica
     std::string infija_a_postfija(std::string expresionInfija)
     {
         if (expresionInfija.empty()) throw std::runtime_error("La expresión infija no puede ser vacía");
+        if(!son_caracteres_validos(expresionInfija)) throw std::runtime_error("Caracteres de la expresion infija invalidos");
         if (!son_parentesis_validos(expresionInfija)) throw std::runtime_error("Paréntesis inválidos");
-        
+
         PilaGenerica<char> pilaOp;
         std::string postfija;
         for (size_t i = 0; i < expresionInfija.length(); ++i)
         {
             char car = expresionInfija[i];
-            if (std::isdigit(car))
+            // if (std::isdigit(car))
+            // {
+            //     postfija += car;
+            //     while (i + 1 < expresionInfija.length() && std::isdigit(expresionInfija[i + 1]))
+            //     {
+            //         postfija += expresionInfija[++i];
+            //     }
+            //     postfija += ' ';
+            // }
+            if (std::isdigit(car) || car == '.')
             {
                 postfija += car;
-                while (i + 1 < expresionInfija.length() && std::isdigit(expresionInfija[i + 1]))
+
+                bool decimalAdded = (car == '.');
+                while (i + 1 < expresionInfija.length() && (std::isdigit(expresionInfija[i + 1]) || (!decimalAdded && expresionInfija[i + 1] == '.')))
                 {
-                    postfija += expresionInfija[++i];
+                    char nextChar = expresionInfija[++i];
+                    if (nextChar == '.') decimalAdded = true;
+                    postfija += nextChar;
                 }
                 postfija += ' ';
             }
