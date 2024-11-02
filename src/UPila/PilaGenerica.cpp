@@ -60,7 +60,7 @@ namespace UPilaGenerica
     std::string PilaGenerica<T>::mostrar()
     {
         std::string s = "";
-        PilaGenerica<T>* aux = new PilaGenerica<T>();
+        PilaGenerica<T>aux;
         while (!vacia())
         {
             T e;
@@ -91,12 +91,12 @@ namespace UPilaGenerica
                 // tipo no especificado
                 s += "| Tipo no soportado |\n";
             }
-            aux->meter(e);
+            aux.meter(e);
         }
-        while (!aux->vacia())
+        while (!aux.vacia())
         {
             T e;
-            aux->sacar(e);
+            aux.sacar(e);
             meter(e);
         }
         return s;

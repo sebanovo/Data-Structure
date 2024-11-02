@@ -48,18 +48,18 @@ namespace UPilaPuntero
     std::string PilaPuntero::mostrar()
     {
         std::string s = "";
-        PilaPuntero* aux = new PilaPuntero;
+        PilaPuntero aux;
         while (!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
-            aux->meter(e);
+            aux.meter(e);
         }
-        while (!aux->vacia())
+        while (!aux.vacia())
         {
             int e;
-            aux->sacar(e);
+            aux.sacar(e);
             meter(e);
         }
         return s;

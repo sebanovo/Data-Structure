@@ -45,18 +45,18 @@ namespace UPilaCadena
     std::string PilaCadena::mostrar()
     {
         std::string s = "";
-        PilaCadena* aux = new PilaCadena;
+        PilaCadena aux;
         while (!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
-            aux->meter(e);
+            aux.meter(e);
         }
-        while (!aux->vacia())
+        while (!aux.vacia())
         {
             int e;
-            aux->sacar(e);
+            aux.sacar(e);
             meter(e);
         }
         return s;
