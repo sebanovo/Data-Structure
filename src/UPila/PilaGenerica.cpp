@@ -11,12 +11,6 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-// Añadir mas instancias si se lo desea
-template class UPilaGenerica::PilaGenerica<int>;
-template class UPilaGenerica::PilaGenerica<char>;
-template class UPilaGenerica::PilaGenerica<std::string>;
-template class UPilaGenerica::PilaGenerica<bool>;
-
 namespace UPilaGenerica
 {
     // Implementación de las funciones plantilla
@@ -270,3 +264,9 @@ namespace UPilaGenerica
         return resultado;
     }
 }  // namespace UPilaGenerica
+
+// Añadir mas instancias si se lo desea
+template class UPilaGenerica::PilaGenerica<int>;
+template class UPilaGenerica::PilaGenerica<char>;
+template class UPilaGenerica::PilaGenerica<std::string>;
+template class UPilaGenerica::PilaGenerica<bool>;
