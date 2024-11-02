@@ -4,9 +4,6 @@
 #define PilaGenericaH
 //---------------------------------------------------------------------------
 #include <string>
-#include <stdexcept>
-#include <cmath>
-#include <iostream>
 
 namespace UPilaGenerica
 {

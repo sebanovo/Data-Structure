@@ -3,11 +3,10 @@
 #pragma hdrstop
 
 #include "PilaGenerica.h"
-#include <math.h>
-#include <type_traits>
-#include <stdexcept>
 #include <sstream>
-#include <string>
+#include <stdexcept>
+#include <cmath>
+#include <type_traits>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
