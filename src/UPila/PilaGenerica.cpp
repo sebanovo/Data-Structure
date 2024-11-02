@@ -4,14 +4,128 @@
 
 #include "PilaGenerica.h"
 #include <math.h>
+#include <type_traits>
 #include <stdexcept>
 #include <sstream>
+#include <string>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-namespace UPilaGenerica 
+// Añadir mas instancias si se lo desea
+template class UPilaGenerica::PilaGenerica<int>;
+template class UPilaGenerica::PilaGenerica<char>;
+template class UPilaGenerica::PilaGenerica<std::string>;
+template class UPilaGenerica::PilaGenerica<bool>;
+
+namespace UPilaGenerica
 {
+    // Implementación de las funciones plantilla
+    template <typename T>
+    PilaGenerica<T>::PilaGenerica()
+    {
+        tope = 0;
+        elementos = new T[MAX];
+    }
+
+    template <typename T>
+    bool PilaGenerica<T>::vacia()
+    {
+        return tope == 0;
+    }
+
+    template <typename T>
+    void PilaGenerica<T>::meter(T e)
+    {
+        if (tope >= MAX) return;
+        tope++;
+        elementos[tope] = e;
+    }
+
+    template <typename T>
+    void PilaGenerica<T>::sacar(T& e)
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        e = elementos[tope];
+        tope--;
+    }
+
+    template <typename T>
+    T PilaGenerica<T>::cima()
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos en la cima");
+        return elementos[tope];
+    }
+
+    template <typename T>
+    std::string PilaGenerica<T>::mostrar()
+    {
+        std::string s = "";
+        PilaGenerica<T>* aux = new PilaGenerica<T>();
+        while (!vacia())
+        {
+            T e;
+            sacar(e);
+            // Usamos `if constexpr` para verificar el tipo en tiempo de compilación
+            if constexpr (std::is_same<T, int>::value)
+            {
+                s += "| " + std::to_string(e) + " |\n";
+            }
+            else if constexpr (std::is_same<T, char>::value)
+            {
+                s += "| ";
+                s += e;
+                s += " |\n";
+            }
+            else if constexpr (std::is_same<T, std::string>::value)
+            {
+                s += "| " + e + " |\n";
+            }
+            else if constexpr (std::is_same<T, bool>::value)
+            {
+                s += "| ";
+                s += e ? "true" : "false";
+                s += " |\n";
+            }
+            else
+            {
+                // tipo no especificado
+                s += "| Tipo no soportado |\n";
+            }
+            aux->meter(e);
+        }
+        while (!aux->vacia())
+        {
+            T e;
+            aux->sacar(e);
+            meter(e);
+        }
+        return s;
+    }
+
+    template <typename T>
+    PilaGenerica<T>::~PilaGenerica()
+    {
+        delete[] elementos;
+    }
+
+    bool son_parentesis_validos(std::string expresionInfija)
+    {
+        int balance = 0;
+        for (char c : expresionInfija)
+        {
+            if (c == '(')
+                ++balance;
+            else if (c == ')')
+                --balance;
+            if (balance < 0)
+                return false;
+        }
+        if (balance != 0)
+            return false;
+        return true;
+    }
+
     double evaluar(double op1, double op2, char operacion)
     {
         switch (operacion)
@@ -50,6 +164,9 @@ namespace UPilaGenerica
 
     std::string infija_a_postfija(std::string expresionInfija)
     {
+        if (expresionInfija.empty()) throw std::runtime_error("La expresión infija no puede ser vacía");
+        if (!son_parentesis_validos(expresionInfija)) throw std::runtime_error("Paréntesis inválidos");
+        
         PilaGenerica<char> pilaOp;
         std::string postfija;
         for (size_t i = 0; i < expresionInfija.length(); ++i)
@@ -122,38 +239,8 @@ namespace UPilaGenerica
             }
         }
 
-        double resultado ;
+        double resultado;
         pila.sacar(resultado);
         return resultado;
     }
-
-    bool verificar_parentesis(std::string expresionInfija)
-    {
-        if (expresionInfija.empty())
-        {
-            std::cout << "La expresión infija no puede ser vacía";
-            return false;
-        }
-
-        int balance = 0;
-        for (char c : expresionInfija)
-        {
-            if (c == '(')
-                ++balance;
-            else if (c == ')')
-                --balance;
-            if (balance < 0)
-            {
-                std::cout << "Paréntesis inválidos";
-                return false;
-            }
-        }
-        if (balance != 0)
-        {
-            std::cout << "Paréntesis inválidos";
-            return false;
-        }
-        return true;
-    }
-
 }  // namespace UPilaGenerica

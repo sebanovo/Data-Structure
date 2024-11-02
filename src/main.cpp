@@ -552,11 +552,5 @@ int main()
     // std::string postfija = infija_a_postfija(input);
     // std::cout << postfija << '\n';
     // std::cout << evaluar_postfija(postfija) << '\n';
-
-    std::string infija = "4/3-(8/2*3+1)+4";
-    std::cout << (UPilaGenerica::verificar_parentesis(infija) ? "SI" : "NO") << '\n';
-    std::string postfija = UPilaGenerica::infija_a_postfija(infija);
-    std::cout << postfija << '\n';
-    std::cout << UPilaGenerica::evaluar_postfija(postfija) << '\n';
     return 0;
 }
