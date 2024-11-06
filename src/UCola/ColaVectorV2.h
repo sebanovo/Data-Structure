@@ -1,27 +1,27 @@
 //---------------------------------------------------------------------------
 
-#ifndef PilaVectorH
-#define PilaVectorH
+#ifndef ColaVectorV2H
+#define ColaVectorV2H
 //---------------------------------------------------------------------------
 #include <string>
 
-namespace UPilaVector
+namespace UColaVectorV2
 {
-    class PilaVector
+    class ColaVectorV2
     {
        private:
         const int MAX = 1000;
-        int* elementos;
-        int tope;
+        int *v;
+        int ini, fin;
 
        public:
-        PilaVector();
+        ColaVectorV2();
         bool vacia();
-        void meter(int e);
-        void sacar(int& e);
-        int cima();
+        void poner(int e);
+        void sacar(int &e);
+        int primero();
         std::string mostrar();
-        ~PilaVector();
+        ~ColaVectorV2();
     };
-};  // namespace UPilaVector
+};  // namespace UColaVectorV2
 #endif

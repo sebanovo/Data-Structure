@@ -30,6 +30,14 @@
 #include "UPila/PilaCadena.h"
 #include "UPila/PilaGenerica.h"
 
+#include "UCola/ColaVectorV1.h"
+#include "UCola/ColaVectorV2.h"
+#include "UCola/ColaVectorV3.h"
+#include "UCola/ColaPuntero.h"
+#include "UCola/ColaSM.h"
+#include "UCola/ColaLista.h"
+#include "UCola/ColaGenerica.h"
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -526,32 +534,34 @@ void mostrarMDSMDoble()
 //     }
 // }
 
-int main()
+void mostrarInfijoAPostfijo()
 {
-    // mostarPilaCadena();
-    // mostrarMDispersaVectorCSR();
-    // std::string s = "Sebastian";
-    // if(s.find(s[0]) >= 0)
-    //     std::cout << "Hola" << " " << s << "\n";
-    // int re = UPilaVector::evaluar_postfija("235*+");
-    // std::cout << re << "\n";
-    // std::cout << UPilaVector::infija_a_postfija("2+3*5");
-    // char* c = static_cast<char *>(malloc(sizeof(char) * 100));
-    // c[0] = 's';
-    // c[1] = 'e';
-    // c[2] = 'b';
-    // c[3] = 'a';
-    // c[4] = 's';
-    // c[5] = '\0';
-    // int longitud = std::strlen(c);
-    // std::cout << longitud;
-
     //-7.666666
     //"4/3-(8/2*3+1)+4"
-    std::string input = "1..+1";
+    std::string input = "1+1";
     // 4 4 / 8 2 / 3 * 1 + - 4 +
     std::string postfija = UPilaGenerica::infija_a_postfija(input);
     std::cout << postfija << '\n';
     std::cout << UPilaGenerica::evaluar_postfija(postfija) << '\n';
+}
+
+int main()
+{
+    UColaGenerica::ColaGenerica<int> c1;
+    c1.poner(1);
+    c1.poner(2);
+    c1.poner(3);
+    c1.poner(4);
+    c1.poner(5);
+    c1.poner(6);
+    std::cout << c1.mostrar() << '\n';
+    int e;
+    c1.sacar(e);
+    c1.sacar(e);
+    c1.sacar(e);
+    c1.sacar(e);
+    c1.sacar(e);
+    c1.sacar(e);
+    std::cout << c1.mostrar() << '\n';
     return 0;
 }

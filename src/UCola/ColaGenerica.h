@@ -1,27 +1,28 @@
 //---------------------------------------------------------------------------
 
-#ifndef PilaVectorH
-#define PilaVectorH
+#ifndef ColaGenericaH
+#define ColaGenericaH
 //---------------------------------------------------------------------------
 #include <string>
 
-namespace UPilaVector
+namespace UColaGenerica
 {
-    class PilaVector
+    template <typename T>
+    class ColaGenerica
     {
        private:
         const int MAX = 1000;
-        int* elementos;
-        int tope;
+        T *v;
+        int ini, fin;
 
        public:
-        PilaVector();
+        ColaGenerica();
         bool vacia();
-        void meter(int e);
-        void sacar(int& e);
-        int cima();
+        void poner(T e);
+        void sacar(T &e);
+        T primero();
         std::string mostrar();
-        ~PilaVector();
+        ~ColaGenerica();
     };
-};  // namespace UPilaVector
+};  // namespace UColaGenerica
 #endif

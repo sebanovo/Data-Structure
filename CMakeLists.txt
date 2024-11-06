@@ -38,6 +38,14 @@ set(
             src/UPila/PilaEntero.cpp
             src/UPila/PilaCadena.cpp
             src/UPila/PilaGenerica.cpp
+
+            src/UCola/ColaVectorV1.cpp
+            src/UCola/ColaVectorV2.cpp
+            src/UCola/ColaVectorV3.cpp
+            src/UCola/ColaLista.cpp
+            src/UCola/ColaPuntero.cpp
+            src/UCola/ColaSM.cpp
+            src/UCola/ColaGenerica.cpp
 )
 
 add_executable(TDA ${SOURCES})
