@@ -1,21 +1,18 @@
 // ---------------------------------------------------------------------------
 
 #ifndef ColaPrioridadH
-#define ColaPrioridaddH
+#define ColaPrioridadH
 // ---------------------------------------------------------------------------
 #include <string>
-#include "UCola/ColaVectorV3.h"
 #include "UCola/ColaSM.h"
 #include "UCSMemoria/CSMemoria.h"
 
 namespace UColaPrioridad
 {
-    const int MAXCP = 3;
-    using namespace std;
-
     class ColaPrioridad
     {
        private:
+        const int MAX = 3;
         UColaSM::ColaSM*(*vc);
         int* vf;
         int colaAct;
@@ -27,7 +24,7 @@ namespace UColaPrioridad
         bool vacia();
         int primero();
         void poner(int e, int prioridad);
-        void asignar_frec_prioridad(int frec, int prioridad);
+        void asignar_frecuencia_prioridad(int frec, int prioridad);
         void sacar(int& e);
         std::string mostrar();
 

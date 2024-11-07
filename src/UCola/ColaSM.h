@@ -32,6 +32,9 @@ namespace UColaSM
         int ultimo();
         void poner_frente(int e);
         void sacar_final(int& e);
+
+        // ejercicio
+        static void concatenar(ColaSM* c1, ColaSM* c2, ColaSM* c3);
     };
 };  // namespace UColaSM
 #endif

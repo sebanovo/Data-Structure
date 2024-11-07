@@ -28,6 +28,12 @@ namespace UColaGenerica
         T ultimo();
         void poner_frente(T e);
         void sacar_final(T &e);
+
+        // ejercicio
+        template <typename U>
+        static void concatenar(ColaGenerica<U> *c1, ColaGenerica<U> *c2, ColaGenerica<U> *c3);
     };
+
 };  // namespace UColaGenerica
+
 #endif

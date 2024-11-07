@@ -31,6 +31,9 @@ namespace UColaLista
         int ultimo();
         void poner_frente(int e);
         void sacar_final(int& e);
+
+        // ejercicio
+        static void concatenar(ColaLista* c1, ColaLista* c2, ColaLista* c3);
     };
 };  // namespace UColaLista
 #endif

@@ -4,6 +4,7 @@
 
 #include "ColaVectorV1.h"
 #include <stdexcept>
+#include <memory>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -29,7 +30,7 @@ namespace UColaVectorV1
         v[++fin] = e;
     }
 
-    void ColaVectorV1::sacar(int& e)
+    void ColaVectorV1::sacar(int &e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         e = v[ini++];
@@ -85,10 +86,41 @@ namespace UColaVectorV1
         v[ini] = e;
     }
 
-    void ColaVectorV1::sacar_final(int& e)
+    void ColaVectorV1::sacar_final(int &e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         e = v[fin];
         fin--;
+    }
+
+    void ColaVectorV1::concatenar(ColaVectorV1 *c1, ColaVectorV1 *c2, ColaVectorV1 *c3)
+    {
+        ColaVectorV1 aux;
+        while (!c1->vacia())
+        {
+            int e;
+            c1->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            int e;
+            aux.sacar(e);
+            c3->poner(e);
+            c1->poner(e);
+        }
+        while (!c2->vacia())
+        {
+            int e;
+            c2->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            int e;
+            aux.sacar(e);
+            c3->poner(e);
+            c2->poner(e);
+        }
     }
 }  // namespace UColaVectorV1

@@ -32,7 +32,7 @@ namespace UColaGenerica
     }
 
     template <typename T>
-    void ColaGenerica<T>::sacar(T& e)
+    void ColaGenerica<T>::sacar(T &e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         e = v[ini];
@@ -118,15 +118,55 @@ namespace UColaGenerica
     }
 
     template <typename T>
-    void ColaGenerica<T>::sacar_final(T& e)
+    void ColaGenerica<T>::sacar_final(T &e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         e = v[fin];
         fin--;
     }
+
+    template <typename T>
+    template <typename U>
+    void ColaGenerica<T>::concatenar(ColaGenerica<U> *c1, ColaGenerica<U> *c2, ColaGenerica<U> *c3)
+    {
+        ColaGenerica<U> aux;
+        while (!c1->vacia())
+        {
+            U e;
+            c1->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            U e;
+            aux.sacar(e);
+            c3->poner(e);
+            c1->poner(e);
+        }
+        while (!c2->vacia())
+        {
+            U e;
+            c2->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            U e;
+            aux.sacar(e);
+            c3->poner(e);
+            c2->poner(e);
+        }
+    }
+
 }  // namespace UColaGenerica
 // Añadir mas instancias si se lo desea
 template class UColaGenerica::ColaGenerica<int>;
 template class UColaGenerica::ColaGenerica<char>;
 template class UColaGenerica::ColaGenerica<std::string>;
 template class UColaGenerica::ColaGenerica<bool>;
+
+// instanciar el metodo estatico;
+template void UColaGenerica::ColaGenerica<int>::concatenar<int>(ColaGenerica<int> *, ColaGenerica<int> *, ColaGenerica<int> *);
+template void UColaGenerica::ColaGenerica<char>::concatenar<char>(ColaGenerica<char> *, ColaGenerica<char> *, ColaGenerica<char> *);
+template void UColaGenerica::ColaGenerica<std::string>::concatenar<std::string>(ColaGenerica<std::string> *, ColaGenerica<std::string> *, ColaGenerica<std::string> *);
+template void UColaGenerica::ColaGenerica<bool>::concatenar<bool>(ColaGenerica<bool> *, ColaGenerica<bool> *, ColaGenerica<bool> *);

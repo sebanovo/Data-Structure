@@ -32,6 +32,9 @@ namespace UColaPuntero
         int ultimo();
         void poner_frente(int e);
         void sacar_final(int& e);
+
+        // ejercicio
+        static void concatenar(ColaPuntero* c1, ColaPuntero* c2, ColaPuntero* c3);
     };
 };  // namespace UColaPuntero
 #endif

@@ -35,8 +35,10 @@
 #include "UCola/ColaVectorV3.h"
 #include "UCola/ColaPuntero.h"
 #include "UCola/ColaSM.h"
-#include "UCola/ColaLista.h"
 #include "UCola/ColaGenerica.h"
+#include "UCola/ColaGenerica.h"
+
+#include "UColaPrioridad/ColaPrioridad.h"
 
 using std::cin;
 using std::cout;
@@ -552,8 +554,7 @@ void mostrarCola()
     // UColaVectorV1::ColaVectorV1 c1;
     // UColaPuntero::ColaPuntero c1;
     // UColaSM::ColaSM c1;
-    UColaLista::ColaLista c1;
-    // UColaGenerica::ColaGenerica<int> c1;
+    UColaGenerica::ColaGenerica<int> c1;
     c1.poner(1);
     c1.poner(2);
     c1.poner(3);
@@ -582,8 +583,57 @@ void mostrarCola()
     // <<<<
 }
 
+void mostrarConcatenarCola()
+{
+    UColaGenerica::ColaGenerica<bool>* c1 = new UColaGenerica::ColaGenerica<bool>;
+    UColaGenerica::ColaGenerica<bool>* c2 = new UColaGenerica::ColaGenerica<bool>;
+    UColaGenerica::ColaGenerica<bool>* c3 = new UColaGenerica::ColaGenerica<bool>;
+
+    c1->poner(true);
+    c1->poner(false);
+    c1->poner(true);
+    c1->poner(false);
+
+    c2->poner(true);
+    c2->poner(true);
+    c2->poner(true);
+
+    UColaGenerica::ColaGenerica<bool>::concatenar(c1, c2, c3);
+
+    std::cout << c1->mostrar() << '\n';
+    std::cout << c2->mostrar() << '\n';
+    std::cout << c3->mostrar() << '\n';
+
+    delete c1, c2, c3;
+}
+
+void mostrarColaPrioridad() {
+    UColaPrioridad::ColaPrioridad c;
+    c.poner(1, 0);
+    c.poner(2, 0);
+    c.poner(3, 0);
+
+    c.poner(1, 1);
+    c.poner(2, 1);
+    c.poner(3, 1);
+
+    c.poner(1, 2);
+    c.poner(2, 2);
+    c.poner(3, 2);
+
+    c.asignar_frecuencia_prioridad(3, 1);
+    c.asignar_frecuencia_prioridad(2, 2);
+    c.asignar_frecuencia_prioridad(2, 3);
+
+    while(!c.vacia()) {
+        int e;
+        c.sacar(e);
+        std::cout << c.mostrar() << '\n';
+    }
+}
+
 int main()
 {
-    mostrarCola();
-    return 0;
+    // mostrarCola();
+    mostrarColaPrioridad();
 }

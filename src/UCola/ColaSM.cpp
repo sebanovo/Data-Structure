@@ -131,4 +131,35 @@ namespace UColaSM
         mem->delete_espacio(fin);
         fin = ant;
     }
+
+    void ColaSM::concatenar(ColaSM* c1, ColaSM* c2, ColaSM* c3)
+    {
+        ColaSM aux;
+        while (!c1->vacia())
+        {
+            int e;
+            c1->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            int e;
+            aux.sacar(e);
+            c3->poner(e);
+            c1->poner(e);
+        }
+        while (!c2->vacia())
+        {
+            int e;
+            c2->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            int e;
+            aux.sacar(e);
+            c3->poner(e);
+            c2->poner(e);
+        }
+    }
 }  // namespace UColaSM

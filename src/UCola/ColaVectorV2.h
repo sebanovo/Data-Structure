@@ -27,6 +27,9 @@ namespace UColaVectorV2
         int ultimo();
         void poner_frente(int e);
         void sacar_final(int &e);
+
+        // ejercicio
+        static void concatenar(ColaVectorV2 *c1, ColaVectorV2 *c2, ColaVectorV2 *c3);
     };
 };  // namespace UColaVectorV2
 #endif

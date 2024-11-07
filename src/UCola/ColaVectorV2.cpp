@@ -30,7 +30,7 @@ namespace UColaVectorV2
         v[++fin] = e;
     }
 
-    void ColaVectorV2 ::sacar(int& e)
+    void ColaVectorV2 ::sacar(int &e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         e = v[ini];
@@ -89,10 +89,41 @@ namespace UColaVectorV2
         v[ini] = e;
     }
 
-    void ColaVectorV2::sacar_final(int& e)
+    void ColaVectorV2::sacar_final(int &e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         e = v[fin];
         fin--;
+    }
+
+    void ColaVectorV2::concatenar(ColaVectorV2 *c1, ColaVectorV2 *c2, ColaVectorV2 *c3)
+    {
+        ColaVectorV2 aux;
+        while (!c1->vacia())
+        {
+            int e;
+            c1->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            int e;
+            aux.sacar(e);
+            c3->poner(e);
+            c1->poner(e);
+        }
+        while (!c2->vacia())
+        {
+            int e;
+            c2->sacar(e);
+            aux.poner(e);
+        }
+        while (!aux.vacia())
+        {
+            int e;
+            aux.sacar(e);
+            c3->poner(e);
+            c2->poner(e);
+        }
     }
 }  // namespace UColaVectorV2
