@@ -22,6 +22,11 @@ namespace UColaVectorV2
         int primero();
         std::string mostrar();
         ~ColaVectorV2();
+
+        // metodos para la dicola
+        int ultimo();
+        void poner_frente(int e);
+        void sacar_final(int &e);
     };
 };  // namespace UColaVectorV2
 #endif

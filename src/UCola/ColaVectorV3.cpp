@@ -27,11 +27,9 @@ namespace UColaVectorV3
 
     void ColaVectorV3::poner(int e)
     {
-       if (siguiente(siguiente(fin)) != ini)
-        {
-            fin = siguiente(fin);
-            v[fin - 1] = e;
-        }
+        if (siguiente(siguiente(fin)) == ini) throw std::runtime_error("No hay espacio en la cola");
+        fin = siguiente(fin);
+        v[fin - 1] = e;
     }
 
     void ColaVectorV3 ::sacar(int& e)
@@ -76,36 +74,30 @@ namespace UColaVectorV3
 
     int ColaVectorV3::siguiente(int dir)
     {
-        if (dir == MAX) return 1;
-        return dir + 1;
+        return dir == MAX ? 1 : dir + 1;
     }
 
     int ColaVectorV3::anterior(int dir)
     {
-        if (dir == 1) return MAX;
-        return dir - 1;
+        return dir == 1 ? MAX : dir - 1;
     }
-
 
     int ColaVectorV3::ultimo()
     {
         if (vacia()) throw std::runtime_error("No hay elementos en la cola");
-        if (!vacia())
-            return v[fin - 1];
+        return v[fin - 1];
     }
 
     void ColaVectorV3::poner_frente(int e)
     {
-        if (siguiente(siguiente(fin)) != ini)
-        {
-            ini = anterior(ini);
-            v[ini - 1] = e;
-        }
+        if (siguiente(siguiente(fin)) == ini) throw std::runtime_error("No hay espacio en la cola");
+        ini = anterior(ini);
+        v[ini - 1] = e;
     }
 
     void ColaVectorV3::sacar_final(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
         e = v[fin - 1];
         fin = anterior(fin);
     }

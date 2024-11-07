@@ -29,19 +29,17 @@ namespace UColaSM
     void ColaSM::poner(int e)
     {
         int aux = mem->new_espacio(_elemento_sig);
-        if (aux != NULO)
+        if (aux == NULO) throw std::runtime_error("No hay espacio en la memoria");
+        mem->poner_dato(aux, _elemento, e);
+        mem->poner_dato(aux, _sig, NULO);
+        if (vacia())
         {
-            mem->poner_dato(aux, _elemento, e);
-            mem->poner_dato(aux, _sig, NULO);
-            if (vacia())
-            {
-                ini = fin = aux;
-            }
-            else
-            {
-                mem->poner_dato(fin, _sig, aux);
-                fin = aux;
-            }
+            ini = fin = aux;
+        }
+        else
+        {
+            mem->poner_dato(fin, _sig, aux);
+            fin = aux;
         }
     }
 
@@ -83,5 +81,54 @@ namespace UColaSM
             poner(e);
         }
         return s + "<<";
+    }
+
+    ColaSM::~ColaSM()
+    {
+        delete mem;
+    }
+
+    int ColaSM::ultimo()
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        return mem->obtener_dato(fin, _elemento);
+    }
+
+    void ColaSM::poner_frente(int e)
+    {
+        int aux = mem->new_espacio(_elemento_sig);
+        if (aux == NULO) throw std::runtime_error("No hay espacio en la memoria");
+        mem->poner_dato(aux, _elemento, e);
+        mem->poner_dato(aux, _sig, NULO);
+        if (vacia())
+        {
+            ini = fin = aux;
+        }
+        else
+        {
+            mem->poner_dato(aux, _sig, ini);
+            ini = aux;
+        }
+    }
+
+    void ColaSM::sacar_final(int& e)
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        int x = ini;
+        int ant = x;
+        while (x != fin)
+        {
+            ant = x;
+            x = mem->obtener_dato(x, _sig);
+        }
+        if (x == ini)
+        {
+            mem->delete_espacio(fin);
+            ini = fin = NULO;
+            return;
+        }
+        e = mem->obtener_dato(fin, _elemento);
+        mem->delete_espacio(fin);
+        fin = ant;
     }
 }  // namespace UColaSM

@@ -26,15 +26,14 @@ namespace UColaVectorV2
 
     void ColaVectorV2::poner(int e)
     {
-        if (fin >= MAX) return;
+        if (fin >= MAX) throw std::runtime_error("No hay espacio en la cola");
         v[++fin] = e;
     }
 
     void ColaVectorV2 ::sacar(int& e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        // e = v[ini++];
-        e = v[1];
+        e = v[ini];
         for (int i = ini; i < fin; i++)
             v[i] = v[i + 1];
         fin--;
@@ -71,5 +70,29 @@ namespace UColaVectorV2
     ColaVectorV2 ::~ColaVectorV2()
     {
         delete[] v;
+    }
+
+    int ColaVectorV2::ultimo()
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        return v[fin];
+    }
+
+    void ColaVectorV2::poner_frente(int e)
+    {
+        if (fin >= MAX) throw std::runtime_error("No hay espacio en la cola");
+        fin++;
+        for (int i = fin; i > ini; i--)
+        {
+            v[i] = v[i - 1];
+        }
+        v[ini] = e;
+    }
+
+    void ColaVectorV2::sacar_final(int& e)
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        e = v[fin];
+        fin--;
     }
 }  // namespace UColaVectorV2

@@ -26,6 +26,12 @@ namespace UColaSM
         void sacar(int& e);
         int primero();
         std::string mostrar();
+        ~ColaSM();
+
+        // metodos para la dicola
+        int ultimo();
+        void poner_frente(int e);
+        void sacar_final(int& e);
     };
 };  // namespace UColaSM
 #endif

@@ -23,7 +23,7 @@ namespace UColaPuntero
     void ColaPuntero::poner(int e)
     {
         Nodo* aux = new Nodo;
-        if (aux == nullptr) return;
+        if (aux == nullptr) throw std::runtime_error("No hay espacio en la memoria");
         aux->elemento = e;
         aux->sig = nullptr;
         if (vacia())
@@ -87,5 +87,49 @@ namespace UColaPuntero
             x = x->sig;
             delete aux;
         }
+    }
+
+    int ColaPuntero::ultimo()
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        return fin->elemento;
+    }
+
+    void ColaPuntero::poner_frente(int e)
+    {
+        Nodo* aux = new Nodo;
+        if (aux == nullptr) throw std::runtime_error("No hay espacio en la memoria");
+        aux->elemento = e;
+        aux->sig = nullptr;
+        if (vacia())
+        {
+            ini = fin = aux;
+        }
+        else
+        {
+            aux->sig = ini;
+            ini = aux;
+        }
+    }
+
+    void ColaPuntero::sacar_final(int& e)
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        Nodo* x = ini;
+        Nodo* ant = x;
+        while (x != fin)
+        {
+            ant = x;
+            x = x->sig;
+        }
+        if (x == ini)
+        {
+            delete fin;
+            ini = fin = nullptr;
+            return;
+        }
+        e = fin->elemento;
+        delete fin;
+        fin = ant;
     }
 }  // namespace UColaPuntero

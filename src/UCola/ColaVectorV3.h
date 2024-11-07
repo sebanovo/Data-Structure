@@ -25,6 +25,7 @@ namespace UColaVectorV3
         std::string mostrar();
         ~ColaVectorV3();
 
+        // metodos para la dicola
         int ultimo();
         void poner_frente(int e);
         void sacar_final(int &e);

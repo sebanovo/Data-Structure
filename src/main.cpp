@@ -545,23 +545,45 @@ void mostrarInfijoAPostfijo()
     std::cout << UPilaGenerica::evaluar_postfija(postfija) << '\n';
 }
 
-int main()
+void mostrarCola()
 {
-    UColaGenerica::ColaGenerica<int> c1;
+    // UColaVectorV3::ColaVectorV3 c1;
+    // UColaVectorV2::ColaVectorV2 c1;
+    // UColaVectorV1::ColaVectorV1 c1;
+    // UColaPuntero::ColaPuntero c1;
+    // UColaSM::ColaSM c1;
+    UColaLista::ColaLista c1;
+    // UColaGenerica::ColaGenerica<int> c1;
     c1.poner(1);
     c1.poner(2);
     c1.poner(3);
     c1.poner(4);
     c1.poner(5);
     c1.poner(6);
+    std::cout << "primero: " << c1.primero() << '\n';
+    c1.poner_frente(100);
+    std::cout << "primero: " << c1.primero() << '\n';
     std::cout << c1.mostrar() << '\n';
+    int a;
+    c1.sacar_final(a);
+    std::cout << "ultimo: " << c1.ultimo() << '\n';
     int e;
     c1.sacar(e);
     c1.sacar(e);
-    c1.sacar(e);
-    c1.sacar(e);
-    c1.sacar(e);
-    c1.sacar(e);
+    c1.sacar_final(e);
+    c1.sacar_final(e);
+    c1.sacar_final(e);
+    c1.sacar_final(e);
     std::cout << c1.mostrar() << '\n';
+    // primero: 1
+    // primero: 100
+    // <<100,1,2,3,4,5,6<<
+    // ultimo: 5
+    // <<<<
+}
+
+int main()
+{
+    mostrarCola();
     return 0;
 }

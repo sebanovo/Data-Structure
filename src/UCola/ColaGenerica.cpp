@@ -27,7 +27,7 @@ namespace UColaGenerica
     template <typename T>
     void ColaGenerica<T>::poner(T e)
     {
-        if (fin >= MAX) return;
+        if (fin >= MAX) throw std::runtime_error("No hay espacio en la cola");
         v[++fin] = e;
     }
 
@@ -35,7 +35,10 @@ namespace UColaGenerica
     void ColaGenerica<T>::sacar(T& e)
     {
         if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        e = v[ini++];
+        e = v[ini];
+        for (int i = ini; i < fin; i++)
+            v[i] = v[i + 1];
+        fin--;
     }
 
     template <typename T>
@@ -66,7 +69,7 @@ namespace UColaGenerica
             }
             else if constexpr (std::is_same<T, std::string>::value)
             {
-                s +=  e;
+                s += e;
             }
             else if constexpr (std::is_same<T, bool>::value)
             {
@@ -93,6 +96,33 @@ namespace UColaGenerica
     ColaGenerica<T>::~ColaGenerica()
     {
         delete[] v;
+    }
+
+    template <typename T>
+    T ColaGenerica<T>::ultimo()
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        return v[fin];
+    }
+
+    template <typename T>
+    void ColaGenerica<T>::poner_frente(T e)
+    {
+        if (fin >= MAX) throw std::runtime_error("No hay espacio en la cola");
+        fin++;
+        for (int i = fin; i > ini; i--)
+        {
+            v[i] = v[i - 1];
+        }
+        v[ini] = e;
+    }
+
+    template <typename T>
+    void ColaGenerica<T>::sacar_final(T& e)
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        e = v[fin];
+        fin--;
     }
 }  // namespace UColaGenerica
 // Añadir mas instancias si se lo desea

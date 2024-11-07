@@ -73,4 +73,21 @@ namespace UColaLista
         // delete mem;
         delete ls;
     }
+
+    int ColaLista::ultimo()
+    {
+        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        return ls->recupera(ls->fin());
+    }
+
+    void ColaLista::poner_frente(int e)
+    {
+        ls->inserta(ls->primero(), e);
+    }
+
+    void ColaLista::sacar_final(int& e)
+    {
+        e = ls->recupera(ls->fin());
+        ls->suprime(ls->fin());
+    }
 }  // namespace UColaLista

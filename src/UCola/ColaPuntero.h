@@ -27,6 +27,11 @@ namespace UColaPuntero
         int primero();
         std::string mostrar();
         ~ColaPuntero();
+
+        // metodos para la dicola
+        int ultimo();
+        void poner_frente(int e);
+        void sacar_final(int& e);
     };
 };  // namespace UColaPuntero
 #endif

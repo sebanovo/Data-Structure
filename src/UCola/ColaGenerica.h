@@ -23,6 +23,11 @@ namespace UColaGenerica
         T primero();
         std::string mostrar();
         ~ColaGenerica();
+
+        // metodos para la dicola
+        T ultimo();
+        void poner_frente(T e);
+        void sacar_final(T &e);
     };
 };  // namespace UColaGenerica
 #endif
