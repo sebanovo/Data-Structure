@@ -46,6 +46,8 @@ set(
             src/UCola/ColaPuntero.cpp
             src/UCola/ColaSM.cpp
             src/UCola/ColaGenerica.cpp
+
+            src/UColaPrioridad/ColaPrioridad.cpp
 )
 
 add_executable(TDA ${SOURCES})
