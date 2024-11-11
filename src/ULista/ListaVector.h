@@ -5,16 +5,18 @@
 //---------------------------------------------------------------------------
 #include <string>
 
-namespace UListaVector {
+namespace UListaVector
+{
     using std::string;
     typedef int direccion;
-    class ListaVector {
-       private:
+    class ListaVector
+    {
+        private:
         const int MAX = 100;
         int* elementos;
         int longitud;
 
-       public:
+        public:
         ListaVector();
         direccion fin();
         direccion primero();
@@ -39,5 +41,5 @@ namespace UListaVector {
         // ejercicio
         void bubble_sort();
     };
-}  // namespace UListaVector
+} // namespace UListaVector
 #endif

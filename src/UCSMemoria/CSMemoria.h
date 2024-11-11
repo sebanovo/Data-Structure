@@ -6,24 +6,27 @@
 #include <iostream>
 #include <string>
 
-namespace UCSMemoria {
+namespace UCSMemoria
+{
     using std::string;
 
     const int NULO = -1;
 
-    struct Nodo {
+    struct Nodo
+    {
         int dato = 0;
         string id;
         int link;
     };
 
-    class CSMemoria {
-       private:
+    class CSMemoria
+    {
+        private:
         const int MAX = 1000;
         int libre;
-        Nodo *mem;
+        Nodo* mem;
 
-       public:
+        public:
         CSMemoria();
         // importantes
         int new_espacio(string cadena);
@@ -38,7 +41,7 @@ namespace UCSMemoria {
         string mostrar();
         ~CSMemoria();
 
-       private:
+        private:
         // metodos auxiliares
         int numero_ids(string id);
         string obtener_id(string cadena, int n);
@@ -47,6 +50,6 @@ namespace UCSMemoria {
         string eliminar_flecha(string cadena);
     };
 
-}  // namespace UCSMemoria
+} // namespace UCSMemoria
 
 #endif

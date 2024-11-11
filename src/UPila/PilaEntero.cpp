@@ -22,14 +22,16 @@ namespace UPilaEntero
 
     void PilaEntero::meter(int e)
     {
-        if (e <= 0 || e >= 9) throw std::runtime_error("datos fuera de rango");
+        if(e <= 0 || e >= 9)
+            throw std::runtime_error("datos fuera de rango");
         datos = datos * 10 + e;
     }
 
     void PilaEntero::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        e = datos % 10;
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        e     = datos % 10;
         datos = datos / 10;
     }
 
@@ -42,14 +44,14 @@ namespace UPilaEntero
     {
         std::string s = "";
         PilaEntero aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux.meter(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -57,4 +59,4 @@ namespace UPilaEntero
         }
         return s;
     }
-}  // namespace UPilaEntero
+} // namespace UPilaEntero

@@ -7,22 +7,24 @@
 #include <string>
 #include "UCSMemoria/CSMemoria.h"
 
-namespace UMatrizDispersaSMDoble {
+namespace UMatrizDispersaSMDoble
+{
     using namespace std;
 
-    const string _col = "->col";
-    const string _dato = "->dato";
-    const string _sigC = "->sigC";
+    const string _col           = "->col";
+    const string _dato          = "->dato";
+    const string _sigC          = "->sigC";
     const string _col_dato_sigC = "col,dato,sigC";
 
-    const string _fil = "->fil";
-    const string _antF = "->antF";
-    const string _sigF = "->sigF";
-    const string _ptrCol = "->ptrCol";
+    const string _fil                  = "->fil";
+    const string _antF                 = "->antF";
+    const string _sigF                 = "->sigF";
+    const string _ptrCol               = "->ptrCol";
     const string _fil_antF_sigF_ptrCol = "fil,antF,sigF,ptrCol";
 
-    class MatrizDispersaSMDoble {
-       private:
+    class MatrizDispersaSMDoble
+    {
+        private:
         UCSMemoria::CSMemoria* mem;
         int PtrFil, repe, df, dc, nt;
 
@@ -34,7 +36,7 @@ namespace UMatrizDispersaSMDoble {
         void suprimir(int dir);
         bool hay(int elemento);
 
-       public:
+        public:
         MatrizDispersaSMDoble();
         MatrizDispersaSMDoble(UCSMemoria::CSMemoria* m);
         void dimensionar(int f, int c);
@@ -50,5 +52,5 @@ namespace UMatrizDispersaSMDoble {
         static void transpuesta(MatrizDispersaSMDoble* m, MatrizDispersaSMDoble* m1);
         static bool es_simetrica(MatrizDispersaSMDoble* m);
     };
-}  // namespace UMatrizDispersaSMDoble
+} // namespace UMatrizDispersaSMDoble
 #endif

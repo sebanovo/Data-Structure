@@ -6,18 +6,21 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-namespace UListaVector {
+namespace UListaVector
+{
     using std::cout;
     using std::endl;
 
     // constructor
-    ListaVector::ListaVector() {
-        longitud = 0;
+    ListaVector::ListaVector()
+    {
+        longitud  = 0;
         elementos = new int[MAX];
     }
 
     // devuelve la direccion fin de la lista
-    direccion ListaVector::fin() {
+    direccion ListaVector::fin()
+    {
         // if (vacia()) {
         //     throw std::runtime_error("La lista esta vacia\n");
         // }
@@ -32,7 +35,8 @@ namespace UListaVector {
     }
 
     // devuelve la dirección del primer elemento de la lista
-    direccion ListaVector::primero() {
+    direccion ListaVector::primero()
+    {
         // if (vacia()) {
         //     throw std::runtime_error("La lista esta vacia\n");
         // }
@@ -48,7 +52,8 @@ namespace UListaVector {
     }
 
     // retorna la dirección siguiente a esta
-    direccion ListaVector::siguiente(direccion dir) {
+    direccion ListaVector::siguiente(direccion dir)
+    {
         // if (vacia()) {
         //     cout << "Error: La lista esta vacia\n";
         // }
@@ -68,13 +73,14 @@ namespace UListaVector {
         //     throw std::runtime_error("La lista esta vacia\n");
         // if (dir == fin())
         //     throw std::runtime_error("No hay siguiente después de esta dirección (" + std::to_string(dir) + ")\n");
-        if (dir >= fin())
+        if(dir >= fin())
             return -1;
         return dir + 1;
     }
 
     // retorna la dirección anterior a esta
-    direccion ListaVector::anterior(direccion dir) {
+    direccion ListaVector::anterior(direccion dir)
+    {
         // if (vacia()) {
         //     cout << "Error: La lista esta vacia\n";
         // }
@@ -89,23 +95,27 @@ namespace UListaVector {
         //     }
         // }
 
-        if (vacia())
+        if(vacia())
             throw std::runtime_error("La lista esta vacía\n");
-        if (dir == 1)
-            throw std::runtime_error("No hay anterior antes de esta dirección (" + std::to_string(dir) + ")\n");
-        if (dir == primero())
-            throw std::runtime_error("La dirección (" + std::to_string(dir) + ") esta fuera de los limites\n");
+        if(dir == 1)
+            throw std::runtime_error("No hay anterior antes de esta dirección ("
+            + std::to_string(dir) + ")\n");
+        if(dir == primero())
+            throw std::runtime_error("La dirección (" + std::to_string(dir)
+            + ") esta fuera de los limites\n");
 
         return dir - 1;
     }
 
     // esta vacia?
-    bool ListaVector::vacia() {
+    bool ListaVector::vacia()
+    {
         return longitud == 0;
     }
 
     // devuelve el valor del elemento
-    int ListaVector::recupera(direccion dir) {
+    int ListaVector::recupera(direccion dir)
+    {
         // if (vacia()) {
         //     cout << "Error: La lista esta vacia\n";
 
@@ -124,11 +134,13 @@ namespace UListaVector {
     }
 
     // retorna la longitud de la lista
-    int ListaVector::_longitud() {
+    int ListaVector::_longitud()
+    {
         return longitud;
     }
 
-    void ListaVector::inserta(direccion dir, int element) {
+    void ListaVector::inserta(direccion dir, int element)
+    {
         // if (longitud == MAX) {
         //     cout << "Error: La lista esta llena\n";
         // }
@@ -148,23 +160,27 @@ namespace UListaVector {
         // {
         //     cout << "Error de direccion\n";
         // }
-        if (longitud == MAX) {
+        if(longitud == MAX)
+        {
             throw std::runtime_error("La lista esta llena\n");
         }
-        if (vacia()) {
+        if(vacia())
+        {
             elementos[1] = element;
             longitud++;
             return;
         }
 
-        for (int i = longitud + 1; i > dir; i--) {
+        for(int i = longitud + 1; i > dir; i--)
+        {
             elementos[i] = elementos[i - 1];
         }
         elementos[dir] = element;
         longitud++;
     }
 
-    void ListaVector::inserta_primero(int element) {
+    void ListaVector::inserta_primero(int element)
+    {
         // if (longitud == MAX) {
         //     cout << "Error: La lista esta llena\n";
         //     return; //added
@@ -175,11 +191,13 @@ namespace UListaVector {
         // elementos[0] = element;
         // longitud++; //check! if it isn't at the beginning.
         // //aumentar la cajita al vector para mover todo luego.
-        if (longitud == MAX) {
+        if(longitud == MAX)
+        {
             std::runtime_error("La lista esta llena\n");
         }
 
-        for (int i = longitud + 1; i > 1; i--) {
+        for(int i = longitud + 1; i > 1; i--)
+        {
             elementos[i] = elementos[i - 1];
         }
 
@@ -188,7 +206,8 @@ namespace UListaVector {
     }
 
     // inserta un elemento al final de la lista
-    void ListaVector::inserta_ultimo(int element) {
+    void ListaVector::inserta_ultimo(int element)
+    {
         // if (longitud == MAX) {
         //     cout << "Error: La lista esta llena\n";
         //     return; //added
@@ -198,7 +217,8 @@ namespace UListaVector {
         //     longitud++; //at the beginning verificar si es 0 o 1???
         // }
 
-        if (longitud == MAX) {
+        if(longitud == MAX)
+        {
             std::runtime_error("La lista esta llena\n");
         }
 
@@ -207,7 +227,8 @@ namespace UListaVector {
     }
 
     // elimina una dirección de la lista
-    void ListaVector::suprime(direccion dir) {
+    void ListaVector::suprime(direccion dir)
+    {
         // if (longitud == 0) {
         //     cout << "Error: La lista esta vacia\n";
         //     return; //added
@@ -224,14 +245,16 @@ namespace UListaVector {
         //     }
         // }
 
-        for (int i = dir; i < longitud; i++) {
+        for(int i = dir; i < longitud; i++)
+        {
             elementos[i] = elementos[i + 1];
         }
         longitud--;
     }
 
     // modifica el elemento de una dirección del vector
-    void ListaVector::modifica(direccion dir, int element) {
+    void ListaVector::modifica(direccion dir, int element)
+    {
         // if (longitud == 0) {
         //     cout << "Error: La lista esta vacia\n";
         //     return; //added
@@ -244,18 +267,20 @@ namespace UListaVector {
         //         cout << "Error de direccion no pertenece al vector\n";
         //     }
         // }
-        if (vacia())
+        if(vacia())
             throw std::runtime_error("Lista vacia\n");
 
         elementos[dir] = element;
     }
 
-    ListaVector::~ListaVector() {
+    ListaVector::~ListaVector()
+    {
         delete[] elementos;
     }
 
     // muestra el vector
-    string ListaVector::mostrar() {
+    string ListaVector::mostrar()
+    {
         //    string s;
         // s = '<';
         // for (int i = 0; i < longitud; i++) {
@@ -267,9 +292,11 @@ namespace UListaVector {
         // s += ">";
         // return s;
         string s = "<";
-        for (int i = 1; i <= longitud; i++) {
+        for(int i = 1; i <= longitud; i++)
+        {
             s += std::to_string(elementos[i]);
-            if (i < longitud) {
+            if(i < longitud)
+            {
                 s += ",";
             }
         }
@@ -277,22 +304,24 @@ namespace UListaVector {
     }
 
     // retorna la dirección de memoria del elemento
-    direccion ListaVector::localiza(int element) {
+    direccion ListaVector::localiza(int element)
+    {
         // for (int i = 0; i < longitud; i++)
         //     if (elementos[i] == element)
         //         return i;
 
         // return -1;
 
-        for (int i = 1; i <= longitud; i++)
-            if (elementos[i] == element)
+        for(int i = 1; i <= longitud; i++)
+            if(elementos[i] == element)
                 return i;
 
         return -1;
     }
 
     // elimina todas la ocurrencias de ese elemento
-    void ListaVector::elimina_dato(int element) {
+    void ListaVector::elimina_dato(int element)
+    {
         // int i = 0;
         // while (i < longitud) {
         //     if (elementos[i] == element) {
@@ -302,29 +331,38 @@ namespace UListaVector {
         //     }
         // }
         int i = 1;
-        while (i <= longitud) {
-            if (elementos[i] == element) {
+        while(i <= longitud)
+        {
+            if(elementos[i] == element)
+            {
                 suprime(i);
-            } else {
+            }
+            else
+            {
                 i++;
             }
         }
     }
 
-    void ListaVector::anula() {
+    void ListaVector::anula()
+    {
         longitud = 0;
     }
 
     // ejercicio
-    void ListaVector::bubble_sort() {
-        for (int i = 1; i < longitud; i++) {
-            for (int j = i + 1; j <= longitud; j++) {
-                if (elementos[i] > elementos[j]) {
-                    int temp = elementos[i];
+    void ListaVector::bubble_sort()
+    {
+        for(int i = 1; i < longitud; i++)
+        {
+            for(int j = i + 1; j <= longitud; j++)
+            {
+                if(elementos[i] > elementos[j])
+                {
+                    int temp     = elementos[i];
                     elementos[i] = elementos[j];
                     elementos[j] = temp;
                 }
             }
         }
     }
-}  // namespace UListaVector
+} // namespace UListaVector

@@ -6,16 +6,18 @@
 #include <iostream>
 #include <string>
 
-namespace UMatrizDispersaVector {
-    class MatrizDispersaVector {
-       private:
+namespace UMatrizDispersaVector
+{
+    class MatrizDispersaVector
+    {
+        private:
         const int MAX = 1000;
-        int *vf, *vc, *vd;  // filas, columnas, datos
+        int *vf, *vc, *vd; // filas, columnas, datos
         int df, dc, nt, repe;
         int buscar_posicion_vd(int f, int c);
         bool hay(int elemento);
 
-       public:
+        public:
         MatrizDispersaVector();
         void dimensionar(int df, int dc);
         int dimension_fila();
@@ -27,10 +29,10 @@ namespace UMatrizDispersaVector {
         ~MatrizDispersaVector();
 
         // ejercicios
-        static int suma(MatrizDispersaVector *m);
-        static void transpuesta(MatrizDispersaVector *m, MatrizDispersaVector *m1);
-        static bool es_simetrica(MatrizDispersaVector *m);
+        static int suma(MatrizDispersaVector* m);
+        static void transpuesta(MatrizDispersaVector* m, MatrizDispersaVector* m1);
+        static bool es_simetrica(MatrizDispersaVector* m);
     };
 
-}  // namespace UMatrizDispersaVector
+} // namespace UMatrizDispersaVector
 #endif

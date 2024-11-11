@@ -15,7 +15,7 @@ namespace UColaGenerica
     {
         fin = 0;
         ini = 1;
-        v = new T[MAX];
+        v   = new T[MAX];
     }
 
     template <typename T>
@@ -27,16 +27,18 @@ namespace UColaGenerica
     template <typename T>
     void ColaGenerica<T>::poner(T e)
     {
-        if (fin >= MAX) throw std::runtime_error("No hay espacio en la cola");
+        if(fin >= MAX)
+            throw std::runtime_error("No hay espacio en la cola");
         v[++fin] = e;
     }
 
     template <typename T>
-    void ColaGenerica<T>::sacar(T &e)
+    void ColaGenerica<T>::sacar(T& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
         e = v[ini];
-        for (int i = ini; i < fin; i++)
+        for(int i = ini; i < fin; i++)
             v[i] = v[i + 1];
         fin--;
     }
@@ -44,7 +46,8 @@ namespace UColaGenerica
     template <typename T>
     T ColaGenerica<T>::primero()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return v[ini];
     }
 
@@ -53,25 +56,25 @@ namespace UColaGenerica
     {
         std::string s = "<<";
         ColaGenerica aux;
-        while (!vacia())
+        while(!vacia())
         {
             T e;
             sacar(e);
             aux.poner(e);
             // Usamos `if constexpr` para verificar el tipo en tiempo de compilación
-            if constexpr (std::is_same<T, int>::value)
+            if constexpr(std::is_same<T, int>::value)
             {
                 s += std::to_string(e);
             }
-            else if constexpr (std::is_same<T, char>::value)
+            else if constexpr(std::is_same<T, char>::value)
             {
                 s += e;
             }
-            else if constexpr (std::is_same<T, std::string>::value)
+            else if constexpr(std::is_same<T, std::string>::value)
             {
                 s += e;
             }
-            else if constexpr (std::is_same<T, bool>::value)
+            else if constexpr(std::is_same<T, bool>::value)
             {
                 s += e ? "true" : "false";
             }
@@ -80,10 +83,10 @@ namespace UColaGenerica
                 // tipo no especificado
                 s += "| Tipo no soportado |\n";
             }
-            if (!vacia())
+            if(!vacia())
                 s += ",";
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             T e;
             aux.sacar(e);
@@ -101,16 +104,18 @@ namespace UColaGenerica
     template <typename T>
     T ColaGenerica<T>::ultimo()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return v[fin];
     }
 
     template <typename T>
     void ColaGenerica<T>::poner_frente(T e)
     {
-        if (fin >= MAX) throw std::runtime_error("No hay espacio en la cola");
+        if(fin >= MAX)
+            throw std::runtime_error("No hay espacio en la cola");
         fin++;
-        for (int i = fin; i > ini; i--)
+        for(int i = fin; i > ini; i--)
         {
             v[i] = v[i - 1];
         }
@@ -118,38 +123,41 @@ namespace UColaGenerica
     }
 
     template <typename T>
-    void ColaGenerica<T>::sacar_final(T &e)
+    void ColaGenerica<T>::sacar_final(T& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
         e = v[fin];
         fin--;
     }
 
     template <typename T>
     template <typename U>
-    void ColaGenerica<T>::concatenar(ColaGenerica<U> *c1, ColaGenerica<U> *c2, ColaGenerica<U> *c3)
+    void ColaGenerica<T>::concatenar(ColaGenerica<U>* c1,
+    ColaGenerica<U>* c2,
+    ColaGenerica<U>* c3)
     {
         ColaGenerica<U> aux;
-        while (!c1->vacia())
+        while(!c1->vacia())
         {
             U e;
             c1->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             U e;
             aux.sacar(e);
             c3->poner(e);
             c1->poner(e);
         }
-        while (!c2->vacia())
+        while(!c2->vacia())
         {
             U e;
             c2->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             U e;
             aux.sacar(e);
@@ -158,7 +166,7 @@ namespace UColaGenerica
         }
     }
 
-}  // namespace UColaGenerica
+} // namespace UColaGenerica
 // Añadir mas instancias si se lo desea
 template class UColaGenerica::ColaGenerica<int>;
 template class UColaGenerica::ColaGenerica<char>;
@@ -166,7 +174,16 @@ template class UColaGenerica::ColaGenerica<std::string>;
 template class UColaGenerica::ColaGenerica<bool>;
 
 // instanciar el metodo estatico;
-template void UColaGenerica::ColaGenerica<int>::concatenar<int>(ColaGenerica<int> *, ColaGenerica<int> *, ColaGenerica<int> *);
-template void UColaGenerica::ColaGenerica<char>::concatenar<char>(ColaGenerica<char> *, ColaGenerica<char> *, ColaGenerica<char> *);
-template void UColaGenerica::ColaGenerica<std::string>::concatenar<std::string>(ColaGenerica<std::string> *, ColaGenerica<std::string> *, ColaGenerica<std::string> *);
-template void UColaGenerica::ColaGenerica<bool>::concatenar<bool>(ColaGenerica<bool> *, ColaGenerica<bool> *, ColaGenerica<bool> *);
+template void UColaGenerica::ColaGenerica<int>::concatenar<int>(ColaGenerica<int>*,
+ColaGenerica<int>*,
+ColaGenerica<int>*);
+template void UColaGenerica::ColaGenerica<char>::concatenar<char>(ColaGenerica<char>*,
+ColaGenerica<char>*,
+ColaGenerica<char>*);
+template void UColaGenerica::ColaGenerica<std::string>::concatenar<std::string>(
+ColaGenerica<std::string>*,
+ColaGenerica<std::string>*,
+ColaGenerica<std::string>*);
+template void UColaGenerica::ColaGenerica<bool>::concatenar<bool>(ColaGenerica<bool>*,
+ColaGenerica<bool>*,
+ColaGenerica<bool>*);

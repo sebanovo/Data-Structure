@@ -15,11 +15,10 @@ namespace UPilaPuntero
 
     class PilaPuntero
     {
-       private:
-
+        private:
         Nodo* tope;
 
-       public:
+        public:
         PilaPuntero();
         bool vacia();
         void meter(int e);
@@ -28,5 +27,5 @@ namespace UPilaPuntero
         std::string mostrar();
         ~PilaPuntero();
     };
-};  // namespace UPilaPuntero
+}; // namespace UPilaPuntero
 #endif

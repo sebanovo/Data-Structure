@@ -12,14 +12,16 @@
 // Conjunto LISTA
 // SOLO FUNCIONA PARA UNA (LISTA SM) Y (LISTA VECTOR)
 
-namespace UConjuntoLista {
-    class ConjuntoLista {
-       private:
+namespace UConjuntoLista
+{
+    class ConjuntoLista
+    {
+        private:
         // UListaVector::ListaVector* elem;
         UListaSM::ListaSM* elem;
         UCSMemoria::CSMemoria* mem;
 
-       public:
+        public:
         ConjuntoLista();
         ConjuntoLista(UCSMemoria::CSMemoria* m);
         int cardinal();
@@ -38,5 +40,5 @@ namespace UConjuntoLista {
         static bool _equivalentes(ConjuntoLista* a, ConjuntoLista* b);
     };
 
-}  // namespace UConjuntoLista
+} // namespace UConjuntoLista
 #endif

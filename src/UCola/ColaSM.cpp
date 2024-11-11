@@ -29,10 +29,11 @@ namespace UColaSM
     void ColaSM::poner(int e)
     {
         int aux = mem->new_espacio(_elemento_sig);
-        if (aux == NULO) throw std::runtime_error("No hay espacio en la memoria");
+        if(aux == NULO)
+            throw std::runtime_error("No hay espacio en la memoria");
         mem->poner_dato(aux, _elemento, e);
         mem->poner_dato(aux, _sig, NULO);
-        if (vacia())
+        if(vacia())
         {
             ini = fin = aux;
         }
@@ -45,10 +46,11 @@ namespace UColaSM
 
     void ColaSM::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        e = mem->obtener_dato(ini, _elemento);
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        e     = mem->obtener_dato(ini, _elemento);
         int x = ini;
-        if (ini == fin)
+        if(ini == fin)
             ini = fin = NULO;
         else
             ini = mem->obtener_dato(ini, _sig);
@@ -57,7 +59,8 @@ namespace UColaSM
 
     int ColaSM::primero()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return mem->obtener_dato(ini, _elemento);
     }
 
@@ -65,16 +68,16 @@ namespace UColaSM
     {
         std::string s = "<<";
         ColaSM aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             aux.poner(e);
             s += std::to_string(e);
-            if (!vacia())
+            if(!vacia())
                 s += ",";
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -90,17 +93,19 @@ namespace UColaSM
 
     int ColaSM::ultimo()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return mem->obtener_dato(fin, _elemento);
     }
 
     void ColaSM::poner_frente(int e)
     {
         int aux = mem->new_espacio(_elemento_sig);
-        if (aux == NULO) throw std::runtime_error("No hay espacio en la memoria");
+        if(aux == NULO)
+            throw std::runtime_error("No hay espacio en la memoria");
         mem->poner_dato(aux, _elemento, e);
         mem->poner_dato(aux, _sig, NULO);
-        if (vacia())
+        if(vacia())
         {
             ini = fin = aux;
         }
@@ -113,15 +118,16 @@ namespace UColaSM
 
     void ColaSM::sacar_final(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        int x = ini;
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        int x   = ini;
         int ant = x;
-        while (x != fin)
+        while(x != fin)
         {
             ant = x;
-            x = mem->obtener_dato(x, _sig);
+            x   = mem->obtener_dato(x, _sig);
         }
-        if (x == ini)
+        if(x == ini)
         {
             mem->delete_espacio(fin);
             ini = fin = NULO;
@@ -135,26 +141,26 @@ namespace UColaSM
     void ColaSM::concatenar(ColaSM* c1, ColaSM* c2, ColaSM* c3)
     {
         ColaSM aux;
-        while (!c1->vacia())
+        while(!c1->vacia())
         {
             int e;
             c1->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
             c3->poner(e);
             c1->poner(e);
         }
-        while (!c2->vacia())
+        while(!c2->vacia())
         {
             int e;
             c2->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -162,4 +168,4 @@ namespace UColaSM
             c2->poner(e);
         }
     }
-}  // namespace UColaSM
+} // namespace UColaSM

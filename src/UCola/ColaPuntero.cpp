@@ -23,26 +23,28 @@ namespace UColaPuntero
     void ColaPuntero::poner(int e)
     {
         Nodo* aux = new Nodo;
-        if (aux == nullptr) throw std::runtime_error("No hay espacio en la memoria");
+        if(aux == nullptr)
+            throw std::runtime_error("No hay espacio en la memoria");
         aux->elemento = e;
-        aux->sig = nullptr;
-        if (vacia())
+        aux->sig      = nullptr;
+        if(vacia())
         {
             ini = fin = aux;
         }
         else
         {
             fin->sig = aux;
-            fin = aux;
+            fin      = aux;
         }
     }
 
     void ColaPuntero::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        e = ini->elemento;
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        e       = ini->elemento;
         Nodo* x = ini;
-        if (ini == fin)
+        if(ini == fin)
             ini = fin = nullptr;
         else
             ini = ini->sig;
@@ -51,7 +53,8 @@ namespace UColaPuntero
 
     int ColaPuntero::primero()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return ini->elemento;
     }
 
@@ -59,16 +62,16 @@ namespace UColaPuntero
     {
         std::string s = "<<";
         ColaPuntero aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             aux.poner(e);
             s += std::to_string(e);
-            if (!vacia())
+            if(!vacia())
                 s += ",";
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -81,48 +84,51 @@ namespace UColaPuntero
     ColaPuntero::~ColaPuntero()
     {
         Nodo* x = ini;
-        while (x != nullptr)
+        while(x != nullptr)
         {
             Nodo* aux = x;
-            x = x->sig;
+            x         = x->sig;
             delete aux;
         }
     }
 
     int ColaPuntero::ultimo()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return fin->elemento;
     }
 
     void ColaPuntero::poner_frente(int e)
     {
         Nodo* aux = new Nodo;
-        if (aux == nullptr) throw std::runtime_error("No hay espacio en la memoria");
+        if(aux == nullptr)
+            throw std::runtime_error("No hay espacio en la memoria");
         aux->elemento = e;
-        aux->sig = nullptr;
-        if (vacia())
+        aux->sig      = nullptr;
+        if(vacia())
         {
             ini = fin = aux;
         }
         else
         {
             aux->sig = ini;
-            ini = aux;
+            ini      = aux;
         }
     }
 
     void ColaPuntero::sacar_final(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        Nodo* x = ini;
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        Nodo* x   = ini;
         Nodo* ant = x;
-        while (x != fin)
+        while(x != fin)
         {
             ant = x;
-            x = x->sig;
+            x   = x->sig;
         }
-        if (x == ini)
+        if(x == ini)
         {
             delete fin;
             ini = fin = nullptr;
@@ -133,29 +139,29 @@ namespace UColaPuntero
         fin = ant;
     }
 
-    void ColaPuntero::concatenar(ColaPuntero *c1, ColaPuntero *c2, ColaPuntero *c3)
+    void ColaPuntero::concatenar(ColaPuntero* c1, ColaPuntero* c2, ColaPuntero* c3)
     {
         ColaPuntero aux;
-        while (!c1->vacia())
+        while(!c1->vacia())
         {
             int e;
             c1->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
             c3->poner(e);
             c1->poner(e);
         }
-        while (!c2->vacia())
+        while(!c2->vacia())
         {
             int e;
             c2->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -163,4 +169,4 @@ namespace UColaPuntero
             c2->poner(e);
         }
     }
-}  // namespace UColaPuntero
+} // namespace UColaPuntero

@@ -5,13 +5,14 @@
 //---------------------------------------------------------------------------
 #include <string>
 
-namespace UPilaCadena 
+namespace UPilaCadena
 {
     class PilaCadena
     {
-       private:
-       std::string datos;
-       public:
+        private:
+        std::string datos;
+
+        public:
         PilaCadena();
         bool vacia();
         void meter(int e);
@@ -20,6 +21,6 @@ namespace UPilaCadena
         std::string mostrar();
         ~PilaCadena() = default;
     };
-};  // namespace UPilaVector
+}; // namespace UPilaCadena
 
 #endif

@@ -9,12 +9,12 @@ namespace UPilaVector
 {
     class PilaVector
     {
-       private:
+        private:
         const int MAX = 1000;
         int* elementos;
         int tope;
 
-       public:
+        public:
         PilaVector();
         bool vacia();
         void meter(int e);
@@ -23,5 +23,5 @@ namespace UPilaVector
         std::string mostrar();
         ~PilaVector();
     };
-};  // namespace UPilaVector
+}; // namespace UPilaVector
 #endif

@@ -27,17 +27,19 @@ namespace UPilaCadena
 
     void PilaCadena::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        int pos = datos.find_first_of(",");
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        int pos         = datos.find_first_of(",");
         std::string sub = datos.substr(0, pos);
-        e = atoi(sub.c_str());
+        e               = atoi(sub.c_str());
         datos.erase(0, pos + 1);
     }
 
     int PilaCadena::cima()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cima");
-        int pos = datos.find_first_of(",");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cima");
+        int pos         = datos.find_first_of(",");
         std::string sub = datos.substr(0, pos);
         return atoi(sub.c_str());
     }
@@ -46,14 +48,14 @@ namespace UPilaCadena
     {
         std::string s = "";
         PilaCadena aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux.meter(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -62,4 +64,4 @@ namespace UPilaCadena
         return s;
     }
 
-}  // namespace UPilaCadena
+} // namespace UPilaCadena

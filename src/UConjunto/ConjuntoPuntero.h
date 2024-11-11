@@ -6,18 +6,21 @@
 #include <iostream>
 #include <string>
 
-namespace UConjuntoPuntero {
-    struct Nodo {
+namespace UConjuntoPuntero
+{
+    struct Nodo
+    {
         int dato;
         Nodo* sig;
     };
 
-    class ConjuntoPuntero {
-       private:
+    class ConjuntoPuntero
+    {
+        private:
         Nodo* PtrConj;
         int cant;
 
-       public:
+        public:
         ConjuntoPuntero();
         int cardinal();
         bool vacio();
@@ -35,5 +38,5 @@ namespace UConjuntoPuntero {
         static bool _equivalentes(ConjuntoPuntero* a, ConjuntoPuntero* b);
     };
 
-}  // namespace UConjuntoPuntero
+} // namespace UConjuntoPuntero
 #endif

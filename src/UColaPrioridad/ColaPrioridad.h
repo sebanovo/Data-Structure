@@ -11,14 +11,14 @@ namespace UColaPrioridad
 {
     class ColaPrioridad
     {
-       private:
+        private:
         const int MAX = 3;
         UColaSM::ColaSM*(*vc);
         int* vf;
         int colaAct;
         int cant;
 
-       public:
+        public:
         ColaPrioridad();
         ColaPrioridad(UCSMemoria::CSMemoria* m);
         bool vacia();
@@ -30,5 +30,5 @@ namespace UColaPrioridad
 
         ~ColaPrioridad();
     };
-}  // namespace UColaPrioridad
+} // namespace UColaPrioridad
 #endif

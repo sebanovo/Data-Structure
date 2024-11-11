@@ -6,31 +6,34 @@
 #include <iostream>
 #include <string>
 
-namespace UPolinomioPuntero {
+namespace UPolinomioPuntero
+{
     using std::string;
     struct Nodo;
-    typedef Nodo *direccion;
-    struct Nodo {
+    typedef Nodo* direccion;
+    struct Nodo
+    {
         int coef;
         int exp;
-        Nodo *sig;
+        Nodo* sig;
     };
 
-    class PolinomioPuntero {
-       private:
+    class PolinomioPuntero
+    {
+        private:
         direccion PtrPoli;
         int nt;
         direccion buscar_exponente(int exp);
         direccion buscar_termino_n(int n);
 
-       public:
+        public:
         PolinomioPuntero();
         bool es_cero();
         int grado();
         int coeficiente(int exp);
-        void sumar(PolinomioPuntero *p1, PolinomioPuntero *p2);
-        void restar(PolinomioPuntero *p1, PolinomioPuntero *p2);
-        void multiplicar(PolinomioPuntero *p1, PolinomioPuntero *p2);
+        void sumar(PolinomioPuntero* p1, PolinomioPuntero* p2);
+        void restar(PolinomioPuntero* p1, PolinomioPuntero* p2);
+        void multiplicar(PolinomioPuntero* p1, PolinomioPuntero* p2);
         void poner_termino(int coef, int exp);
         int numero_terminos();
         int exponente(int nroTer);
@@ -39,8 +42,8 @@ namespace UPolinomioPuntero {
         ~PolinomioPuntero();
 
         // ejercicios
-        static void derivada(PolinomioPuntero *p, PolinomioPuntero *p1);
-        static std::string mostrar_integral(PolinomioPuntero *p);
+        static void derivada(PolinomioPuntero* p, PolinomioPuntero* p1);
+        static std::string mostrar_integral(PolinomioPuntero* p);
     };
-}  // namespace UPolinomioPuntero
+} // namespace UPolinomioPuntero
 #endif

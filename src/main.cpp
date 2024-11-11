@@ -36,7 +36,6 @@
 #include "UCola/ColaPuntero.h"
 #include "UCola/ColaSM.h"
 #include "UCola/ColaGenerica.h"
-#include "UCola/ColaGenerica.h"
 
 #include "UColaPrioridad/ColaPrioridad.h"
 
@@ -60,7 +59,7 @@ void mostrarMemoria()
         cout << "Opcion: ";
         cin >> opcion;
 
-        if (cin.fail())
+        if(cin.fail())
         {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -68,94 +67,91 @@ void mostrarMemoria()
             continue;
         }
 
-        switch (opcion)
+        switch(opcion)
         {
-            case 1:
-            {
-                if (mem != nullptr)
-                {
-                    delete mem;
-                }
-                mem = new UCSMemoria::CSMemoria();
-                cout << "Memoria Creada\n";
-            }
-            break;
-
-            case 2:
-            {
-                if (mem == nullptr)
-                {
-                    cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
-                    break;
-                }
-                string ids;
-                cout << "Ids: ";
-                cin.ignore();
-                getline(cin, ids);
-                mem->new_espacio(ids);
-            }
-            break;
-
-            case 3:
-            {
-                if (mem == nullptr)
-                {
-                    cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
-                    break;
-                }
-                int dir_delete;
-                cout << "Direccion a liberar: ";
-                cin >> dir_delete;
-                mem->delete_espacio(dir_delete);
-            }
-            break;
-
-            case 4:
-            {
-                if (mem == nullptr)
-                {
-                    cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
-                    break;
-                }
-                int dir;
-                cout << "Direccion: ";
-                cin >> dir;
-                string id;
-                cout << "Id: ";
-                cin.ignore();
-                getline(cin, id);
-                int valor;
-                cout << "Valor: ";
-                cin >> valor;
-                mem->poner_dato(dir, id, valor);
-            }
-            break;
-
-            case 5:
-            {
-                if (mem == nullptr)
-                {
-                    cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
-                    break;
-                }
-                mem->mostrar();
-            }
-            break;
-
-            case 6:
+        case 1:
+        {
+            if(mem != nullptr)
             {
                 delete mem;
-                mem = nullptr;
-                cout << "Saliendo...\n"
-                     << endl;
             }
-            break;
-
-            default:
-                cout << "Opción no válida. Inténtalo de nuevo.\n";
-                break;
+            mem = new UCSMemoria::CSMemoria();
+            cout << "Memoria Creada\n";
         }
-    } while (opcion != 6);
+        break;
+
+        case 2:
+        {
+            if(mem == nullptr)
+            {
+                cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
+                break;
+            }
+            string ids;
+            cout << "Ids: ";
+            cin.ignore();
+            getline(cin, ids);
+            mem->new_espacio(ids);
+        }
+        break;
+
+        case 3:
+        {
+            if(mem == nullptr)
+            {
+                cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
+                break;
+            }
+            int dir_delete;
+            cout << "Direccion a liberar: ";
+            cin >> dir_delete;
+            mem->delete_espacio(dir_delete);
+        }
+        break;
+
+        case 4:
+        {
+            if(mem == nullptr)
+            {
+                cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
+                break;
+            }
+            int dir;
+            cout << "Direccion: ";
+            cin >> dir;
+            string id;
+            cout << "Id: ";
+            cin.ignore();
+            getline(cin, id);
+            int valor;
+            cout << "Valor: ";
+            cin >> valor;
+            mem->poner_dato(dir, id, valor);
+        }
+        break;
+
+        case 5:
+        {
+            if(mem == nullptr)
+            {
+                cout << "Error: Debes crear la memoria primero (opcion 1)." << endl;
+                break;
+            }
+            mem->mostrar();
+        }
+        break;
+
+        case 6:
+        {
+            delete mem;
+            mem = nullptr;
+            cout << "Saliendo...\n" << endl;
+        }
+        break;
+
+        default: cout << "Opción no válida. Inténtalo de nuevo.\n"; break;
+        }
+    } while(opcion != 6);
 
     delete mem;
 }
@@ -251,7 +247,7 @@ void mostrarPolinomioLista()
 {
     UPolinomioLista::PolinomioLista* p1 = new UPolinomioLista::PolinomioLista;
     UPolinomioLista::PolinomioLista* p2 = new UPolinomioLista::PolinomioLista;
-    UPolinomioLista::PolinomioLista* p = new UPolinomioLista::PolinomioLista;
+    UPolinomioLista::PolinomioLista* p  = new UPolinomioLista::PolinomioLista;
 
     // std::cout << p->es_cero() << std::endl;
     // p->poner_termino(1, 2);
@@ -292,7 +288,8 @@ void mostrarConjunto()
 
 void mostrarMDispersaVector()
 {
-    UMatrizDispersaVector::MatrizDispersaVector* m = new UMatrizDispersaVector::MatrizDispersaVector;
+    UMatrizDispersaVector::MatrizDispersaVector* m
+    = new UMatrizDispersaVector::MatrizDispersaVector;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -320,7 +317,8 @@ void mostrarMDispersaVectorCSR()
 
 void mostrarMDPuntero()
 {
-    UMatrizDispersaPuntero::MatrizDispersaPuntero* m = new UMatrizDispersaPuntero::MatrizDispersaPuntero;
+    UMatrizDispersaPuntero::MatrizDispersaPuntero* m
+    = new UMatrizDispersaPuntero::MatrizDispersaPuntero;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -349,7 +347,8 @@ void mostrarMDSM()
 
 void mostrarMDPunteroDoble()
 {
-    UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble* m = new UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble;
+    UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble* m
+    = new UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -363,7 +362,8 @@ void mostrarMDPunteroDoble()
 
 void mostrarMDSMDoble()
 {
-    UMatrizDispersaSMDoble::MatrizDispersaSMDoble* m = new UMatrizDispersaSMDoble::MatrizDispersaSMDoble;
+    UMatrizDispersaSMDoble::MatrizDispersaSMDoble* m
+    = new UMatrizDispersaSMDoble::MatrizDispersaSMDoble;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -607,7 +607,8 @@ void mostrarConcatenarCola()
     delete c1, c2, c3;
 }
 
-void mostrarColaPrioridad() {
+void mostrarColaPrioridad()
+{
     UColaPrioridad::ColaPrioridad c;
     c.poner(1, 0);
     c.poner(2, 0);
@@ -625,7 +626,8 @@ void mostrarColaPrioridad() {
     c.asignar_frecuencia_prioridad(2, 2);
     c.asignar_frecuencia_prioridad(2, 3);
 
-    while(!c.vacia()) {
+    while(!c.vacia())
+    {
         int e;
         c.sacar(e);
         std::cout << c.mostrar() << '\n';

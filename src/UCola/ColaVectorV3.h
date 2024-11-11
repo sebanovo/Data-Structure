@@ -9,18 +9,18 @@ namespace UColaVectorV3
 {
     class ColaVectorV3
     {
-       private:
+        private:
         const int MAX = 1000;
-        int *v;
+        int* v;
         int ini, fin;
         int siguiente(int dir);
         int anterior(int dir);
 
-       public:
+        public:
         ColaVectorV3();
         bool vacia();
         void poner(int e);
-        void sacar(int &e);
+        void sacar(int& e);
         int primero();
         std::string mostrar();
         ~ColaVectorV3();
@@ -28,10 +28,10 @@ namespace UColaVectorV3
         // metodos para la dicola
         int ultimo();
         void poner_frente(int e);
-        void sacar_final(int &e);
+        void sacar_final(int& e);
 
         // ejercicio
-        static void concatenar(ColaVectorV3 *c1, ColaVectorV3 *c2, ColaVectorV3 *c3);
+        static void concatenar(ColaVectorV3* c1, ColaVectorV3* c2, ColaVectorV3* c3);
     };
-};  // namespace UColaVectorV3
+}; // namespace UColaVectorV3
 #endif

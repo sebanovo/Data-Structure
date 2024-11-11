@@ -15,12 +15,12 @@ namespace UPilaSM
     PilaSM::PilaSM()
     {
         tope = NULO;
-        mem = new UCSMemoria::CSMemoria;
+        mem  = new UCSMemoria::CSMemoria;
     }
 
     PilaSM::PilaSM(UCSMemoria::CSMemoria* m)
     {
-        mem = m;
+        mem  = m;
         tope = NULO;
     }
 
@@ -32,7 +32,8 @@ namespace UPilaSM
     void PilaSM::meter(int e)
     {
         int x = mem->new_espacio(_elemento_sig);
-        if (x == NULO) throw std::runtime_error("No hay espacio en la memoria");
+        if(x == NULO)
+            throw std::runtime_error("No hay espacio en la memoria");
         mem->poner_dato(x, _elemento, e);
         mem->poner_dato(x, _sig, tope);
         tope = x;
@@ -40,17 +41,19 @@ namespace UPilaSM
 
     void PilaSM::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
         // if (e == NULO) throw std::invalid_argument("Puntero nulo pasado a sacar");
-        e = mem->obtener_dato(tope, _elemento);
+        e       = mem->obtener_dato(tope, _elemento);
         int aux = tope;
-        tope = mem->obtener_dato(tope, _sig);
+        tope    = mem->obtener_dato(tope, _sig);
         mem->delete_espacio(aux);
     }
 
     int PilaSM::cima()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cima");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cima");
         return mem->obtener_dato(tope, _elemento);
     }
 
@@ -58,14 +61,14 @@ namespace UPilaSM
     {
         std::string s = "";
         PilaSM aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux.meter(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -78,4 +81,4 @@ namespace UPilaSM
     {
         delete mem;
     }
-}  // namespace UPilaSM
+} // namespace UPilaSM

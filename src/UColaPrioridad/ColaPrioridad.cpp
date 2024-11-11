@@ -13,7 +13,7 @@ namespace UColaPrioridad
     {
         vc = new ColaSM*[MAX];
         vf = new int[MAX];
-        for (int i = 0; i < MAX; i++)
+        for(int i = 0; i < MAX; i++)
         {
             vc[i] = new ColaSM;
             vf[i] = 1;
@@ -25,7 +25,7 @@ namespace UColaPrioridad
     {
         vc = new ColaSM*[MAX];
         vf = new int[MAX];
-        for (int i = 0; i < MAX; i++)
+        for(int i = 0; i < MAX; i++)
         {
             vc[i] = new ColaSM(m);
             vf[i] = 1;
@@ -35,9 +35,9 @@ namespace UColaPrioridad
 
     bool ColaPrioridad ::vacia()
     {
-        for (int i = 0; i < MAX; i++)
+        for(int i = 0; i < MAX; i++)
         {
-            if (!vc[i]->vacia())
+            if(!vc[i]->vacia())
                 return false;
         }
         return true;
@@ -45,16 +45,17 @@ namespace UColaPrioridad
 
     int ColaPrioridad ::primero()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
 
-        int ca = cant;
+        int ca  = cant;
         int act = colaAct;
 
-        while (true)
+        while(true)
         {
-            if (ca == vf[act] || vc[act]->vacia())
+            if(ca == vf[act] || vc[act]->vacia())
             {
-                if (act == MAX - 1)
+                if(act == MAX - 1)
                     act = 0;
                 else
                     act++;
@@ -64,12 +65,13 @@ namespace UColaPrioridad
                 return vc[act]->primero();
         }
 
-        return 0;  // default
+        return 0; // default
     }
 
     void ColaPrioridad ::poner(int e, int prioridad)
     {
-        if (prioridad < 0 || prioridad > MAX) throw std::runtime_error("Prioridad fuera de los límites");
+        if(prioridad < 0 || prioridad > MAX)
+            throw std::runtime_error("Prioridad fuera de los límites");
         vc[prioridad]->poner(e);
     }
 
@@ -80,13 +82,14 @@ namespace UColaPrioridad
 
     void ColaPrioridad ::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("Las colas estan vacias");
+        if(vacia())
+            throw std::runtime_error("Las colas estan vacias");
 
-        while (true)
+        while(true)
         {
-            if (cant == vf[colaAct] || vc[colaAct]->vacia())
+            if(cant == vf[colaAct] || vc[colaAct]->vacia())
             {
-                if (colaAct == MAX - 1)
+                if(colaAct == MAX - 1)
                     colaAct = 0;
                 else
                     colaAct++;
@@ -104,7 +107,7 @@ namespace UColaPrioridad
     std::string ColaPrioridad ::mostrar()
     {
         std::string s = "";
-        for (int i = 0; i < MAX; i++)
+        for(int i = 0; i < MAX; i++)
             s += vc[i]->mostrar() + "\n";
         return s;
     }
@@ -113,4 +116,4 @@ namespace UColaPrioridad
     {
         delete vc, vf;
     }
-};  // namespace UColaPrioridad
+}; // namespace UColaPrioridad

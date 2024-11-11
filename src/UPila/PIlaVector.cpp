@@ -15,7 +15,7 @@ namespace UPilaVector
 
     PilaVector ::PilaVector()
     {
-        tope = 0;
+        tope      = 0;
         elementos = new int[MAX];
     }
 
@@ -26,21 +26,24 @@ namespace UPilaVector
 
     void PilaVector ::meter(int e)
     {
-        if (tope >= MAX) return;
+        if(tope >= MAX)
+            return;
         tope++;
         elementos[tope] = e;
     }
 
-    void PilaVector ::sacar(int &e)
+    void PilaVector ::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
         e = elementos[tope];
         tope--;
     }
 
     int PilaVector ::cima()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cima");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cima");
         return elementos[tope];
     }
 
@@ -48,14 +51,14 @@ namespace UPilaVector
     {
         std::string s = "";
         PilaVector aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux.meter(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -68,4 +71,4 @@ namespace UPilaVector
     {
         delete[] elementos;
     }
-}  // namespace UPilaVector
+} // namespace UPilaVector

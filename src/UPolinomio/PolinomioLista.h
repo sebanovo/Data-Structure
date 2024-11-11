@@ -12,9 +12,11 @@
 // POLINOMIO LISTA
 // SOLO FUNCIONA PARA UNA (LISTA SM) Y (LISTA VECTOR)
 
-namespace UPolinomioLista {
-    class PolinomioLista {
-       private:
+namespace UPolinomioLista
+{
+    class PolinomioLista
+    {
+        private:
         // UListaSM::ListaSM* ls;
         UCSMemoria::CSMemoria* mem;
         UListaVector::ListaVector* ls;
@@ -22,7 +24,7 @@ namespace UPolinomioLista {
         int buscar_exponente(int exp);
         int buscar_termino_n(int n);
 
-       public:
+        public:
         PolinomioLista();
         PolinomioLista(UCSMemoria::CSMemoria* m);
         bool es_cero();
@@ -44,6 +46,6 @@ namespace UPolinomioLista {
         static void derivada(PolinomioLista* p, PolinomioLista* p1);
         static std::string mostrar_integral(PolinomioLista* p);
     };
-}  // namespace UPolinomioLista
+} // namespace UPolinomioLista
 
 #endif

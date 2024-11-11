@@ -8,18 +8,20 @@
 
 #include "UCSMemoria/CSMemoria.h"
 
-namespace UConjuntoSM {
+namespace UConjuntoSM
+{
     const std::string _dato_sig = "dato,sig";
-    const std::string _dato = "->dato";
-    const std::string _sig = "->sig";
+    const std::string _dato     = "->dato";
+    const std::string _sig      = "->sig";
 
-    class ConjuntoSM {
-       private:
+    class ConjuntoSM
+    {
+        private:
         UCSMemoria::CSMemoria* mem;
         int PtrConj;
         int cant;
 
-       public:
+        public:
         ConjuntoSM();
         ConjuntoSM(UCSMemoria::CSMemoria* m);
         int cardinal();
@@ -37,5 +39,5 @@ namespace UConjuntoSM {
         static void _interseccion(ConjuntoSM* a, ConjuntoSM* b, ConjuntoSM* c);
         static bool _equivalentes(ConjuntoSM* a, ConjuntoSM* b);
     };
-}  // namespace UConjuntoSM
+} // namespace UConjuntoSM
 #endif

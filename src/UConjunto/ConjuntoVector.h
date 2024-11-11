@@ -6,14 +6,16 @@
 #include <iostream>
 #include <string>
 
-namespace UConjuntoVector {
-    class ConjuntoVector {
-       private:
+namespace UConjuntoVector
+{
+    class ConjuntoVector
+    {
+        private:
         const int MAX = 100;
         bool* v;
         int cant;
 
-       public:
+        public:
         ConjuntoVector();
         int cardinal();
         bool vacio();
@@ -30,5 +32,5 @@ namespace UConjuntoVector {
         static void _interseccion(ConjuntoVector* a, ConjuntoVector* b, ConjuntoVector* c);
         static bool _equivalentes(ConjuntoVector* a, ConjuntoVector* b);
     };
-}  // namespace UConjuntoVector
+} // namespace UConjuntoVector
 #endif

@@ -7,36 +7,44 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-namespace UConjuntoLista {
+namespace UConjuntoLista
+{
     using UCSMemoria::NULO;
-    ConjuntoLista::ConjuntoLista() {
-        mem = new UCSMemoria::CSMemoria;
+    ConjuntoLista::ConjuntoLista()
+    {
+        mem  = new UCSMemoria::CSMemoria;
         elem = new UListaSM::ListaSM(mem);
         // elem = new UListaVector::ListaVector;
     }
 
-    ConjuntoLista::ConjuntoLista(UCSMemoria::CSMemoria* m) {
+    ConjuntoLista::ConjuntoLista(UCSMemoria::CSMemoria* m)
+    {
         elem = new UListaSM::ListaSM(m);
         // elem = new UListaVector::ListaVector;
     }
 
     // cantidad de elementos del conjunto
-    int ConjuntoLista::cardinal() {
+    int ConjuntoLista::cardinal()
+    {
         return elem->_longitud();
     }
 
     // esta vacio?
-    bool ConjuntoLista::vacio() {
+    bool ConjuntoLista::vacio()
+    {
         return elem->_longitud() == 0;
     }
 
     // busca el lugar que ocupa el elemento E en el conjunto
-    int ConjuntoLista::ordinal(int e) {
+    int ConjuntoLista::ordinal(int e)
+    {
         int resp = 0;
-        int pc = elem->primero();
-        while (pc != NULO) {
+        int pc   = elem->primero();
+        while(pc != NULO)
+        {
             resp++;
-            if (elem->recupera(pc) == e) {
+            if(elem->recupera(pc) == e)
+            {
                 return resp;
             }
             pc = elem->siguiente(pc);
@@ -45,21 +53,29 @@ namespace UConjuntoLista {
     }
 
     // inserta elementos en el conjunto
-    void ConjuntoLista::inserta(int e) {
-        if (!pertenece(e)) {
+    void ConjuntoLista::inserta(int e)
+    {
+        if(!pertenece(e))
+        {
             elem->inserta(elem->primero(), e);
-        } else {
+        }
+        else
+        {
             // error pertenece
         }
     }
 
     // elimna un elemento del conjunto
-    void ConjuntoLista::suprime(int e) {
-        if (!pertenece(e)) return;
+    void ConjuntoLista::suprime(int e)
+    {
+        if(!pertenece(e))
+            return;
 
         int aux = elem->primero();
-        while (aux != -1) {
-            if (elem->recupera(aux) == e) {
+        while(aux != -1)
+        {
+            if(elem->recupera(aux) == e)
+            {
                 elem->suprime(aux);
                 return;
             }
@@ -71,10 +87,12 @@ namespace UConjuntoLista {
         }
     }
 
-    bool ConjuntoLista::pertenece(int e) {
+    bool ConjuntoLista::pertenece(int e)
+    {
         int aux = elem->primero();
-        while (aux != -1) {
-            if (elem->recupera(aux) == e)
+        while(aux != -1)
+        {
+            if(elem->recupera(aux) == e)
                 return true;
             aux = elem->siguiente(aux);
         }
@@ -82,29 +100,35 @@ namespace UConjuntoLista {
     }
 
     // busca un elemento al azar que pertenezca al conjunto
-    int ConjuntoLista::muestrea() {
-        int i = 0;
-        int lugar = rand() % cardinal() + 1;  // >= 1 && <= cant
-        int aux = elem->primero();
-        while (aux != -1) {
+    int ConjuntoLista::muestrea()
+    {
+        int i     = 0;
+        int lugar = rand() % cardinal() + 1; // >= 1 && <= cant
+        int aux   = elem->primero();
+        while(aux != -1)
+        {
             i++;
-            if (i == lugar) {
+            if(i == lugar)
+            {
                 return elem->recupera(aux);
             }
             aux = elem->siguiente(aux);
         }
     }
 
-    ConjuntoLista::~ConjuntoLista() {
+    ConjuntoLista::~ConjuntoLista()
+    {
         delete elem;
         // delete mem;
     }
 
-    std::string ConjuntoLista::mostrar() {
+    std::string ConjuntoLista::mostrar()
+    {
         std::string s = "{";
-        int aux = elem->_longitud() == 0 ? aux = -1 : elem->primero();
-        int i = 0;
-        while (aux != -1) {
+        int aux       = elem->_longitud() == 0 ? aux = -1 : elem->primero();
+        int i         = 0;
+        while(aux != -1)
+        {
             i++;
             s += std::to_string(elem->recupera(aux));
             s += i < cardinal() ? "," : "";
@@ -113,9 +137,11 @@ namespace UConjuntoLista {
         return s + "}";
     }
 
-    void ConjuntoLista::_union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
+    void ConjuntoLista::_union(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c)
+    {
         ConjuntoLista* aux = new ConjuntoLista;
-        while (!a->vacio()) {
+        while(!a->vacio())
+        {
             int m = a->muestrea();
             a->suprime(m);
             aux->inserta(m);
@@ -126,11 +152,12 @@ namespace UConjuntoLista {
         //     aux->suprime(m);
         //     a->inserta(m);
         // }
-        while (!b->vacio()) {
+        while(!b->vacio())
+        {
             int m = b->muestrea();
             b->suprime(m);
             aux->inserta(m);
-            if (!c->pertenece(m))
+            if(!c->pertenece(m))
                 c->inserta(m);
         }
         // while (!aux->vacio()) {
@@ -142,18 +169,22 @@ namespace UConjuntoLista {
         delete aux;
     };
 
-    void ConjuntoLista::_interseccion(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c) {
+    void ConjuntoLista::_interseccion(ConjuntoLista* a, ConjuntoLista* b, ConjuntoLista* c)
+    {
         auto* aux = new ConjuntoLista;
-        while (!a->vacio()) {
+        while(!a->vacio())
+        {
             int m = a->muestrea();
-            if (a->pertenece(m) && b->pertenece(m)) {
+            if(a->pertenece(m) && b->pertenece(m))
+            {
                 c->inserta(m);
             }
             a->suprime(m);
             aux->inserta(m);
         }
 
-        while (!aux->vacio()) {
+        while(!aux->vacio())
+        {
             int m = aux->muestrea();
             aux->suprime(m);
             a->inserta(m);
@@ -162,8 +193,9 @@ namespace UConjuntoLista {
         delete aux;
     }
 
-    bool ConjuntoLista::_equivalentes(ConjuntoLista* a, ConjuntoLista* b) {
+    bool ConjuntoLista::_equivalentes(ConjuntoLista* a, ConjuntoLista* b)
+    {
         return a->cardinal() == b->cardinal();
     }
 
-}  // namespace UConjuntoLista
+} // namespace UConjuntoLista

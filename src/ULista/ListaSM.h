@@ -7,19 +7,21 @@
 
 #include "UCSMemoria/CSMemoria.h"
 
-namespace UListaSM {
+namespace UListaSM
+{
     using std::string;
     const string _elemento_sig = "elemento,sig";
-    const string _elemento = "->elemento";
-    const string _sig = "->sig";
+    const string _elemento     = "->elemento";
+    const string _sig          = "->sig";
 
-    class ListaSM {
-       private:
+    class ListaSM
+    {
+        private:
         int PtrElementos;
         int longitud;
         UCSMemoria::CSMemoria* mem;
 
-       public:
+        public:
         ListaSM();
         ListaSM(UCSMemoria::CSMemoria* m);
         int fin();
@@ -48,6 +50,6 @@ namespace UListaSM {
         void bubble_sort();
     };
 
-}  // namespace UListaSM
+} // namespace UListaSM
 
 #endif

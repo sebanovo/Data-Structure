@@ -37,14 +37,16 @@ namespace UPilaLista
 
     void PilaLista::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
         e = ls->recupera(ls->primero());
         ls->suprime(ls->primero());
     }
 
     int PilaLista::cima()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cima");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cima");
         return ls->recupera(ls->primero());
     }
 
@@ -52,20 +54,20 @@ namespace UPilaLista
     {
         std::string s = "";
         PilaLista aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux.meter(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
             meter(e);
         }
-        return s; 
+        return s;
     }
 
     PilaLista::~PilaLista()
@@ -73,4 +75,4 @@ namespace UPilaLista
         // delete ls, mem;
         delete ls;
     }
-}  // namespace UPilaLista
+} // namespace UPilaLista

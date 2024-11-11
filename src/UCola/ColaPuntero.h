@@ -15,11 +15,11 @@ namespace UColaPuntero
 
     class ColaPuntero
     {
-       private:
+        private:
         Nodo* ini;
         Nodo* fin;
 
-       public:
+        public:
         ColaPuntero();
         bool vacia();
         void poner(int e);
@@ -36,5 +36,5 @@ namespace UColaPuntero
         // ejercicio
         static void concatenar(ColaPuntero* c1, ColaPuntero* c2, ColaPuntero* c3);
     };
-};  // namespace UColaPuntero
+}; // namespace UColaPuntero
 #endif

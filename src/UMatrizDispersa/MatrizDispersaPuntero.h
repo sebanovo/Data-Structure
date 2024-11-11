@@ -6,22 +6,25 @@
 #include <iostream>
 #include <string>
 
-namespace UMatrizDispersaPuntero {
-    struct Nodo {
+namespace UMatrizDispersaPuntero
+{
+    struct Nodo
+    {
         int fil;
         int col;
         int dato;
         Nodo* sig;
     };
 
-    class MatrizDispersaPuntero {
-       private:
+    class MatrizDispersaPuntero
+    {
+        private:
         Nodo* PtrMatD;
         int repe, df, dc, nt;
         Nodo* buscar(int f, int c);
         bool hay(int elemento);
 
-       public:
+        public:
         MatrizDispersaPuntero();
         void dimensionar(int f, int c);
         int dimension_fila();
@@ -37,5 +40,5 @@ namespace UMatrizDispersaPuntero {
         static void transpuesta(MatrizDispersaPuntero* m, MatrizDispersaPuntero* m1);
         static bool es_simetrica(MatrizDispersaPuntero* m);
     };
-}  // namespace UMatrizDispersaPuntero
+} // namespace UMatrizDispersaPuntero
 #endif

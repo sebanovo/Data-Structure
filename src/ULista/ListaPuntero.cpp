@@ -6,117 +6,140 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-namespace UListaPuntero {
+namespace UListaPuntero
+{
     // inicializa las variables
     using std::to_string;
-    ListaPuntero::ListaPuntero() {
-        longitud = 0;
+    ListaPuntero::ListaPuntero()
+    {
+        longitud     = 0;
         PtrElementos = nullptr;
     }
 
     // retorna la dirección de memoria final
-    direccion ListaPuntero::fin() {
-        Nodo *x = PtrElementos;
-        Nodo *PtrFin;
-        while (x != nullptr) {
+    direccion ListaPuntero::fin()
+    {
+        Nodo* x = PtrElementos;
+        Nodo* PtrFin;
+        while(x != nullptr)
+        {
             PtrFin = x;
-            x = x->sig;
+            x      = x->sig;
         }
         return PtrFin;
     }
 
     // retorna la dirección de memoria de la cabeza de la lista
-    direccion ListaPuntero::primero() {
+    direccion ListaPuntero::primero()
+    {
         return PtrElementos;
     }
 
     // retorna la dirección de memoria siguiente a este
-    direccion ListaPuntero::siguiente(direccion dir) {
-        if (vacia())
+    direccion ListaPuntero::siguiente(direccion dir)
+    {
+        if(vacia())
             throw std::runtime_error("La lista esta vacía\n");
-        if (!es_direccion_valida(dir))
+        if(!es_direccion_valida(dir))
             throw std::runtime_error("No existe esta dirección en la Lista");
-        if (dir == fin())
-            throw std::runtime_error("No existe la dirección siguiente a esta\n");
+        if(dir == fin())
+            throw std::runtime_error(
+            "No existe la dirección siguiente a esta\n");
 
         return dir->sig;
     }
 
     // retorna la dirección de memoria anterior a esta
-    direccion ListaPuntero::anterior(direccion dir) {
-        if (vacia())
+    direccion ListaPuntero::anterior(direccion dir)
+    {
+        if(vacia())
             throw std::runtime_error("La lista esta vacía\n");
-        if (!es_direccion_valida(dir))
+        if(!es_direccion_valida(dir))
             throw std::runtime_error("No existe esta dirección en la Lista");
-        if (dir == primero())
-            throw std::runtime_error("No existe la dirección anterior a esta\n");
+        if(dir == primero())
+            throw std::runtime_error(
+            "No existe la dirección anterior a esta\n");
 
-        Nodo *x = PtrElementos;
-        Nodo *ant;
-        while (x != nullptr) {
-            if (x == dir) {
+        Nodo* x = PtrElementos;
+        Nodo* ant;
+        while(x != nullptr)
+        {
+            if(x == dir)
+            {
                 return ant;
             }
             ant = x;
-            x = x->sig;
+            x   = x->sig;
         }
         return nullptr;
     }
 
     // esta vacia?
-    bool ListaPuntero::vacia() {
+    bool ListaPuntero::vacia()
+    {
         return longitud == 0 || PtrElementos == nullptr;
     }
 
     // recupera el elemento de la dirección de la lista
-    int ListaPuntero::recupera(direccion dir) {
-        if (vacia())
+    int ListaPuntero::recupera(direccion dir)
+    {
+        if(vacia())
             throw std::runtime_error("La lista esta vacía\n");
-        if (!es_direccion_valida(dir))
+        if(!es_direccion_valida(dir))
             throw std::runtime_error("No existe esta dirección en la Lista");
         return dir->elemento;
     }
 
     // retorna la lontitud
-    int ListaPuntero::_longitud() {
+    int ListaPuntero::_longitud()
+    {
         return longitud;
     }
 
     // insertar un elemento en una dirección de memoria
-    void ListaPuntero::inserta(direccion dir, int element) {
-        Nodo *x = new Nodo;
+    void ListaPuntero::inserta(direccion dir, int element)
+    {
+        Nodo* x     = new Nodo;
         x->elemento = element;
-        x->sig = nullptr;
+        x->sig      = nullptr;
 
-        if (vacia()) {
+        if(vacia())
+        {
             PtrElementos = x;
-        } else if (dir == primero()) {  // caso especial
-            x->sig = PtrElementos;
+        }
+        else if(dir == primero())
+        { // caso especial
+            x->sig       = PtrElementos;
             PtrElementos = x;
-        } else {
-            Nodo *ant = anterior(dir);
-            x->sig = ant->sig;
-            ant->sig = x;
+        }
+        else
+        {
+            Nodo* ant = anterior(dir);
+            x->sig    = ant->sig;
+            ant->sig  = x;
         }
         longitud++;
     }
 
     // insertar un elemento al principio de la lista
-    void ListaPuntero::inserta_primero(int element) {
-        Nodo *x = new Nodo;
-        x->elemento = element;
-        x->sig = PtrElementos;
+    void ListaPuntero::inserta_primero(int element)
+    {
+        Nodo* x      = new Nodo;
+        x->elemento  = element;
+        x->sig       = PtrElementos;
         PtrElementos = x;
         longitud++;
     }
 
     // insertar un elemento al final de la lista
-    void ListaPuntero::inserta_ultimo(int element) {
-        Nodo *x = new Nodo;
+    void ListaPuntero::inserta_ultimo(int element)
+    {
+        Nodo* x     = new Nodo;
         x->elemento = element;
-        x->sig = nullptr;
+        x->sig      = nullptr;
 
-        if (vacia()) {
+        if(vacia())
+        {
             PtrElementos = x;
             longitud++;
             return;
@@ -127,58 +150,68 @@ namespace UListaPuntero {
     }
 
     // elimina un elemento
-    void ListaPuntero::suprime(direccion dir) {
-        if (vacia())
+    void ListaPuntero::suprime(direccion dir)
+    {
+        if(vacia())
             throw std::runtime_error("La lista esta vacía");
-        if (!es_direccion_valida(dir))
+        if(!es_direccion_valida(dir))
             throw std::runtime_error("La dirección no es valida");
-        if (PtrElementos == dir) {
-            Nodo *temp = PtrElementos;
+        if(PtrElementos == dir)
+        {
+            Nodo* temp   = PtrElementos;
             PtrElementos = PtrElementos->sig;
             delete temp;
             // return;
-        } else {
-            Nodo *ant = anterior(dir);
-            ant->sig = dir->sig;
+        }
+        else
+        {
+            Nodo* ant = anterior(dir);
+            ant->sig  = dir->sig;
             delete dir;
         }
         longitud--;
     }
 
     // modifica el elemento de una direccion de la lista
-    void ListaPuntero::modifica(direccion dir, int element) {
-        if (vacia())
+    void ListaPuntero::modifica(direccion dir, int element)
+    {
+        if(vacia())
             throw std::runtime_error("La lista esta vacía");
-        if (!es_direccion_valida(dir))
+        if(!es_direccion_valida(dir))
             throw std::runtime_error("La dirección no es valida");
         dir->elemento = element;
     }
 
     // muestra la lista
-    string ListaPuntero::mostrar() {
-        string s = "<";
+    string ListaPuntero::mostrar()
+    {
+        string s    = "<";
         direccion x = PtrElementos;
-        while (x != nullptr) {
+        while(x != nullptr)
+        {
             int numero = x->elemento;
             s += to_string(numero);
             x = x->sig;
-            if (x != nullptr)
+            if(x != nullptr)
                 s += ",";
         }
         return s + ">";
     }
 
-    ListaPuntero::~ListaPuntero() {
-        while (!vacia())
+    ListaPuntero::~ListaPuntero()
+    {
+        while(!vacia())
             suprime(primero());
         delete PtrElementos;
     }
 
     // retorna la direccion de memoria de la primera ocurrencia del elemento
-    direccion ListaPuntero::localiza(int element) {
-        Nodo *x = PtrElementos;
-        while (x != nullptr) {
-            if (x->elemento == element)
+    direccion ListaPuntero::localiza(int element)
+    {
+        Nodo* x = PtrElementos;
+        while(x != nullptr)
+        {
+            if(x->elemento == element)
                 return x;
             x = x->sig;
         }
@@ -186,30 +219,38 @@ namespace UListaPuntero {
     }
 
     // elimina todas las ocurrencias del elemento ocurrente
-    void ListaPuntero::elimina_dato(int element) {
-        Nodo *x = PtrElementos;
-        while (x != nullptr) {
-            if (x->elemento == element) {
-                Nodo *elim = x;
-                x = x->sig;
+    void ListaPuntero::elimina_dato(int element)
+    {
+        Nodo* x = PtrElementos;
+        while(x != nullptr)
+        {
+            if(x->elemento == element)
+            {
+                Nodo* elim = x;
+                x          = x->sig;
                 suprime(elim);
-            } else {
+            }
+            else
+            {
                 x = x->sig;
             }
         }
     }
 
     // elimina todos los nodos y elementos de la lista
-    void ListaPuntero::anula() {
-        while (!vacia())
+    void ListaPuntero::anula()
+    {
+        while(!vacia())
             suprime(primero());
     }
 
     // verifica que la dirección exista
-    bool ListaPuntero::es_direccion_valida(direccion dir) {
-        Nodo *x = PtrElementos;
-        while (x != nullptr) {
-            if (x == dir)
+    bool ListaPuntero::es_direccion_valida(direccion dir)
+    {
+        Nodo* x = PtrElementos;
+        while(x != nullptr)
+        {
+            if(x == dir)
                 return true;
             x = x->sig;
         }
@@ -217,15 +258,19 @@ namespace UListaPuntero {
     }
 
     // ejercicios
-    void ListaPuntero::bubble_sort() {
-        Nodo *x = PtrElementos;
-        Nodo *y;
+    void ListaPuntero::bubble_sort()
+    {
+        Nodo* x = PtrElementos;
+        Nodo* y;
 
-        while (x != nullptr) {
+        while(x != nullptr)
+        {
             y = x->sig;
-            while (y != nullptr) {
-                if (x->elemento > y->elemento) {
-                    int temp = x->elemento;
+            while(y != nullptr)
+            {
+                if(x->elemento > y->elemento)
+                {
+                    int temp    = x->elemento;
                     x->elemento = y->elemento;
                     y->elemento = temp;
                 }
@@ -234,4 +279,4 @@ namespace UListaPuntero {
             x = x->sig;
         }
     }
-}  // namespace UListaPuntero
+} // namespace UListaPuntero

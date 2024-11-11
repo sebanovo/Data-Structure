@@ -9,18 +9,18 @@
 namespace UPilaSM
 {
     const std::string _elemento_sig = "elemento,sig";
-    const std::string _elemento = "->elemento";
-    const std::string _sig = "->sig";
+    const std::string _elemento     = "->elemento";
+    const std::string _sig          = "->sig";
 
     class PilaSM
     {
-       private:
+        private:
         int tope;
         UCSMemoria::CSMemoria* mem;
 
-       public:
+        public:
         PilaSM();
-        PilaSM(UCSMemoria::CSMemoria * m);
+        PilaSM(UCSMemoria::CSMemoria* m);
         bool vacia();
         void meter(int e);
         void sacar(int& e);
@@ -28,5 +28,5 @@ namespace UPilaSM
         std::string mostrar();
         ~PilaSM();
     };
-};  // namespace UPilaSM
+}; // namespace UPilaSM
 #endif

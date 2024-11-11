@@ -6,22 +6,26 @@
 #include <iostream>
 #include <string>
 
-namespace UMatrizDispersaPunteroDoble {
-    struct NodoColumna {
+namespace UMatrizDispersaPunteroDoble
+{
+    struct NodoColumna
+    {
         int col;
         int dato;
         NodoColumna* sigC;
     };
 
-    struct NodoFila {
+    struct NodoFila
+    {
         int fil;
         NodoFila* antF;
         NodoFila* sigF;
         NodoColumna* PtrCol;
     };
 
-    class MatrizDispersaPunteroDoble {
-       private:
+    class MatrizDispersaPunteroDoble
+    {
+        private:
         NodoFila* PtrFil;
         int repe, df, dc, nt;
 
@@ -33,7 +37,7 @@ namespace UMatrizDispersaPunteroDoble {
         void suprimir(NodoFila* dir);
         bool hay(int elemento);
 
-       public:
+        public:
         MatrizDispersaPunteroDoble();
         void dimensionar(int f, int c);
         int dimension_fila();
@@ -45,9 +49,10 @@ namespace UMatrizDispersaPunteroDoble {
 
         // ejercicios
         static int suma(MatrizDispersaPunteroDoble* m);
-        static void transpuesta(MatrizDispersaPunteroDoble* m, MatrizDispersaPunteroDoble* m1);
+        static void transpuesta(MatrizDispersaPunteroDoble* m,
+        MatrizDispersaPunteroDoble* m1);
         static bool es_simetrica(MatrizDispersaPunteroDoble* m);
     };
-}  // namespace UMatrizDispersaPunteroDoble
+} // namespace UMatrizDispersaPunteroDoble
 
 #endif

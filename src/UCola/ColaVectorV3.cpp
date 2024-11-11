@@ -17,7 +17,7 @@ namespace UColaVectorV3
     {
         fin = 0;
         ini = 1;
-        v = new int[MAX];
+        v   = new int[MAX];
     }
 
     bool ColaVectorV3 ::vacia()
@@ -27,21 +27,24 @@ namespace UColaVectorV3
 
     void ColaVectorV3::poner(int e)
     {
-        if (siguiente(siguiente(fin)) == ini) throw std::runtime_error("No hay espacio en la cola");
-        fin = siguiente(fin);
+        if(siguiente(siguiente(fin)) == ini)
+            throw std::runtime_error("No hay espacio en la cola");
+        fin        = siguiente(fin);
         v[fin - 1] = e;
     }
 
-    void ColaVectorV3 ::sacar(int &e)
+    void ColaVectorV3 ::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        e = v[ini - 1];
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        e   = v[ini - 1];
         ini = siguiente(ini);
     }
 
     int ColaVectorV3 ::primero()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return v[ini - 1];
     }
 
@@ -49,16 +52,16 @@ namespace UColaVectorV3
     {
         std::string s = "<<";
         ColaVectorV3 aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             aux.poner(e);
             s += std::to_string(e);
-            if (!vacia())
+            if(!vacia())
                 s += ",";
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -84,47 +87,50 @@ namespace UColaVectorV3
 
     int ColaVectorV3::ultimo()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return v[fin - 1];
     }
 
     void ColaVectorV3::poner_frente(int e)
     {
-        if (siguiente(siguiente(fin)) == ini) throw std::runtime_error("No hay espacio en la cola");
-        ini = anterior(ini);
+        if(siguiente(siguiente(fin)) == ini)
+            throw std::runtime_error("No hay espacio en la cola");
+        ini        = anterior(ini);
         v[ini - 1] = e;
     }
 
-    void ColaVectorV3::sacar_final(int &e)
+    void ColaVectorV3::sacar_final(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        e = v[fin - 1];
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        e   = v[fin - 1];
         fin = anterior(fin);
     }
 
-    void ColaVectorV3::concatenar(ColaVectorV3 *c1, ColaVectorV3 *c2, ColaVectorV3 *c3)
+    void ColaVectorV3::concatenar(ColaVectorV3* c1, ColaVectorV3* c2, ColaVectorV3* c3)
     {
         ColaVectorV3 aux;
-        while (!c1->vacia())
+        while(!c1->vacia())
         {
             int e;
             c1->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
             c3->poner(e);
             c1->poner(e);
         }
-        while (!c2->vacia())
+        while(!c2->vacia())
         {
             int e;
             c2->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -132,4 +138,4 @@ namespace UColaVectorV3
             c2->poner(e);
         }
     }
-}  // namespace UColaVectorV3
+} // namespace UColaVectorV3

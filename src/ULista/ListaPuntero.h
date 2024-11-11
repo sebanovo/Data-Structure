@@ -5,24 +5,27 @@
 #include <iostream>
 #include <string>
 
-namespace UListaPuntero {
+namespace UListaPuntero
+{
     using std::runtime_error;
     using std::string;
 
     struct Nodo;
-    typedef Nodo *direccion;
-    struct Nodo {
-       public:
+    typedef Nodo* direccion;
+    struct Nodo
+    {
+        public:
         int elemento;
-        Nodo *sig;
+        Nodo* sig;
     };
 
-    class ListaPuntero {
-       private:
+    class ListaPuntero
+    {
+        private:
         direccion PtrElementos;
         int longitud;
 
-       public:
+        public:
         ListaPuntero();
         direccion fin();
         direccion primero();
@@ -50,5 +53,5 @@ namespace UListaPuntero {
         void bubble_sort();
     };
 
-}  // namespace UListaPuntero
+} // namespace UListaPuntero
 #endif

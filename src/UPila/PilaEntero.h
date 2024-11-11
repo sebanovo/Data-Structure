@@ -9,10 +9,10 @@ namespace UPilaEntero
 {
     class PilaEntero
     {
-       private:
+        private:
         int datos;
 
-       public:
+        public:
         PilaEntero();
         bool vacia();
         void meter(int e);
@@ -21,5 +21,5 @@ namespace UPilaEntero
         std::string mostrar();
         ~PilaEntero() = default;
     };
-};  // namespace UPilaVector
+}; // namespace UPilaEntero
 #endif

@@ -35,14 +35,16 @@ namespace UColaLista
 
     void ColaLista::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
         e = ls->recupera(ls->primero());
         ls->suprime(ls->primero());
     }
 
     int ColaLista::primero()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return ls->recupera(ls->primero());
     }
 
@@ -50,16 +52,16 @@ namespace UColaLista
     {
         std::string s = "<<";
         ColaLista aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             aux.poner(e);
             s += std::to_string(e);
-            if (!vacia())
+            if(!vacia())
                 s += ",";
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -76,7 +78,8 @@ namespace UColaLista
 
     int ColaLista::ultimo()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cola");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cola");
         return ls->recupera(ls->fin());
     }
 
@@ -94,26 +97,26 @@ namespace UColaLista
     void ColaLista::concatenar(ColaLista* c1, ColaLista* c2, ColaLista* c3)
     {
         ColaLista aux;
-        while (!c1->vacia())
+        while(!c1->vacia())
         {
             int e;
             c1->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
             c3->poner(e);
             c1->poner(e);
         }
-        while (!c2->vacia())
+        while(!c2->vacia())
         {
             int e;
             c2->sacar(e);
             aux.poner(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -121,4 +124,4 @@ namespace UColaLista
             c2->poner(e);
         }
     }
-}  // namespace UColaLista
+} // namespace UColaLista

@@ -12,12 +12,12 @@ namespace UColaLista
 {
     class ColaLista
     {
-       private:
+        private:
         // UListaSM::ListaSM* ls;
         // UCSMemoria::CSMemoria* mem;
         UListaVector::ListaVector* ls;
 
-       public:
+        public:
         ColaLista();
         ColaLista(UCSMemoria::CSMemoria* m);
         bool vacia();
@@ -35,5 +35,5 @@ namespace UColaLista
         // ejercicio
         static void concatenar(ColaLista* c1, ColaLista* c2, ColaLista* c3);
     };
-};  // namespace UColaLista
+}; // namespace UColaLista
 #endif

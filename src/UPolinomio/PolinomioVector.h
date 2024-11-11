@@ -6,26 +6,28 @@
 #include <iostream>
 #include <string>
 
-namespace UPolinomioVector {
+namespace UPolinomioVector
+{
     using std::string;
-    class PolinomioVector {
-       private:
+    class PolinomioVector
+    {
+        private:
         const int MAX = 100;
-        int *vc;
-        int *ve;
+        int* vc;
+        int* ve;
         int nt;
 
         int buscar_exponente(int exp);
         int buscar_termino_n(int n);
 
-       public:
+        public:
         PolinomioVector();
         bool es_cero();
         int grado();
         int coeficiente(int exp);
-        void sumar(PolinomioVector *p1, PolinomioVector *p2);
-        void restar(PolinomioVector *p1, PolinomioVector *p2);
-        void multiplicar(PolinomioVector *p1, PolinomioVector *p3);
+        void sumar(PolinomioVector* p1, PolinomioVector* p2);
+        void restar(PolinomioVector* p1, PolinomioVector* p2);
+        void multiplicar(PolinomioVector* p1, PolinomioVector* p3);
         void poner_termino(int coef, int exp);
         int numero_terminos();
         int exponente(int nroTer);
@@ -35,9 +37,9 @@ namespace UPolinomioVector {
         int evaluar(int x);
 
         // ejercicios
-        static void derivada(PolinomioVector *p, PolinomioVector *p1);
-        static string mostrar_integral(PolinomioVector *p);
+        static void derivada(PolinomioVector* p, PolinomioVector* p1);
+        static string mostrar_integral(PolinomioVector* p);
     };
-}  // namespace UPolinomioVector
+} // namespace UPolinomioVector
 
 #endif

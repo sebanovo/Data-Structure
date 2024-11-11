@@ -9,16 +9,16 @@
 namespace UColaSM
 {
     const std::string _elemento_sig = "elemento,sig";
-    const std::string _elemento = "->elemento";
-    const std::string _sig = "->sig";
+    const std::string _elemento     = "->elemento";
+    const std::string _sig          = "->sig";
 
     class ColaSM
     {
-       private:
+        private:
         UCSMemoria::CSMemoria* mem;
         int ini, fin;
 
-       public:
+        public:
         ColaSM();
         ColaSM(UCSMemoria::CSMemoria* m);
         bool vacia();
@@ -36,5 +36,5 @@ namespace UColaSM
         // ejercicio
         static void concatenar(ColaSM* c1, ColaSM* c2, ColaSM* c3);
     };
-};  // namespace UColaSM
+}; // namespace UColaSM
 #endif

@@ -23,24 +23,27 @@ namespace UPilaPuntero
     void PilaPuntero::meter(int e)
     {
         Nodo* x = new Nodo;
-        if (x == nullptr) throw std::runtime_error("No hay espacio en la memoria");
+        if(x == nullptr)
+            throw std::runtime_error("No hay espacio en la memoria");
         x->elemento = e;
-        x->sig = tope;
-        tope = x;
+        x->sig      = tope;
+        tope        = x;
     }
 
     void PilaPuntero::sacar(int& e)
     {
-        if (vacia()) throw std::runtime_error("No hay elementos que sacar");
-        e = tope->elemento;
+        if(vacia())
+            throw std::runtime_error("No hay elementos que sacar");
+        e         = tope->elemento;
         Nodo* aux = tope;
-        tope = tope->sig;
+        tope      = tope->sig;
         delete aux;
     }
 
     int PilaPuntero::cima()
     {
-        if (vacia()) throw std::runtime_error("No hay elementos en la cima");
+        if(vacia())
+            throw std::runtime_error("No hay elementos en la cima");
         return tope->elemento;
     }
 
@@ -48,14 +51,14 @@ namespace UPilaPuntero
     {
         std::string s = "";
         PilaPuntero aux;
-        while (!vacia())
+        while(!vacia())
         {
             int e;
             sacar(e);
             s += "| " + std::to_string(e) + " |\n";
             aux.meter(e);
         }
-        while (!aux.vacia())
+        while(!aux.vacia())
         {
             int e;
             aux.sacar(e);
@@ -67,11 +70,11 @@ namespace UPilaPuntero
     PilaPuntero::~PilaPuntero()
     {
         Nodo* x = tope;
-        while (x != nullptr)
+        while(x != nullptr)
         {
             Nodo* aux = tope;
-            tope = tope->sig;
+            tope      = tope->sig;
             delete aux;
         }
     }
-}  // namespace UPilaPuntero
+} // namespace UPilaPuntero

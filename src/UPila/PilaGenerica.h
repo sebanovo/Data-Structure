@@ -10,12 +10,12 @@ namespace UPilaGenerica
     template <typename T>
     class PilaGenerica
     {
-       private:
+        private:
         const int MAX = 1000;
         T* elementos;
         int tope;
 
-       public:
+        public:
         PilaGenerica();
         bool vacia();
         void meter(T e);
@@ -27,5 +27,5 @@ namespace UPilaGenerica
 
     std::string infija_a_postfija(std::string expresionInfija);
     double evaluar_postfija(std::string postfija);
-};  // namespace UPilaGenerica
+}; // namespace UPilaGenerica
 #endif

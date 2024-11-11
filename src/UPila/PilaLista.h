@@ -13,12 +13,12 @@ namespace UPilaLista
 {
     class PilaLista
     {
-       private:
+        private:
         // UListaSM::ListaSM* ls;
         // UCSMemoria::CSMemoria* mem;
         UListaVector::ListaVector* ls;
 
-       public:
+        public:
         PilaLista();
         PilaLista(UCSMemoria::CSMemoria* m);
         bool vacia();
@@ -28,5 +28,5 @@ namespace UPilaLista
         std::string mostrar();
         ~PilaLista();
     };
-};  // namespace UPilaLista
+}; // namespace UPilaLista
 #endif
