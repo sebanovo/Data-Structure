@@ -15,14 +15,14 @@ namespace UMatrizDispersaSM
     MatrizDispersaSM::MatrizDispersaSM()
     {
         PtrMatD = NULO;
-        mem     = new UCSMemoria::CSMemoria;
+        mem = new UCSMemoria::CSMemoria;
         df = dc = nt = repe = 0;
     }
 
     MatrizDispersaSM::MatrizDispersaSM(UCSMemoria::CSMemoria* m)
     {
         PtrMatD = NULO;
-        mem     = m;
+        mem = m;
         df = dc = nt = repe = 0;
     }
 
@@ -82,14 +82,14 @@ namespace UMatrizDispersaSM
                     PtrMatD = mem->obtener_dato(PtrMatD, _sig);
                 else
                 {
-                    int x   = PtrMatD;
+                    int x = PtrMatD;
                     int ant = NULO;
                     while(x != NULO)
                     {
                         if(x == dir)
                             break;
                         ant = x;
-                        x   = mem->obtener_dato(x, _sig);
+                        x = mem->obtener_dato(x, _sig);
                     }
                     mem->poner_dato(ant, _sig, mem->obtener_dato(dir, _sig));
                 }
@@ -137,14 +137,14 @@ namespace UMatrizDispersaSM
                             PtrMatD = mem->obtener_dato(PtrMatD, _sig);
                         else
                         {
-                            int x   = PtrMatD;
+                            int x = PtrMatD;
                             int ant = NULO;
                             while(x != NULO)
                             {
                                 if(x == dir)
                                     break;
                                 ant = x;
-                                x   = mem->obtener_dato(x, _sig);
+                                x = mem->obtener_dato(x, _sig);
                             }
                             mem->poner_dato(ant, _sig, mem->obtener_dato(dir, _sig));
                         }
@@ -240,6 +240,107 @@ namespace UMatrizDispersaSM
                     return false;
             }
         }
+        return true;
+    }
+
+    bool esValido(MatrizDispersaSM* m, int f, int c, int k)
+    {
+        for(int j = 1; j <= 9; ++j)
+            if(m->elemento(f, j) == k)
+                return false;
+
+        for(int i = 1; i <= 9; ++i)
+            if(m->elemento(i, c) == k)
+                return false;
+
+
+        int box_row_start = ((f - 1) / 3) * 3 + 1;
+        int box_col_start = ((c - 1) / 3) * 3 + 1;
+
+        for(int i = box_row_start; i < box_row_start + 3; ++i)
+            for(int j = box_col_start; j < box_col_start + 3; ++j)
+                if(m->elemento(i, j) == k)
+                    return false;
+
+        return true;
+    }
+
+    bool resolverSudokuBacktracking(MatrizDispersaSM* m, int f, int c)
+    {
+        if(f > 9) //  caso base
+            return true;
+        else if(c > 9)
+            return resolverSudokuBacktracking(m, f + 1, 1);
+        else if(m->elemento(f, c) != 0)
+            return resolverSudokuBacktracking(m, f, c + 1);
+        else
+        {
+            for(int k = 1; k <= 9; k++)
+            {
+                if(esValido(m, f, c, k))
+                {
+                    m->poner(f, c, k);
+                    if(resolverSudokuBacktracking(m, f, c + 1))
+                        return true;
+                    m->poner(f, c, 0);
+                }
+            }
+            return false;
+        }
+    }
+
+    bool esSudoku(MatrizDispersaSM* m)
+    {
+        const int n = 9;
+        int df = m->dimension_fila();
+        int dc = m->dimension_columna();
+
+        if(df != n || dc != n)
+            throw std::runtime_error("No es Sudoku");
+
+        // Verificar filas y columnas
+        for(int f = 1; f <= n; f++)
+        {
+            bool fila[n + 1] = { false };
+            bool columna[n + 1] = { false };
+
+            for(int c = 1; c <= n; c++)
+            {
+                // Verificar filas
+                int valorFila = m->elemento(f, c);
+                if(valorFila < 1 || valorFila > 9 || fila[valorFila])
+                    return false;
+                fila[valorFila] = true;
+
+                // Verificar columnas
+                int valorColumna = m->elemento(f, c);
+                if(valorColumna < 1 || valorColumna > 9 || columna[valorColumna])
+                    return false;
+                columna[valorColumna] = true;
+            }
+        }
+
+        // Verificar cada subcuadricula 3x3
+        for(int startRow = 1; startRow < n; startRow += 3)
+        {
+            for(int startCol = 1; startCol < n; startCol += 3)
+            {
+                bool subCuadricula[n + 1] = { false };
+                for(int row = 0; row < 3; row++)
+                {
+                    for(int col = 0; col < 3; col++)
+                    {
+                        int valor = m->elemento(startRow + row, startCol + col);
+                        if(valor < 1 || valor > 9 || subCuadricula[valor])
+                        {
+                            return false;
+                        }
+                        subCuadricula[valor] = true;
+                    }
+                }
+            }
+        }
+
         return true;
     }
 } // namespace UMatrizDispersaSM

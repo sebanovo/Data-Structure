@@ -2,6 +2,7 @@
 #include <limits>
 #include <cstring>
 #include <cmath>
+#include <vector>
 
 #include "UCSMemoria/CSMemoria.h"
 #include "ULista/ListaPuntero.h"
@@ -247,7 +248,7 @@ void mostrarPolinomioLista()
 {
     UPolinomioLista::PolinomioLista* p1 = new UPolinomioLista::PolinomioLista;
     UPolinomioLista::PolinomioLista* p2 = new UPolinomioLista::PolinomioLista;
-    UPolinomioLista::PolinomioLista* p  = new UPolinomioLista::PolinomioLista;
+    UPolinomioLista::PolinomioLista* p = new UPolinomioLista::PolinomioLista;
 
     // std::cout << p->es_cero() << std::endl;
     // p->poner_termino(1, 2);
@@ -289,7 +290,7 @@ void mostrarConjunto()
 void mostrarMDispersaVector()
 {
     UMatrizDispersaVector::MatrizDispersaVector* m
-    = new UMatrizDispersaVector::MatrizDispersaVector;
+        = new UMatrizDispersaVector::MatrizDispersaVector;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -318,7 +319,7 @@ void mostrarMDispersaVectorCSR()
 void mostrarMDPuntero()
 {
     UMatrizDispersaPuntero::MatrizDispersaPuntero* m
-    = new UMatrizDispersaPuntero::MatrizDispersaPuntero;
+        = new UMatrizDispersaPuntero::MatrizDispersaPuntero;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -348,7 +349,7 @@ void mostrarMDSM()
 void mostrarMDPunteroDoble()
 {
     UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble* m
-    = new UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble;
+        = new UMatrizDispersaPunteroDoble::MatrizDispersaPunteroDoble;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -363,7 +364,7 @@ void mostrarMDPunteroDoble()
 void mostrarMDSMDoble()
 {
     UMatrizDispersaSMDoble::MatrizDispersaSMDoble* m
-    = new UMatrizDispersaSMDoble::MatrizDispersaSMDoble;
+        = new UMatrizDispersaSMDoble::MatrizDispersaSMDoble;
     m->dimensionar(3, 3);
     m->poner(1, 1, 100);
     m->poner(1, 2, 200);
@@ -634,8 +635,91 @@ void mostrarColaPrioridad()
     }
 }
 
+void mostrarSudoku()
+{
+    // SUDOKU A CARGAR
+    // clang-format off
+    std::vector<std::vector<int>> matriz = 
+    {
+        { 7, 0, 0, 0, 0, 6, 0, 0, 0, }, 
+        { 0, 0, 0, 9, 0, 3, 2, 6, 0, }, 
+        { 0, 0, 9, 4, 0, 0, 5, 0, 1, }, 
+        { 0, 0, 0, 5, 0, 0, 0, 1, 0, }, 
+        { 4, 7, 0, 0, 0, 0, 3, 0, 6, }, 
+        { 0, 1, 6, 0, 0, 4, 0, 0, 0, }, 
+        { 5, 9, 7, 0, 1, 8, 6, 4, 0, }, 
+        { 0, 6, 2, 0, 4, 9, 8, 3, 5, }, 
+        { 3, 0, 0, 0, 2, 5, 0, 0, 0, },
+    };
+    // clang-format on
+    UMatrizDispersaSM::MatrizDispersaSM* sudoku = new UMatrizDispersaSM::MatrizDispersaSM;
+    sudoku->dimensionar(9, 9);
+
+    for(int i = 0; i < matriz.size(); i++) {
+        for(int j = 0; j < matriz[0].size(); j++) {
+            int e = matriz[i][j];
+            if(e == 0) continue;
+            sudoku->poner(i + 1, j + 1, matriz[i][j]);
+        }
+    }
+
+    // sudoku->poner(1, 1, 7);
+    // sudoku->poner(1, 6, 6);
+    // sudoku->poner(2, 4, 9);
+    // sudoku->poner(2, 6, 3);
+    // sudoku->poner(2, 7, 2);
+    // sudoku->poner(2, 8, 6);
+    // sudoku->poner(3, 3, 9);
+    // sudoku->poner(3, 4, 4);
+    // sudoku->poner(3, 7, 5);
+    // sudoku->poner(3, 9, 1);
+    // sudoku->poner(4, 4, 5);
+    // sudoku->poner(4, 8, 1);
+    // sudoku->poner(5, 1, 4);
+    // sudoku->poner(5, 2, 7);
+    // sudoku->poner(5, 7, 3);
+    // sudoku->poner(5, 9, 6);
+    // sudoku->poner(6, 2, 1);
+    // sudoku->poner(6, 3, 6);
+    // sudoku->poner(6, 6, 4);
+    // sudoku->poner(7, 1, 5);
+    // sudoku->poner(7, 2, 9);
+    // sudoku->poner(7, 3, 7);
+    // sudoku->poner(7, 5, 1);
+    // sudoku->poner(7, 6, 8);
+    // sudoku->poner(7, 7, 6);
+    // sudoku->poner(7, 8, 4);
+    // sudoku->poner(8, 2, 6);
+    // sudoku->poner(8, 3, 2);
+    // sudoku->poner(8, 5, 4);
+    // sudoku->poner(8, 6, 9);
+    // sudoku->poner(8, 7, 8);
+    // sudoku->poner(8, 8, 3);
+    // sudoku->poner(8, 9, 5);
+    // sudoku->poner(9, 1, 3);
+    // sudoku->poner(9, 5, 2);
+    // sudoku->poner(9, 6, 5);
+
+    std::cout << sudoku->mostrar() << '\n';
+    UMatrizDispersaSM::resolverSudokuBacktracking(sudoku, 1, 1);
+    std::cout << sudoku->mostrar() << '\n';
+    std::cout << std::boolalpha << UMatrizDispersaSM::esSudoku(sudoku) << '\n';
+    // SUDOKU SOLUCION USANDO EL resolverSudokuBacktracking:
+    // 7  2  4  1  5  6  9  8  3
+    // 8  5  1  9  7  3  2  6  4
+    // 6  3  9  4  8  2  5  7  1
+    // 2  8  3  5  6  7  4  1  9
+    // 4  7  5  8  9  1  3  2  6
+    // 9  1  6  2  3  4  7  5  8
+    // 5  9  7  3  1  8  6  4  2
+    // 1  6  2  7  4  9  8  3  5
+    // 3  4  8  6  2  5  1  9  7
+    delete sudoku;
+}
+
 int main()
 {
     // mostrarCola();
-    mostrarColaPrioridad();
+    // mostrarColaPrioridad();
+    mostrarSudoku();
 }

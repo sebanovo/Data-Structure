@@ -32,3 +32,8 @@ g++ -o main main.cpp
 ```
 
 Asegúrate de que los archivos fuente de las clases y los ejemplos estén en el mismo directorio o correctamente incluidos en el archivo `main.cpp` que compilas.
+
+#### TODO
+- arreglar el definir valor repetido de MatrizDispersaCSR 
+- arreglar el caso en que a las matrices le metan el valor repetido (repe = 0) {SM simple, puntero simple, vector}
+
