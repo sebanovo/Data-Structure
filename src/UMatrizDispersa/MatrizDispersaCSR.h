@@ -34,6 +34,9 @@ namespace UMatrizDispersaCSR
         static void transpuesta(MatrizDispersaCSR* m, MatrizDispersaCSR* m1);
         static bool es_simetrica(MatrizDispersaCSR* m);
     };
+
+    void resolverSudoku(MatrizDispersaCSR* m);
+    bool esSudoku(MatrizDispersaCSR* m);
 } // namespace UMatrizDispersaCSR
 
 #endif

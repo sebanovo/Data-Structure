@@ -40,5 +40,8 @@ namespace UMatrizDispersaPuntero
         static void transpuesta(MatrizDispersaPuntero* m, MatrizDispersaPuntero* m1);
         static bool es_simetrica(MatrizDispersaPuntero* m);
     };
+
+    void resolverSudoku(MatrizDispersaPuntero* m);
+    bool esSudoku(MatrizDispersaPuntero* m);
 } // namespace UMatrizDispersaPuntero
 #endif

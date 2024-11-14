@@ -12,9 +12,9 @@ namespace UMatrizDispersaVector
     MatrizDispersaVector::MatrizDispersaVector()
     {
         df = dc = nt = repe = 0;
-        vf                  = new int[MAX];
-        vc                  = new int[MAX];
-        vd                  = new int[MAX];
+        vf = new int[MAX];
+        vc = new int[MAX];
+        vd = new int[MAX];
 
         for(int i = 1; i < MAX; i++)
         {
@@ -234,5 +234,118 @@ namespace UMatrizDispersaVector
             }
         }
         return true;
+    }
+
+    bool esValido(MatrizDispersaVector* m, int f, int c, int k)
+    {
+        for(int j = 1; j <= m->dimension_columna(); ++j)
+            if(m->elemento(f, j) == k)
+                return false;
+
+        for(int i = 1; i <= m->dimension_columna(); ++i)
+            if(m->elemento(i, c) == k)
+                return false;
+
+
+        int box_row_start = ((f - 1) / 3) * 3 + 1;
+        int box_col_start = ((c - 1) / 3) * 3 + 1;
+
+        for(int i = box_row_start; i < box_row_start + 3; ++i)
+            for(int j = box_col_start; j < box_col_start + 3; ++j)
+                if(m->elemento(i, j) == k)
+                    return false;
+
+        return true;
+    }
+
+    // algoritmo para resolver el sudoku clasico de 9x9
+    bool backTracking(MatrizDispersaVector* m, int f, int c)
+    {
+        if(f > 9) //  caso base
+            return true;
+        else if(c > 9)
+            return backTracking(m, f + 1, 1);
+        else if(m->elemento(f, c) != 0)
+            return backTracking(m, f, c + 1);
+        else
+        {
+            for(int k = 1; k <= 9; k++)
+            {
+                if(esValido(m, f, c, k))
+                {
+                    m->poner(f, c, k);
+                    if(backTracking(m, f, c + 1))
+                        return true;
+                    m->poner(f, c, 0);
+                }
+            }
+            return false;
+        }
+    }
+
+    // verifica únicamente el sudoku clasico de 9x9
+    bool esSudoku(MatrizDispersaVector* m)
+    {
+        const int n = 9;
+        int df = m->dimension_fila();
+        int dc = m->dimension_columna();
+
+        if(df != n || dc != n)
+            throw std::runtime_error("No es Sudoku");
+
+        // Verificar filas y columnas
+        for(int f = 1; f <= n; f++)
+        {
+            bool fila[n + 1] = { false };
+            bool columna[n + 1] = { false };
+
+            for(int c = 1; c <= n; c++)
+            {
+                // Verificar filas
+                int valorFila = m->elemento(f, c);
+                if(valorFila < 1 || valorFila > 9 || fila[valorFila])
+                    return false;
+                fila[valorFila] = true;
+
+                // Verificar columnas
+                int valorColumna = m->elemento(f, c);
+                if(valorColumna < 1 || valorColumna > 9 || columna[valorColumna])
+                    return false;
+                columna[valorColumna] = true;
+            }
+        }
+
+        // Verificar cada subcuadricula 3x3
+        for(int startRow = 1; startRow < n; startRow += 3)
+        {
+            for(int startCol = 1; startCol < n; startCol += 3)
+            {
+                bool subCuadricula[n + 1] = { false };
+                for(int row = 0; row < 3; row++)
+                {
+                    for(int col = 0; col < 3; col++)
+                    {
+                        int valor = m->elemento(startRow + row, startCol + col);
+                        if(valor < 1 || valor > 9 || subCuadricula[valor])
+                        {
+                            return false;
+                        }
+                        subCuadricula[valor] = true;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // resuelve únicamente sudokus de 9x9 (no resuelve las miles de variantes de este juego)
+    void resolverSudoku(MatrizDispersaVector* m)
+    {
+        if(m->dimension_fila() != m->dimension_columna())
+            throw std::runtime_error("La matriz tiene que ser cuadrada");
+        if(m->dimension_fila() != 9 || m->dimension_columna() != 9)
+            throw std::runtime_error("La matriz no es de 9x9");
+        backTracking(m, 1, 1);
     }
 } // namespace UMatrizDispersaVector

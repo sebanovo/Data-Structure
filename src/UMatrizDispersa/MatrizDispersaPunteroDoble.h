@@ -46,6 +46,7 @@ namespace UMatrizDispersaPunteroDoble
         int elemento(int f, int c);
         void definir_valor_repetido(int elemento);
         std::string mostrar();
+        ~MatrizDispersaPunteroDoble();
 
         // ejercicios
         static int suma(MatrizDispersaPunteroDoble* m);
@@ -53,6 +54,9 @@ namespace UMatrizDispersaPunteroDoble
         MatrizDispersaPunteroDoble* m1);
         static bool es_simetrica(MatrizDispersaPunteroDoble* m);
     };
+
+    void resolverSudoku(MatrizDispersaPunteroDoble* m);
+    bool esSudoku(MatrizDispersaPunteroDoble* m);
 } // namespace UMatrizDispersaPunteroDoble
 
 #endif

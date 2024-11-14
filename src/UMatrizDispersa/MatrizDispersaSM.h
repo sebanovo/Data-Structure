@@ -43,7 +43,7 @@ namespace UMatrizDispersaSM
         static bool es_simetrica(MatrizDispersaSM* m);
     };
 
-    bool resolverSudokuBacktracking(MatrizDispersaSM* m, int f, int c);
+    void resolverSudoku(MatrizDispersaSM* m);
     bool esSudoku(MatrizDispersaSM* m);
 } // namespace UMatrizDispersaSM
 

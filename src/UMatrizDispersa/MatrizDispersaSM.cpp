@@ -75,7 +75,8 @@ namespace UMatrizDispersaSM
         }
         else
         {
-            if(dir == NULO && elemento == repe) return;
+            if(dir == NULO && elemento == repe)
+                return;
             mem->poner_dato(dir, _dato, elemento);
             if(elemento == repe)
             {
@@ -246,11 +247,11 @@ namespace UMatrizDispersaSM
 
     bool esValido(MatrizDispersaSM* m, int f, int c, int k)
     {
-        for(int j = 1; j <= 9; ++j)
+        for(int j = 1; j <= m->dimension_columna(); ++j)
             if(m->elemento(f, j) == k)
                 return false;
 
-        for(int i = 1; i <= 9; ++i)
+        for(int i = 1; i <= m->dimension_columna(); ++i)
             if(m->elemento(i, c) == k)
                 return false;
 
@@ -266,14 +267,15 @@ namespace UMatrizDispersaSM
         return true;
     }
 
-    bool resolverSudokuBacktracking(MatrizDispersaSM* m, int f, int c)
+    // algoritmo para resolver el sudoku clasico de 9x9
+    bool backTracking(MatrizDispersaSM* m, int f, int c)
     {
         if(f > 9) //  caso base
             return true;
         else if(c > 9)
-            return resolverSudokuBacktracking(m, f + 1, 1);
+            return backTracking(m, f + 1, 1);
         else if(m->elemento(f, c) != 0)
-            return resolverSudokuBacktracking(m, f, c + 1);
+            return backTracking(m, f, c + 1);
         else
         {
             for(int k = 1; k <= 9; k++)
@@ -281,7 +283,7 @@ namespace UMatrizDispersaSM
                 if(esValido(m, f, c, k))
                 {
                     m->poner(f, c, k);
-                    if(resolverSudokuBacktracking(m, f, c + 1))
+                    if(backTracking(m, f, c + 1))
                         return true;
                     m->poner(f, c, 0);
                 }
@@ -290,6 +292,7 @@ namespace UMatrizDispersaSM
         }
     }
 
+    // verifica únicamente el sudoku clasico de 9x9
     bool esSudoku(MatrizDispersaSM* m)
     {
         const int n = 9;
@@ -343,5 +346,15 @@ namespace UMatrizDispersaSM
         }
 
         return true;
+    }
+
+    // resuelve únicamente sudokus de 9x9 (no resuelve las miles de variantes de este juego)
+    void resolverSudoku(MatrizDispersaSM* m)
+    {
+        if(m->dimension_fila() != m->dimension_columna())
+            throw std::runtime_error("La matriz tiene que ser cuadrada");
+        if(m->dimension_fila() != 9 || m->dimension_columna() != 9)
+            throw std::runtime_error("La matriz no es de 9x9");
+        backTracking(m, 1, 1);
     }
 } // namespace UMatrizDispersaSM

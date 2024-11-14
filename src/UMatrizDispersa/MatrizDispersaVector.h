@@ -34,5 +34,7 @@ namespace UMatrizDispersaVector
         static bool es_simetrica(MatrizDispersaVector* m);
     };
 
+    void resolverSudoku(MatrizDispersaVector* m);
+    bool esSudoku(MatrizDispersaVector* m);
 } // namespace UMatrizDispersaVector
 #endif

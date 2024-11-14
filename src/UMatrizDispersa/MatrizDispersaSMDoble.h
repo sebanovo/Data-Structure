@@ -11,15 +11,15 @@ namespace UMatrizDispersaSMDoble
 {
     using namespace std;
 
-    const string _col           = "->col";
-    const string _dato          = "->dato";
-    const string _sigC          = "->sigC";
+    const string _col = "->col";
+    const string _dato = "->dato";
+    const string _sigC = "->sigC";
     const string _col_dato_sigC = "col,dato,sigC";
 
-    const string _fil                  = "->fil";
-    const string _antF                 = "->antF";
-    const string _sigF                 = "->sigF";
-    const string _ptrCol               = "->ptrCol";
+    const string _fil = "->fil";
+    const string _antF = "->antF";
+    const string _sigF = "->sigF";
+    const string _ptrCol = "->ptrCol";
     const string _fil_antF_sigF_ptrCol = "fil,antF,sigF,ptrCol";
 
     class MatrizDispersaSMDoble
@@ -46,11 +46,15 @@ namespace UMatrizDispersaSMDoble
         int elemento(int f, int c);
         void definir_valor_repetido(int elemento);
         string mostrar();
+        ~MatrizDispersaSMDoble();
 
         // ejercicios
         static int suma(MatrizDispersaSMDoble* m);
         static void transpuesta(MatrizDispersaSMDoble* m, MatrizDispersaSMDoble* m1);
         static bool es_simetrica(MatrizDispersaSMDoble* m);
     };
+
+    void resolverSudoku(MatrizDispersaSMDoble* m);
+    bool esSudoku(MatrizDispersaSMDoble* m);
 } // namespace UMatrizDispersaSMDoble
 #endif
