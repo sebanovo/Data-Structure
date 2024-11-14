@@ -12,9 +12,9 @@ namespace UMatrizDispersaCSR
     MatrizDispersaCSR::MatrizDispersaCSR()
     {
         df = dc = nt = repe = 0;
-        vf                  = new int[MAX];
-        vc                  = new int[MAX];
-        vd                  = new int[MAX];
+        vf = new int[MAX];
+        vc = new int[MAX];
+        vd = new int[MAX];
 
         // incializar en 0 solamente sirve en el c++ no nativo
         for(int i = 1; i < MAX; i++)
@@ -56,8 +56,7 @@ namespace UMatrizDispersaCSR
 
         for(int i = 1; i <= vf[f + 1] - vf[f]; i++)
         {
-            if(vc[lug_antes + i] == c)
-                return lug_antes + i;
+            if(vc[lug_antes + i] == c) return lug_antes + i;
         }
         return 0;
     }
@@ -74,13 +73,12 @@ namespace UMatrizDispersaCSR
         }
 
         int nuevo_lugar = lugar_antes;
-        int lugar       = lugar_antes;
+        int lugar = lugar_antes;
 
         for(int i = 1; i <= vf[f + 1] - vf[f]; i++)
         {
             lugar = lugar_antes + i;
-            if(c > vc[lugar])
-                nuevo_lugar = lugar;
+            if(c == vc[lugar]) nuevo_lugar = lugar;
         }
         return nuevo_lugar + 1;
     }
@@ -151,8 +149,7 @@ namespace UMatrizDispersaCSR
     bool MatrizDispersaCSR::hay(int elemento)
     {
         for(int i = 1; i <= nt; i++)
-            if(vd[i] == elemento)
-                return true;
+            if(vd[i] == elemento) return true;
         return false;
     }
 
@@ -178,22 +175,22 @@ namespace UMatrizDispersaCSR
                             vd[k] = vd[k + 1];
                             vc[k] = vc[k + 1];
                         }
-                        for(int k = i; k <= df + 1; k++)
+                        for(int k = i + 1; k <= df + 1; k++)
                             vf[k]--;
                         nt--;
                     }
                     else if(el == repe)
                     {
                         int pos = donde_insertar(i, j);
-                        for(int k = nt; k >= pos; k--)
+                        for(int k = nt + 1; k > pos; k--)
                         {
                             vd[k] = vd[k - 1];
                             vc[k] = vc[k - 1];
                         }
-                        vd[pos] = elemento;
+                        vd[pos] = repe;
                         vc[pos] = j;
                         nt++;
-                        for(int k = i; k <= df + 1; k++)
+                        for(int k = i + 1; k <= df + 1; k++)
                             vf[k]++;
                     }
                 }
@@ -283,14 +280,12 @@ namespace UMatrizDispersaCSR
     {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
-        if(f != c)
-            return false;
+        if(f != c) return false;
         for(int i = 1; i <= f; i++)
         {
             for(int j = 1; j <= c; j++)
             {
-                if(m->elemento(i, j) != m->elemento(j, i))
-                    return false;
+                if(m->elemento(i, j) != m->elemento(j, i)) return false;
             }
         }
         return true;

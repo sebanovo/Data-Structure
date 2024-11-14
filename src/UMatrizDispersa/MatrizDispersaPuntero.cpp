@@ -39,8 +39,7 @@ namespace UMatrizDispersaPuntero
         Nodo* x = PtrMatD;
         while(x != nullptr)
         {
-            if(x->fil == f && x->col == c)
-                return x;
+            if(x->fil == f && x->col == c) return x;
             x = x->sig;
         }
         return nullptr;
@@ -56,15 +55,16 @@ namespace UMatrizDispersaPuntero
             Nodo* x = new Nodo;
             if(x == nullptr)
                 throw std::runtime_error("No ha espacios en la memoria");
-            x->fil  = f;
-            x->col  = c;
+            x->fil = f;
+            x->col = c;
             x->dato = elemento;
-            x->sig  = PtrMatD;
+            x->sig = PtrMatD;
             PtrMatD = x;
             nt++;
         }
         else
         {
+            if(dir == nullptr && elemento == repe) return;
             dir->dato = elemento;
             if(elemento == repe)
             {
@@ -72,14 +72,13 @@ namespace UMatrizDispersaPuntero
                     PtrMatD = PtrMatD->sig;
                 else
                 {
-                    Nodo* x   = PtrMatD;
+                    Nodo* x = PtrMatD;
                     Nodo* ant = nullptr;
                     while(x != nullptr)
                     {
-                        if(x == dir)
-                            break;
+                        if(x == dir) break;
                         ant = x;
-                        x   = x->sig;
+                        x = x->sig;
                     }
                     ant->sig = dir->sig;
                 }
@@ -102,8 +101,7 @@ namespace UMatrizDispersaPuntero
         Nodo* x = PtrMatD;
         while(x != nullptr)
         {
-            if(x->dato == elemento)
-                return true;
+            if(x->dato == elemento) return true;
             x = x->sig;
         }
         return false;
@@ -130,14 +128,13 @@ namespace UMatrizDispersaPuntero
                         else
                         {
                             // El anterior
-                            Nodo* x   = PtrMatD;
+                            Nodo* x = PtrMatD;
                             Nodo* ant = nullptr;
                             while(x != nullptr)
                             {
-                                if(x == dir)
-                                    break;
+                                if(x == dir) break;
                                 ant = x;
-                                x   = x->sig;
+                                x = x->sig;
                             }
                             ant->sig = dir->sig;
                         }
@@ -149,11 +146,11 @@ namespace UMatrizDispersaPuntero
                         Nodo* x = new Nodo;
                         if(x == nullptr)
                             throw std::runtime_error(
-                            "No hay espacio en la memoria");
-                        x->fil  = i;
-                        x->col  = j;
+                                "No hay espacio en la memoria");
+                        x->fil = i;
+                        x->col = j;
                         x->dato = repe;
-                        x->sig  = PtrMatD;
+                        x->sig = PtrMatD;
                         PtrMatD = x;
                         nt++;
                     }
@@ -169,11 +166,11 @@ namespace UMatrizDispersaPuntero
         while(x != nullptr)
         {
             Nodo* temp = x;
-            x          = x->sig;
+            x = x->sig;
             delete temp;
         }
         PtrMatD = nullptr;
-        x       = nullptr;
+        x = nullptr;
     }
 
     std::string MatrizDispersaPuntero::mostrar()
@@ -229,14 +226,12 @@ namespace UMatrizDispersaPuntero
     {
         int f = m->dimension_fila();
         int c = m->dimension_columna();
-        if(f != c)
-            return false;
+        if(f != c) return false;
         for(int i = 1; i <= f; i++)
         {
             for(int j = 1; j <= c; j++)
             {
-                if(m->elemento(i, j) != m->elemento(j, i))
-                    return false;
+                if(m->elemento(i, j) != m->elemento(j, i)) return false;
             }
         }
         return true;

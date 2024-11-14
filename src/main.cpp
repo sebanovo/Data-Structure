@@ -313,6 +313,7 @@ void mostrarMDispersaVectorCSR()
 
     m->definir_valor_repetido(100);
     std::cout << m->mostrar() << "\n";
+
     delete m;
 }
 
@@ -376,166 +377,166 @@ void mostrarMDSMDoble()
     delete m;
 }
 
-// void mostrarPilaV()
-// {
-//     UPilaVector::PilaVector p1;
-//     p1.meter(10);
-//     p1.meter(20);
-//     p1.meter(30);
-//     p1.meter(40);
-//     std::cout << p1.mostrar() << "\n";
-//     std::cout << "cima" << p1.cima() << "\n";
+void mostrarPilaV()
+{
+    UPilaVector::PilaVector p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
 
-//     while (!p1.vacia())
-//     {
-//         int exp1;
-//         p1.sacar( exp1);
-//         std::cout << "Elemento: " << exp1 << std::endl;
-//     }
+    while(!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
 
-//     try
-//     {
-//         std::cout << "cima" << p1.cima() << "\n";
-//     }
-//     catch (const std::runtime_error& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-// }
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch(const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
 
-// void mostrarPilaLista()
-// {
-//     UPilaLista::PilaLista p1;
-//     p1.meter(10);
-//     p1.meter(20);
-//     p1.meter(30);
-//     p1.meter(40);
-//     std::cout << p1.mostrar() << "\n";
-//     std::cout << "cima" << p1.cima() << "\n";
+void mostrarPilaLista()
+{
+    UPilaLista::PilaLista p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
 
-//     while (!p1.vacia())
-//     {
-//         int exp1;
-//         p1.sacar( exp1);
-//         std::cout << "Elemento: " << exp1 << std::endl;
-//     }
+    while(!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
 
-//     try
-//     {
-//         std::cout << "cima" << p1.cima() << "\n";
-//     }
-//     catch (const std::runtime_error& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-// }
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch(const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
 
-// void mostarPilaPuntero()
-// {
-//     UPilaPuntero::PilaPuntero p1;
-//     p1.meter(10);
-//     p1.meter(20);
-//     p1.meter(30);
-//     p1.meter(40);
-//     std::cout << p1.mostrar() << "\n";
-//     std::cout << "cima" << p1.cima() << "\n";
+void mostarPilaPuntero()
+{
+    UPilaPuntero::PilaPuntero p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
 
-//     while (!p1.vacia())
-//     {
-//         int exp1;
-//         p1.sacar( exp1);
-//         std::cout << "Elemento: " << exp1 << std::endl;
-//     }
+    while(!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
 
-//     try
-//     {
-//         std::cout << "cima" << p1.cima() << "\n";
-//     }
-//     catch (const std::runtime_error& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-// }
-// void mostarPilaSM()
-// {
-//     UPilaSM::PilaSM p1;
-//     p1.meter(10);
-//     p1.meter(20);
-//     p1.meter(30);
-//     p1.meter(40);
-//     std::cout << p1.mostrar() << "\n";
-//     std::cout << "cima" << p1.cima() << "\n";
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch(const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+void mostarPilaSM()
+{
+    UPilaSM::PilaSM p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
 
-//     while (!p1.vacia())
-//     {
-//         int exp1;
-//         p1.sacar( exp1);
-//         std::cout << "Elemento: " << exp1 << std::endl;
-//     }
+    while(!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
 
-//     try
-//     {
-//         std::cout << "cima" << p1.cima() << "\n";
-//     }
-//     catch (const std::runtime_error& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-// }
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch(const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
 
-// void mostarPilaEntero()
-// {
-//     UPilaEntero::PilaEntero p1;
-//     p1.meter(1);
-//     p1.meter(2);
-//     p1.meter(3);
-//     p1.meter(4);
-//     std::cout << p1.mostrar() << "\n";
-//     std::cout << "cima" << p1.cima() << "\n";
+void mostarPilaEntero()
+{
+    UPilaEntero::PilaEntero p1;
+    p1.meter(1);
+    p1.meter(2);
+    p1.meter(3);
+    p1.meter(4);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
 
-//     while (!p1.vacia())
-//     {
-//         int exp1;
-//         p1.sacar( exp1);
-//         std::cout << "Elemento: " << exp1 << std::endl;
-//     }
+    while(!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
 
-//     try
-//     {
-//         std::cout << "cima" << p1.cima() << "\n";
-//     }
-//     catch (const std::runtime_error& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-// }
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch(const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
 
-// void mostarPilaCadena()
-// {
-//     UPilaCadena::PilaCadena p1;
-//     p1.meter(10);
-//     p1.meter(20);
-//     p1.meter(30);
-//     p1.meter(40);
-//     std::cout << p1.mostrar() << "\n";
-//     std::cout << "cima" << p1.cima() << "\n";
+void mostarPilaCadena()
+{
+    UPilaCadena::PilaCadena p1;
+    p1.meter(10);
+    p1.meter(20);
+    p1.meter(30);
+    p1.meter(40);
+    std::cout << p1.mostrar() << "\n";
+    std::cout << "cima" << p1.cima() << "\n";
 
-//     while (!p1.vacia())
-//     {
-//         int exp1;
-//         p1.sacar(exp1);
-//         std::cout << "Elemento: " << exp1 << std::endl;
-//     }
+    while(!p1.vacia())
+    {
+        int exp1;
+        p1.sacar(exp1);
+        std::cout << "Elemento: " << exp1 << std::endl;
+    }
 
-//     try
-//     {
-//         std::cout << "cima" << p1.cima() << "\n";
-//     }
-//     catch (const std::runtime_error& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-// }
+    try
+    {
+        std::cout << "cima" << p1.cima() << "\n";
+    }
+    catch(const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
 
 void mostrarInfijoAPostfijo()
 {
@@ -652,13 +653,15 @@ void mostrarSudoku()
         { 3, 0, 0, 0, 2, 5, 0, 0, 0, },
     };
     // clang-format on
+
     UMatrizDispersaSM::MatrizDispersaSM* sudoku = new UMatrizDispersaSM::MatrizDispersaSM;
     sudoku->dimensionar(9, 9);
 
-    for(int i = 0; i < matriz.size(); i++) {
-        for(int j = 0; j < matriz[0].size(); j++) {
+    for(int i = 0; i < matriz.size(); i++)
+    {
+        for(int j = 0; j < matriz[0].size(); j++)
+        {
             int e = matriz[i][j];
-            if(e == 0) continue;
             sudoku->poner(i + 1, j + 1, matriz[i][j]);
         }
     }
@@ -701,19 +704,18 @@ void mostrarSudoku()
     // sudoku->poner(9, 6, 5);
 
     std::cout << sudoku->mostrar() << '\n';
-    UMatrizDispersaSM::resolverSudokuBacktracking(sudoku, 1, 1);
-    std::cout << sudoku->mostrar() << '\n';
-    std::cout << std::boolalpha << UMatrizDispersaSM::esSudoku(sudoku) << '\n';
-    // SUDOKU SOLUCION USANDO EL resolverSudokuBacktracking:
-    // 7  2  4  1  5  6  9  8  3
-    // 8  5  1  9  7  3  2  6  4
-    // 6  3  9  4  8  2  5  7  1
-    // 2  8  3  5  6  7  4  1  9
-    // 4  7  5  8  9  1  3  2  6
-    // 9  1  6  2  3  4  7  5  8
-    // 5  9  7  3  1  8  6  4  2
-    // 1  6  2  7  4  9  8  3  5
-    // 3  4  8  6  2  5  1  9  7
+    // UMatrizDispersaSM::resolverSudokuBacktracking(sudoku, 1, 1);
+    // std::cout << sudoku->mostrar() << '\n';
+    // std::cout << std::boolalpha << UMatrizDispersaSM::esSudoku(sudoku) <<
+    // '\n'; SUDOKU SOLUCION USANDO EL resolverSudokuBacktracking: 7       2 4
+    // 1       5       6       9       8       3 8       5       1       9 7 3
+    // 2       6       4 6       3       9       4       8       2       5 7 1
+    // 2       8       3       5       6       7       4       1       9
+    // 4       7       5       8       9       1       3       2       6
+    // 9       1       6       2       3       4       7       5       8
+    // 5       9       7       3       1       8       6       4       2
+    // 1       6       2       7       4       9       8       3       5
+    // 3       4       8       6       2       5       1       9       7
     delete sudoku;
 }
 
@@ -721,5 +723,7 @@ int main()
 {
     // mostrarCola();
     // mostrarColaPrioridad();
-    mostrarSudoku();
+    // mostrarSudoku();
+    // mostrarMDispersaVector();
+    mostrarMDispersaVectorCSR();
 }

@@ -75,6 +75,7 @@ namespace UMatrizDispersaSM
         }
         else
         {
+            if(dir == NULO && elemento == repe) return;
             mem->poner_dato(dir, _dato, elemento);
             if(elemento == repe)
             {

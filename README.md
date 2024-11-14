@@ -1,4 +1,3 @@
-/**
 # Estructuras de Datos y Simuladores en C++
 
 Este repositorio contiene implementaciones en C++ de varias estructuras de datos y simuladores diseñados para comprender y manejar conceptos de organización de datos y algoritmos en memoria. Cada clase encapsula una estructura o simulador específico, proporcionando métodos y operaciones útiles que permiten explorar su funcionamiento y aplicación en escenarios de uso real. Este proyecto es ideal para estudiantes, desarrolladores y entusiastas de C++ que busquen profundizar en estructuras de datos clásicas y conceptos de gestión de memoria.
@@ -32,8 +31,4 @@ g++ -o main main.cpp
 ```
 
 Asegúrate de que los archivos fuente de las clases y los ejemplos estén en el mismo directorio o correctamente incluidos en el archivo `main.cpp` que compilas.
-
-#### TODO
-- arreglar el definir valor repetido de MatrizDispersaCSR 
-- arreglar el caso en que a las matrices le metan el valor repetido (repe = 0) {SM simple, puntero simple, vector}
 
