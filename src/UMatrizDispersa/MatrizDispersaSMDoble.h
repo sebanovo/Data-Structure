@@ -19,7 +19,7 @@ namespace UMatrizDispersaSMDoble
     const string _fil = "->fil";
     const string _antF = "->antF";
     const string _sigF = "->sigF";
-    const string _ptrCol = "->ptrCol";
+    const string _PtrCol = "->ptrCol";
     const string _fil_antF_sigF_ptrCol = "fil,antF,sigF,ptrCol";
 
     class MatrizDispersaSMDoble

@@ -24,7 +24,7 @@ namespace UCSMemoria
             mem[i].link = i + 1;
 
         mem[MAX - 1].link = NULO;
-        libre             = 0;
+        libre = 0;
     }
 
     // retorna el inicio de la dirección donde se colocaron los ids
@@ -36,20 +36,18 @@ namespace UCSMemoria
         //     throw std::runtime_error("La cadena esta vacía");
         // if (!hay_al_menos_un_id(cadena))
         //     throw std::runtime_error("Tiene que haber almenos un id");
-        // if (hay_un_id_repetido(cadena))
-        //     throw std::runtime_error("Hay un id repetido en la cadena");
 
         int cant = numero_ids(cadena);
-        int dir  = libre;
-        int d    = libre;
+        int dir = libre;
+        int d = libre;
         for(int i = 1; i < cant; i++)
         {
             mem[d].id = obtener_id(cadena, i);
-            d         = mem[d].link;
+            d = mem[d].link;
         }
-        libre       = mem[d].link;
+        libre = mem[d].link;
         mem[d].link = NULO;
-        mem[d].id   = obtener_id(cadena, cant);
+        mem[d].id = obtener_id(cadena, cant);
         return dir;
     }
 
@@ -63,7 +61,7 @@ namespace UCSMemoria
         while(mem[x].link != NULO)
             x = mem[x].link;
         mem[x].link = libre;
-        libre       = dir;
+        libre = dir;
     }
 
     // pone un dato desde la dirección de memoria que quieras
@@ -133,7 +131,7 @@ namespace UCSMemoria
     // verifica si la dirección esta libre
     bool CSMemoria::dir_libre(int dir)
     {
-        int x  = libre;
+        int x = libre;
         bool c = false;
         while(x != NULO && !c)
         {
@@ -154,13 +152,13 @@ namespace UCSMemoria
         for(int i = 0; i < MAX; i++)
         {
             string ocup = !dir_libre(i) ? "ocupado" : "       ";
-            int rel     = edir - to_string(i).length();
-            string dir  = " " + string(rel, '0') + to_string(i) + " ";
-            rel         = edat - to_string(mem[i].dato).length();
-            string dat  = string(rel, ' ') + to_string(mem[i].dato);
-            rel         = eid - mem[i].id.length();
-            string id   = string(rel, ' ') + mem[i].id;
-            rel         = edir - to_string(mem[i].link).length();
+            int rel = edir - to_string(i).length();
+            string dir = " " + string(rel, '0') + to_string(i) + " ";
+            rel = edat - to_string(mem[i].dato).length();
+            string dat = string(rel, ' ') + to_string(mem[i].dato);
+            rel = eid - mem[i].id.length();
+            string id = string(rel, ' ') + mem[i].id;
+            rel = edir - to_string(mem[i].link).length();
             string lnk = "  " + string(rel, ' ') + to_string(mem[i].link) + " ";
             out += ocup + "|" + dir + "|" + dat + "|" + id + "|" + lnk + "|\n";
         }
@@ -185,7 +183,7 @@ namespace UCSMemoria
         // ,,,a,b,c,d,,,
         // a,,,b,,,c,,,d
         bool b = false;
-        int c  = 0;
+        int c = 0;
         for(int i = 0; i < ids.length(); i++)
         {
             if(ids[i] != ',')
@@ -207,8 +205,8 @@ namespace UCSMemoria
         // ,,,a,b,c,d,,,
         // a,,,b,,,c,,,d
         string id = "";
-        bool b    = false;
-        int c     = 0;
+        bool b = false;
+        int c = 0;
         for(int i = 0; i < cadena.length(); i++)
         {
             if(cadena[i] != ',')
@@ -240,25 +238,6 @@ namespace UCSMemoria
             if(cadena[i] != ',')
                 return true;
         }
-        return false;
-    }
-
-    // verifica que no se repitan ids ejem: "fono,x,y,,fono"
-    bool CSMemoria::hay_un_id_repetido(string cadena)
-    {
-        set<string> idsUnicos;
-        stringstream ss(cadena);
-        string id;
-
-        while(getline(ss, id, ','))
-        {
-            if(id.empty())
-                continue;
-            if(idsUnicos.find(id) != idsUnicos.end())
-                return true;
-            idsUnicos.insert(id);
-        }
-
         return false;
     }
 

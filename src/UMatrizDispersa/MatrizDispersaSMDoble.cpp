@@ -13,14 +13,14 @@ namespace UMatrizDispersaSMDoble
     using UCSMemoria::NULO;
     MatrizDispersaSMDoble::MatrizDispersaSMDoble()
     {
-        mem    = new UCSMemoria::CSMemoria;
+        mem = new UCSMemoria::CSMemoria;
         PtrFil = NULO;
         df = dc = repe = nt = 0;
     }
 
     MatrizDispersaSMDoble::MatrizDispersaSMDoble(UCSMemoria::CSMemoria* m)
     {
-        mem    = m;
+        mem = m;
         PtrFil = NULO;
         df = dc = nt = repe = 0;
     }
@@ -43,73 +43,73 @@ namespace UMatrizDispersaSMDoble
 
     int MatrizDispersaSMDoble::buscarC(int f, int c)
     {
-        int auxf = PtrFil;
-        while(auxf != NULO)
+        int auxF = PtrFil;
+        while(auxF != NULO)
         {
-            if(mem->obtener_dato(auxf, _fil) == f)
+            if(mem->obtener_dato(auxF, _fil) == f)
             {
-                int auxc = mem->obtener_dato(auxf, _ptrCol);
-                while(auxc != NULO)
+                int auxC = mem->obtener_dato(auxF, _PtrCol);
+                while(auxC != NULO)
                 {
-                    if(mem->obtener_dato(auxc, _col) == c)
-                        return auxc;
-                    auxc = mem->obtener_dato(auxc, _sigC);
+                    if(mem->obtener_dato(auxC, _col) == c)
+                        return auxC;
+                    auxC = mem->obtener_dato(auxC, _sigC);
                 }
                 return NULO;
             }
-            auxf = mem->obtener_dato(auxf, _sigF);
+            auxF = mem->obtener_dato(auxF, _sigF);
         }
         return NULO;
     }
 
     int MatrizDispersaSMDoble::buscarF(int f)
     {
-        int auxf = PtrFil;
-        while(auxf != NULO)
+        int auxF = PtrFil;
+        while(auxF != NULO)
         {
-            if(mem->obtener_dato(auxf, _fil) == f)
-                return auxf;
-            auxf = mem->obtener_dato(auxf, _sigF);
+            if(mem->obtener_dato(auxF, _fil) == f)
+                return auxF;
+            auxF = mem->obtener_dato(auxF, _sigF);
         }
         return NULO;
     }
 
     int MatrizDispersaSMDoble::posicionIns(int f)
     {
-        int aux = PtrFil;
-        while(aux != NULO)
+        int auxF = PtrFil;
+        while(auxF != NULO)
         {
-            if(f < mem->obtener_dato(aux, _fil))
-                return aux;
-            aux = mem->obtener_dato(aux, _sigF);
+            if(f < mem->obtener_dato(auxF, _fil))
+                return auxF;
+            auxF = mem->obtener_dato(auxF, _sigF);
         }
         return NULO;
     }
 
     void MatrizDispersaSMDoble::suprimir(int dirFil, int dirCol)
     {
-        if(dirCol == mem->obtener_dato(dirFil, _ptrCol))
+        if(dirCol == mem->obtener_dato(dirFil, _PtrCol))
         {
             mem->poner_dato(
-            dirFil, _ptrCol, mem->obtener_dato(mem->obtener_dato(dirFil, _ptrCol), _sigC));
+            dirFil, _PtrCol, mem->obtener_dato(mem->obtener_dato(dirFil, _PtrCol), _sigC));
         }
         else
         {
             // El anterior
-            int x   = mem->obtener_dato(dirFil, _ptrCol);
+            int x = mem->obtener_dato(dirFil, _PtrCol);
             int ant = NULO;
             while(x != NULO)
             {
                 if(x == dirCol)
                     break;
                 ant = x;
-                x   = mem->obtener_dato(x, _sigC);
+                x = mem->obtener_dato(x, _sigC);
             }
             mem->poner_dato(ant, _sigC, mem->obtener_dato(dirCol, _sigC));
         }
         mem->delete_espacio(dirCol);
         nt--;
-        if(mem->obtener_dato(dirFil, _ptrCol) == NULO)
+        if(mem->obtener_dato(dirFil, _PtrCol) == NULO)
         {
             suprimir(dirFil);
         }
@@ -145,50 +145,50 @@ namespace UMatrizDispersaSMDoble
         int dirFila = buscarF(f);
         if(dirFila != NULO)
         {
-            mem->poner_dato(x, _sigC, mem->obtener_dato(dirFila, _ptrCol));
-            mem->poner_dato(dirFila, _ptrCol, x);
+            mem->poner_dato(x, _sigC, mem->obtener_dato(dirFila, _PtrCol));
+            mem->poner_dato(dirFila, _PtrCol, x);
         }
         else
         {
-            int xf = mem->new_espacio(_fil_antF_sigF_ptrCol);
-            if(xf != NULO)
+            int xF = mem->new_espacio(_fil_antF_sigF_ptrCol);
+            if(xF != NULO)
             {
-                mem->poner_dato(xf, _fil, f);
-                mem->poner_dato(xf, _antF, NULO);
-                mem->poner_dato(xf, _sigF, NULO);
-                mem->poner_dato(xf, _ptrCol, NULO);
+                mem->poner_dato(xF, _fil, f);
+                mem->poner_dato(xF, _antF, NULO);
+                mem->poner_dato(xF, _sigF, NULO);
+                mem->poner_dato(xF, _PtrCol, NULO);
                 int posF = posicionIns(f);
                 if(posF == NULO)
                 {
                     if(PtrFil == NULO)
-                        PtrFil = xf;
+                        PtrFil = xF;
                     else
                     {
                         int fin = PtrFil;
                         while(mem->obtener_dato(fin, _sigF) != NULO)
                             fin = mem->obtener_dato(fin, _sigF);
-                        mem->poner_dato(xf, _antF, fin);
-                        mem->poner_dato(fin, _sigF, xf);
+                        mem->poner_dato(xF, _antF, fin);
+                        mem->poner_dato(fin, _sigF, xF);
                     }
                 }
                 else if(posF == PtrFil)
                 {
-                    mem->poner_dato(xf, _sigF, PtrFil);
-                    mem->poner_dato(PtrFil, _antF, xf);
-                    PtrFil = xf;
+                    mem->poner_dato(xF, _sigF, PtrFil);
+                    mem->poner_dato(PtrFil, _antF, xF);
+                    PtrFil = xF;
                 }
                 else
                 {
                     int ant = mem->obtener_dato(posF, _antF);
                     int sig = posF;
-                    mem->poner_dato(xf, _sigF, sig);
-                    mem->poner_dato(xf, _antF, ant);
-                    mem->poner_dato(ant, _sigF, xf);
-                    mem->poner_dato(sig, _antF, xf);
+                    mem->poner_dato(xF, _sigF, sig);
+                    mem->poner_dato(xF, _antF, ant);
+                    mem->poner_dato(ant, _sigF, xF);
+                    mem->poner_dato(sig, _antF, xF);
                 }
 
-                mem->poner_dato(x, _sigC, mem->obtener_dato(xf, _ptrCol));
-                mem->poner_dato(xf, _ptrCol, x);
+                mem->poner_dato(x, _sigC, mem->obtener_dato(xF, _PtrCol));
+                mem->poner_dato(xF, _PtrCol, x);
             }
         }
         nt++;
@@ -225,7 +225,7 @@ namespace UMatrizDispersaSMDoble
         int auxF = PtrFil;
         while(auxF != NULO)
         {
-            int auxC = mem->obtener_dato(auxF, _ptrCol);
+            int auxC = mem->obtener_dato(auxF, _PtrCol);
             while(auxC != NULO)
             {
                 if(mem->obtener_dato(auxC, _dato) == elemento)
@@ -387,8 +387,8 @@ namespace UMatrizDispersaSMDoble
     bool esSudoku(MatrizDispersaSMDoble* m)
     {
         const int n = 9;
-        int df      = m->dimension_fila();
-        int dc      = m->dimension_columna();
+        int df = m->dimension_fila();
+        int dc = m->dimension_columna();
 
         if(df != n || dc != n)
             throw std::runtime_error("No es Sudoku");
@@ -396,7 +396,7 @@ namespace UMatrizDispersaSMDoble
         // Verificar filas y columnas
         for(int f = 1; f <= n; f++)
         {
-            bool fila[n + 1]    = { false };
+            bool fila[n + 1] = { false };
             bool columna[n + 1] = { false };
 
             for(int c = 1; c <= n; c++)

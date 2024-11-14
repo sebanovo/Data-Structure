@@ -137,44 +137,44 @@ namespace UMatrizDispersaPunteroDoble
         }
         else
         {
-            NodoFila* auxF = new NodoFila;
-            if(auxF != nullptr)
+            NodoFila* xF = new NodoFila;
+            if(xF != nullptr)
             {
-                auxF->fil = f;
-                auxF->antF = nullptr;
-                auxF->sigF = nullptr;
-                auxF->PtrCol = nullptr;
+                xF->fil = f;
+                xF->antF = nullptr;
+                xF->sigF = nullptr;
+                xF->PtrCol = nullptr;
                 NodoFila* posF = posicionIns(f);
                 if(posF == nullptr)
                 {
                     if(PtrFil == nullptr)
-                        PtrFil = auxF;
+                        PtrFil = xF;
                     else
                     {
                         NodoFila* fin = PtrFil;
                         while(fin->sigF != nullptr)
                             fin = fin->sigF;
-                        auxF->antF = fin;
-                        fin->sigF = auxF;
+                        xF->antF = fin;
+                        fin->sigF = xF;
                     }
                 }
                 else if(posF == PtrFil)
                 {
-                    auxF->sigF = PtrFil;
-                    PtrFil->antF = auxF;
-                    PtrFil = auxF;
+                    xF->sigF = PtrFil;
+                    PtrFil->antF = xF;
+                    PtrFil = xF;
                 }
                 else
                 {
                     NodoFila* ant = posF->antF;
                     NodoFila* sig = posF;
-                    auxF->sigF = sig;
-                    auxF->antF = ant;
-                    ant->sigF = auxF;
-                    sig->antF = auxF;
+                    xF->sigF = sig;
+                    xF->antF = ant;
+                    ant->sigF = xF;
+                    sig->antF = xF;
                 }
-                x->sigC = auxF->PtrCol;
-                auxF->PtrCol = x;
+                x->sigC = xF->PtrCol;
+                xF->PtrCol = x;
             }
         }
         nt++;

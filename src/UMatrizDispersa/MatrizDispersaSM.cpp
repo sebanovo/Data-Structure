@@ -133,7 +133,7 @@ namespace UMatrizDispersaSM
                 {
                     int el = this->elemento(i, j);
                     if(el == elemento)
-                    { //
+                    { 
                         int dir = buscar(i, j);
                         if(dir == PtrMatD)
                             PtrMatD = mem->obtener_dato(PtrMatD, _sig);
