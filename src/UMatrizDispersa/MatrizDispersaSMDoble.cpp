@@ -264,7 +264,7 @@ namespace UMatrizDispersaSMDoble
         }
     }
 
-    string MatrizDispersaSMDoble::mostrar()
+    std::string MatrizDispersaSMDoble::mostrar()
     {
         std::string s = "";
         for(int i = 1; i <= df; i++)

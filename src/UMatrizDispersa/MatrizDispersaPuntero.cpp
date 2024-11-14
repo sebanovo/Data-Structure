@@ -165,19 +165,6 @@ namespace UMatrizDispersaPuntero
         }
     }
 
-    MatrizDispersaPuntero::~MatrizDispersaPuntero()
-    {
-        Nodo* x = PtrMatD;
-        while(x != nullptr)
-        {
-            Nodo* temp = x;
-            x = x->sig;
-            delete temp;
-        }
-        PtrMatD = nullptr;
-        x = nullptr;
-    }
-
     std::string MatrizDispersaPuntero::mostrar()
     {
         std::string s = "";
@@ -198,6 +185,20 @@ namespace UMatrizDispersaPuntero
         info << "repe = " << std::to_string(repe) << "\n";
         return s + info.str();
     }
+
+    MatrizDispersaPuntero::~MatrizDispersaPuntero()
+    {
+        Nodo* x = PtrMatD;
+        while(x != nullptr)
+        {
+            Nodo* temp = x;
+            x = x->sig;
+            delete temp;
+        }
+        PtrMatD = nullptr;
+        x = nullptr;
+    }
+
 
     int MatrizDispersaPuntero::suma(MatrizDispersaPuntero* m)
     {

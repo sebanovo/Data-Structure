@@ -9,13 +9,11 @@
 
 namespace UMatrizDispersaSM
 {
-
-    using std::string;
-    const string _fil_col_dato_sig = "fil,col,dato,sig";
-    const string _fil = "->fil";
-    const string _col = "->col";
-    const string _dato = "->dato";
-    const string _sig = "->sig";
+    const std::string _fil_col_dato_sig = "fil,col,dato,sig";
+    const std::string _fil = "->fil";
+    const std::string _col = "->col";
+    const std::string _dato = "->dato";
+    const std::string _sig = "->sig";
 
     class MatrizDispersaSM
     {

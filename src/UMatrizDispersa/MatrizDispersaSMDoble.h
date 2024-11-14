@@ -9,18 +9,17 @@
 
 namespace UMatrizDispersaSMDoble
 {
-    using namespace std;
 
-    const string _col = "->col";
-    const string _dato = "->dato";
-    const string _sigC = "->sigC";
-    const string _col_dato_sigC = "col,dato,sigC";
+    const std::string _col = "->col";
+    const std::string _dato = "->dato";
+    const std::string _sigC = "->sigC";
+    const std::string _col_dato_sigC = "col,dato,sigC";
 
-    const string _fil = "->fil";
-    const string _antF = "->antF";
-    const string _sigF = "->sigF";
-    const string _PtrCol = "->ptrCol";
-    const string _fil_antF_sigF_ptrCol = "fil,antF,sigF,ptrCol";
+    const std::string _fil = "->fil";
+    const std::string _antF = "->antF";
+    const std::string _sigF = "->sigF";
+    const std::string _PtrCol = "->ptrCol";
+    const std::string _fil_antF_sigF_ptrCol = "fil,antF,sigF,ptrCol";
 
     class MatrizDispersaSMDoble
     {
@@ -45,7 +44,7 @@ namespace UMatrizDispersaSMDoble
         void poner(int f, int c, int elemento);
         int elemento(int f, int c);
         void definir_valor_repetido(int elemento);
-        string mostrar();
+        std::string mostrar();
         ~MatrizDispersaSMDoble();
 
         // ejercicios

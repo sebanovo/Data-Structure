@@ -133,7 +133,7 @@ namespace UMatrizDispersaSM
                 {
                     int el = this->elemento(i, j);
                     if(el == elemento)
-                    { 
+                    {
                         int dir = buscar(i, j);
                         if(dir == PtrMatD)
                             PtrMatD = mem->obtener_dato(PtrMatD, _sig);
@@ -172,13 +172,6 @@ namespace UMatrizDispersaSM
         }
     }
 
-    MatrizDispersaSM::~MatrizDispersaSM()
-    {
-        if(mem == nullptr)
-            return;
-        delete mem;
-    }
-
     std::string MatrizDispersaSM::mostrar()
     {
         std::string s = "";
@@ -198,6 +191,13 @@ namespace UMatrizDispersaSM
         info << "dc = " << std::to_string(dc) << "\n";
         info << "repe = " << std::to_string(repe) << "\n";
         return s + info.str();
+    }
+
+    MatrizDispersaSM::~MatrizDispersaSM()
+    {
+        if(mem == nullptr)
+            return;
+        delete mem;
     }
 
     int MatrizDispersaSM::suma(MatrizDispersaSM* m)
