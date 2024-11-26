@@ -24,11 +24,5 @@ Cada estructura de datos está implementada en su propia clase de C++, con un di
 
 Para compilar y ejecutar los ejemplos en el repositorio:
 
-**Compila el archivo principal o de ejemplo** usando un compilador de C++ (se recomienda `g++` compatible con C++17 o superior, o con tu `IDE` favorito):
-
-```bash
-g++ -o main main.cpp
-```
-
-Asegúrate de que los archivos fuente de las clases y los ejemplos estén en el mismo directorio o correctamente incluidos en el archivo `main.cpp` que compilas.
+**Compila el archivo principal o de ejemplo** usando un compilador de C++ (se recomienda `g++` compatible con C++17 o superior, o con tu `IDE` favorito)
 
